@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+if [ -z $1 ]; then
+  echo "usage: enable-http <interface>"
+  exit 1
+fi
+
+ip=$(ifconfig $1 | awk '/inet[^6]/ { print $2 }')
+if ! [ -z $ip ]; then
+  echo "enabling http(s) on $1 ($ip):"
+  sudo pfctl -t ob_http -T add $ip
+fi
