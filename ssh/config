@@ -24,6 +24,7 @@ Host github
 Host iorek
 	HostName iorek.ice-nine.org
 	User matt
+	IdentityFile ~/.ssh/id_iorek
 	LocalForward 4001 proxy.ice-nine.org:3128
 	DynamicForward localhost:4000
 
