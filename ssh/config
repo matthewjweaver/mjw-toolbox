@@ -3,6 +3,7 @@ ForwardX11  no
 ForwardX11Trusted  no
 KeepAlive  yes
 Protocol  2
+PKCS11Provider /usr/lib/opensc-pkcs11.so
 
 Host *
     KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
@@ -40,6 +41,12 @@ Host sietchtabr
 	ForwardAgent yes
 	IdentityFile ~/.ssh/id_sietchtabr
 	User sysop
+
+Host sietchumbu
+	HostName 96.88.251.140
+	ForwardAgent yes
+	IdentityFile ~/.ssh/id_sietchumbu
+	User 5y50p
 
 Host virt01
 	HostName virt01.ice-nine.org
