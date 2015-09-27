@@ -4,6 +4,11 @@
 # edge of crypto thinking.
 # This is a decision to pay the overhead of not tracking upstream config-file
 # defaults. Blame me.
+# Keygen howto:
+#  cd /etc/ssh
+#  sudo rm ssh_host_*key*
+#  sudo ssh-keygen -t ed25519 -f ssh_host_ed25519_key < /dev/null
+#  sudo ssh-keygen -t rsa -b 4096 -f ssh_host_rsa_key < /dev/null
 
 AcceptEnv LANG LC_*
 ChallengeResponseAuthentication no
@@ -16,6 +21,7 @@ MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-
 PrintMotd no
 Protocol 2
 PubkeyAuthentication yes
+PasswordAuthentication no
 Subsystem sftp /usr/lib/openssh/sftp-server
 UsePAM yes
 X11Forwarding yes
