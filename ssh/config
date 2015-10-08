@@ -3,6 +3,7 @@
 Compression  yes
 ForwardX11  no
 ForwardX11Trusted  no
+HashKnownHosts yes
 KeepAlive  yes
 Protocol  2
 PKCS11Provider /usr/local/lib/opensc-pkcs11.so
