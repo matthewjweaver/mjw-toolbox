@@ -1,4 +1,4 @@
 #!/bin/sh
 set -e
-echo "disabling all outbound http(s):"
-sudo pfctl -t ob_http -T flush
+echo "disabling all outbound dns, http, and http:"
+sudo pfctl -t outbound_http -T flush
