@@ -1,12 +1,9 @@
 autoconf
 automake
 bitlbee
-docbook
-docbook-xsl
 gettext
 glib
 gmp
-gnome-doc-utils
 gnutls
 intltool
 ircii
