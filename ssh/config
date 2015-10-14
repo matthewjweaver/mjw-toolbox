@@ -1,6 +1,7 @@
 # ssh-keygen -t ed25519 -o -a 100
 # ssh-keygen -t rsa -b 4096 -o -a 100
 Compression  yes
+ForwardAgent no
 ForwardX11  no
 ForwardX11Trusted  no
 HashKnownHosts yes
@@ -27,7 +28,6 @@ Host github
 
 Host iorek
 	HostName iorek.ice-nine.org
-	ForwardAgent no
 	User matt
 	IdentityFile ~/.ssh/id_ed25519
 	LocalForward 4001 proxy.ice-nine.org:3128
@@ -35,27 +35,21 @@ Host iorek
 
 Host otheym
 	HostName otheym.mjw.wtf
-	ForwardAgent yes
 	IdentityFile ~/.ssh/id_ed25519
 	User matt
 
 Host sietchtabr
 	HostName sietchtabr.nodeless.net
-	ForwardAgent yes
 	IdentityFile ~/.ssh/id_ed25519
 	User sysop
 
 Host sietchumbu
 	HostName 96.88.251.140
-	ForwardAgent yes
 	IdentityFile ~/.ssh/id_ed25519
 	User sysop
 
 Host virt01
 	HostName virt01.ice-nine.org
-	ForwardAgent yes
 	IdentityFile ~/.ssh/id_ed25519
 	User 5y50p
 
-# only fwd agent to trusted hosts
-ForwardAgent no
