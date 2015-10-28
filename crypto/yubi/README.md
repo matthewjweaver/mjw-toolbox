@@ -11,7 +11,7 @@ The configured features, when finished, include:
 Prerequisites:
 
 * yubikey-neo-manager [yubico](https://developers.yubico.com/yubikey-neo-manager/)
-* yubico-piv-tools (homebrew)
+* yubico-piv-tool (homebrew)
 * opensc (homebrew)
 * GPG Suite [gpgtools](https://gpgtools.org/)
 
