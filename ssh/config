@@ -19,31 +19,27 @@ Host *
 Host github
 	HostName github.com
 	User git
-	IdentityFile ~/.ssh/id_ed25519
 
 Host iorek
 	HostName iorek.ice-nine.org
 	User matt
-	IdentityFile ~/.ssh/id_ed25519
 	LocalForward 4001 proxy.ice-nine.org:3128
 
 Host otheym
 	HostName otheym.mjw.wtf
-	IdentityFile ~/.ssh/id_ed25519
 	User matt
 
 Host sietchtabr
-	HostName 96.88.251.137
-	IdentityFile ~/.ssh/id_ed25519
+	HostName 192.168.223.1
 	User sysop
+	ForwardAgent yes
 
 Host sietchumbu
-	HostName 96.88.251.140
-	IdentityFile ~/.ssh/id_ed25519
+	HostName 192.168.223.4
 	User sysop
+	ForwardAgent yes
 
 Host virt01
 	HostName virt01.ice-nine.org
-	IdentityFile ~/.ssh/id_ed25519
 	User 5y50p
 
