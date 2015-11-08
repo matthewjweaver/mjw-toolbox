@@ -15,3 +15,10 @@ Prerequisites:
 * opensc (homebrew)
 * GPG Suite [gpgtools](https://gpgtools.org/)
 
+Notes:
+
+* If you manage to trigger the PIN retry block, you will need to use 
+  `gpg --change-pin` and choose the `unblock PIN` option along with 
+  the PUK/Admin code you set up when configuring the card.
+    * If you try to use the `unblock` option of the `gpg --card-edit` tool
+      you will likely meet with failure.
