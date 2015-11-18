@@ -21,7 +21,7 @@ Host github
 	User git
 
 Host iorek
-	HostName iorek.ice-nine.org
+	HostName 69.55.65.204
 	User matt
 	LocalForward 4001 proxy.ice-nine.org:3128
 
