@@ -1,0 +1,15 @@
+# bashrc snippet to add/remove the key from the SSH agent depending
+# on whether the Yubikey is present.
+
+opensc_dso=/usr/local/lib/opensc-pkcs11.so
+smartcard_present() {
+	opensc-tool -r 0 -n >/dev/null 2>&1
+}
+smartcard_key_present() {
+	ssh-add -ls "$opensc_dso" >/dev/null 2>&1
+}
+if ! smartcard_present && smartcard_key_present; then
+	ssh-add -ds "$opensc_dso"
+elif smartcard_present && ! smartcard_key_present; then
+	ssh-add -s "$opensc_dso"
+fi
