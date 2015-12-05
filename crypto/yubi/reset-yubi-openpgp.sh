@@ -1,1 +1,1 @@
-gpg-connect-agent -r gpg-codez
+gpg-connect-agent -r gpg-codez </dev/null
