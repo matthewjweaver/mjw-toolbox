@@ -26,16 +26,16 @@ Host iorek
 	LocalForward 4001 proxy.ice-nine.org:3128
 
 Host otheym
-	HostName otheym.mjw.wtf
+	HostName otheym.nodeless.net
 	User matt
 
 Host sietchtabr
-	HostName 192.168.223.1
+	HostName sietchtabr.nodeless.net
 	User sysop
 	ForwardAgent yes
 
 Host sietchumbu
-	HostName 192.168.223.4
+	HostName sietchumbu.nodeless.net
 	User sysop
 	ForwardAgent yes
 
