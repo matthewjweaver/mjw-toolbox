@@ -17,8 +17,15 @@ Prerequisites:
 
 Notes:
 
-* If you manage to trigger the PIN retry block, you will need to use 
+* If you manage to trigger the GPG PIN retry block, you will need to use 
   `gpg --change-pin` and choose the `unblock PIN` option along with 
   the PUK/Admin code you set up when configuring the card.
     * If you try to use the `unblock` option of the `gpg --card-edit` tool
       you will likely meet with failure.
+* If you manage to trigger the PKCS11 PIN retry block, you may start to get very obscure error messages from SSH:
+
+        Enter PIN for 'PIV_II (PIV Card Holder pin)':
+        C_Login failed: 164
+        Permission denied (publickey,password).
+
+    To unblock/reset the PIN, you can use the `pkcs15-tool -u`
