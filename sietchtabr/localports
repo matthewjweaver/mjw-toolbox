@@ -1,0 +1,12 @@
+archivers/zip
+converters/libiconv
+devel/cvsps
+devel/gettext
+devel/git
+devel/libidn
+devel/p5-Error
+editors/vim
+misc/screen
+net/curl
+net/rsync
+security/opensc
