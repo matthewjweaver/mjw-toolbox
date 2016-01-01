@@ -5,8 +5,9 @@ devel/gettext
 devel/git
 devel/libidn
 devel/p5-Error
-editors/vim
+editors/vim,no_x11
 misc/screen
 net/curl
 net/rsync
+security/ccid
 security/opensc
