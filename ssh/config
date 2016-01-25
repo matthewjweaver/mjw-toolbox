@@ -8,6 +8,8 @@ HashKnownHosts yes
 KeepAlive  yes
 Protocol  2
 PKCS11Provider /usr/local/lib/opensc-pkcs11.so
+# CVE-2016-0777
+UseRoaming no
 
 Host *
     KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
