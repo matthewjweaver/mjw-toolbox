@@ -1,0 +1,4 @@
+ftpproxy_flags=
+ipsec=YES
+iked_flags=""
+ntpd_flags="-s"
