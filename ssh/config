@@ -25,7 +25,8 @@ Host github
 Host iorek
 	HostName 69.55.65.204
 	User matt
-	LocalForward 4001 proxy.ice-nine.org:3128
+	LocalForward 3128 proxy.ice-nine.org:3128
+	DynamicForward localhost:3129
 
 Host otheym
 	HostName otheym.nodeless.net
