@@ -1,5 +1,1 @@
-ftpproxy_flags=
-ipsec=YES
-iked_flags=""
 ntpd_flags="-s"
-unbound_flags="-c /var/unbound/etc/unbound.conf"
