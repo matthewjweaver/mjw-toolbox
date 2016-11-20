@@ -1,2 +1,7 @@
-# External bridge
-up
+# external interface.
+inet 96.88.251.137 255.255.255.248
+dest 96.88.251.142
+inet alias 96.88.251.138 255.255.255.248
+inet alias 96.88.251.139 255.255.255.248
+inet alias 96.88.251.140 255.255.255.248
+inet alias 96.88.251.141 255.255.255.248

@@ -1,3 +1,2 @@
 # bridged to internal interface.
-#inet 192.168.223.129 255.255.255.224 NONE
 up
