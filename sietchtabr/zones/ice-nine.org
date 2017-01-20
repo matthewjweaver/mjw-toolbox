@@ -1,0 +1,67 @@
+$TTL 3600
+@ 	IN SOA ns1.nodeless.net. named.ice-nine.org. (
+				2017012000	; serial
+				1800	; refresh, 30 min
+				300	; retry 5 min
+				8467200	; expire 2 weeks
+				3600 )	; min. TTL 1 day
+
+			NS		ns1.nodeless.net.
+			NS		ns6.gandi.net.
+
+			MX	10 in1-smtp.messagingengine.com.
+			MX	20 in2-smtp.messagingengine.com.
+*			MX	10 in1-smtp.messagingengine.com.
+*			MX	20 in2-smtp.messagingengine.com.
+
+mesmtp._domainkey	TXT	(
+	"v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDUBcwn1anz+myh"
+	"0R/DbkINPj98I5bP0F9fH+d97Eu+z6jCaKZ2kk/CyfC7haTR7W/TysL99AsD7GqY6uzdrW"
+	"n47m6bsJB+QOwyshunXEt5bvb2m8xQmHKUVE0lhn/jx5V715CVcN6JASNRXLKVnXjOnyTl"
+	"U4UCKvrdFx7RK7xrAwIDAQAB")
+@			TXT	"v=spf1 include:spf.messagingengine.com ?all"
+
+			A		69.55.65.207
+			AAAA		2606:c380:c001:1::23
+
+sectopod		A		69.55.65.208
+			AAAA		2606:c380:c001:1::22
+
+www			A		69.55.65.207
+			AAAA		2606:c380:c001:1::23
+radio			CNAME		www
+
+iorek			A		69.55.65.204
+			AAAA		2606:c380:c001:1::129
+			TXT		"virt01.ice-nine.org"
+ib			CNAME		iorek
+imap			CNAME		iorek
+smtp			CNAME		iorek
+; MX and NS records cannot be CNAMEs
+mx			A		69.55.65.204
+			AAAA		2606:c380:c001:1::129
+ns2			A		69.55.65.204
+			AAAA		2606:c380:c001:1::129
+
+netmon01		AAAA		2606:c380:c001:1::2
+
+sectopod		AAAA		2606:c380:c001:1::22
+
+cloud			AAAA		2606:c380:c001:1::24
+
+minecraft		A		69.55.65.205
+			AAAA		2606:c380:c001:1::21
+
+virt01			A		69.55.65.205
+			AAAA		2606:c380:c001:1::1
+mgmt-virt01		A		69.55.65.206
+			AAAA		2606:c380::42f2:e9ff:fe1b:fc7c
+
+; Known, constant hostname for port forwarding to VMs.
+access			CNAME		virt01
+
+apt-proxy		CNAME		virt01
+ldap			CNAME		virt01
+smarthost		CNAME		virt01
+ns1			A		69.55.65.205
+			AAAA		2606:c380:c001:1::1
