@@ -1,7 +1,7 @@
 $TTL 3600
 @	IN SOA	ns1 named (
-				2017012001  ; serial
-				1800       ; refresh (30 min)
+				2017012002  ; serial
+				300        ; refresh (5 min)
 				300        ; retry (5 min)
 				8467200    ; expire (14 weeks)
 				3600       ; minimum (1 hour)
