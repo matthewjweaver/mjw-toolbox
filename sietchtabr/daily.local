@@ -1,0 +1,9 @@
+# renew let's encrypt certs as necessary
+acme-client mjw.wtf
+if [ $? -eq 0 ]; then
+	rcctl reload httpd
+fi
+acme-client layeraleph.com
+if [ $? -eq 0 ]; then
+	rcctl reload httpd
+fi
