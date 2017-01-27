@@ -1,6 +1,6 @@
 $TTL 3600
 @ 	IN SOA ns1.nodeless.net. named.ice-nine.org. (
-				2017012200	; serial
+				2017012700	; serial
 				1800	; refresh, 30 min
 				300	; retry 5 min
 				8467200	; expire 2 weeks
@@ -21,40 +21,4 @@ mesmtp._domainkey	TXT	(
 	"U4UCKvrdFx7RK7xrAwIDAQAB")
 @			TXT	"v=spf1 include:spf.messagingengine.com ?all"
 
-@			A		69.55.65.207
-@			AAAA		2606:c380:c001:1::23
-
-sectopod		A		69.55.65.208
-			AAAA		2606:c380:c001:1::22
-
-www			A		69.55.65.207
-			AAAA		2606:c380:c001:1::23
-radio			CNAME		www
-
-iorek			A		69.55.65.204
-			AAAA		2606:c380:c001:1::129
-			TXT		"virt01.ice-nine.org"
-ib			CNAME		iorek
-imap			CNAME		iorek
-smtp			CNAME		iorek
-; MX and NS records cannot be CNAMEs
-netmon01		AAAA		2606:c380:c001:1::2
-
-sectopod		AAAA		2606:c380:c001:1::22
-
-cloud			AAAA		2606:c380:c001:1::24
-
-minecraft		A		69.55.65.205
-			AAAA		2606:c380:c001:1::21
-
-virt01			A		69.55.65.205
-			AAAA		2606:c380:c001:1::1
-mgmt-virt01		A		69.55.65.206
-			AAAA		2606:c380::42f2:e9ff:fe1b:fc7c
-
-; Known, constant hostname for port forwarding to VMs.
-access			CNAME		virt01
-
-apt-proxy		CNAME		virt01
-ldap			CNAME		virt01
-smarthost		CNAME		virt01
+@			A		108.56.184.72
