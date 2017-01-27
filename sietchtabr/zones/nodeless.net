@@ -1,6 +1,6 @@
 $TTL 3600
 @	IN SOA	ns1 named (
-				2017012001  ; serial
+				2017012700  ; serial
 				1800       ; refresh (30 min)
 				300        ; retry (5 min)
 				8467200    ; expire (14 weeks)
@@ -22,7 +22,7 @@ mesmtp._domainkey	TXT	(
 	"hvQ3KoO5e8596jvEIMmHnYaHrU28huu4JQ9nt+d1ziMWS6uHQKG5nNBfiojFOqjZ5QozLR"
 	"sTn5/laIU73uG3N4wQIDAQAB")
 
-@		IN A	69.55.65.207
+@		IN A	108.56.184.72
 
 nat		IN A	108.56.184.72
 ns1		IN A	108.56.184.72
@@ -30,5 +30,3 @@ otheym		IN A	108.56.184.72
 ps3		IN A	108.56.184.72
 sietchtabr	IN A	108.56.184.72
 sietchumbu	IN A	108.56.184.72
-www		IN A	69.55.65.207
-
