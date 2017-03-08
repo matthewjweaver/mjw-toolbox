@@ -1,2 +1,7 @@
-# wifi-facing interface.
-inet 192.168.223.1 255.255.255.0 NONE
+# external interface.
+inet 100.36.223.10 255.255.255.0
+inet alias 100.36.223.11 255.255.255.255
+inet alias 100.36.223.12 255.255.255.255
+inet alias 100.36.223.13 255.255.255.255
+inet alias 100.36.223.14 255.255.255.255
+dest 100.36.223.1
