@@ -1,12 +1,12 @@
 
-;publish KSK DNSKEY record:
+;ready KSK DNSKEY record:
 ice-nine.org.	3600	IN	DNSKEY	257 3 8 AwEAAcnNMp08AMKsmlPqW0w86SXueNN8ieqEEjhllI/Eu94EMcu1GuRjOFLC6TSJI2iIboy4AjrlwgwoKU8TxVYHeMaWy9Avc4zYTTFqoiYXAclLYjDju3VdOksPxjgFqj3yutTtCFKnhVN/Kj6x48AwQr9+RTak9kRp8V9I+jzosGBGp4rpW6jN5rYefBW6s6x2sgkzodlMc4hYmYjk1Ld8GiVLwazspUPN7U0dQFF8+IFiCH44D+b/DgawiK8qe/31v7BnGNvSwVfjO7eP5zNW9XTZrd6Opa1s9AoDBjtO48jddgCTS/XdqN6VRx5SE9GudLGnDI03vvFHoFR/wm7XsR0= ;{id = 19814 (ksk), size = 2048b}
 
-;publish KSK DNSKEY record:
+;ready KSK DNSKEY record:
 layeraleph.com.	3600	IN	DNSKEY	257 3 8 AwEAAduBKwZ20Z5u54Qk/m+9q/Vy3Md2QX3h1k6XF7CzSH3SZYIBBpX2czVcrreNSsxPLRDUhcF4w/X2/jGUa1y2VJamp022o8l9Te+z0CRbIjmopcpqlC5v0ssGTfYKfoecaewG8r+F0YylqCzH1YKExZu81lF2rbXalxgZ5tgkQf+i46h3/JOmfmCzjdkVrZXyPm27Q6l4qgfYDax9rflrK0AchK/xStJRGkzbzjpiau4JiqzLZJmQDrYlN2kd+h0ygaA/mwojUAU86oI213Xbmd76DLz+mPNf/k4z/x7HuIcNaBzOE62QNU1UT+9G1sFUjpqGUnAtglnwVJ+zHj1TGc0= ;{id = 57995 (ksk), size = 2048b}
 
-;publish KSK DNSKEY record:
+;ready KSK DNSKEY record:
 mjw.wtf.	3600	IN	DNSKEY	257 3 8 AwEAActg7uQ+6bn5s9qASGSDkDIoo/Ee43vFj7uRTE7z0Yq5x6jz945CKfLfJY82pedlW1ILTZj5EEgrpbn/oVF0M2Er00Cewar7ohUUXJKkVKGiHNFx+VU7ytEspklTkZqUQliekuHOA6s8v85txbV/RvvVtdKGUnIRek6DPYhcMYLqVLHoCz4S3EmyZzqwLY4dZ7xeyWGLPPHGVhu/ppXjQ6wa3+KWBb+2hwFkvbTwncew4YI4ZF4r/52WrvLkdjjlLnz/0jY+hMDLM5gXwEXJhpg9R5HMcqEr25C1Nl5kqpLxnsbZDah7vKnn5y2U0BTy0j80r+xgU2cM3LINww2zAEE= ;{id = 23756 (ksk), size = 2048b}
 
-;publish KSK DNSKEY record:
+;ready KSK DNSKEY record:
 nodeless.net.	3600	IN	DNSKEY	257 3 8 AwEAAfc/WTLdhiZZanXpPzT9XjrAHxvlH5W80XJansQYjDdYFbFMAClM+ZjNIw1q4ohw7WiBIZYNYWtvWnydOcfnCmRx5BO/brCE+3DnwRcTqL4pHZpJQJ3y3p78p354/mEwxvFPl4YhbjuELDwpqfnO1JqkoAnzqtR686jDLX9pQFt1BbBONbs9zzwU35Lb0plTwvo1RzjjQUmA6QCyZlHrkvOicGKEKDyTUMiyO1mrb434kBQsyJ+xhnDOv8xJ+2/jZk3el/pyYsgxjjNg35Q4mbvEugvfEbZ8a3yLX8cko9YSh0gbC47cq3NaP/LHSWC5EBUIAsfzFZD/um8qNoyKEuE= ;{id = 5261 (ksk), size = 2048b}
