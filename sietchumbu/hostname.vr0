@@ -1,1 +1,4 @@
-dhcp
+# external interface
+inet 100.36.223.14 255.255.255.0
+inet alias 100.36.223.13 255.255.255.255
+dest 100.36.223.1
