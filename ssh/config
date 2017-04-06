@@ -21,17 +21,3 @@ Host *
 Host github
 	HostName github.com
 	User git
-
-Host iorek
-	HostName 69.55.65.204
-	User matt
-
-Host sietchtabr
-	HostName sietchtabr.nodeless.net
-	User sysop
-	ForwardAgent yes
-
-Host virt01
-	HostName virt01.ice-nine.org
-	User 5y50p
-
