@@ -1,1 +1,2 @@
+dhcpd_flags=
 ntpd_flags="-s"
