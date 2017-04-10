@@ -1,6 +1,6 @@
 $TTL 3600
-@	IN SOA	ns1.nodeless.net. named.nodeless.net. (
-				2017032300 ; serial
+@	IN SOA	ns1 named (
+				2017041000 ; serial
 				300        ; refresh (5m)
 				300        ; retry (5m)
 				8467200    ; expire (14w)
