@@ -1,6 +1,6 @@
 $TTL 3600
 @	IN SOA	ns1 named (
-				2017041000 ; serial
+				2017050900 ; serial
 				300        ; refresh (5m)
 				300        ; retry (5m)
 				8467200    ; expire (14w)
@@ -10,6 +10,7 @@ $TTL 3600
 		NS	ns6.gandi.net.
 
 		IN A	100.36.223.10
+p0		IN A	100.36.223.12
 
 mail		CNAME	ghs.googlehosted.com.
 @		MX 	1 ASPMX.L.GOOGLE.COM.
