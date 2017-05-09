@@ -10,6 +10,5 @@
 ## opendnssec workflow
     doas cp zones/${DOMAIN} /var/opendnssec/unsigned/
     doas ods-signer sign ${DOMAIN}
-    doas cp /var/opendnssec/signed/${DOMAIN} /var/nsd/zones/master/
     doas nsd-control reload ${DOMAIN}
 
