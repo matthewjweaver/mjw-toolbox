@@ -20,6 +20,10 @@
 1. ssh/sshd configs
     * `# cd /etc/ssh && ftp https://raw.githubusercontent.com/matthewjweaver/mjw-toolbox/master/ssh/sshd_config`
     * `# cd /etc/ssh && ftp -o ssh_config https://raw.githubusercontent.com/matthewjweaver/mjw-toolbox/master/ssh/config`
+1. sshd keys
+    * `#  cd /etc/ssh && rm ssh_host_*key*`
+    * `#  ssh-keygen -t ed25519 -f ssh_host_ed25519_key < /dev/null`
+    * `#  ssh-keygen -t rsa -b 4096 -f ssh_host_rsa_key < /dev/null`
 1. doas config
     * `# echo 'permit nopass setenv { -ENV SSH_AUTH_SOCK PKG_PATH } :wheel' > /etc/doas.conf`
 1. configure unbound
@@ -28,6 +32,7 @@
     * `# rcctl enable unbound`
 1. dhclient DNS override
     * `# echo 'supersede domain-name-servers 127.0.0.1;' > /etc/dhclient.conf`
+    * `# echo 'supersede domain-name "my.domain";
 1. configure ntpd
     * `# rcctl enable ntpd`
     * `# rcctl set ntpd flags -s`
