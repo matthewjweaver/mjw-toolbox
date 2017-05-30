@@ -38,7 +38,7 @@ This checklist produces an openbsd server with a minimized surface area. It only
     * `# rcctl enable unbound`
 1. dhclient DNS override
     * `# echo 'supersede domain-name-servers 127.0.0.1;' > /etc/dhclient.conf`
-    * `# echo 'supersede domain-name "my.domain";
+    * `# echo 'supersede domain-name "my.domain"' >> /etc/dhclient.conf;
 1. configure ntpd
     * `# rcctl enable ntpd`
     * `# rcctl set ntpd flags -s`
