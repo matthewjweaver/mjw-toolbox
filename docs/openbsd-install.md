@@ -54,5 +54,10 @@ This checklist produces an openbsd server with a minimized surface area. It only
 1. enable forwarding
     * `# echo 'net.inet.ip.forwarding=1' > /etc/sysctl.conf`
 1. pf.conf with NAT
+    * `# cd /etc && ftp -o pf.conf https://raw.githubusercontent.com/matthewjweaver/mjw-toolbox/master/openbsd-skel/pf.conf.router`
 1. internal interface
+    * `# echo "inet 192.168.111.1 255.255.255.0 NONE" > /etc/hostname.em1"`
 1. dhcpd.conf
+    * `# cd /etc && ftp https://raw.githubusercontent.com/matthewjweaver/mjw-toolbox/master/openbsd-skel/dhcpd.conf`
+1. enable dhcpd
+    * `# rcctl enable dhcpd`
