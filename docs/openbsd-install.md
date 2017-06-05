@@ -38,10 +38,21 @@ This checklist produces an openbsd server with a minimized surface area. It only
     * `# rcctl enable unbound`
 1. dhclient DNS override
     * `# echo 'supersede domain-name-servers 127.0.0.1;' > /etc/dhclient.conf`
-    * `# echo 'supersede domain-name "my.domain"' >> /etc/dhclient.conf;
+    * `# echo 'supersede domain-name "my.domain";' >> /etc/dhclient.conf`
 1. configure ntpd
     * `# rcctl enable ntpd`
     * `# rcctl set ntpd flags -s`
+1. set installurl
+    * `# echo "https://ftp4.usa.openbsd.org/pub/OpenBSD" > /etc/installurl`
 1. apply patches
     * `# doas syspatch`
 1. reboot
+
+
+## Router-only steps
+
+1. enable forwarding
+    * `# echo 'net.inet.ip.forwarding=1' > /etc/sysctl.conf`
+1. pf.conf with NAT
+1. internal interface
+1. dhcpd.conf
