@@ -5,7 +5,7 @@ This checklist produces an openbsd server with a minimized surface area. It only
 
 
 1. Retrieve installation image
-    * `# for f in install61.fs SHA256.sig install61.fs; do ftp https://ftp.openbsd.org/pub/OpenBSD/6.1/amd64/${f}; done`
+    * `# for f in install61.fs SHA256.sig; do ftp https://ftp.openbsd.org/pub/OpenBSD/6.1/amd64/${f}; done`
 1. Check installation image signature
     * `# signify -C -p /etc/signify/openbsd-61-base.pub -x SHA256.sig | grep install61.fs`
 1. Write installation image to media
