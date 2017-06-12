@@ -1,6 +1,6 @@
 # renew let's encrypt certs as necessary
 for DOMAIN in ice-nine.org layeraleph.com mjw.wtf nodeless.net; do
-  /usr/local/bin/acme-client -C /var/www/acme \
+  /usr/sbin/acme-client -C /var/www/acme \
       -c /etc/ssl/acme/${DOMAIN} \
       -k /etc/ssl/acme/private/${DOMAIN}/privkey.pem \
       -f /etc/acme/privkey.pem \
