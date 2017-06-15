@@ -4,5 +4,5 @@ dest 100.36.223.1
 !ifconfig vether0 lladdr 7e:99:dc:00:3d:c2
 !arp -s 100.36.223.11 00:0d:b9:45:f9:f4 permanent
 !arp -s 100.36.223.12 00:0d:b9:44:0b:ec permanent
-!arp -s 100.36.223.13 6a:54:7b:85:35:c5 permanent
-!arp -s 100.36.223.14 6a:54:7b:85:35:c5 permanent
+!arp -s 100.36.223.13 00:00:24:c8:e2:dc permanent
+!arp -s 100.36.223.14 00:00:24:c8:e2:dc permanent
