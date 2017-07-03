@@ -1,8 +1,4 @@
-# renew let's encrypt certs as necessary
+# renew letsencrypt certs as necessary
 for DOMAIN in ice-nine.org layeraleph.com mjw.wtf nodeless.net; do
-  /usr/sbin/acme-client -C /var/www/acme \
-      -c /etc/ssl/acme/${DOMAIN} \
-      -k /etc/ssl/acme/private/${DOMAIN}/privkey.pem \
-      -f /etc/acme/privkey.pem \
-      ${DOMAIN}
+  acme-client ${DOMAIN} && rcctl reload httpd
 done
