@@ -8,6 +8,11 @@ export PKG_PATH="https://ftp.openbsd.org/%m/"
 
 umask 027
 
+if [ -n $SSH_AUTH_SOCK ]; then 
+  set|grep SSH_AUTH_SOCK|sed -e's/^/export /'|tee ~/.ssha;
+  alias ssha=". ~/.ssha"
+fi
+
 if groups | grep -q wheel; then
   export PS1="$(hostname -s)# "
 else
