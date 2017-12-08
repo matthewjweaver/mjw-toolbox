@@ -1,13 +1,12 @@
 # ssh-keygen -t ed25519 -o -a 100
 # ssh-keygen -t rsa -b 4096 -o -a 100
 Compression  yes
-ForwardAgent no
+ForwardAgent yes
 ForwardX11  no
 ForwardX11Trusted  no
 HashKnownHosts yes
 KeepAlive  yes
 Protocol  2
-PKCS11Provider /usr/local/lib/pkcs11/opensc-pkcs11.so
 
 Host *
   KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
