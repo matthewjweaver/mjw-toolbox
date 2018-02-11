@@ -5,17 +5,17 @@ This checklist produces an openbsd server with a minimized surface area. It only
 
 
 1. Retrieve installation image
-    * `# for f in install61.fs SHA256.sig; do ftp https://ftp.openbsd.org/pub/OpenBSD/6.1/amd64/${f}; done`
+    * `# for f in install62.fs SHA256.sig; do ftp https://ftp.openbsd.org/pub/OpenBSD/6.2/amd64/${f}; done`
 1. Check installation image signature
     * `# signify -C -p /etc/signify/openbsd-61-base.pub -x SHA256.sig | grep install61.fs`
 1. Write installation image to media
     * `# dd if=install61.fs of=/dev/rsd2c bs=1m`
 1. Reboot to installation media and select (S)hell
-1. [Create crypto volume](https://openbsd.org/faq/faq14.html#softraidFDE)
+1. [Create crypto volume](https://openbsd.org/faq/faq14.html#softraidFDE), with a keydisk
     * `# dd if=/dev/random of=/dev/rsd0c bs=1m`
     * `# fdisk -iy sd0`
     * `# disklabel -E sd0`
-    * `# bioctl -c C -l sd0a softraid0`
+    * `# bioctl -c C -k sd1a -l sd0a softraid0`
     * `# cd /dev && sh MAKEDEV sd1 sd2`
     * `# dd if=/dev/zero of=/dev/rsd2c bs=1m count=1`
     * `# exit`
