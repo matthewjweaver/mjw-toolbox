@@ -7,23 +7,23 @@ This checklist produces an openbsd server with a minimized surface area. It only
 1. Retrieve installation image
     * `# for f in install62.fs SHA256.sig; do ftp https://ftp.openbsd.org/pub/OpenBSD/6.2/amd64/${f}; done`
 1. Check installation image signature
-    * `# signify -C -p /etc/signify/openbsd-61-base.pub -x SHA256.sig | grep install61.fs`
+    * `# signify -C -p /etc/signify/openbsd-62-base.pub -x SHA256.sig install62.fs`
 1. Write installation image to media
-    * `# dd if=install61.fs of=/dev/rsd2c bs=1m`
+    * `# dd if=install62.fs of=/dev/rsd2c bs=1m`
 1. Reboot to installation media and select (S)hell
-1. [Create crypto volume](https://openbsd.org/faq/faq14.html#softraidFDE), with a keydisk
-    * `# dd if=/dev/random of=/dev/rsd0c bs=1m`
+1. [Create crypto volume](https://openbsd.org/faq/faq14.html#softraidFDE), with a [keydisk](https://www.openbsd.org/faq/faq14.html#softraidFDEkeydisk)
+    * `# dd if=/dev/urandom of=/dev/rsd0c bs=1m`
     * `# fdisk -iy sd0`
     * `# disklabel -E sd0`
-    * `# bioctl -c C -k sd1a -l sd0a softraid0`
-    * `# cd /dev && sh MAKEDEV sd1 sd2`
+    * `# bioctl -c C -k sd1a -l sd0a softraid0` (note what sd this creates)
+    * `# cd /dev && sh MAKEDEV sd1 sd2 sd3`
     * `# dd if=/dev/zero of=/dev/rsd2c bs=1m count=1`
     * `# exit`
-1. Complete installation, using package sets on disk
-1. `# chroot /mnt sh -l`
+1. Complete installation using the new sd device bioctl created, with package sets on disk
+1. Exit to (S)hell, and hop into a chroot at the new install
+    * `# chroot /mnt sh -l`
 1. ssh/sshd configs
-    * `# cd /etc/ssh && ftp https://raw.githubusercontent.com/matthewjweaver/mjw-toolbox/master/openbsd-skel/sshd_config`
-    * `# cd /etc/ssh && ftp https://raw.githubusercontent.com/matthewjweaver/mjw-toolbox/master/openbsd-skel/ssh_config`
+    * `# cd /etc/ssh && ftp https://raw.githubusercontent.com/matthewjweaver/mjw-toolbox/master/openbsd-skel/{sshd,ssh}_config`
 1. sshd keys
     * `# cd /etc/ssh && rm ssh_host_*key*`
     * `# ssh-keygen -t ed25519 -f ssh_host_ed25519_key < /dev/null`
@@ -34,7 +34,7 @@ This checklist produces an openbsd server with a minimized surface area. It only
     * `# cd /etc && ftp https://raw.githubusercontent.com/matthewjweaver/mjw-toolbox/master/openbsd-skel/pf.conf`
 1. configure unbound
     * `# cd /var/unbound/etc && ftp https://raw.githubusercontent.com/matthewjweaver/mjw-toolbox/master/openbsd-skel/unbound.conf`
-    * `# echo 'nameserver 127.0.0.1 >> /etc/resolv.conf'`
+    * `# echo 'nameserver 127.0.0.1' >> /etc/resolv.conf`
     * `# rcctl enable unbound`
 1. dhclient DNS override
     * `# echo 'supersede domain-name-servers 127.0.0.1;' > /etc/dhclient.conf`
@@ -44,9 +44,11 @@ This checklist produces an openbsd server with a minimized surface area. It only
     * `# rcctl set ntpd flags -s`
 1. set installurl
     * `# echo "https://ftp4.usa.openbsd.org/pub/OpenBSD" > /etc/installurl`
-1. apply patches
-    * `# doas syspatch`
+1. Fetch firmware if you need it (wireless devices, usually)
+    * `# fw_update`
 1. reboot
+1. After reboot, login and apply patches
+    * `# doas syspatch`
 
 
 ## Router-only steps
