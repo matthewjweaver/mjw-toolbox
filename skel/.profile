@@ -4,7 +4,7 @@
 
 PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:.
 export PATH HOME TERM
-export PKG_PATH="https://ftp.openbsd.org/%m/"
+export PKG_PATH="https://cdn.openbsd.org/%m/"
 
 umask 027
 
