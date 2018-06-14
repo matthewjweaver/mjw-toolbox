@@ -1,0 +1,2 @@
+# internal interface
+inet 192.168.66.1 255.255.255.0 NONE
