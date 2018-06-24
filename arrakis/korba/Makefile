@@ -1,6 +1,11 @@
 .DEFAULT = all
 
-all: /www/korba/OpenBSD/6.3/amd64/site63-korba.tgz
+all: /www/korba/OpenBSD/6.3/amd64/site63-korba.tgz \
+  /var/www/htdocs/korba-install.conf
+
+/var/www/htdocs/korba-install.conf : korba-install.conf
+	install -o sysop -g daemon -m 0644 \
+	  korba-install.conf /var/www/htdocs/korba-install.conf
 
 /var/www/OpenBSD/6.3/amd64/site63-korba.tgz : site63-korba.tgz
 	install -o sysop -g daemon -m 0644 \
