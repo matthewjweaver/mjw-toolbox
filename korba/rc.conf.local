@@ -1,5 +1,0 @@
-dhcpd_flags=
-ftpproxy_flags=
-ntpd_flags="-s"
-tftpd_flags="/tftpboot"
-unbound_flags="-c /var/unbound/etc/unbound.conf"

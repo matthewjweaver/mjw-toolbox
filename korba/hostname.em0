@@ -1,7 +1,0 @@
-# external interface.
-inet 100.36.223.11 255.255.255.0 
-dest 100.36.223.1
-!arp -s 100.36.223.10 7e:99:dc:00:3d:c2 permanent
-!arp -s 100.36.223.12 00:0d:b9:44:0b:ec permanent
-!arp -s 100.36.223.13 00:00:24:c8:e2:dc permanent
-!arp -s 100.36.223.14 00:00:24:c8:e2:dc permanent
