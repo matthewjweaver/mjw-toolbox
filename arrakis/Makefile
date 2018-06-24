@@ -4,12 +4,10 @@ all: /etc/acme-client.conf \
      /etc/doas.conf \
      /etc/dhcpd.conf \
      /etc/hostname.bridge0 \
-     /etc/hostname.bridge1 \
      /etc/hostname.em0 \
      /etc/hostname.em1 \
      /etc/hostname.em2 \
      /etc/hostname.vether0 \
-     /etc/hostname.vether1 \
      /etc/httpd.conf \
      /etc/ntpd.conf \
      /etc/pf.conf \
@@ -33,10 +31,6 @@ all: /etc/acme-client.conf \
 	install -o root -g wheel -m 0640 \
 	  hostname.bridge0 /etc/hostname.bridge0
 
-/etc/hostname.bridge1 : hostname.bridge1
-	install -o root -g wheel -m 0640 \
-	  hostname.bridge1 /etc/hostname.bridge1
-
 /etc/hostname.em0 : hostname.em0
 	install -o root -g wheel -m 0640 \
 	  hostname.em0 /etc/hostname.em0
@@ -52,10 +46,6 @@ all: /etc/acme-client.conf \
 /etc/hostname.vether0 : hostname.vether0
 	install -o root -g wheel -m 0640 \
 	  hostname.vether0 /etc/hostname.vether0
-
-/etc/hostname.vether1 : hostname.vether1
-	install -o root -g wheel -m 0640 \
-	  hostname.vether1 /etc/hostname.vether1
 
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \
