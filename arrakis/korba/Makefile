@@ -1,14 +1,14 @@
 .DEFAULT = all
 
-all: /var/www/OpenBSD/6.3/amd64/site63-www.tgz
+all: /www/korba/OpenBSD/6.3/amd64/site63-korba.tgz
 
-/var/www/OpenBSD/6.3/amd64/site63-www.tgz : site63-www.tgz
+/var/www/OpenBSD/6.3/amd64/site63-korba.tgz : site63-korba.tgz
 	install -o sysop -g daemon -m 0644 \
-	  site63-www.tgz /var/www/OpenBSD/6.3/amd64/site63-www.tgz
+	  site63-korba.tgz /var/www/OpenBSD/6.3/amd64/site63-korba.tgz
 
-site63-www.tgz : etc/acme-client.conf etc/httpd.conf etc/ntpd.conf \
+site63-korba.tgz : etc/acme-client.conf etc/httpd.conf etc/ntpd.conf \
   etc/pf.conf etc/ssh/ssh_config etc/ssh/sshd_config
-	tar -cpvzf site63-www.tgz etc
+	tar -cpvzf site63-korba.tgz etc
 
 etc/acme-client.conf : acme-client.conf
 	mkdir -p etc
