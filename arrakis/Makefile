@@ -13,7 +13,6 @@ all: /etc/acme-client.conf \
      /etc/pf.conf \
      /etc/sysctl.conf \
      /var/unbound/etc/unbound.conf \
-     /etc/vm.conf
 
 /etc/acme-client.conf : acme-client.conf
 	install -o root -g wheel -m 0644 \
@@ -74,8 +73,4 @@ all: /etc/acme-client.conf \
 /var/unbound/etc/unbound.conf : unbound.conf
 	install -o root -g _unbound -m 0640 \
 	  unbound.conf /var/unbound/etc/unbound.conf
-
-/etc/vm.conf : vm.conf
-	install -o root -g wheel -m 0640 \
-	  vm.conf /etc/vm.conf
 
