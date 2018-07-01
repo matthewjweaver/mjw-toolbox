@@ -1,6 +1,6 @@
 $TTL 3600
 @	IN SOA	ns1 named (
-				2018062400  ; serial
+				2018070100  ; serial
 				1800       ; refresh (30 min)
 				300        ; retry (5 min)
 				8467200    ; expire (14 weeks)
@@ -22,7 +22,7 @@ mesmtp._domainkey	TXT	(
 	"hvQ3KoO5e8596jvEIMmHnYaHrU28huu4JQ9nt+d1ziMWS6uHQKG5nNBfiojFOqjZ5QozLR"
 	"sTn5/laIU73uG3N4wQIDAQAB")
 
-@		IN A	100.36.223.10
+@		IN A	100.36.223.11
 
 ns1		IN A	100.36.223.10
 korba		IN A	100.36.223.11
