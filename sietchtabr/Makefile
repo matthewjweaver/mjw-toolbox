@@ -1,6 +1,12 @@
-sietchtabr: /etc/hostname.em0 /etc/hostname.em1 /etc/hostname.em2 \
-	/etc/hostname.em3 /etc/hostname.em4 /etc/hostname.em5 \
-	/etc/hostname.em6 /etc/hostname.em7
+sietchtabr: /etc/hostname.em0 \
+	    /etc/hostname.em1 \
+	    /etc/hostname.em2 \
+	    /etc/hostname.em3 \
+	    /etc/hostname.em4 \
+	    /etc/hostname.em5 \
+	    /etc/hostname.em6 \
+	    /etc/hostname.em7 \
+	    /etc/pf.conf
 
 /etc/hostname.em0 : hostname.em0
 	install -o root -g wheel -m 0640 hostname.em0 /etc/hostname.em0
@@ -25,4 +31,8 @@ sietchtabr: /etc/hostname.em0 /etc/hostname.em1 /etc/hostname.em2 \
 
 /etc/hostname.em7 : hostname.em7
 	install -o root -g wheel -m 0640 hostname.em7 /etc/hostname.em7
+
+/etc/pf.conf : pf.conf
+	install -o root -g wheel -m 0600 \
+	  pf.conf /etc/pf.conf
 
