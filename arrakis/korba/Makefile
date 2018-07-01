@@ -1,6 +1,4 @@
-.DEFAULT = all
-
-all: /var/www/OpenBSD/site/site63-korba.tgz \
+korba: /var/www/OpenBSD/site/site63-korba.tgz \
   /var/www/htdocs/korba-install.conf
 
 /var/www/htdocs/korba-install.conf : korba-install.conf

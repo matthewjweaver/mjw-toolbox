@@ -1,18 +1,16 @@
-.DEFAULT : all
-
-all: /etc/acme-client.conf \
-     /etc/doas.conf \
-     /etc/dhcpd.conf \
-     /etc/hostname.bridge0 \
-     /etc/hostname.em0 \
-     /etc/hostname.em1 \
-     /etc/hostname.em2 \
-     /etc/hostname.vether0 \
-     /etc/httpd.conf \
-     /etc/ntpd.conf \
-     /etc/pf.conf \
-     /etc/sysctl.conf \
-     /var/unbound/etc/unbound.conf \
+arrakis: /etc/acme-client.conf \
+         /etc/doas.conf \
+         /etc/dhcpd.conf \
+         /etc/hostname.bridge0 \
+         /etc/hostname.em0 \
+         /etc/hostname.em1 \
+         /etc/hostname.em2 \
+         /etc/hostname.vether0 \
+         /etc/httpd.conf \
+         /etc/ntpd.conf \
+         /etc/pf.conf \
+         /etc/sysctl.conf \
+         /var/unbound/etc/unbound.conf
 
 /etc/acme-client.conf : acme-client.conf
 	install -o root -g wheel -m 0644 \

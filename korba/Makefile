@@ -1,6 +1,4 @@
-.DEFAULT = all
-
-all : /etc/acme-client.conf /etc/httpd.conf /etc/ntpd.conf \
+korba : /etc/acme-client.conf /etc/httpd.conf /etc/ntpd.conf \
   /etc/pf.conf /etc/ssh/ssh_config /etc/ssh/sshd_config
 
 /etc/acme-client.conf : acme-client.conf

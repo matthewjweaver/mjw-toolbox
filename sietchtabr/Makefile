@@ -1,6 +1,4 @@
-.DEFAULT : all
-
-all: /etc/hostname.em0 /etc/hostname.em1 /etc/hostname.em2 \
+sietchtabr: /etc/hostname.em0 /etc/hostname.em1 /etc/hostname.em2 \
 	/etc/hostname.em3 /etc/hostname.em4 /etc/hostname.em5 \
 	/etc/hostname.em6 /etc/hostname.em7
 
