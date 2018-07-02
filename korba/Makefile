@@ -1,9 +1,18 @@
-korba : /etc/acme-client.conf /etc/httpd.conf /etc/ntpd.conf \
-  /etc/pf.conf /etc/ssh/ssh_config /etc/ssh/sshd_config
+korba : /etc/acme-client.conf \
+        /etc/daily.local \
+        /etc/httpd.conf \
+        /etc/ntpd.conf \
+        /etc/pf.conf \
+        /etc/ssh/ssh_config \
+        /etc/ssh/sshd_config
 
 /etc/acme-client.conf : acme-client.conf
 	install -o root -g wheel -m 0644 \
 	  acme-client.conf /etc/acme-client.conf
+
+/etc/daily.local : daily.local
+	install -o root -g wheel -m 0644 \
+	  daily.local /etc/daily.local
 
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \
