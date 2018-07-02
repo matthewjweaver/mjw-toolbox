@@ -1,6 +1,7 @@
 arrakis: /etc/acme-client.conf \
-         /etc/doas.conf \
+         /etc/daily.local \
          /etc/dhcpd.conf \
+         /etc/doas.conf \
          /etc/hostname.bridge0 \
          /etc/hostname.em0 \
          /etc/hostname.em1 \
@@ -15,6 +16,10 @@ arrakis: /etc/acme-client.conf \
 /etc/acme-client.conf : acme-client.conf
 	install -o root -g wheel -m 0644 \
 	  acme-client.conf /etc/acme-client.conf
+
+/etc/daily.local : daily.local
+	install -o root -g wheel -m 0644 \
+	  daily.local /etc/daily.local
 
 /etc/dhcpd.conf : dhcpd.conf
 	install -o root -g wheel -m 0644 \
