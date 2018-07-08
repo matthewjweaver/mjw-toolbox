@@ -1,6 +1,8 @@
 # uplink and downlink
 add em0
 add em1
+add vether0
+blocknonip em0
 rule block in on em0 arp reply tpa 100.36.223.10
 rule block in on em0 arp reply tpa 100.36.223.11
 rule block in on em0 arp reply tpa 100.36.223.12

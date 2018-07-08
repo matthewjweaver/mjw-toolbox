@@ -6,6 +6,7 @@ arrakis: /etc/acme-client.conf \
          /etc/hostname.em0 \
          /etc/hostname.em1 \
          /etc/hostname.em2 \
+         /etc/hostname.em3 \
          /etc/hostname.vether0 \
          /etc/httpd.conf \
          /etc/ntpd.conf \
@@ -44,6 +45,10 @@ arrakis: /etc/acme-client.conf \
 /etc/hostname.em2 : hostname.em2
 	install -o root -g wheel -m 0640 \
 	  hostname.em2 /etc/hostname.em2
+
+/etc/hostname.em3 : hostname.em3
+	install -o root -g wheel -m 0640 \
+	  hostname.em3 /etc/hostname.em3
 
 /etc/hostname.vether0 : hostname.vether0
 	install -o root -g wheel -m 0640 \
