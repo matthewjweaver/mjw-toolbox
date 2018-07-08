@@ -1,10 +1,9 @@
-# uplink and DMZ
-add vether0
+# uplink and downlink
 add em0
 add em1
-rule block in on em0 src 84:b5:9c:a1:33:c8 arp reply tpa 100.36.223.10
-rule block in on em0 src 84:b5:9c:a1:33:c8 arp reply tpa 100.36.223.11
-rule block in on em0 src 84:b5:9c:a1:33:c8 arp reply tpa 100.36.223.12
-rule block in on em0 src 84:b5:9c:a1:33:c8 arp reply tpa 100.36.223.13
-rule block in on em0 src 84:b5:9c:a1:33:c8 arp reply tpa 100.36.223.14
+rule block in on em0 arp reply tpa 100.36.223.10
+rule block in on em0 arp reply tpa 100.36.223.11
+rule block in on em0 arp reply tpa 100.36.223.12
+rule block in on em0 arp reply tpa 100.36.223.13
+rule block in on em0 arp reply tpa 100.36.223.14
 up
