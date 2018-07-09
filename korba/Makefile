@@ -3,6 +3,7 @@ korba : /etc/acme-client.conf \
         /etc/httpd.conf \
         /etc/ntpd.conf \
         /etc/pf.conf \
+        /etc/resolv.conf \
         /etc/ssh/ssh_config \
         /etc/ssh/sshd_config
 
@@ -25,6 +26,10 @@ korba : /etc/acme-client.conf \
 /etc/pf.conf : pf.conf
 	install -o root -g wheel -m 0600 \
 	  pf.conf /etc/pf.conf
+
+/etc/resolv.conf : resolv.conf
+	install -o root -g wheel -m 0644 \
+	  resolv.conf /etc/resolv.conf
 
 /etc/ssh/ssh_config : ../openbsd-skel/ssh_config
 	install -o root -g wheel -m 0644 \
