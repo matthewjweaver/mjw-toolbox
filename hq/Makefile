@@ -9,6 +9,7 @@ hq : /etc/acme-client.conf \
         /etc/softhsm.conf \
         /etc/ssh/ssh_config \
         /etc/ssh/sshd_config \
+	/home/ebde7a06/.ssh/authorized_keys \
 	/var/nsd/etc/nsd.conf \
 	/var/nsd/zones/master/layeraleph.com
 
@@ -55,6 +56,10 @@ hq : /etc/acme-client.conf \
 /etc/ssh/sshd_config : ../openbsd-skel/sshd_config
 	install -o root -g wheel -m 0644 \
 	  ../openbsd-skel/sshd_config /etc/ssh/sshd_config
+
+/home/ebde7a06/.ssh/authorized_keys : www-ci-authorized_keys
+	install -o ebde7a06 -g ebde7a06 -m 0400 \
+	www-ci-authorized_keys /home/ebde7a06/.ssh/authorized_keys
 
 /var/nsd/etc/nsd.conf : nsd.conf
 	install -o root -g _nsd -m 0640 \
