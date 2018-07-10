@@ -1,4 +1,4 @@
 # renew letsencrypt certs as necessary
-for DOMAIN in ice-nine.org layeraleph.com mjw.wtf nodeless.net; do
+for DOMAIN in ice-nine.org mjw.wtf nodeless.net; do
   acme-client ${DOMAIN} && rcctl reload httpd
 done
