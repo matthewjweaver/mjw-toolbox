@@ -1,0 +1,10 @@
+# renew letsencrypt certs as necessary
+for DOMAIN in arrakis.nodeless.net; do
+  acme-client ${DOMAIN} && rcctl reload httpd
+done
+
+# TODO(weaver) : update block lists.
+# doas grep "invalid user" /var/log/authlog| \
+# sed -e's/.*invalid user [^ ]* //g' -e's/ port.*//g'| \
+# sed -e's/[^0123456789.]//g'|sort -n|uniq>/tmp/t
+# then combine with /etc/pf.sshbots
