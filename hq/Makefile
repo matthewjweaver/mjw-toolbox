@@ -66,7 +66,7 @@ hq : /etc/acme-client.conf \
 	  /var/opendnssec/signed/layeraleph.com \
 	  /var/nsd/zones/master/layeraleph.com
 
-/var/opendnssrc/signed/layeraleph.com : \
+/var/opendnssec/signed/layeraleph.com : \
   /var/opendnssec/unsigned/layeraleph.com
 	ods-signer sign layeraleph.com
 
