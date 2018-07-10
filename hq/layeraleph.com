@@ -1,6 +1,6 @@
 $TTL 3600
 @	IN SOA	ns1 named (
-				2018070900 ; serial
+				2018071001 ; serial
 				300        ; refresh (5m)
 				300        ; retry (5m)
 				8467200    ; expire (14w)
@@ -9,7 +9,7 @@ $TTL 3600
 		NS	ns.layeraleph.com.
 		NS	ns6.gandi.net.
 
-		IN A	100.36.223.12
+		IN A	100.36.223.11
 ns		IN A	100.36.223.12
 hq		IN A	100.36.223.12
 
