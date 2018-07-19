@@ -2,16 +2,16 @@ hq : /etc/acme-client.conf \
         /etc/daily.local \
         /etc/httpd.conf \
         /etc/ntpd.conf \
-	/etc/opendnssec/conf.xml \
-	/etc/opendnssec/kasp.xml \
+        /etc/opendnssec/conf.xml \
+        /etc/opendnssec/kasp.xml \
         /etc/pf.conf \
         /etc/resolv.conf \
         /etc/softhsm.conf \
         /etc/ssh/ssh_config \
         /etc/ssh/sshd_config \
-	/home/ebde7a06/.ssh/authorized_keys \
-	/var/nsd/etc/nsd.conf \
-	/var/nsd/zones/master/layeraleph.com
+        /home/ebde7a06/.ssh/authorized_keys \
+        /var/nsd/etc/nsd.conf \
+        /var/nsd/zones/master/layeraleph.com
 
 /etc/acme-client.conf : acme-client.conf
 	install -o root -g wheel -m 0644 \
