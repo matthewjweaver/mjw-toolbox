@@ -1,3 +1,8 @@
+# You are editing the Makefile to include these:
+# conf.xml,kasp.xml,nsd.conf,softhsm.conf
+# Next up will be editing those files, and then adding the zone files to the
+# makefile. After that, setting up softhsm, then opendnssec and nsd.
+# Then, fire it all up, and change gandi stuff (ksks, nameserver)
 korba : /etc/acme-client.conf \
         /etc/daily.local \
         /etc/httpd.conf \
