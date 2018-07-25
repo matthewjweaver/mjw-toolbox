@@ -45,9 +45,7 @@ This checklist produces an openbsd server with a minimized surface area. It only
 1. set installurl
     * `# echo "https://cdn.openbsd.org/pub/OpenBSD" > /etc/installurl`
 1. reboot
-1. After reboot, login and apply patches
-    * `# doas syspatch`
-
+1. reboot again, after the system has applied all syspatch(8) updates on first boot
 
 ## Router-only steps
 
