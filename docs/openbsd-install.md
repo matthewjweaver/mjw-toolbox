@@ -5,11 +5,11 @@ This checklist produces an openbsd server with a minimized surface area. It only
 
 
 1. Retrieve installation image
-    * `# for f in install62.fs SHA256.sig; do ftp https://ftp.openbsd.org/pub/OpenBSD/6.2/amd64/${f}; done`
+    * `# for f in install63.fs SHA256.sig; do ftp https://cdn.openbsd.org/pub/OpenBSD/6.3/amd64/${f}; done`
 1. Check installation image signature
-    * `# signify -C -p /etc/signify/openbsd-62-base.pub -x SHA256.sig install62.fs`
+    * `# signify -C -p /etc/signify/openbsd-63-base.pub -x SHA256.sig install63.fs`
 1. Write installation image to media
-    * `# dd if=install62.fs of=/dev/rsd2c bs=1m`
+    * `# dd if=install63.fs of=/dev/rsd2c bs=1m`
 1. Reboot to installation media and select (S)hell
 1. [Create crypto volume](https://openbsd.org/faq/faq14.html#softraidFDE), with a [keydisk](https://www.openbsd.org/faq/faq14.html#softraidFDEkeydisk)
     * `# dd if=/dev/urandom of=/dev/rsd0c bs=1m`
@@ -43,9 +43,7 @@ This checklist produces an openbsd server with a minimized surface area. It only
     * `# rcctl enable ntpd`
     * `# rcctl set ntpd flags -s`
 1. set installurl
-    * `# echo "https://ftp4.usa.openbsd.org/pub/OpenBSD" > /etc/installurl`
-1. Fetch firmware if you need it (wireless devices, usually)
-    * `# fw_update`
+    * `# echo "https://cdn.openbsd.org/pub/OpenBSD" > /etc/installurl`
 1. reboot
 1. After reboot, login and apply patches
     * `# doas syspatch`
