@@ -22,6 +22,10 @@ signs the zones.  OpenBSD's authoritative name server, `nsd`, is what
 actually serves the signed zones. Its config file is here as `nsd.conf`.
 
 
+TODO(weaver) : Fix zone signing so that failures are exposed on build.
+TODO(weaver) : Fix zone installation so two makes aren't required.
+
+
 ### caveats about build
 1. You'll need to manually enter the softhsm "user" PIN
 into `/etc/opendnssec/conf.xml` after a `doas make hq`, since we don't
