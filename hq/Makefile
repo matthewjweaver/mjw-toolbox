@@ -68,12 +68,6 @@ hq : /etc/acme-client.conf \
 	  nsd.conf /var/nsd/etc/nsd.conf
 
 /var/nsd/zones/master/layeraleph.com : \
-  /var/opendnssec/signed/layeraleph.com
-	install -o root -g _nsd -m 0644 \
-	  /var/opendnssec/signed/layeraleph.com \
-	  /var/nsd/zones/master/layeraleph.com
-
-/var/opendnssec/signed/layeraleph.com : \
   /var/opendnssec/unsigned/layeraleph.com
 	ods-signer sign layeraleph.com
 

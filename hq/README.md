@@ -22,17 +22,25 @@ signs the zones.  OpenBSD's authoritative name server, `nsd`, is what
 actually serves the signed zones. Its config file is here as `nsd.conf`.
 
 
+Additional steps, if this is a new machine:
+1. Run `doas usermod -G _nsd opendnssec`. This gives opendnssec
+permisison appropriate to notify nsd of new signed zone files.
+1. Run `doas rm -rf /var/opendnssec/signed && doas ln -sf
+/var/nsd/zones/master /var/opendnssec/signed`. This makes a symlink so
+that opendnssec will output signed zone files into the location that nsd
+expects them.
+1. Run `doas chown -R _opendnssec /var/nsd/zones/master`. This makes
+sure write permissions are appropriate for opendnssec on the zone files
+and directory they live in.
+
+
 TODO(weaver) : Fix zone signing so that failures are exposed on build.
-TODO(weaver) : Fix zone installation so two makes aren't required.
 
 
 ### caveats about build
 1. You'll need to manually enter the softhsm "user" PIN
 into `/etc/opendnssec/conf.xml` after a `doas make hq`, since we don't
 keep secrets in the git repository.
-
-1. You'll need to run `doas nsd-control reload layeraleph.com` to notify
-nsd of any zone file changes after `doas make hq`.
 
 
 ## HTTPS
