@@ -15,8 +15,8 @@
 
 	<Policy name="default">
 		<Description> A policy with two year, 4096b KSKs and
-		  180 day, 2048b ZSKs. SOA Serial numbers from the
-		  unsigned zone are preserved.</Description>
+		  180 day, 2048b ZSKs. SOA Serial numbers are generated
+		  in a YYYYMMDDnn format by ODS.</Description>
 		<Signatures>
 			<Resign>PT2H</Resign>
 			<Refresh>P3D</Refresh>
