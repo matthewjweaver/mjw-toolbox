@@ -13,7 +13,7 @@
 
 <KASP>
 
-	<Policy name="default">
+	<Policy name="nodeless-default">
 		<Description> A policy with two year, 4096b KSKs and
 		  180 day, 2048b ZSKs. SOA Serial numbers from the
 		  unsigned zone are preserved.</Description>
