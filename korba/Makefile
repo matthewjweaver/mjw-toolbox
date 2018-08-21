@@ -68,15 +68,15 @@ korba : /etc/acme-client.conf \
 	install -o root -g _nsd -m 0640 \
 	  nsd.conf /var/nsd/etc/nsd.conf
 
-/var/opendnssec/signed/ice-nine.org : \
+/var/nsd/zones/master/ice-nine.org : \
   /var/opendnssec/unsigned/ice-nine.org
 	ods-signer sign ice-nine.org
 
-/var/opendnssec/signed/mjw.wtf : \
+/var/nsd/zones/master/mjw.wtf : \
   /var/opendnssec/unsigned/mjw.wtf
 	ods-signer sign mjw.wtf
 
-/var/opendnssec/signed/nodeless.net : \
+/var/nsd/zones/master/nodeless.net : \
   /var/opendnssec/unsigned/nodeless.net
 	ods-signer sign nodeless.net
 
