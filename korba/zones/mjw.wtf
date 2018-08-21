@@ -1,6 +1,6 @@
 $TTL 3600
-@	IN SOA	ns1 named (
-				2018070100  ; serial
+@	IN SOA	ns named (
+				2018082101 ; serial
 				300        ; refresh (5 min)
 				300        ; retry (5 min)
 				8467200    ; expire (14 weeks)
@@ -10,8 +10,6 @@ $TTL 3600
 		IN NS	ns1.nodeless.net.
 		IN NS	ns6.gandi.net.
 
-		IN A	100.36.223.11
-		IN MX	10 mx.ice-nine.org.
 		IN MX	10 in1-smtp.messagingengine.com.
 		IN MX	20 in2-smtp.messagingengine.com.
 *		IN MX	10 in1-smtp.messagingengine.com.
@@ -23,3 +21,5 @@ mesmtp._domainkey       TXT     (
         "JvI1qydV/9zsyagN07OWnv2B6QSGJ8sCzF7ygDpzZGvNyNlQsQturZohQN+NM2y7WDS6KS"
         "pOvE71MiGLtDRPKVyJfmyFO0/G/M60KH9xz1G+mstR9BtXhg6Kc0dtA6muNjKHplpbteG9"
         "SDhvjUuzl/JnhmkcRQIDAQAB")
+
+@		IN A	100.36.223.11

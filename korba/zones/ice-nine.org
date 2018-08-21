@@ -1,0 +1,26 @@
+$TTL 3600
+@ 	IN SOA ns named (
+				2018082101 ; serial
+				1800       ; refresh, 30 min
+				300        ; retry 5 min
+				8467200    ; expire 2 weeks
+				3600       ; min. TTL 1 day
+				)
+
+		IN NS	ns1.nodeless.net.
+		IN NS	ns6.gandi.net.
+
+		MX	10 in1-smtp.messagingengine.com.
+		MX	20 in2-smtp.messagingengine.com.
+*		MX	10 in1-smtp.messagingengine.com.
+*		MX	20 in2-smtp.messagingengine.com.
+
+mesmtp._domainkey	TXT	(
+	"v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDUBcwn1anz+myh"
+	"0R/DbkINPj98I5bP0F9fH+d97Eu+z6jCaKZ2kk/CyfC7haTR7W/TysL99AsD7GqY6uzdrW"
+	"n47m6bsJB+QOwyshunXEt5bvb2m8xQmHKUVE0lhn/jx5V715CVcN6JASNRXLKVnXjOnyTl"
+	"U4UCKvrdFx7RK7xrAwIDAQAB")
+
+@		TXT	"v=spf1 include:spf.messagingengine.com ?all"
+
+@		IN A	100.36.223.11
