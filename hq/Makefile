@@ -32,10 +32,12 @@ hq : /etc/acme-client.conf \
 /etc/opendnssec/conf.xml : conf.xml
 	install -o root -g _opendnssec -m 0640 \
 	  conf.xml /etc/opendnssec/conf.xml
+	ods-ksmutil update conf
 
 /etc/opendnssec/kasp.xml : kasp.xml
 	install -o root -g _opendnssec -m 0640 \
 	  kasp.xml /etc/opendnssec/kasp.xml
+	ods-ksmutil update kasp
 
 /etc/pf.conf : pf.conf
 	install -o root -g wheel -m 0600 \
@@ -66,12 +68,6 @@ hq : /etc/acme-client.conf \
 	  nsd.conf /var/nsd/etc/nsd.conf
 
 /var/nsd/zones/master/layeraleph.com : \
-  /var/opendnssec/signed/layeraleph.com
-	install -o root -g _nsd -m 0644 \
-	  /var/opendnssec/signed/layeraleph.com \
-	  /var/nsd/zones/master/layeraleph.com
-
-/var/opendnssec/signed/layeraleph.com : \
   /var/opendnssec/unsigned/layeraleph.com
 	ods-signer sign layeraleph.com
 

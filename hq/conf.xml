@@ -86,9 +86,7 @@
 <!--
 		<NotifyCommand>/usr/local/bin/my_nameserver_reload_command</NotifyCommand>
 -->
-<!--
-		<NotifyCommand>/usr/sbin/rndc reload %zone</NotifyCommand>
--->
+		<NotifyCommand>/usr/sbin/nsd-control reload %zone</NotifyCommand>
 	</Signer>
 
 </Configuration>
