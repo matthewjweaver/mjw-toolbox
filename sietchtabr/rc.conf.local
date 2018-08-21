@@ -1,4 +1,0 @@
-httpd_flags=
-nsd_flags=-4
-ntpd_flags="-s"
-pkg_scripts=nginx opendnssec
