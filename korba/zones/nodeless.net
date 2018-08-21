@@ -1,13 +1,13 @@
 $TTL 3600
 @	IN SOA	ns1 named (
-				2018082101  ; serial
+				2018082102  ; serial
 				1800       ; refresh (30 min)
 				300        ; retry (5 min)
 				8467200    ; expire (14 weeks)
 				3600       ; minimum (1 hour)
 				)
 
-		IN NS	ns.nodeless.net.
+		IN NS	ns1.nodeless.net.
 		IN NS	ns6.gandi.net.
 
 		IN MX	10 in1-smtp.messagingengine.com.
@@ -27,7 +27,7 @@ mesmtp._domainkey	TXT	(
 arrakis		IN A	100.36.223.14
 korba		IN A	100.36.223.11
 la		IN A	100.36.223.12
-ns		IN A	100.36.223.11
+ns1		IN A	100.36.223.11
 pqg		IN A	73.200.233.139
 sietchtabr	IN A	100.36.223.10
 sietchumbu	IN A	100.36.223.13

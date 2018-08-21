@@ -1,13 +1,13 @@
 $TTL 3600
 @ 	IN SOA ns named (
-				2018082100 ; serial
+				2018082101 ; serial
 				1800       ; refresh, 30 min
 				300        ; retry 5 min
 				8467200    ; expire 2 weeks
 				3600       ; min. TTL 1 day
 				)
 
-		IN NS	ns.nodeless.net.
+		IN NS	ns1.nodeless.net.
 		IN NS	ns6.gandi.net.
 
 		MX	10 in1-smtp.messagingengine.com.
