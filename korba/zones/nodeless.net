@@ -1,6 +1,6 @@
 $TTL 3600
 @	IN SOA	ns1 named (
-				2018100800  ; serial
+				2018100801  ; serial
 				1800       ; refresh (30 min)
 				300        ; retry (5 min)
 				8467200    ; expire (14 weeks)
@@ -28,6 +28,6 @@ korba		IN A	100.36.223.11
 la		IN A	100.36.223.12
 ns1		IN A	100.36.223.11
 pqg		IN A	73.200.233.139
-servok		IN A	100.36.223.10
 sietchtabr	IN A	100.36.223.14
 sietchumbu	IN A	100.36.223.13
+taqwa		IN A	100.36.223.10
