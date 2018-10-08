@@ -6,6 +6,10 @@ sietchtabr: /etc/daily.local \
          /etc/hostname.em1 \
          /etc/hostname.em2 \
          /etc/hostname.em3 \
+         /etc/hostname.em4 \
+         /etc/hostname.em5 \
+         /etc/hostname.em6 \
+         /etc/hostname.em7 \
          /etc/hostname.vether0 \
          /etc/ntpd.conf \
          /etc/pf.conf \
@@ -43,6 +47,22 @@ sietchtabr: /etc/daily.local \
 /etc/hostname.em3 : hostname.em3
 	install -o root -g wheel -m 0640 \
 	  hostname.em3 /etc/hostname.em3
+
+/etc/hostname.em4 : hostname.em4
+	install -o root -g wheel -m 0640 \
+	  hostname.em4 /etc/hostname.em4
+
+/etc/hostname.em5 : hostname.em5
+	install -o root -g wheel -m 0640 \
+	  hostname.em5 /etc/hostname.em5
+
+/etc/hostname.em6 : hostname.em6
+	install -o root -g wheel -m 0640 \
+	  hostname.em6 /etc/hostname.em6
+
+/etc/hostname.em7 : hostname.em7
+	install -o root -g wheel -m 0640 \
+	  hostname.em7 /etc/hostname.em7
 
 /etc/hostname.vether0 : hostname.vether0
 	install -o root -g wheel -m 0640 \
