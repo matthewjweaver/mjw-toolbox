@@ -11,6 +11,7 @@ sietchtabr: /etc/daily.local \
          /etc/hostname.em6 \
          /etc/hostname.em7 \
          /etc/hostname.vether0 \
+         /etc/ldapd.conf \
          /etc/ntpd.conf \
          /etc/newsyslog.conf \
          /etc/pf.conf \
@@ -70,6 +71,10 @@ sietchtabr: /etc/daily.local \
 /etc/hostname.vether0 : hostname.vether0
 	install -o root -g wheel -m 0640 \
 	  hostname.vether0 /etc/hostname.vether0
+
+/etc/ldapd.conf : ldapd.conf
+	install -o root -g wheel -m 0600 \
+	  ldapd.conf /etc/ldapd.conf
 
 /etc/ntpd.conf : ntpd.conf
 	install -o root -g wheel -m 0644 \
