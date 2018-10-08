@@ -1,6 +1,11 @@
-add vether0
+# uplink and downlink
 add em0
 add em1
-add em2
-add em3
+add vether0
+blocknonip em0
+rule block in on em0 arp reply spa 100.36.223.10
+rule block in on em0 arp reply spa 100.36.223.11
+rule block in on em0 arp reply spa 100.36.223.12
+rule block in on em0 arp reply spa 100.36.223.13
+rule block in on em0 arp reply spa 100.36.223.14
 up
