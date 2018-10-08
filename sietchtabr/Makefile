@@ -12,7 +12,10 @@ sietchtabr: /etc/daily.local \
          /etc/hostname.em7 \
          /etc/hostname.vether0 \
          /etc/ntpd.conf \
+         /etc/newsyslog.conf \
          /etc/pf.conf \
+         /etc/ssh/ssh_config \
+         /etc/ssh/sshd_config \
          /etc/sysctl.conf \
          /var/unbound/etc/unbound.conf
 
@@ -71,6 +74,10 @@ sietchtabr: /etc/daily.local \
 /etc/ntpd.conf : ntpd.conf
 	install -o root -g wheel -m 0644 \
 	  ntpd.conf /etc/ntpd.conf
+
+/etc/newsyslog.conf : newsyslog.conf
+	install -o root -g wheel -m 0644 \
+	  newsyslog.conf /etc/newsyslog.conf
 
 /etc/pf.conf : pf.conf
 	install -o root -g wheel -m 0600 \
