@@ -1,9 +1,8 @@
-# You are editing the Makefile to include these:
-# Next up will be editing those files, and then adding the zone files to the
-# makefile. After that, setting up softhsm, then opendnssec and nsd.
-# Then, fire it all up, and change gandi stuff (ksks, nameserver)
 korba : /etc/acme-client.conf \
         /etc/daily.local \
+        /etc/dhcpd.conf \
+	/etc/hostname.em0 \
+	/etc/hostname.em2 \
         /etc/httpd.conf \
         /etc/ntpd.conf \
         /etc/opendnssec/conf.xml \
@@ -26,9 +25,21 @@ korba : /etc/acme-client.conf \
 	install -o root -g wheel -m 0644 \
 	  daily.local /etc/daily.local
 
+/etc/dhcpd.conf : dhcpd.conf
+	install -o root -g wheel -m 0644 \
+	  dhcpd.conf /etc/dhcpd.conf
+
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \
 	  httpd.conf /etc/httpd.conf
+
+/etc/hostname.em0 : hostname.em0
+	install -o root -g wheel -m 0640 \
+	  hostname.em0 /etc/hostname.em0
+
+/etc/hostname.em2 : hostname.em2
+	install -o root -g wheel -m 0640 \
+	  hostname.em2 /etc/hostname.em2
 
 /etc/ntpd.conf : ntpd.conf
 	install -o root -g wheel -m 0644 \
