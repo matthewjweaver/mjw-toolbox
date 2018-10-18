@@ -1,2 +1,3 @@
 # DMZ (unallocated)
+mtu 9000
 up
