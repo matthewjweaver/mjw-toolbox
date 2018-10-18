@@ -1,23 +1,29 @@
-sietchtabr: /etc/daily.local \
-         /etc/dhcpd.conf \
-         /etc/doas.conf \
-         /etc/hostname.bridge0 \
-         /etc/hostname.em0 \
-         /etc/hostname.em1 \
-         /etc/hostname.em2 \
-         /etc/hostname.em3 \
-         /etc/hostname.em4 \
-         /etc/hostname.em5 \
-         /etc/hostname.em6 \
-         /etc/hostname.em7 \
-         /etc/hostname.vether0 \
-         /etc/ntpd.conf \
-         /etc/newsyslog.conf \
-         /etc/pf.conf \
-         /etc/ssh/ssh_config \
-         /etc/ssh/sshd_config \
-         /etc/sysctl.conf \
-         /var/unbound/etc/unbound.conf
+sietchtabr: /etc/acme-client.conf \
+            /etc/daily.local \
+            /etc/dhcpd.conf \
+            /etc/doas.conf \
+            /etc/hostname.bridge0 \
+            /etc/hostname.em0 \
+            /etc/hostname.em1 \
+            /etc/hostname.em2 \
+            /etc/hostname.em3 \
+            /etc/hostname.em4 \
+            /etc/hostname.em5 \
+            /etc/hostname.em6 \
+            /etc/hostname.em7 \
+            /etc/hostname.vether0 \
+            /etc/httpd.conf \
+            /etc/ntpd.conf \
+            /etc/newsyslog.conf \
+            /etc/pf.conf \
+            /etc/ssh/ssh_config \
+            /etc/ssh/sshd_config \
+            /etc/sysctl.conf \
+            /var/unbound/etc/unbound.conf
+
+/etc/acme-client.conf : acme-client.conf
+	install -o root -g wheel -m 0644 \
+	  acme-client.conf /etc/acme-client.conf
 
 /etc/daily.local : daily.local
 	install -o root -g wheel -m 0644 \
@@ -70,6 +76,10 @@ sietchtabr: /etc/daily.local \
 /etc/hostname.vether0 : hostname.vether0
 	install -o root -g wheel -m 0640 \
 	  hostname.vether0 /etc/hostname.vether0
+
+/etc/httpd.conf : httpd.conf
+	install -o root -g wheel -m 0644 \
+	  httpd.conf /etc/httpd.conf
 
 /etc/ntpd.conf : ntpd.conf
 	install -o root -g wheel -m 0644 \
