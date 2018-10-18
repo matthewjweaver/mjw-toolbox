@@ -1,0 +1,2 @@
+# optimized nfs for hard, no-switch gigabit link
+192.168.2.2:/volume1/homedirs /homedirs nfs rw,soft,-T,-r2097152,-w2097152 1 0
