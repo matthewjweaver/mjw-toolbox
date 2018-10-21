@@ -7,6 +7,8 @@ sietchumbu: \
   /etc/hostname.em2 \
   /etc/hostname.em3 \
   /etc/hostname.vether0 \
+  /etc/ipsec.conf \
+  /etc/npppd/npppd-users \
   /etc/ntpd.conf \
   /etc/pf.conf \
   /etc/resolv.conf \
@@ -43,6 +45,14 @@ sietchumbu: \
 /etc/hostname.vether0 : hostname.vether0
 	install -o root -g wheel -m 0640 \
 	  hostname.vether0 /etc/hostname.vether0
+
+/etc/ipsec.conf : ipsec.conf
+	install -o root -g wheel -m 0600 \
+	  ipsec.conf /etc/ipsec.conf
+
+/etc/npppd/npppd-users : npppd-users
+	install -o root -g wheel -m 0600 \
+	  npppd-users /etc/npppd/npppd-users
 
 /etc/ntpd.conf : ntpd.conf
 	install -o root -g wheel -m 0644 \
