@@ -3,7 +3,6 @@ add em0
 add em1
 add em2
 add em3
-add em4
 add vether0
 blocknonip em0
 rule block in on em0 arp reply spa 100.36.223.10
