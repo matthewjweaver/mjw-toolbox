@@ -29,10 +29,6 @@ korba : /etc/acme-client.conf \
 	install -o root -g wheel -m 0644 \
 	  dhcpd.conf /etc/dhcpd.conf
 
-/etc/httpd.conf : httpd.conf
-	install -o root -g wheel -m 0644 \
-	  httpd.conf /etc/httpd.conf
-
 /etc/hostname.em0 : hostname.em0
 	install -o root -g wheel -m 0640 \
 	  hostname.em0 /etc/hostname.em0
@@ -40,6 +36,10 @@ korba : /etc/acme-client.conf \
 /etc/hostname.em2 : hostname.em2
 	install -o root -g wheel -m 0640 \
 	  hostname.em2 /etc/hostname.em2
+
+/etc/httpd.conf : httpd.conf
+	install -o root -g wheel -m 0644 \
+	  httpd.conf /etc/httpd.conf
 
 /etc/ntpd.conf : ntpd.conf
 	install -o root -g wheel -m 0644 \

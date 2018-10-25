@@ -3,3 +3,8 @@
 # sed -e's/.*invalid user [^ ]* //g' -e's/ port.*//g'| \
 # sed -e's/[^0123456789.]//g'|sort -n|uniq>/tmp/t
 # then combine with /etc/pf.sshbots
+
+# renew letsencrypt certs as necessary
+for DOMAIN in sietchtabr.nodeless.net; do
+  acme-client ${DOMAIN} && rcctl reload httpd
+done
