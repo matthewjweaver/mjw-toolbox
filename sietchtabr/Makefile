@@ -1,7 +1,9 @@
 sietchtabr: /etc/acme-client.conf \
+            /etc/collectd.conf \
             /etc/daily.local \
             /etc/dhcpd.conf \
             /etc/doas.conf \
+            /etc/grafana/config.ini \
             /etc/hostname.bridge0 \
             /etc/hostname.em0 \
             /etc/hostname.em1 \
@@ -13,6 +15,7 @@ sietchtabr: /etc/acme-client.conf \
             /etc/hostname.em7 \
             /etc/hostname.vether0 \
             /etc/httpd.conf \
+            /etc/influxdb/influxdb.conf \
             /etc/ntpd.conf \
             /etc/newsyslog.conf \
             /etc/pf.conf \
@@ -25,6 +28,10 @@ sietchtabr: /etc/acme-client.conf \
 	install -o root -g wheel -m 0644 \
 	  acme-client.conf /etc/acme-client.conf
 
+/etc/collectd.conf : collectd.conf
+	install -o root -g _collectd -m 0640 \
+	  collectd.conf /etc/collectd.conf
+
 /etc/daily.local : daily.local
 	install -o root -g wheel -m 0644 \
 	  daily.local /etc/daily.local
@@ -36,6 +43,10 @@ sietchtabr: /etc/acme-client.conf \
 /etc/doas.conf : doas.conf
 	install -o root -g wheel -m 0600 \
 	  doas.conf /etc/doas.conf
+
+/etc/grafana/config.ini : config.ini
+	install -o root -g wheel -m 0644 \
+	  config.ini /etc/grafana/config.ini
 
 /etc/hostname.bridge0 : hostname.bridge0
 	install -o root -g wheel -m 0640 \
@@ -80,6 +91,10 @@ sietchtabr: /etc/acme-client.conf \
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \
 	  httpd.conf /etc/httpd.conf
+
+/etc/influxdb/influxdb.conf : influxdb.conf
+	install -o _influx -g _influx -m 0640 \
+	  influxdb.conf /etc/influxdb/influxdb.conf
 
 /etc/ntpd.conf : ntpd.conf
 	install -o root -g wheel -m 0644 \
