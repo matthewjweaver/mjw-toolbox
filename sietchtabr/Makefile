@@ -11,6 +11,7 @@ sietchtabr: /etc/acme-client.conf \
             /etc/hostname.em5 \
             /etc/hostname.em6 \
             /etc/hostname.em7 \
+            /etc/hostname.pflow0 \
             /etc/hostname.vether0 \
             /etc/httpd.conf \
             /etc/ntpd.conf \
@@ -72,6 +73,10 @@ sietchtabr: /etc/acme-client.conf \
 /etc/hostname.em7 : hostname.em7
 	install -o root -g wheel -m 0640 \
 	  hostname.em7 /etc/hostname.em7
+
+/etc/hostname.pflow0 : hostname.pflow0
+	install -o root -g wheel -m 0640 \
+	  hostname.pflow0 /etc/hostname.pflow0
 
 /etc/hostname.vether0 : hostname.vether0
 	install -o root -g wheel -m 0640 \
