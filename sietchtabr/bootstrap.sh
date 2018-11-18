@@ -14,10 +14,4 @@ rcctl set ntpd flags -s
 export PKG_PATH=https://cdn.openbsd.org/%m
 pkg_add git
 pkg_add vim
-pkg_add influxdb
-pkg_add collectd
-pkg_add grafana
 
-rcctl enable influxdb
-rcctl enable collectd
-rcctl enable grafana
