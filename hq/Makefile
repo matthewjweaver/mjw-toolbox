@@ -11,7 +11,8 @@ hq : /etc/acme-client.conf \
         /etc/ssh/sshd_config \
         /home/ebde7a06/.ssh/authorized_keys \
         /var/nsd/etc/nsd.conf \
-        /var/nsd/zones/master/layeraleph.com
+        /var/nsd/zones/master/layeraleph.com \
+        /var/nsd/zones/master/layerbeh.com
 
 /etc/acme-client.conf : acme-client.conf
 	install -o root -g wheel -m 0644 \
@@ -71,7 +72,15 @@ hq : /etc/acme-client.conf \
   /var/opendnssec/unsigned/layeraleph.com
 	ods-signer sign layeraleph.com
 
+/var/nsd/zones/master/layerbeh.com : \
+  /var/opendnssec/unsigned/layerbeh.com
+	ods-signer sign layerbeh.com
+
 /var/opendnssec/unsigned/layeraleph.com : layeraleph.com
 	install -o _opendnssec -g _opendnssec -m 0600 \
 	  layeraleph.com /var/opendnssec/unsigned/layeraleph.com
+
+/var/opendnssec/unsigned/layerbeh.com : layerbeh.com
+	install -o _opendnssec -g _opendnssec -m 0600 \
+	  layerbeh.com /var/opendnssec/unsigned/layerbeh.com
 
