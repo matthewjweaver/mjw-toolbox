@@ -8,3 +8,6 @@
 for DOMAIN in sietchtabr.nodeless.net; do
   acme-client ${DOMAIN} && rcctl reload httpd
 done
+
+# trim pfstats DB
+/usr/local/bin/pfstat -t 31:1825

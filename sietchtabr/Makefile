@@ -17,10 +17,12 @@ sietchtabr: /etc/acme-client.conf \
             /etc/ntpd.conf \
             /etc/newsyslog.conf \
             /etc/pf.conf \
+            /etc/pfstat.conf \
             /etc/ssh/ssh_config \
             /etc/ssh/sshd_config \
             /etc/sysctl.conf \
-            /var/unbound/etc/unbound.conf
+            /var/unbound/etc/unbound.conf \
+            /var/www/htdocs/pf/index.html
 
 /etc/acme-client.conf : acme-client.conf
 	install -o root -g wheel -m 0644 \
@@ -98,6 +100,10 @@ sietchtabr: /etc/acme-client.conf \
 	install -o root -g wheel -m 0600 \
 	  pf.conf /etc/pf.conf
 
+/etc/pfstat.conf : pfstat.conf
+	install -o root -g wheel -m 0644 \
+	  pfstat.conf /etc/pfstat.conf
+
 /etc/ssh/ssh_config : ../openbsd-skel/ssh_config
 	install -o root -g wheel -m 0644 \
 	  ../openbsd-skel/ssh_config /etc/ssh/ssh_config
@@ -113,4 +119,8 @@ sietchtabr: /etc/acme-client.conf \
 /var/unbound/etc/unbound.conf : unbound.conf
 	install -o root -g _unbound -m 0640 \
 	  unbound.conf /var/unbound/etc/unbound.conf
+
+/var/www/htdocs/pf/index.html : pf-index.html
+	install -o root -g daemon -m 0644 \
+	  pf-index.html /var/www/htdocs/pf/index.html
 

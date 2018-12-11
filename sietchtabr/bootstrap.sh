@@ -14,4 +14,8 @@ rcctl set ntpd flags -s
 export PKG_PATH=https://cdn.openbsd.org/%m
 pkg_add git
 pkg_add vim
+pkg_add pfstat
 
+mkdir -p /var/www/htdocs/pf
+
+echo "For pfstat stats and graphs, add pfstat -qp to root's crontab."
