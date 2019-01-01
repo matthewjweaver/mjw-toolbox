@@ -25,7 +25,7 @@ local network to the internet on the egress interface.
 The pf.sshbots is a persistent table of addresses and netblocks observed
 doing funny business to ssh. The pf.conf(5) files will, by default, drop
 all traffic from these addresses if this file is placed in
-`/etc/pf.sshbots`. See the end of this file for instructions on updating
+`/etc/pf.sshbots`.
 
 
 The following set of commands are useful for updating the bad ssh actors
