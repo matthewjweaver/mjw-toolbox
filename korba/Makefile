@@ -14,6 +14,7 @@ korba : /etc/acme-client.conf \
         /etc/ssh/sshd_config \
         /var/nsd/etc/nsd.conf \
         /var/nsd/zones/master/ice-nine.org \
+        /var/nsd/zones/master/mcweavers.net \
         /var/nsd/zones/master/mjw.wtf \
         /var/nsd/zones/master/nodeless.net
 
@@ -83,6 +84,10 @@ korba : /etc/acme-client.conf \
   /var/opendnssec/unsigned/ice-nine.org
 	ods-signer sign ice-nine.org
 
+/var/nsd/zones/master/mcweavers.net : \
+  /var/opendnssec/unsigned/mcweavers.net
+	ods-signer sign mcweavers.net
+
 /var/nsd/zones/master/mjw.wtf : \
   /var/opendnssec/unsigned/mjw.wtf
 	ods-signer sign mjw.wtf
@@ -94,6 +99,10 @@ korba : /etc/acme-client.conf \
 /var/opendnssec/unsigned/ice-nine.org : zones/ice-nine.org
 	install -o _opendnssec -g _opendnssec -m 0600 \
 	  zones/ice-nine.org /var/opendnssec/unsigned/ice-nine.org
+
+/var/opendnssec/unsigned/mcweavers.net : zones/mcweavers.net
+	install -o _opendnssec -g _opendnssec -m 0600 \
+	  zones/mcweavers.net /var/opendnssec/unsigned/mcweavers.net
 
 /var/opendnssec/unsigned/mjw.wtf : zones/mjw.wtf
 	install -o _opendnssec -g _opendnssec -m 0600 \
