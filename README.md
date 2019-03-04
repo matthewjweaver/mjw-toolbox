@@ -19,7 +19,8 @@ in each directory.
 
 ## Hardened OpenSSH client & server configurations
 
-1. [ssh/](https://github.com/matthewjweaver/mjw-toolbox/tree/master/ssh/)
+1. [openbsd-skel/ssh_config](https://github.com/matthewjweaver/mjw-toolbox/tree/master/openbsd-skel/ssh_config)
+1. [openbsd-skel/sshd_config](https://github.com/matthewjweaver/mjw-toolbox/tree/master/openbsd-skel/sshd_config)
 
 
 ## Generic OpenBSD skeleton files & OpenBSD setup HOWTOs
