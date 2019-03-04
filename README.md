@@ -19,20 +19,20 @@ in each directory.
 
 ## Hardened OpenSSH client & server configurations
 
-1. ssh/
+1. [ssh/](https://github.com/matthewjweaver/mjw-toolbox/tree/master/ssh/)
 
 
 ## Generic OpenBSD skeleton files & OpenBSD setup HOWTOs
 
-1. docs/
-1. openbsd-skel/
+1. [docs/](https://github.com/matthewjweaver/mjw-toolbox/tree/master/docs/)
+1. [openbsd-skel/](https://github.com/matthewjweaver/mjw-toolbox/tree/master/openbsd-skel/)
 
 
 ## Host configurations
 
-1. cielago/ (traffic-shaping firewall)
-1. hq/ (layeraleph.com)
-1. korba/ (ice-nine.org, mjw.wtf, nodeless.net)
-1. sietchtabr/ (router)
-1. sietchumbu/ (router, vpn endpoint)
+1. [cielago/](https://github.com/matthewjweaver/mjw-toolbox/tree/master/cielago/) (traffic-shaping firewall)
+1. [hq/](https://github.com/matthewjweaver/mjw-toolbox/tree/master/hq/) (layeraleph.com)
+1. [korba/](https://github.com/matthewjweaver/mjw-toolbox/tree/master/korba/) (ice-nine.org, mjw.wtf, nodeless.net)
+1. [sietchtabr/](https://github.com/matthewjweaver/mjw-toolbox/tree/master/sietchtabr/) (router, firewall)
+1. [sietchumbu/](https://github.com/matthewjweaver/mjw-toolbox/tree/master/sietchumbu/) (router, vpn endpoint)
 
