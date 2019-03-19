@@ -1,6 +1,6 @@
 $TTL 3600
 @	IN SOA	ns1 named (
-				2018100900  ; serial
+				2019031900  ; serial
 				1800       ; refresh (30 min)
 				300        ; retry (5 min)
 				8467200    ; expire (14 weeks)
@@ -33,3 +33,5 @@ sietchumbu	IN A	100.36.223.13
 servok		IN A	100.36.223.10
 
 ldap		IN CNAME	sietchtabr
+
+nodeless.net.	IN CAA	0 issue "letsencrypt.org"
