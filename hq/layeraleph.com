@@ -1,6 +1,6 @@
 $TTL 3600
 @	IN SOA	ns1 named (
-				2018081001 ; serial
+				2019031900 ; serial
 				300        ; refresh (5m)
 				600        ; retry (5m)
 				8467200    ; expire (14w)
@@ -30,3 +30,4 @@ google._domainkey	TXT	(
 	"8QmQJnAfy24uU5cWHbOhchJVvlF1HwoUP4AjGxTgsUqLQkte0wo++umMVCVRiAToWLI"
 	"kQIDAQAB")
 
+layeraleph.com.	IN CAA	0 issue "letsencrypt.org"
