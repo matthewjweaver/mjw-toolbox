@@ -1,10 +1,10 @@
 $TTL 3600
 @ 	IN SOA ns named (
-				2019030300 ; serial
+				2019031802 ; serial
 				1800       ; refresh, 30 min
 				300        ; retry 5 min
-				8467200    ; expire 2 weeks
-				3600       ; min. TTL 1 day
+				7776000    ; expire 90 days
+				86400      ; min. TTL 1 day
 				)
 
 		IN NS	ns1.nodeless.net.
