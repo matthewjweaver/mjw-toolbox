@@ -75,10 +75,12 @@ hq : /etc/acme-client.conf \
 
 /var/nsd/zones/master/layeraleph.com : \
   /var/opendnssec/unsigned/layeraleph.com
+	chown _opendnssec /var/nsd/zones/master
 	ods-signer sign layeraleph.com
 
 /var/nsd/zones/master/layerbeh.com : \
   /var/opendnssec/unsigned/layerbeh.com
+	chown _opendnssec /var/nsd/zones/master
 	ods-signer sign layerbeh.com
 
 /var/opendnssec/unsigned/layeraleph.com : layeraleph.com
