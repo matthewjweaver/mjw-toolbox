@@ -1,15 +1,15 @@
 @ 	IN SOA ns named (
-				2019031903 ; serial
+				2019032200 ; serial
 				1800       ; refresh, 30 min
 				300        ; retry 5 min
 				7776000    ; expire 90 days
 				86400      ; min. TTL 1 day
 				)
 
-@   777600	IN NS	ns1.nodeless.net.
-@   777600	IN NS	ns6.gandi.net.
+@	IN NS	ns1.nodeless.net.
+@	IN NS	ns6.gandi.net.
 
-@   259200	IN A	100.36.223.11
-www 259200	IN A	100.36.223.11
+@	IN A	100.36.223.11
+www	IN A	100.36.223.11
 
 mcweavers.net.	IN CAA	0 issue "letsencrypt.org"
