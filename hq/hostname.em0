@@ -1,3 +1,2 @@
 # external interface.
 inet 100.36.223.12 255.255.255.0 
-dest 100.36.223.1

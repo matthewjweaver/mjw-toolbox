@@ -14,6 +14,7 @@ sietchtabr: /etc/acme-client.conf \
             /etc/hostname.pflow0 \
             /etc/hostname.vether0 \
             /etc/httpd.conf \
+            /etc/mygate \
             /etc/ntpd.conf \
             /etc/newsyslog.conf \
             /etc/pf.conf \
@@ -87,6 +88,10 @@ sietchtabr: /etc/acme-client.conf \
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \
 	  httpd.conf /etc/httpd.conf
+
+/etc/mygate : mygate
+	install -o root -g wheel -m 0644 \
+	  ntpd.conf /etc/mygate
 
 /etc/ntpd.conf : ntpd.conf
 	install -o root -g wheel -m 0644 \

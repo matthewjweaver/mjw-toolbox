@@ -8,6 +8,7 @@ sietchumbu: \
   /etc/hostname.em3 \
   /etc/hostname.vether0 \
   /etc/ipsec.conf \
+  /etc/mygate \
   /etc/npppd/npppd-users \
   /etc/ntpd.conf \
   /etc/pf.conf \
@@ -49,6 +50,10 @@ sietchumbu: \
 /etc/ipsec.conf : ipsec.conf
 	install -o root -g wheel -m 0600 \
 	  ipsec.conf /etc/ipsec.conf
+
+/etc/mygate : mygate
+	install -o root -g wheel -m 0644 \
+	  ntpd.conf /etc/mygate
 
 /etc/npppd/npppd-users : npppd-users
 	install -o root -g wheel -m 0600 \

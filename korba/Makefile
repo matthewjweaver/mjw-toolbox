@@ -4,6 +4,7 @@ korba : /etc/acme-client.conf \
 	/etc/hostname.em0 \
 	/etc/hostname.em2 \
         /etc/httpd.conf \
+        /etc/mygate \
         /etc/ntpd.conf \
         /etc/opendnssec/conf.xml \
         /etc/opendnssec/kasp.xml \
@@ -41,6 +42,10 @@ korba : /etc/acme-client.conf \
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \
 	  httpd.conf /etc/httpd.conf
+
+/etc/mygate : mygate
+	install -o root -g wheel -m 0644 \
+	  ntpd.conf /etc/mygate
 
 /etc/ntpd.conf : ntpd.conf
 	install -o root -g wheel -m 0644 \
