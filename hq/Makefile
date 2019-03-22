@@ -29,7 +29,7 @@ hq : /etc/acme-client.conf \
 
 /etc/mygate : mygate
 	install -o root -g wheel -m 0644 \
-	  ntpd.conf /etc/mygate
+	  mygate /etc/mygate
 
 /etc/ntpd.conf : ntpd.conf
 	install -o root -g wheel -m 0644 \

@@ -53,7 +53,7 @@ sietchumbu: \
 
 /etc/mygate : mygate
 	install -o root -g wheel -m 0644 \
-	  ntpd.conf /etc/mygate
+	  mygate /etc/mygate
 
 /etc/npppd/npppd-users : npppd-users
 	install -o root -g wheel -m 0600 \
