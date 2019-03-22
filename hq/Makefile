@@ -1,6 +1,7 @@
 hq : /etc/acme-client.conf \
         /etc/daily.local \
         /etc/httpd.conf \
+        /etc/mygate \
         /etc/ntpd.conf \
         /etc/opendnssec/conf.xml \
         /etc/opendnssec/kasp.xml \
@@ -25,6 +26,10 @@ hq : /etc/acme-client.conf \
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \
 	  httpd.conf /etc/httpd.conf
+
+/etc/mygate : mygate
+	install -o root -g wheel -m 0644 \
+	  mygate /etc/mygate
 
 /etc/ntpd.conf : ntpd.conf
 	install -o root -g wheel -m 0644 \
