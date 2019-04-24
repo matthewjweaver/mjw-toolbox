@@ -50,7 +50,6 @@
 
 		<!-- <PidFile>/var/run/opendnssec/enforcerd.pid</PidFile> -->
 		<Datastore><SQLite>/var/opendnssec/db/kasp.db</SQLite></Datastore>
-		<Interval>PT3600S</Interval>
 		<!-- <ManualKeyGeneration/> -->
 		<!-- <RolloverNotification>P14D</RolloverNotification> -->
 		
