@@ -38,12 +38,12 @@ hq : /etc/acme-client.conf \
 /etc/opendnssec/conf.xml : conf.xml
 	install -o root -g _opendnssec -m 0640 \
 	  conf.xml /etc/opendnssec/conf.xml
-	ods-ksmutil update conf
+	ods-enforcer update conf
 
 /etc/opendnssec/kasp.xml : kasp.xml
 	install -o root -g _opendnssec -m 0640 \
 	  kasp.xml /etc/opendnssec/kasp.xml
-	ods-ksmutil update kasp
+	ods-enforcer update all
 
 /etc/pf.conf : pf.conf
 	install -o root -g wheel -m 0600 \
