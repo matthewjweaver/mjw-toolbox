@@ -1,6 +1,6 @@
 $TTL 3600
 @	IN SOA	ns named (
-				2019032200 ; serial
+				2019072600 ; serial
 				300        ; refresh (5 min)
 				300        ; retry (5 min)
 				8467200    ; expire (14 weeks)
@@ -22,6 +22,6 @@ mesmtp._domainkey       TXT     (
         "pOvE71MiGLtDRPKVyJfmyFO0/G/M60KH9xz1G+mstR9BtXhg6Kc0dtA6muNjKHplpbteG9"
         "SDhvjUuzl/JnhmkcRQIDAQAB")
 
-@		IN A	100.36.223.11
+@		IN A	96.73.134.171
 
 mjw.wtf.	IN CAA	0 issue "letsencrypt.org"
