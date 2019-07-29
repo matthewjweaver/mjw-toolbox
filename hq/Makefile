@@ -1,5 +1,6 @@
 hq : /etc/acme-client.conf \
         /etc/daily.local \
+	/etc/hostname.em0 \
         /etc/httpd.conf \
         /etc/mygate \
         /etc/ntpd.conf \
@@ -22,6 +23,10 @@ hq : /etc/acme-client.conf \
 /etc/daily.local : daily.local
 	install -o root -g wheel -m 0644 \
 	  daily.local /etc/daily.local
+
+/etc/hostname.em0 : hostname.em0
+	install -o root -g wheel -m 0640 \
+	  hostname.em0 /etc/hostname.em0
 
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \
