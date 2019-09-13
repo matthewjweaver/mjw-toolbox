@@ -1,2 +1,2 @@
-# DMZ (uplink)
-up
+# external interface.
+inet 96.73.134.173 255.255.255.248 

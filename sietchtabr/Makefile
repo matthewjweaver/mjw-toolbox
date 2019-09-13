@@ -2,17 +2,11 @@ sietchtabr: /etc/acme-client.conf \
             /etc/daily.local \
             /etc/dhcpd.conf \
             /etc/doas.conf \
-            /etc/hostname.bridge0 \
             /etc/hostname.em0 \
             /etc/hostname.em1 \
             /etc/hostname.em2 \
             /etc/hostname.em3 \
-            /etc/hostname.em4 \
-            /etc/hostname.em5 \
-            /etc/hostname.em6 \
-            /etc/hostname.em7 \
             /etc/hostname.pflow0 \
-            /etc/hostname.vether0 \
             /etc/httpd.conf \
             /etc/mygate \
             /etc/ntpd.conf \
@@ -41,10 +35,6 @@ sietchtabr: /etc/acme-client.conf \
 	install -o root -g wheel -m 0600 \
 	  doas.conf /etc/doas.conf
 
-/etc/hostname.bridge0 : hostname.bridge0
-	install -o root -g wheel -m 0640 \
-	  hostname.bridge0 /etc/hostname.bridge0
-
 /etc/hostname.em0 : hostname.em0
 	install -o root -g wheel -m 0640 \
 	  hostname.em0 /etc/hostname.em0
@@ -61,29 +51,9 @@ sietchtabr: /etc/acme-client.conf \
 	install -o root -g wheel -m 0640 \
 	  hostname.em3 /etc/hostname.em3
 
-/etc/hostname.em4 : hostname.em4
-	install -o root -g wheel -m 0640 \
-	  hostname.em4 /etc/hostname.em4
-
-/etc/hostname.em5 : hostname.em5
-	install -o root -g wheel -m 0640 \
-	  hostname.em5 /etc/hostname.em5
-
-/etc/hostname.em6 : hostname.em6
-	install -o root -g wheel -m 0640 \
-	  hostname.em6 /etc/hostname.em6
-
-/etc/hostname.em7 : hostname.em7
-	install -o root -g wheel -m 0640 \
-	  hostname.em7 /etc/hostname.em7
-
 /etc/hostname.pflow0 : hostname.pflow0
 	install -o root -g wheel -m 0640 \
 	  hostname.pflow0 /etc/hostname.pflow0
-
-/etc/hostname.vether0 : hostname.vether0
-	install -o root -g wheel -m 0640 \
-	  hostname.vether0 /etc/hostname.vether0
 
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \
