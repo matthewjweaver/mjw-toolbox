@@ -6,6 +6,7 @@ cielago: \
   /etc/hostname.em3 \
   /etc/ntpd.conf \
   /etc/pf.conf \
+  /etc/pf.sshbots \
   /etc/sysctl.conf
 
 /etc/doas.conf : ../openbsd-skel/doas.conf
@@ -35,6 +36,10 @@ cielago: \
 /etc/pf.conf : pf.conf
 	install -o root -g wheel -m 0600 \
 	  pf.conf /etc/pf.conf
+
+/etc/pf.sshbots : ../openbsd-skel/pf.sshbots
+	install -o root -g wheel -m 0600 \
+	  ../openbsd-skel/pf.sshbots /etc/pf.sshbots
 
 /etc/ssh/ssh_config : ../openbsd-skel/ssh_config
 	install -o root -g wheel -m 0644 \
