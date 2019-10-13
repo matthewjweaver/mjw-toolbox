@@ -1,2 +1,2 @@
 # p, x-facing internal interface
-inet 192.168.235.1 255.255.255.0 NONE
+inet 192.168.235.1 255.255.255.0 NONE mtu 9000
