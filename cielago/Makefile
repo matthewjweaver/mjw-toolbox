@@ -4,9 +4,11 @@ cielago: \
   /etc/hostname.em0 \
   /etc/hostname.em1 \
   /etc/hostname.em3 \
+  /etc/httpd.conf \
   /etc/ntpd.conf \
   /etc/pf.conf \
   /etc/pf.sshbots \
+  /etc/pfstat.conf \
   /etc/sysctl.conf
 
 /etc/doas.conf : ../openbsd-skel/doas.conf
@@ -29,6 +31,10 @@ cielago: \
 	install -o root -g wheel -m 0640 \
 	  hostname.em3 /etc/hostname.em3
 
+/etc/httpd.conf : httpd.conf
+	install -o root -g wheel -m 0644 \
+	  httpd.conf /etc/httpd.conf
+
 /etc/ntpd.conf : ntpd.conf
 	install -o root -g wheel -m 0644 \
 	  ntpd.conf /etc/ntpd.conf
@@ -40,6 +46,10 @@ cielago: \
 /etc/pf.sshbots : ../openbsd-skel/pf.sshbots
 	install -o root -g wheel -m 0600 \
 	  ../openbsd-skel/pf.sshbots /etc/pf.sshbots
+
+/etc/pfstat.conf : pfstat.conf
+	install -o root -g wheel -m 0644 \
+	  pfstat.conf /etc/pfstat.conf
 
 /etc/ssh/ssh_config : ../openbsd-skel/ssh_config
 	install -o root -g wheel -m 0644 \
