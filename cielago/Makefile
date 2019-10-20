@@ -9,7 +9,9 @@ cielago: \
   /etc/pf.conf \
   /etc/pf.sshbots \
   /etc/pfstat.conf \
-  /etc/sysctl.conf
+  /etc/sysctl.conf \
+  /home/sysop/bin/rrdstatsloop.sh \
+  /home/sysop/bin/rrdupdate.sh
 
 /etc/doas.conf : ../openbsd-skel/doas.conf
 	install -o root -g wheel -m 0600 \
@@ -63,3 +65,10 @@ cielago: \
 	install -o root -g wheel -m 0644 \
 	  sysctl.conf /etc/sysctl.conf
 
+/home/sysop/bin/rrdstatsloop.sh : rrdstatsloop.sh
+	install -o sysop -g sysop -m 0750 \
+	  rrdstatsloop.sh /home/sysop/bin/rrdstatsloop.sh
+
+/home/sysop/bin/rrdupdate.sh : rrdupdate.sh
+	install -o sysop -g sysop -m 0750 \
+	  rrdupdate.sh /home/sysop/bin/rrdupdate.sh
