@@ -67,5 +67,5 @@ for label in $(pfctl -s label|cut -d ' ' -f 1); do
   RRD_CMD="${RRD_CMD} RRA:AVERAGE:0.5:3600:8760"
   RRD_CMD="${RRD_CMD} RRA:AVERAGE:0.5:43200:23360"
 
-  echo time ${RRD_CMD}
+  time ${RRD_CMD}
 done
