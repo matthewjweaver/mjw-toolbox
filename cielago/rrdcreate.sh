@@ -34,9 +34,9 @@ for label in $(pfctl -s label|cut -d ' ' -f 1); do
   # scalability is always nice.
   RRD_CMD="${RRD_CMD} -d unix:/var/run/rrd/rrdcached.sock"
 
-  # Assume we'll collect stats at 5Hz, and never miss more than 5
+  # Assume we'll collect stats at 1Hz, and never miss more than 5
   # seconds of measurement (heartbeat 5s on DS lines, below).
-  RRD_CMD="${RRD_CMD} -b ${RRD_EPOCH} -s 200ms"
+  RRD_CMD="${RRD_CMD} -b ${RRD_EPOCH} -s 1"
 
   # Assume we will never see more than 2m pps, and never measure less
   # than 5 seconds apart. so, 10 million packets each way or 20 million
@@ -56,16 +56,14 @@ for label in $(pfctl -s label|cut -d ' ' -f 1); do
   RRD_CMD="${RRD_CMD} DS:bytes_out:ABSOLUTE:5s:0:625000000"
   RRD_CMD="${RRD_CMD} DS:state_creations:ABSOLUTE:5s:0:20000000"
 
-  # keep full resolution for 1 week
   # keep secondly resolution for 28 days
   # keep minutely resolution for 1 years
   # keep hourly resolution for 8 years
   # keep 12-hourly resolution for 32 years
-  RRD_CMD="${RRD_CMD} RRA:AVERAGE:0.5:200ms:432000"
-  RRD_CMD="${RRD_CMD} RRA:AVERAGE:0.5:1:2419200"
-  RRD_CMD="${RRD_CMD} RRA:AVERAGE:0.5:60:525600"
-  RRD_CMD="${RRD_CMD} RRA:AVERAGE:0.5:3600:8760"
-  RRD_CMD="${RRD_CMD} RRA:AVERAGE:0.5:43200:23360"
+  RRD_CMD="${RRD_CMD} RRA:AVERAGE:0.5:1:28d"
+  RRD_CMD="${RRD_CMD} RRA:AVERAGE:0.5:60:2y"
+  RRD_CMD="${RRD_CMD} RRA:AVERAGE:0.5:3600:8y"
+  RRD_CMD="${RRD_CMD} RRA:AVERAGE:0.5:43200:32y"
 
   time ${RRD_CMD}
 done
