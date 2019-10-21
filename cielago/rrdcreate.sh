@@ -60,10 +60,10 @@ for label in $(pfctl -s label|cut -d ' ' -f 1); do
   # keep minutely resolution for 1 years
   # keep hourly resolution for 8 years
   # keep 12-hourly resolution for 32 years
-  RRD_CMD="${RRD_CMD} RRA:AVERAGE:0.5:1:2419200"
-  RRD_CMD="${RRD_CMD} RRA:AVERAGE:0.5:60:525600"
-  RRD_CMD="${RRD_CMD} RRA:AVERAGE:0.5:3600:8760"
-  RRD_CMD="${RRD_CMD} RRA:AVERAGE:0.5:43200:23360"
+  RRD_CMD="${RRD_CMD} RRA:AVERAGE:0.5:1:28d"
+  RRD_CMD="${RRD_CMD} RRA:AVERAGE:0.5:60:2y"
+  RRD_CMD="${RRD_CMD} RRA:AVERAGE:0.5:3600:8y"
+  RRD_CMD="${RRD_CMD} RRA:AVERAGE:0.5:43200:32y"
 
   time ${RRD_CMD}
 done
