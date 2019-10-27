@@ -8,6 +8,8 @@ sietchtabr: /etc/acme-client.conf \
             /etc/hostname.em3 \
             /etc/hostname.pflow0 \
             /etc/httpd.conf \
+            /etc/munin/munin.conf \
+            /etc/munin/munin-node.conf \
             /etc/mygate \
             /etc/ntpd.conf \
             /etc/newsyslog.conf \
@@ -17,7 +19,8 @@ sietchtabr: /etc/acme-client.conf \
             /etc/ssh/sshd_config \
             /etc/sysctl.conf \
             /var/unbound/etc/unbound.conf \
-            /var/www/htdocs/pf/index.html
+            /var/www/htdocs/pf/index.html \
+            /var/www/htdocs/pf/solarized-dark.min.css
 
 /etc/acme-client.conf : acme-client.conf
 	install -o root -g wheel -m 0644 \
@@ -59,6 +62,14 @@ sietchtabr: /etc/acme-client.conf \
 	install -o root -g wheel -m 0644 \
 	  httpd.conf /etc/httpd.conf
 
+/etc/munin/munin.conf : munin.conf
+	install -o root -g wheel -m 0644 \
+	munin.conf /etc/munin/munin.conf
+
+/etc/munin/munin-node.conf : munin-node.conf
+	install -o root -g wheel -m 0644 \
+	munin-node.conf /etc/munin/munin-node.conf
+
 /etc/mygate : mygate
 	install -o root -g wheel -m 0644 \
 	  mygate /etc/mygate
@@ -98,4 +109,8 @@ sietchtabr: /etc/acme-client.conf \
 /var/www/htdocs/pf/index.html : pf-index.html
 	install -o root -g daemon -m 0644 \
 	  pf-index.html /var/www/htdocs/pf/index.html
+
+/var/www/htdocs/pf/solarized-dark.min.css : solarized-dark.min.css
+	install -o root -g daemon -m 0644 \
+	  solarized-dark.min.css /var/www/htdocs/pf/solarized-dark.min.css
 

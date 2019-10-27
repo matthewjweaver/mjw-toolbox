@@ -5,17 +5,22 @@
 
 echo "https://cdn.openbsd.org/pub/OpenBSD/" > /etc/installurl
 
+export PKG_PATH=https://cdn.openbsd.org/%m
+pkg_add git
+pkg_add vim
+pkg_add pfstat
+pkg_add munin-server
+
 rcctl enable dhcpd
 rcctl enable httpd
 rcctl set pflogd flags "-s 1500"
 rcctl enable unbound
 rcctl set ntpd flags -s
 
-export PKG_PATH=https://cdn.openbsd.org/%m
-pkg_add git
-pkg_add vim
-pkg_add pfstat
+rcctl enable munin_node
 
 mkdir -p /var/www/htdocs/pf
+
+usermod -G _munin www
 
 echo "For pfstat stats and graphs, add pfstat -qp to root's crontab."
