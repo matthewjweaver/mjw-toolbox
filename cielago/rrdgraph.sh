@@ -1,8 +1,7 @@
 #!/bin/sh
-set -x
 
 # Size graphs to look nice on my laptop
-W=1150
+W=850
 H=200
 
 # link speed (160M)
@@ -27,86 +26,103 @@ blue="#268bd2"
 cyan="#2aa198"
 green="#859900"
 
-f="/var/www/htdocs/pf/bps-out-highres.png"
+bps_graph() {
+  RRD_CMD="${1}"
+  RRD_CMD="${RRD_CMD} --upper-limit ${MAX_BW_UL}"
+  RRD_CMD="${RRD_CMD} --lower-limit -${MAX_BW_DL} --rigid"
 
-RRD_CMD=""
-RRD_CMD="${RRD_CMD} rrdtool graph ${f}"
-RRD_CMD="${RRD_CMD} -a PNG -d unix:/var/run/rrd/rrdcached.sock"
-RRD_CMD="${RRD_CMD} -e now -s end-4h"
-RRD_CMD="${RRD_CMD} -w ${W} -h ${H} --full-size-mode"
-RRD_CMD="${RRD_CMD} --upper-limit ${MAX_BW_UL}"
-RRD_CMD="${RRD_CMD} --lower-limit -${MAX_BW_DL} --rigid"
-RRD_CMD="${RRD_CMD} --color BACK${base03}"
-RRD_CMD="${RRD_CMD} --color CANVAS${base02}"
-RRD_CMD="${RRD_CMD} --color GRID${base01}"
-RRD_CMD="${RRD_CMD} --color FONT${base0}"
-RRD_CMD="${RRD_CMD} --color AXIS${base1}"
-RRD_CMD="${RRD_CMD} --border 0"
+  # bytes, in
+  RRD_CMD="${RRD_CMD} DEF:hq-B-in=/var/db/rrd/96.73.134.170-in.rrd:bytes_in:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:korba-B-in=/var/db/rrd/96.73.134.171-in.rrd:bytes_in:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:umbu-B-in=/var/db/rrd/96.73.134.172-in.rrd:bytes_in:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:tabr-B-in=/var/db/rrd/96.73.134.173-in.rrd:bytes_in:AVERAGE"
 
-# bytes, in
-RRD_CMD="${RRD_CMD} DEF:hq-B-in=/var/db/rrd/96.73.134.170-in.rrd:bytes_in:AVERAGE"
-RRD_CMD="${RRD_CMD} DEF:korba-B-in=/var/db/rrd/96.73.134.171-in.rrd:bytes_in:AVERAGE"
-RRD_CMD="${RRD_CMD} DEF:umbu-B-in=/var/db/rrd/96.73.134.172-in.rrd:bytes_in:AVERAGE"
-RRD_CMD="${RRD_CMD} DEF:tabr-B-in=/var/db/rrd/96.73.134.173-in.rrd:bytes_in:AVERAGE"
+  # bytes, out
+  RRD_CMD="${RRD_CMD} DEF:hq-B-out=/var/db/rrd/96.73.134.170-out.rrd:bytes_out:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:korba-B-out=/var/db/rrd/96.73.134.171-out.rrd:bytes_out:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:umbu-B-out=/var/db/rrd/96.73.134.172-out.rrd:bytes_out:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:tabr-B-out=/var/db/rrd/96.73.134.173-out.rrd:bytes_out:AVERAGE"
 
-# bytes, out
-RRD_CMD="${RRD_CMD} DEF:hq-B-out=/var/db/rrd/96.73.134.170-out.rrd:bytes_out:AVERAGE"
-RRD_CMD="${RRD_CMD} DEF:korba-B-out=/var/db/rrd/96.73.134.171-out.rrd:bytes_out:AVERAGE"
-RRD_CMD="${RRD_CMD} DEF:umbu-B-out=/var/db/rrd/96.73.134.172-out.rrd:bytes_out:AVERAGE"
-RRD_CMD="${RRD_CMD} DEF:tabr-B-out=/var/db/rrd/96.73.134.173-out.rrd:bytes_out:AVERAGE"
+  # bps in, made negative so it will graph "down"
+  RRD_CMD="${RRD_CMD} CDEF:hq-b-in=0,hq-B-in,-,8,*"
+  RRD_CMD="${RRD_CMD} CDEF:korba-b-in=0,korba-B-in,-,8,*"
+  RRD_CMD="${RRD_CMD} CDEF:umbu-b-in=0,umbu-B-in,-,8,*"
+  RRD_CMD="${RRD_CMD} CDEF:tabr-b-in=0,tabr-B-in,-,8,*"
+  
+  # bps out
+  RRD_CMD="${RRD_CMD} CDEF:hq-b-out=hq-B-out,8,*"
+  RRD_CMD="${RRD_CMD} CDEF:korba-b-out=korba-B-out,8,*"
+  RRD_CMD="${RRD_CMD} CDEF:umbu-b-out=umbu-B-out,8,*"
+  RRD_CMD="${RRD_CMD} CDEF:tabr-b-out=tabr-B-out,8,*"
+  
+  # graph bandwidth in
+  RRD_CMD="${RRD_CMD} AREA:hq-b-in${red}:layeraleph_bps:STACK"
+  RRD_CMD="${RRD_CMD} AREA:korba-b-in${yellow}:korba_bps:STACK"
+  RRD_CMD="${RRD_CMD} AREA:umbu-b-in${violet}:sietchumbu_bps:STACK"
+  RRD_CMD="${RRD_CMD} AREA:tabr-b-in${cyan}:sietchtabr_bps:STACK"
+  
+  # graph bandwidth out (no legend for these, same colors as above)
+  RRD_CMD="${RRD_CMD} AREA:hq-b-out${red}::STACK"
+  RRD_CMD="${RRD_CMD} AREA:korba-b-out${yellow}::STACK"
+  RRD_CMD="${RRD_CMD} AREA:umbu-b-out${violet}::STACK"
+  RRD_CMD="${RRD_CMD} AREA:tabr-b-out${cyan}::STACK"
 
-# bps in, made negative so it will graph "down"
-RRD_CMD="${RRD_CMD} CDEF:hq-b-in=0,hq-B-in,-,8,*"
-RRD_CMD="${RRD_CMD} CDEF:korba-b-in=0,korba-B-in,-,8,*"
-RRD_CMD="${RRD_CMD} CDEF:umbu-b-in=0,umbu-B-in,-,8,*"
-RRD_CMD="${RRD_CMD} CDEF:tabr-b-in=0,tabr-B-in,-,8,*"
+  doas $RRD_CMD > /dev/null
+}
+  
+pps_graph() {
+  RRD_CMD="${1}"
 
-# bps out
-RRD_CMD="${RRD_CMD} CDEF:hq-b-out=hq-B-out,8,*"
-RRD_CMD="${RRD_CMD} CDEF:korba-b-out=korba-B-out,8,*"
-RRD_CMD="${RRD_CMD} CDEF:umbu-b-out=umbu-B-out,8,*"
-RRD_CMD="${RRD_CMD} CDEF:tabr-b-out=tabr-B-out,8,*"
+  # packets, in
+  RRD_CMD="${RRD_CMD} DEF:hq-p-in=/var/db/rrd/96.73.134.170-in.rrd:packets_in:MAX"
+  RRD_CMD="${RRD_CMD} DEF:korba-p-in=/var/db/rrd/96.73.134.171-in.rrd:packets_in:MAX"
+  RRD_CMD="${RRD_CMD} DEF:umbu-p-in=/var/db/rrd/96.73.134.172-in.rrd:packets_in:MAX"
+  RRD_CMD="${RRD_CMD} DEF:tabr-p-in=/var/db/rrd/96.73.134.173-in.rrd:packets_in:MAX"
 
-# graph bandwidth in
-RRD_CMD="${RRD_CMD} AREA:hq-b-in${violet}:layeraleph_bps:STACK"
-RRD_CMD="${RRD_CMD} AREA:korba-b-in${blue}:korba_bps:STACK"
-RRD_CMD="${RRD_CMD} AREA:umbu-b-in${cyan}:sietchumbu_bps:STACK"
-RRD_CMD="${RRD_CMD} AREA:tabr-b-in${green}:sietchtabr_bps:STACK"
+  # packets, out
+  RRD_CMD="${RRD_CMD} DEF:hq-pps-out=/var/db/rrd/96.73.134.170-out.rrd:packets_out:MAX"
+  RRD_CMD="${RRD_CMD} DEF:korba-pps-out=/var/db/rrd/96.73.134.171-out.rrd:packets_out:MAX"
+  RRD_CMD="${RRD_CMD} DEF:umbu-pps-out=/var/db/rrd/96.73.134.172-out.rrd:packets_out:MAX"
+  RRD_CMD="${RRD_CMD} DEF:tabr-pps-out=/var/db/rrd/96.73.134.173-out.rrd:packets_out:MAX"
 
-# graph bandwidth out (no legend for these, same colors as above)
-RRD_CMD="${RRD_CMD} AREA:hq-b-out${violet}::STACK"
-RRD_CMD="${RRD_CMD} AREA:korba-b-out${blue}::STACK"
-RRD_CMD="${RRD_CMD} AREA:umbu-b-out${cyan}::STACK"
-RRD_CMD="${RRD_CMD} AREA:tabr-b-out${green}::STACK"
+  # packets in, made negative so it will graph "down"
+  RRD_CMD="${RRD_CMD} CDEF:hq-pps-in=0,hq-p-in,-"
+  RRD_CMD="${RRD_CMD} CDEF:korba-pps-in=0,korba-p-in,-"
+  RRD_CMD="${RRD_CMD} CDEF:umbu-pps-in=0,umbu-p-in,-"
+  RRD_CMD="${RRD_CMD} CDEF:tabr-pps-in=0,tabr-p-in,-"
 
-# packets, in
-#RRD_CMD="${RRD_CMD} DEF:hq-p-in=/var/db/rrd/96.73.134.170-in.rrd:packets_in:AVERAGE"
-#RRD_CMD="${RRD_CMD} DEF:korba-p-in=/var/db/rrd/96.73.134.171-in.rrd:packets_in:AVERAGE"
-#RRD_CMD="${RRD_CMD} DEF:umbu-p-in=/var/db/rrd/96.73.134.172-in.rrd:packets_in:AVERAGE"
-#RRD_CMD="${RRD_CMD} DEF:tabr-p-in=/var/db/rrd/96.73.134.173-in.rrd:packets_in:AVERAGE"
+  # graph packets in
+  RRD_CMD="${RRD_CMD} LINE:hq-pps-in${red}:layeraleph_pps"
+  RRD_CMD="${RRD_CMD} LINE:korba-pps-in${yellow}:korba_pps"
+  RRD_CMD="${RRD_CMD} LINE:umbu-pps-in${violet}:sietchumbu_pps"
+  RRD_CMD="${RRD_CMD} LINE:tabr-pps-in${cyan}:sietchtabr_pps"
 
-# packets, out
-#RRD_CMD="${RRD_CMD} DEF:hq-pps-out=/var/db/rrd/96.73.134.170-out.rrd:packets_out:AVERAGE"
-#RRD_CMD="${RRD_CMD} DEF:korba-pps-out=/var/db/rrd/96.73.134.171-out.rrd:packets_out:AVERAGE"
-#RRD_CMD="${RRD_CMD} DEF:umbu-pps-out=/var/db/rrd/96.73.134.172-out.rrd:packets_out:AVERAGE"
-#RRD_CMD="${RRD_CMD} DEF:tabr-pps-out=/var/db/rrd/96.73.134.173-out.rrd:packets_out:AVERAGE"
+  # graph packets out
+  RRD_CMD="${RRD_CMD} LINE:hq-pps-out${red}"
+  RRD_CMD="${RRD_CMD} LINE:korba-pps-out${yellow}"
+  RRD_CMD="${RRD_CMD} LINE:umbu-pps-out${violet}"
+  RRD_CMD="${RRD_CMD} LINE:tabr-pps-out${cyan}"
 
-# packets in, made negative so it will graph "down"
-#RRD_CMD="${RRD_CMD} CDEF:hq-pps-in=0,hq-p-in,-"
-#RRD_CMD="${RRD_CMD} CDEF:korba-pps-in=0,korba-p-in,-"
-#RRD_CMD="${RRD_CMD} CDEF:umbu-pps-in=0,umbu-p-in,-"
-#RRD_CMD="${RRD_CMD} CDEF:tabr-pps-in=0,tabr-p-in,-"
+  doas $RRD_CMD > /dev/null
+}
 
-# graph packets in
-#RRD_CMD="${RRD_CMD} LINE:hq-pps-in${yellow}:layeraleph_pps"
-#RRD_CMD="${RRD_CMD} LINE:korba-pps-in${orange}:korba_pps"
-#RRD_CMD="${RRD_CMD} LINE:umbu-pps-in${red}:sietchumbu_pps"
-#RRD_CMD="${RRD_CMD} LINE:tabr-pps-in${magenta}:sietchtabr_pps"
+for t in 1h 24h 7d 28d 1y; do
+  for r in bps pps; do
+    f="/var/www/htdocs/pf/${r}-${t}.svg"
+  
+    RRD_PFX=""
+    RRD_PFX="${RRD_PFX} rrdtool graph ${f}"
+    RRD_PFX="${RRD_PFX} -a SVG -d unix:/var/run/rrd/rrdcached.sock"
+    RRD_PFX="${RRD_PFX} -e now -s end-${t}"
+    RRD_PFX="${RRD_PFX} -w ${W} -h ${H} --full-size-mode"
+    RRD_PFX="${RRD_PFX} --color BACK${base03}"
+    RRD_PFX="${RRD_PFX} --color CANVAS${base02}"
+    RRD_PFX="${RRD_PFX} --color GRID${base01}"
+    RRD_PFX="${RRD_PFX} --color FONT${base0}"
+    RRD_PFX="${RRD_PFX} --color AXIS${base1}"
+    RRD_PFX="${RRD_PFX} --border 0"
+    RRD_PFX="${RRD_PFX} --lazy"
 
-# graph packets out
-#RRD_CMD="${RRD_CMD} LINE:hq-pps-out${yellow}"
-#RRD_CMD="${RRD_CMD} LINE:korba-pps-out${orange}"
-#RRD_CMD="${RRD_CMD} LINE:umbu-pps-out${red}"
-#RRD_CMD="${RRD_CMD} LINE:tabr-pps-out${magenta}"
-
-$RRD_CMD
+    ${r}_graph "${RRD_PFX}"
+  done
+done
