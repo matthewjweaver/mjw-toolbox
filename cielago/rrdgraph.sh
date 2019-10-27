@@ -67,7 +67,7 @@ bps_graph() {
   RRD_CMD="${RRD_CMD} AREA:umbu-b-out${violet}::STACK"
   RRD_CMD="${RRD_CMD} AREA:tabr-b-out${cyan}::STACK"
 
-  doas $RRD_CMD > /dev/null
+  doas nice $RRD_CMD > /dev/null
 }
   
 pps_graph() {
@@ -103,10 +103,22 @@ pps_graph() {
   RRD_CMD="${RRD_CMD} LINE:umbu-pps-out${violet}"
   RRD_CMD="${RRD_CMD} LINE:tabr-pps-out${cyan}"
 
-  doas $RRD_CMD > /dev/null
+  doas nice $RRD_CMD > /dev/null
 }
 
-for t in 1h 24h 7d 28d 1y; do
+if [ "${1}" = "--day" ]; then
+  times="24h"
+elif [ "${1}" = "--week" ]; then
+  times="7d"
+elif [ "${1}" = "--month" ]; then
+  times="28d"
+elif [ "${1}" = "--year" ]; then
+  times="1y"
+else
+  times="1h"
+fi
+
+for t in ${times}; do
   for r in bps pps; do
     f="/var/www/htdocs/pf/${r}-${t}.svg"
   
