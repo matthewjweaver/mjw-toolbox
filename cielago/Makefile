@@ -10,8 +10,12 @@ cielago: \
   /etc/pf.sshbots \
   /etc/pfstat.conf \
   /etc/sysctl.conf \
+  /home/sysop/bin/rrdgraph.sh \
   /home/sysop/bin/rrdstatsloop.sh \
-  /home/sysop/bin/rrdupdate.sh
+  /home/sysop/bin/rrdupdate.sh \
+  /var/www/htdocs/pf/nodeless.html \
+  /var/www/htdocs/pf/pfstat.html \
+  /var/www/htdocs/pf/solarized-dark.min.css
 
 /etc/doas.conf : ../openbsd-skel/doas.conf
 	install -o root -g wheel -m 0600 \
@@ -65,6 +69,10 @@ cielago: \
 	install -o root -g wheel -m 0644 \
 	  sysctl.conf /etc/sysctl.conf
 
+/home/sysop/bin/rrdgraph.sh : rrdgraph.sh
+	install -o sysop -g sysop -m 0750 \
+	  rrdgraph.sh /home/sysop/bin/rrdgraph.sh
+
 /home/sysop/bin/rrdstatsloop.sh : rrdstatsloop.sh
 	install -o sysop -g sysop -m 0750 \
 	  rrdstatsloop.sh /home/sysop/bin/rrdstatsloop.sh
@@ -72,3 +80,24 @@ cielago: \
 /home/sysop/bin/rrdupdate.sh : rrdupdate.sh
 	install -o sysop -g sysop -m 0750 \
 	  rrdupdate.sh /home/sysop/bin/rrdupdate.sh
+
+/var/www/htdocs/pf/nodeless.html : htdocs/pf/nodeless.html
+	mkdir -p /var/www/htdocs/pf
+	chown -R sysop.wheel /var/www/htdocs/pf
+	chmod 755 /var/www/htdocs/pf
+	install -o sysop -g wheel -m 0644 \
+	htdocs/pf/nodeless.html /var/www/htdocs/pf/nodeless.html
+
+/var/www/htdocs/pf/pfstat.html : htdocs/pf/pfstat.html
+	mkdir -p /var/www/htdocs/pf
+	chown -R sysop.wheel /var/www/htdocs/pf
+	chmod 755 /var/www/htdocs/pf
+	install -o sysop -g wheel -m 0644 \
+	htdocs/pf/pfstat.html /var/www/htdocs/pf/pfstat.html
+
+/var/www/htdocs/pf/solarized-dark.min.css : htdocs/pf/solarized-dark.min.css
+	mkdir -p /var/www/htdocs/pf
+	chown -R sysop.wheel /var/www/htdocs/pf
+	chmod 755 /var/www/htdocs/pf
+	install -o sysop -g wheel -m 0644 \
+	htdocs/pf/solarized-dark.min.css /var/www/htdocs/pf/solarized-dark.min.css 
