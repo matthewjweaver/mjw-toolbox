@@ -1,5 +1,5 @@
 @ 	IN SOA ns named (
-				2019072600 ; serial
+				2019103010 ; serial
 				1800       ; refresh, 30 min
 				300        ; retry 5 min
 				7776000    ; expire 90 days
