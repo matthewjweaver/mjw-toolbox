@@ -13,16 +13,16 @@
 
 <KASP>
 
-	<Policy name="nodeless-default">
-		<Description> A policy with two year, 4096b KSKs and
-		  180 day, 2048b ZSKs. SOA Serial numbers are set with a
+	<Policy name="default">
+		<Description> A policy with four year, 4096b KSKs and
+		  1 year, 2048b ZSKs. SOA Serial numbers are set with a
 		  classic YYYYMMDDxx format.</Description>
 		<Signatures>
-			<Resign>PT2H</Resign>
-			<Refresh>P3D</Refresh>
+			<Resign>PT4H</Resign>
+			<Refresh>P6D</Refresh>
 			<Validity>
-				<Default>P14D</Default>
-				<Denial>P14D</Denial>
+				<Default>P21D</Default>
+				<Denial>P21D</Denial>
 			</Validity>
 			<Jitter>PT12H</Jitter>
 			<InceptionOffset>PT3600S</InceptionOffset>
@@ -44,15 +44,15 @@
 		<Keys>
 			<!-- Parameters for both KSK and ZSK -->
 			<TTL>PT3600S</TTL>
-			<RetireSafety>PT3600S</RetireSafety>
-			<PublishSafety>PT3600S</PublishSafety>
+			<RetireSafety>PT360S</RetireSafety>
+			<PublishSafety>PT360S</PublishSafety>
 			<!-- <ShareKeys/> -->
-			<Purge>P14D</Purge>
+			<Purge>P21D</Purge>
 
 			<!-- Parameters for KSK only -->
 			<KSK>
 				<Algorithm length="4096">8</Algorithm>
-				<Lifetime>P2Y</Lifetime>
+				<Lifetime>P4Y</Lifetime>
 				<!--
 				  TODO(weaver,mikey): use a hardware
 				  pkcs11 device
@@ -63,7 +63,7 @@
 			<!-- Parameters for ZSK only -->
 			<ZSK>
 				<Algorithm length="2048">8</Algorithm>
-				<Lifetime>P180D</Lifetime>
+				<Lifetime>P1Y</Lifetime>
 				<Repository>SoftHSM</Repository>
 				<!-- <ManualRollover/> -->
 			</ZSK>
