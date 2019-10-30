@@ -48,7 +48,7 @@ hq : /etc/acme-client.conf \
 /etc/opendnssec/kasp.xml : kasp.xml
 	install -o root -g _opendnssec -m 0640 \
 	  kasp.xml /etc/opendnssec/kasp.xml
-	ods-enforcer update all
+	ods-enforcer policy import
 
 /etc/pf.conf : pf.conf
 	install -o root -g wheel -m 0600 \
