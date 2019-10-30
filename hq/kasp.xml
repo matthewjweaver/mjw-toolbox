@@ -15,8 +15,8 @@
 
 	<Policy name="default">
 		<Description> A policy with four year, 4096b KSKs and
-		  1 year, 2048b ZSKs. SOA Serial numbers are set with a
-		  classic YYYYMMDDxx format.</Description>
+		  1 year, 2048b ZSKs. SOA Serial numbers are preserved
+		  from the unsigned zones.</Description>
 		<Signatures>
 			<Resign>PT4H</Resign>
 			<Refresh>P6D</Refresh>
@@ -74,7 +74,7 @@
 			<SOA>
 				<TTL>PT3600S</TTL>
 				<Minimum>PT172800S</Minimum>
-				<Serial>datecounter</Serial>
+				<Serial>keep</Serial>
 			</SOA>
 		</Zone>
 
