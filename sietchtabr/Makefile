@@ -1,26 +1,28 @@
-sietchtabr: /etc/acme-client.conf \
-            /etc/daily.local \
-            /etc/dhcpd.conf \
-            /etc/doas.conf \
-            /etc/hostname.em0 \
-            /etc/hostname.em1 \
-            /etc/hostname.em2 \
-            /etc/hostname.em3 \
-            /etc/hostname.pflow0 \
-            /etc/httpd.conf \
-            /etc/munin/munin.conf \
-            /etc/munin/munin-node.conf \
-            /etc/mygate \
-            /etc/ntpd.conf \
-            /etc/newsyslog.conf \
-            /etc/pf.conf \
-            /etc/pfstat.conf \
-            /etc/ssh/ssh_config \
-            /etc/ssh/sshd_config \
-            /etc/sysctl.conf \
-            /var/unbound/etc/unbound.conf \
-            /var/www/htdocs/pf/index.html \
-            /var/www/htdocs/pf/solarized-dark.min.css
+sietchtabr: \
+  /etc/acme-client.conf \
+  /etc/daily.local \
+  /etc/dhcpd.conf \
+  /etc/doas.conf \
+  /etc/hostname.em0 \
+  /etc/hostname.em1 \
+  /etc/hostname.em2 \
+  /etc/hostname.em3 \
+  /etc/hostname.pflow0 \
+  /etc/httpd.conf \
+  /etc/munin/munin.conf \
+  /etc/munin/munin-node.conf \
+  /etc/munin/plugin-conf.d/taqwa.here \
+  /etc/mygate \
+  /etc/newsyslog.conf \
+  /etc/ntpd.conf \
+  /etc/pf.conf \
+  /etc/pfstat.conf \
+  /etc/ssh/ssh_config \
+  /etc/ssh/sshd_config \
+  /etc/sysctl.conf \
+  /var/unbound/etc/unbound.conf \
+  /var/www/htdocs/pf/index.html \
+  /var/www/htdocs/pf/solarized-dark.min.css
 
 /etc/acme-client.conf : acme-client.conf
 	install -o root -g wheel -m 0644 \
@@ -70,17 +72,22 @@ sietchtabr: /etc/acme-client.conf \
 	install -o root -g wheel -m 0644 \
 	munin-node.conf /etc/munin/munin-node.conf
 
+/etc/munin/plugin-conf.d/taqwa.here : taqwa.here
+	install -o root -g wheel -m 0644 \
+	taqwa.here /etc/munin/plugin-conf.d/taqwa.here
+	echo Remember to input SNMP community name.
+
 /etc/mygate : mygate
 	install -o root -g wheel -m 0644 \
 	  mygate /etc/mygate
 
-/etc/ntpd.conf : ntpd.conf
-	install -o root -g wheel -m 0644 \
-	  ntpd.conf /etc/ntpd.conf
-
 /etc/newsyslog.conf : newsyslog.conf
 	install -o root -g wheel -m 0644 \
 	  newsyslog.conf /etc/newsyslog.conf
+
+/etc/ntpd.conf : ntpd.conf
+	install -o root -g wheel -m 0644 \
+	  ntpd.conf /etc/ntpd.conf
 
 /etc/pf.conf : pf.conf
 	install -o root -g wheel -m 0600 \

@@ -1,20 +1,23 @@
-hq : /etc/acme-client.conf \
-        /etc/daily.local \
-	/etc/hostname.em0 \
-        /etc/httpd.conf \
-        /etc/mygate \
-        /etc/ntpd.conf \
-        /etc/opendnssec/conf.xml \
-        /etc/opendnssec/kasp.xml \
-        /etc/pf.conf \
-        /etc/resolv.conf \
-        /etc/softhsm.conf \
-        /etc/ssh/ssh_config \
-        /etc/ssh/sshd_config \
-        /home/ebde7a06/.ssh/authorized_keys \
-        /var/nsd/etc/nsd.conf \
-        /var/nsd/zones/master/layeraleph.com \
-        /var/nsd/zones/master/layerbeh.com
+hq : \
+  /etc/acme-client.conf \
+  /etc/daily.local \
+  /etc/hostname.em0 \
+  /etc/httpd.conf \
+  /etc/munin/munin.conf \
+  /etc/mygate \
+  /etc/newsyslog.conf \
+  /etc/ntpd.conf \
+  /etc/opendnssec/conf.xml \
+  /etc/opendnssec/kasp.xml \
+  /etc/pf.conf \
+  /etc/resolv.conf \
+  /etc/softhsm.conf \
+  /etc/ssh/ssh_config \
+  /etc/ssh/sshd_config \
+  /home/ebde7a06/.ssh/authorized_keys \
+  /var/nsd/etc/nsd.conf \
+  /var/nsd/zones/master/layeraleph.com \
+  /var/nsd/zones/master/layerbeh.com
 
 /etc/acme-client.conf : acme-client.conf
 	install -o root -g wheel -m 0644 \
@@ -32,9 +35,17 @@ hq : /etc/acme-client.conf \
 	install -o root -g wheel -m 0644 \
 	  httpd.conf /etc/httpd.conf
 
+/etc/munin/munin-node.conf : munin-node.conf
+	install -o root -g wheel -m 0644 \
+	munin-node.conf /etc/munin/munin-node.conf
+
 /etc/mygate : mygate
 	install -o root -g wheel -m 0644 \
 	  mygate /etc/mygate
+
+/etc/newsyslog.conf : newsyslog.conf
+	install -o root -g wheel -m 0644 \
+	  newsyslog.conf /etc/newsyslog.conf
 
 /etc/ntpd.conf : ntpd.conf
 	install -o root -g wheel -m 0644 \

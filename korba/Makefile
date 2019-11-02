@@ -1,23 +1,26 @@
-korba : /etc/acme-client.conf \
-        /etc/daily.local \
-        /etc/dhcpd.conf \
-	/etc/hostname.em0 \
-	/etc/hostname.em2 \
-        /etc/httpd.conf \
-        /etc/mygate \
-        /etc/ntpd.conf \
-        /etc/opendnssec/conf.xml \
-        /etc/opendnssec/kasp.xml \
-        /etc/pf.conf \
-        /etc/resolv.conf \
-        /etc/softhsm.conf \
-        /etc/ssh/ssh_config \
-        /etc/ssh/sshd_config \
-        /var/nsd/etc/nsd.conf \
-        /var/nsd/zones/master/ice-nine.org \
-        /var/nsd/zones/master/mcweavers.net \
-        /var/nsd/zones/master/mjw.wtf \
-        /var/nsd/zones/master/nodeless.net
+korba : \
+  /etc/acme-client.conf \
+  /etc/daily.local \
+  /etc/dhcpd.conf \
+  /etc/hostname.em0 \
+  /etc/hostname.em2 \
+  /etc/httpd.conf \
+  /etc/munin/munin-node.conf \
+  /etc/mygate \
+  /etc/ntpd.conf \
+  /etc/newsyslog.conf \
+  /etc/opendnssec/conf.xml \
+  /etc/opendnssec/kasp.xml \
+  /etc/pf.conf \
+  /etc/resolv.conf \
+  /etc/softhsm.conf \
+  /etc/ssh/ssh_config \
+  /etc/ssh/sshd_config \
+  /var/nsd/etc/nsd.conf \
+  /var/nsd/zones/master/ice-nine.org \
+  /var/nsd/zones/master/mcweavers.net \
+  /var/nsd/zones/master/mjw.wtf \
+  /var/nsd/zones/master/nodeless.net
 
 /etc/acme-client.conf : acme-client.conf
 	install -o root -g wheel -m 0644 \
@@ -43,6 +46,10 @@ korba : /etc/acme-client.conf \
 	install -o root -g wheel -m 0644 \
 	  httpd.conf /etc/httpd.conf
 
+/etc/munin/munin-node.conf : munin-node.conf
+	install -o root -g wheel -m 0644 \
+	munin-node.conf /etc/munin/munin-node.conf
+
 /etc/mygate : mygate
 	install -o root -g wheel -m 0644 \
 	  mygate /etc/mygate
@@ -50,6 +57,10 @@ korba : /etc/acme-client.conf \
 /etc/ntpd.conf : ntpd.conf
 	install -o root -g wheel -m 0644 \
 	  ntpd.conf /etc/ntpd.conf
+
+/etc/newsyslog.conf : newsyslog.conf
+	install -o root -g wheel -m 0644 \
+	  newsyslog.conf /etc/newsyslog.conf
 
 /etc/opendnssec/conf.xml : conf.xml
 	install -o root -g _opendnssec -m 0640 \
