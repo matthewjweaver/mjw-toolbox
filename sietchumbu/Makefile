@@ -8,7 +8,9 @@ sietchumbu: \
   /etc/hostname.em3 \
   /etc/hostname.vether0 \
   /etc/ipsec.conf \
+  /etc/munin/munin-node.conf \
   /etc/mygate \
+  /etc/newsyslog.conf \
   /etc/npppd/npppd-users \
   /etc/ntpd.conf \
   /etc/pf.conf \
@@ -51,6 +53,10 @@ sietchumbu: \
 	install -o root -g wheel -m 0600 \
 	  ipsec.conf /etc/ipsec.conf
 
+/etc/munin/munin-node.conf : munin-node.conf
+	install -o root -g wheel -m 0644 \
+	munin-node.conf /etc/munin/munin-node.conf
+
 /etc/mygate : mygate
 	install -o root -g wheel -m 0644 \
 	  mygate /etc/mygate
@@ -58,6 +64,10 @@ sietchumbu: \
 /etc/npppd/npppd-users : npppd-users
 	install -o root -g wheel -m 0600 \
 	  npppd-users /etc/npppd/npppd-users
+
+/etc/newsyslog.conf : newsyslog.conf
+	install -o root -g wheel -m 0644 \
+	  newsyslog.conf /etc/newsyslog.conf
 
 /etc/ntpd.conf : ntpd.conf
 	install -o root -g wheel -m 0644 \
