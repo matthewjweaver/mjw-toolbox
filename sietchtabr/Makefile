@@ -11,6 +11,7 @@ sietchtabr: \
   /etc/httpd.conf \
   /etc/munin/munin.conf \
   /etc/munin/munin-node.conf \
+  /etc/munin/plugin-conf.d/taqwa.here \
   /etc/mygate \
   /etc/newsyslog.conf \
   /etc/ntpd.conf \
@@ -70,6 +71,11 @@ sietchtabr: \
 /etc/munin/munin-node.conf : munin-node.conf
 	install -o root -g wheel -m 0644 \
 	munin-node.conf /etc/munin/munin-node.conf
+
+/etc/munin/plugin-conf.d/taqwa.here : taqwa.here
+	install -o root -g wheel -m 0644 \
+	taqwa.here /etc/munin/plugin-conf.d/taqwa.here
+	echo Remember to input SNMP community name.
 
 /etc/mygate : mygate
 	install -o root -g wheel -m 0644 \

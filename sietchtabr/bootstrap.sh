@@ -10,6 +10,7 @@ pkg_add git
 pkg_add vim
 pkg_add pfstat
 pkg_add munin-server
+pkg_add p5-Net-SNMP
 
 rcctl enable dhcpd
 rcctl enable httpd
