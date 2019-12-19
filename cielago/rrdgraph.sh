@@ -32,16 +32,16 @@ bps_graph() {
   RRD_CMD="${RRD_CMD} --lower-limit -${MAX_BW_DL} --rigid"
 
   # bytes, in
-  RRD_CMD="${RRD_CMD} DEF:hq-B-in=/var/db/rrd/96.73.134.170-in.rrd:bytes_in:AVERAGE"
-  RRD_CMD="${RRD_CMD} DEF:korba-B-in=/var/db/rrd/96.73.134.171-in.rrd:bytes_in:AVERAGE"
-  RRD_CMD="${RRD_CMD} DEF:umbu-B-in=/var/db/rrd/96.73.134.172-in.rrd:bytes_in:AVERAGE"
-  RRD_CMD="${RRD_CMD} DEF:tabr-B-in=/var/db/rrd/96.73.134.173-in.rrd:bytes_in:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:hq-B-in=/var/db/rrd/72.83.160.21-in.rrd:bytes_in:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:korba-B-in=/var/db/rrd/72.83.160.20-in.rrd:bytes_in:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:umbu-B-in=/var/db/rrd/72.83.160.19-in.rrd:bytes_in:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:tabr-B-in=/var/db/rrd/72.83.160.18-in.rrd:bytes_in:AVERAGE"
 
   # bytes, out
-  RRD_CMD="${RRD_CMD} DEF:hq-B-out=/var/db/rrd/96.73.134.170-out.rrd:bytes_out:AVERAGE"
-  RRD_CMD="${RRD_CMD} DEF:korba-B-out=/var/db/rrd/96.73.134.171-out.rrd:bytes_out:AVERAGE"
-  RRD_CMD="${RRD_CMD} DEF:umbu-B-out=/var/db/rrd/96.73.134.172-out.rrd:bytes_out:AVERAGE"
-  RRD_CMD="${RRD_CMD} DEF:tabr-B-out=/var/db/rrd/96.73.134.173-out.rrd:bytes_out:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:hq-B-out=/var/db/rrd/72.83.160.21-out.rrd:bytes_out:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:korba-B-out=/var/db/rrd/72.83.160.20-out.rrd:bytes_out:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:umbu-B-out=/var/db/rrd/72.83.160.19-out.rrd:bytes_out:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:tabr-B-out=/var/db/rrd/72.83.160.18-out.rrd:bytes_out:AVERAGE"
 
   # bps in, made negative so it will graph "down"
   RRD_CMD="${RRD_CMD} CDEF:hq-b-in=0,hq-B-in,-,8,*"
@@ -74,16 +74,16 @@ pps_graph() {
   RRD_CMD="${1}"
 
   # packets, in
-  RRD_CMD="${RRD_CMD} DEF:hq-p-in=/var/db/rrd/96.73.134.170-in.rrd:packets_in:MAX"
-  RRD_CMD="${RRD_CMD} DEF:korba-p-in=/var/db/rrd/96.73.134.171-in.rrd:packets_in:MAX"
-  RRD_CMD="${RRD_CMD} DEF:umbu-p-in=/var/db/rrd/96.73.134.172-in.rrd:packets_in:MAX"
-  RRD_CMD="${RRD_CMD} DEF:tabr-p-in=/var/db/rrd/96.73.134.173-in.rrd:packets_in:MAX"
+  RRD_CMD="${RRD_CMD} DEF:hq-p-in=/var/db/rrd/72.83.160.21-in.rrd:packets_in:MAX"
+  RRD_CMD="${RRD_CMD} DEF:korba-p-in=/var/db/rrd/72.83.160.20-in.rrd:packets_in:MAX"
+  RRD_CMD="${RRD_CMD} DEF:umbu-p-in=/var/db/rrd/72.83.160.19-in.rrd:packets_in:MAX"
+  RRD_CMD="${RRD_CMD} DEF:tabr-p-in=/var/db/rrd/72.83.160.18-in.rrd:packets_in:MAX"
 
   # packets, out
-  RRD_CMD="${RRD_CMD} DEF:hq-pps-out=/var/db/rrd/96.73.134.170-out.rrd:packets_out:MAX"
-  RRD_CMD="${RRD_CMD} DEF:korba-pps-out=/var/db/rrd/96.73.134.171-out.rrd:packets_out:MAX"
-  RRD_CMD="${RRD_CMD} DEF:umbu-pps-out=/var/db/rrd/96.73.134.172-out.rrd:packets_out:MAX"
-  RRD_CMD="${RRD_CMD} DEF:tabr-pps-out=/var/db/rrd/96.73.134.173-out.rrd:packets_out:MAX"
+  RRD_CMD="${RRD_CMD} DEF:hq-pps-out=/var/db/rrd/72.83.160.21-out.rrd:packets_out:MAX"
+  RRD_CMD="${RRD_CMD} DEF:korba-pps-out=/var/db/rrd/72.83.160.20-out.rrd:packets_out:MAX"
+  RRD_CMD="${RRD_CMD} DEF:umbu-pps-out=/var/db/rrd/72.83.160.19-out.rrd:packets_out:MAX"
+  RRD_CMD="${RRD_CMD} DEF:tabr-pps-out=/var/db/rrd/72.83.160.18-out.rrd:packets_out:MAX"
 
   # packets in, made negative so it will graph "down"
   RRD_CMD="${RRD_CMD} CDEF:hq-pps-in=0,hq-p-in,-"

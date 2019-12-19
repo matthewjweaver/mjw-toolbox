@@ -22,12 +22,12 @@ mesmtp._domainkey	TXT	(
 	"hvQ3KoO5e8596jvEIMmHnYaHrU28huu4JQ9nt+d1ziMWS6uHQKG5nNBfiojFOqjZ5QozLR"
 	"sTn5/laIU73uG3N4wQIDAQAB")
 
-@		IN A	96.73.134.171
+@		IN A	72.83.160.20
 
-la		IN A	96.73.134.170
-korba		IN A	96.73.134.171
-ns1		IN A	96.73.134.171
-sietchumbu	IN A	96.73.134.172
-sietchtabr	IN A	96.73.134.173
+la		IN A	72.83.160.21
+korba		IN A	72.83.160.20
+ns1		IN A	72.83.160.20
+sietchumbu	IN A	72.83.160.19
+sietchtabr	IN A	72.83.160.18
 
 nodeless.net.	IN CAA	0 issue "letsencrypt.org"

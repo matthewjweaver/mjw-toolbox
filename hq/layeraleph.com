@@ -10,9 +10,9 @@ $TTL 3600
 @		NS	ns.layeraleph.com.
 @		NS	ns6.gandi.net.
 
-		IN A	96.73.134.170
-ns		IN A	96.73.134.170
-hq		IN A	96.73.134.170
+		IN A	72.83.160.21
+ns		IN A	72.83.160.21
+hq		IN A	72.83.160.21
 
 mail		CNAME	ghs.googlehosted.com.
 @		MX 	1 ASPMX.L.GOOGLE.COM.
