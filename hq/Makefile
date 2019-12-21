@@ -3,7 +3,7 @@ hq : \
   /etc/daily.local \
   /etc/hostname.em0 \
   /etc/httpd.conf \
-  /etc/munin/munin.conf \
+  /etc/munin/munin-node.conf \
   /etc/mygate \
   /etc/newsyslog.conf \
   /etc/ntpd.conf \
