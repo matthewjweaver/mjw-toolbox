@@ -1,6 +1,6 @@
 $TTL 3600
 @ 	IN SOA ns named (
-				2019193009 ; serial
+				2019193012 ; serial
 				1800       ; refresh, 30 min
 				300        ; retry 5 min
 				7776000    ; expire 90 days
@@ -10,7 +10,7 @@ $TTL 3600
 @	IN NS	ns1.nodeless.net.
 @	IN NS	ns6.gandi.net.
 
-@	IN A	96.73.134.171
-www	IN A	96.73.134.171
+@	IN A	72.83.160.20
+www	IN A	72.83.160.20
 
 mcweavers.net.	IN CAA	0 issue "letsencrypt.org"

@@ -1,6 +1,6 @@
 $TTL 3600
 @	IN SOA	ns1 named (
-				2019193009 ; serial
+				2019193012 ; serial
 				300        ; refresh (5m)
 				600        ; retry (5m)
 				8467200    ; expire (14w)
@@ -10,6 +10,6 @@ $TTL 3600
 @		NS	ns.layeraleph.com.
 @		NS	ns6.gandi.net.
 
-		IN A	96.73.134.170
+		IN A	72.83.160.21
 
 layerbeh.com.	IN CAA	0 issue "letsencrypt.org"
