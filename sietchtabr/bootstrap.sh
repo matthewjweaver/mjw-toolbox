@@ -12,6 +12,8 @@ pkg_add pfstat
 pkg_add munin-server
 pkg_add p5-Net-SNMP
 
+rcctl set syslogd flags "-U 127.0.0.1"
+rcctl restart syslogd
 rcctl enable dhcpd
 rcctl enable httpd
 rcctl set pflogd flags "-s 1500"

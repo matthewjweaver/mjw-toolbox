@@ -20,6 +20,7 @@ sietchtabr: \
   /etc/ssh/ssh_config \
   /etc/ssh/sshd_config \
   /etc/sysctl.conf \
+  /etc/syslog.conf \
   /var/unbound/etc/unbound.conf \
   /var/www/htdocs/pf/index.html \
   /var/www/htdocs/pf/solarized-dark.min.css
@@ -97,13 +98,17 @@ sietchtabr: \
 	install -o root -g wheel -m 0644 \
 	  pfstat.conf /etc/pfstat.conf
 
-/etc/ssh/ssh_config : ../openbsd-skel/ssh_config
+/etc/ssh/ssh_config : ssh_config
 	install -o root -g wheel -m 0644 \
-	  ../openbsd-skel/ssh_config /etc/ssh/ssh_config
+	  ssh_config /etc/ssh/ssh_config
 
 /etc/ssh/sshd_config : ../openbsd-skel/sshd_config
 	install -o root -g wheel -m 0644 \
 	  ../openbsd-skel/sshd_config /etc/ssh/sshd_config
+
+/etc/syslog.conf : syslog.conf
+	install -o root -g wheel -m 0644 \
+	  syslog.conf /etc/syslog.conf
 
 /etc/sysctl.conf : sysctl.conf
 	install -o root -g wheel -m 0644 \
