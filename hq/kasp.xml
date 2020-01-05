@@ -74,7 +74,7 @@
 			<SOA>
 				<TTL>PT3600S</TTL>
 				<Minimum>PT172800S</Minimum>
-				<Serial>keep</Serial>
+				<Serial>datecounter</Serial>
 			</SOA>
 		</Zone>
 
