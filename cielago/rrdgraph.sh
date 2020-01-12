@@ -4,9 +4,9 @@
 W=850
 H=200
 
-# link speed (160M)
-MAX_BW_DL=160000000
-MAX_BW_UL=25000000
+# link speed (1000M)
+MAX_BW_DL=10000000000
+MAX_BW_UL=10000000000
 
 # steal solarized colors
 base03="#002b36"
