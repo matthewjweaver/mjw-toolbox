@@ -4,9 +4,9 @@
 W=850
 H=200
 
-# link speed (160M)
-MAX_BW_DL=160000000
-MAX_BW_UL=25000000
+# default y axis to 100M (will grow if necessary)
+MAX_BW_DL=100000000
+MAX_BW_UL=100000000
 
 # steal solarized colors
 base03="#002b36"
@@ -29,7 +29,7 @@ green="#859900"
 bps_graph() {
   RRD_CMD="${1}"
   RRD_CMD="${RRD_CMD} --upper-limit ${MAX_BW_UL}"
-  RRD_CMD="${RRD_CMD} --lower-limit -${MAX_BW_DL} --rigid"
+  RRD_CMD="${RRD_CMD} --lower-limit -${MAX_BW_DL}"
 
   # bytes, in
   RRD_CMD="${RRD_CMD} DEF:hq-B-in=/var/db/rrd/72.83.160.21-in.rrd:bytes_in:AVERAGE"
