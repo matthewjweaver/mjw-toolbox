@@ -1,2 +1,2 @@
-# taqwa (disk)
-inet 192.168.221.1 255.255.255.0 NONE mtu 9000
+# external bridge, dmz
+up
