@@ -13,6 +13,7 @@ sietchtabr: \
   /etc/hostname.pflow0 \
   /etc/hostname.vether0 \
   /etc/httpd.conf \
+  /etc/iked.conf \
   /etc/munin/munin.conf \
   /etc/munin/munin-node.conf \
   /etc/munin/plugin-conf.d/taqwa.here \
@@ -84,6 +85,10 @@ sietchtabr: \
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \
 	  httpd.conf /etc/httpd.conf
+
+/etc/iked.conf : iked.conf
+	install -o root -g wheel -m 0600 \
+	  iked.conf /etc/iked.conf
 
 /etc/munin/munin.conf : munin.conf
 	install -o root -g wheel -m 0644 \
