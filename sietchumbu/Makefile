@@ -7,7 +7,7 @@ sietchumbu: \
   /etc/hostname.em2 \
   /etc/hostname.em3 \
   /etc/hostname.vether0 \
-  /etc/ipsec.conf \
+  /etc/iked.conf \
   /etc/munin/munin-node.conf \
   /etc/mygate \
   /etc/newsyslog.conf \
@@ -49,9 +49,9 @@ sietchumbu: \
 	install -o root -g wheel -m 0640 \
 	  hostname.vether0 /etc/hostname.vether0
 
-/etc/ipsec.conf : ipsec.conf
+/etc/iked.conf : iked.conf
 	install -o root -g wheel -m 0600 \
-	  ipsec.conf /etc/ipsec.conf
+	  iked.conf /etc/iked.conf
 
 /etc/munin/munin-node.conf : munin-node.conf
 	install -o root -g wheel -m 0644 \
