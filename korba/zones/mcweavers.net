@@ -11,10 +11,10 @@ $TTL 3600
 @	IN NS	ns6.gandi.net.
 
 
-@	IN A	72.83.160.20
-p	IN A	72.83.160.20
-ph	IN A	72.83.160.20
-photos	IN A	72.83.160.20
-www	IN A	72.83.160.20
+@	IN A	149.248.34.175
+p	IN A	149.248.34.175
+ph	IN A	149.248.34.175
+photos	IN A	149.248.34.175
+www	IN A	149.248.34.175
 
 mcweavers.net.	IN CAA	0 issue "letsencrypt.org"

@@ -23,6 +23,6 @@ mesmtp._domainkey	TXT	(
 
 @		TXT	"v=spf1 include:spf.messagingengine.com ?all"
 
-@		IN A	72.83.160.20
+@		IN A	149.248.34.175
 
 ice-nine.org.	IN CAA	0 issue "letsencrypt.org"

@@ -22,6 +22,6 @@ mesmtp._domainkey       TXT     (
         "pOvE71MiGLtDRPKVyJfmyFO0/G/M60KH9xz1G+mstR9BtXhg6Kc0dtA6muNjKHplpbteG9"
         "SDhvjUuzl/JnhmkcRQIDAQAB")
 
-@		IN A	72.83.160.20
+@		IN A	149.248.34.175
 
 mjw.wtf.	IN CAA	0 issue "letsencrypt.org"

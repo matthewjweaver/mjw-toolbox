@@ -2,8 +2,7 @@ korba : \
   /etc/acme-client.conf \
   /etc/daily.local \
   /etc/dhcpd.conf \
-  /etc/hostname.em0 \
-  /etc/hostname.em2 \
+  /etc/hostname.vio0 \
   /etc/httpd.conf \
   /etc/munin/munin-node.conf \
   /etc/mygate \
@@ -34,13 +33,9 @@ korba : \
 	install -o root -g wheel -m 0644 \
 	  dhcpd.conf /etc/dhcpd.conf
 
-/etc/hostname.em0 : hostname.em0
+/etc/hostname.vio0 : hostname.vio0
 	install -o root -g wheel -m 0640 \
-	  hostname.em0 /etc/hostname.em0
-
-/etc/hostname.em2 : hostname.em2
-	install -o root -g wheel -m 0640 \
-	  hostname.em2 /etc/hostname.em2
+	  hostname.vio0 /etc/hostname.vio0
 
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \
