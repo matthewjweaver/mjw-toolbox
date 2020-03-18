@@ -1,10 +1,8 @@
 hq : \
   /etc/acme-client.conf \
   /etc/daily.local \
-  /etc/hostname.em0 \
   /etc/httpd.conf \
   /etc/munin/munin-node.conf \
-  /etc/mygate \
   /etc/newsyslog.conf \
   /etc/ntpd.conf \
   /etc/opendnssec/conf.xml \
@@ -16,8 +14,7 @@ hq : \
   /etc/ssh/sshd_config \
   /home/ebde7a06/.ssh/authorized_keys \
   /var/nsd/etc/nsd.conf \
-  /var/nsd/zones/master/layeraleph.com \
-  /var/nsd/zones/master/layerbeh.com
+  /var/nsd/zones/master/layeraleph.com
 
 /etc/acme-client.conf : acme-client.conf
 	install -o root -g wheel -m 0644 \
@@ -27,10 +24,6 @@ hq : \
 	install -o root -g wheel -m 0644 \
 	  daily.local /etc/daily.local
 
-/etc/hostname.em0 : hostname.em0
-	install -o root -g wheel -m 0640 \
-	  hostname.em0 /etc/hostname.em0
-
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \
 	  httpd.conf /etc/httpd.conf
@@ -38,10 +31,6 @@ hq : \
 /etc/munin/munin-node.conf : munin-node.conf
 	install -o root -g wheel -m 0644 \
 	munin-node.conf /etc/munin/munin-node.conf
-
-/etc/mygate : mygate
-	install -o root -g wheel -m 0644 \
-	  mygate /etc/mygate
 
 /etc/newsyslog.conf : newsyslog.conf
 	install -o root -g wheel -m 0644 \
@@ -94,16 +83,7 @@ hq : \
 	chown _opendnssec /var/nsd/zones/master
 	ods-signer sign layeraleph.com
 
-/var/nsd/zones/master/layerbeh.com : \
-  /var/opendnssec/unsigned/layerbeh.com
-	chown _opendnssec /var/nsd/zones/master
-	ods-signer sign layerbeh.com
-
 /var/opendnssec/unsigned/layeraleph.com : layeraleph.com
 	install -o _opendnssec -g _opendnssec -m 0600 \
 	  layeraleph.com /var/opendnssec/unsigned/layeraleph.com
-
-/var/opendnssec/unsigned/layerbeh.com : layerbeh.com
-	install -o _opendnssec -g _opendnssec -m 0600 \
-	  layerbeh.com /var/opendnssec/unsigned/layerbeh.com
 
