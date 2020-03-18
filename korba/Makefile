@@ -2,11 +2,8 @@ korba : \
   /etc/acme-client.conf \
   /etc/daily.local \
   /etc/dhcpd.conf \
-  /etc/hostname.em0 \
-  /etc/hostname.em2 \
   /etc/httpd.conf \
   /etc/munin/munin-node.conf \
-  /etc/mygate \
   /etc/ntpd.conf \
   /etc/newsyslog.conf \
   /etc/opendnssec/conf.xml \
@@ -34,14 +31,6 @@ korba : \
 	install -o root -g wheel -m 0644 \
 	  dhcpd.conf /etc/dhcpd.conf
 
-/etc/hostname.em0 : hostname.em0
-	install -o root -g wheel -m 0640 \
-	  hostname.em0 /etc/hostname.em0
-
-/etc/hostname.em2 : hostname.em2
-	install -o root -g wheel -m 0640 \
-	  hostname.em2 /etc/hostname.em2
-
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \
 	  httpd.conf /etc/httpd.conf
@@ -49,10 +38,6 @@ korba : \
 /etc/munin/munin-node.conf : munin-node.conf
 	install -o root -g wheel -m 0644 \
 	munin-node.conf /etc/munin/munin-node.conf
-
-/etc/mygate : mygate
-	install -o root -g wheel -m 0644 \
-	  mygate /etc/mygate
 
 /etc/ntpd.conf : ntpd.conf
 	install -o root -g wheel -m 0644 \
