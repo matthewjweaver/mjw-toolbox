@@ -1,6 +1,6 @@
 $TTL 3600
 @	IN SOA	ns1 named (
-				2020010500 ; serial
+				2020031802 ; serial
 				300        ; refresh (5m)
 				600        ; retry (5m)
 				8467200    ; expire (14w)
@@ -10,9 +10,9 @@ $TTL 3600
 @		NS	ns.layeraleph.com.
 @		NS	ns6.gandi.net.
 
-		IN A	72.83.160.21
-ns		IN A	72.83.160.21
-hq		IN A	72.83.160.21
+		IN A	207.148.3.69
+ns		IN A	207.148.3.69
+hq		IN A	207.148.3.69
 
 mail		CNAME	ghs.googlehosted.com.
 @		MX 	1 ASPMX.L.GOOGLE.COM.
