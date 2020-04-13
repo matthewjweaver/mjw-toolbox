@@ -32,39 +32,21 @@ bps_graph() {
   RRD_CMD="${RRD_CMD} --lower-limit -${MAX_BW_DL}"
 
   # bytes, in
-  RRD_CMD="${RRD_CMD} DEF:hq-B-in=/var/db/rrd/72.83.160.21-in.rrd:bytes_in:AVERAGE"
-  RRD_CMD="${RRD_CMD} DEF:korba-B-in=/var/db/rrd/72.83.160.20-in.rrd:bytes_in:AVERAGE"
-  RRD_CMD="${RRD_CMD} DEF:umbu-B-in=/var/db/rrd/72.83.160.19-in.rrd:bytes_in:AVERAGE"
-  RRD_CMD="${RRD_CMD} DEF:tabr-B-in=/var/db/rrd/72.83.160.18-in.rrd:bytes_in:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:tabr-B-in=/var/db/rrd/em0-in.rrd:bytes_in:AVERAGE"
 
   # bytes, out
-  RRD_CMD="${RRD_CMD} DEF:hq-B-out=/var/db/rrd/72.83.160.21-out.rrd:bytes_out:AVERAGE"
-  RRD_CMD="${RRD_CMD} DEF:korba-B-out=/var/db/rrd/72.83.160.20-out.rrd:bytes_out:AVERAGE"
-  RRD_CMD="${RRD_CMD} DEF:umbu-B-out=/var/db/rrd/72.83.160.19-out.rrd:bytes_out:AVERAGE"
-  RRD_CMD="${RRD_CMD} DEF:tabr-B-out=/var/db/rrd/72.83.160.18-out.rrd:bytes_out:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:tabr-B-out=/var/db/rrd/em0-out.rrd:bytes_out:AVERAGE"
 
   # bps in, made negative so it will graph "down"
-  RRD_CMD="${RRD_CMD} CDEF:hq-b-in=0,hq-B-in,-,8,*"
-  RRD_CMD="${RRD_CMD} CDEF:korba-b-in=0,korba-B-in,-,8,*"
-  RRD_CMD="${RRD_CMD} CDEF:umbu-b-in=0,umbu-B-in,-,8,*"
   RRD_CMD="${RRD_CMD} CDEF:tabr-b-in=0,tabr-B-in,-,8,*"
   
   # bps out
-  RRD_CMD="${RRD_CMD} CDEF:hq-b-out=hq-B-out,8,*"
-  RRD_CMD="${RRD_CMD} CDEF:korba-b-out=korba-B-out,8,*"
-  RRD_CMD="${RRD_CMD} CDEF:umbu-b-out=umbu-B-out,8,*"
   RRD_CMD="${RRD_CMD} CDEF:tabr-b-out=tabr-B-out,8,*"
   
   # graph bandwidth in
-  RRD_CMD="${RRD_CMD} AREA:hq-b-in${red}:layeraleph_bps:STACK"
-  RRD_CMD="${RRD_CMD} AREA:korba-b-in${yellow}:korba_bps:STACK"
-  RRD_CMD="${RRD_CMD} AREA:umbu-b-in${violet}:sietchumbu_bps:STACK"
   RRD_CMD="${RRD_CMD} AREA:tabr-b-in${cyan}:sietchtabr_bps:STACK"
   
   # graph bandwidth out (no legend for these, same colors as above)
-  RRD_CMD="${RRD_CMD} AREA:hq-b-out${red}::STACK"
-  RRD_CMD="${RRD_CMD} AREA:korba-b-out${yellow}::STACK"
-  RRD_CMD="${RRD_CMD} AREA:umbu-b-out${violet}::STACK"
   RRD_CMD="${RRD_CMD} AREA:tabr-b-out${cyan}::STACK"
 
   doas nice $RRD_CMD > /dev/null
@@ -74,33 +56,18 @@ pps_graph() {
   RRD_CMD="${1}"
 
   # packets, in
-  RRD_CMD="${RRD_CMD} DEF:hq-p-in=/var/db/rrd/72.83.160.21-in.rrd:packets_in:MAX"
-  RRD_CMD="${RRD_CMD} DEF:korba-p-in=/var/db/rrd/72.83.160.20-in.rrd:packets_in:MAX"
-  RRD_CMD="${RRD_CMD} DEF:umbu-p-in=/var/db/rrd/72.83.160.19-in.rrd:packets_in:MAX"
-  RRD_CMD="${RRD_CMD} DEF:tabr-p-in=/var/db/rrd/72.83.160.18-in.rrd:packets_in:MAX"
+  RRD_CMD="${RRD_CMD} DEF:tabr-p-in=/var/db/rrd/em0-in.rrd:packets_in:MAX"
 
   # packets, out
-  RRD_CMD="${RRD_CMD} DEF:hq-pps-out=/var/db/rrd/72.83.160.21-out.rrd:packets_out:MAX"
-  RRD_CMD="${RRD_CMD} DEF:korba-pps-out=/var/db/rrd/72.83.160.20-out.rrd:packets_out:MAX"
-  RRD_CMD="${RRD_CMD} DEF:umbu-pps-out=/var/db/rrd/72.83.160.19-out.rrd:packets_out:MAX"
-  RRD_CMD="${RRD_CMD} DEF:tabr-pps-out=/var/db/rrd/72.83.160.18-out.rrd:packets_out:MAX"
+  RRD_CMD="${RRD_CMD} DEF:tabr-pps-out=/var/db/rrd/em0-out.rrd:packets_out:MAX"
 
   # packets in, made negative so it will graph "down"
-  RRD_CMD="${RRD_CMD} CDEF:hq-pps-in=0,hq-p-in,-"
-  RRD_CMD="${RRD_CMD} CDEF:korba-pps-in=0,korba-p-in,-"
-  RRD_CMD="${RRD_CMD} CDEF:umbu-pps-in=0,umbu-p-in,-"
   RRD_CMD="${RRD_CMD} CDEF:tabr-pps-in=0,tabr-p-in,-"
 
   # graph packets in
-  RRD_CMD="${RRD_CMD} LINE:hq-pps-in${red}:layeraleph_pps"
-  RRD_CMD="${RRD_CMD} LINE:korba-pps-in${yellow}:korba_pps"
-  RRD_CMD="${RRD_CMD} LINE:umbu-pps-in${violet}:sietchumbu_pps"
   RRD_CMD="${RRD_CMD} LINE:tabr-pps-in${cyan}:sietchtabr_pps"
 
   # graph packets out
-  RRD_CMD="${RRD_CMD} LINE:hq-pps-out${red}"
-  RRD_CMD="${RRD_CMD} LINE:korba-pps-out${yellow}"
-  RRD_CMD="${RRD_CMD} LINE:umbu-pps-out${violet}"
   RRD_CMD="${RRD_CMD} LINE:tabr-pps-out${cyan}"
 
   doas nice $RRD_CMD > /dev/null
