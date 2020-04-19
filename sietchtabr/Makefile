@@ -1,6 +1,7 @@
 sietchtabr: \
   /etc/acme-client.conf \
   /etc/daily.local \
+  /etc/dhclient.conf \
   /etc/dhcpd.conf \
   /etc/doas.conf \
   /etc/hostname.bridge0 \
@@ -17,11 +18,11 @@ sietchtabr: \
   /etc/munin/munin.conf \
   /etc/munin/munin-node.conf \
   /etc/munin/plugin-conf.d/taqwa.here \
-  /etc/mygate \
   /etc/newsyslog.conf \
   /etc/ntpd.conf \
   /etc/pf.conf \
   /etc/pfstat.conf \
+  /etc/resolv.conf \
   /etc/ssh/ssh_config \
   /etc/ssh/sshd_config \
   /etc/sysctl.conf \
@@ -41,6 +42,10 @@ sietchtabr: \
 /etc/dhcpd.conf : dhcpd.conf
 	install -o root -g wheel -m 0644 \
 	  dhcpd.conf /etc/dhcpd.conf
+
+/etc/dhclient.conf : dhclient.conf
+	install -o root -g wheel -m 0644 \
+	  dhclient.conf /etc/dhclient.conf
 
 /etc/doas.conf : doas.conf
 	install -o root -g wheel -m 0600 \
@@ -122,6 +127,10 @@ sietchtabr: \
 /etc/pfstat.conf : pfstat.conf
 	install -o root -g wheel -m 0644 \
 	  pfstat.conf /etc/pfstat.conf
+
+/etc/resolv.conf : resolv.conf
+	install -o root -g wheel -m 0644 \
+	  resolv.conf /etc/resolv.conf
 
 /etc/ssh/ssh_config : ssh_config
 	install -o root -g wheel -m 0644 \
