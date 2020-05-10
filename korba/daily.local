@@ -1,4 +1,10 @@
-# renew letsencrypt certs as necessary
-for DOMAIN in ice-nine.org mcweavers.net mjw.wtf nodeless.net; do
+for DOMAIN in \
+  ice-nine.org mcweavers.net mjw.wtf nodeless.net photos.mcweavers.net; do
+  # renew letsencrypt certs as necessary
   acme-client ${DOMAIN} && rcctl reload httpd
+done
+for DOMAIN in \
+  ice-nine.org mcweavers.net mjw.wtf nodeless.net; do
+  # backstop dnssec reloads
+  nsd-control reload ${DOMAIN} > /dev/null
 done
