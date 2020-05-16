@@ -2,6 +2,7 @@ hq : \
   /etc/acme-client.conf \
   /etc/daily.local \
   /etc/httpd.conf \
+  /etc/iked.conf \
   /etc/munin/munin-node.conf \
   /etc/newsyslog.conf \
   /etc/ntpd.conf \
@@ -27,6 +28,10 @@ hq : \
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \
 	  httpd.conf /etc/httpd.conf
+
+/etc/iked.conf : iked.conf
+	install -o root -g wheel -m 0600 \
+	  iked.conf /etc/iked.conf
 
 /etc/munin/munin-node.conf : munin-node.conf
 	install -o root -g wheel -m 0644 \
