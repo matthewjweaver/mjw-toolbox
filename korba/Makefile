@@ -2,7 +2,6 @@ korba : \
   /etc/acme-client.conf \
   /etc/daily.local \
   /etc/dhcpd.conf \
-  /etc/hostname.vether0 \
   /etc/hostname.vio0 \
   /etc/httpd.conf \
   /etc/iked.conf \
@@ -33,10 +32,6 @@ korba : \
 /etc/dhcpd.conf : dhcpd.conf
 	install -o root -g wheel -m 0644 \
 	  dhcpd.conf /etc/dhcpd.conf
-
-/etc/hostname.vether0 : hostname.vether0
-	install -o root -g wheel -m 0640 \
-	  hostname.vether0 /etc/hostname.vether0
 
 /etc/hostname.vio0 : hostname.vio0
 	install -o root -g wheel -m 0640 \
