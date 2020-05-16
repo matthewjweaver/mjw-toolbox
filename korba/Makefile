@@ -2,7 +2,9 @@ korba : \
   /etc/acme-client.conf \
   /etc/daily.local \
   /etc/dhcpd.conf \
+  /etc/hostname.vio0 \
   /etc/httpd.conf \
+  /etc/iked.conf \
   /etc/munin/munin-node.conf \
   /etc/ntpd.conf \
   /etc/newsyslog.conf \
@@ -31,9 +33,17 @@ korba : \
 	install -o root -g wheel -m 0644 \
 	  dhcpd.conf /etc/dhcpd.conf
 
+/etc/hostname.vio0 : hostname.vio0
+	install -o root -g wheel -m 0640 \
+	  hostname.vio0 /etc/hostname.vio0
+
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \
 	  httpd.conf /etc/httpd.conf
+
+/etc/iked.conf : iked.conf
+	install -o root -g wheel -m 0600 \
+	  iked.conf /etc/iked.conf
 
 /etc/munin/munin-node.conf : munin-node.conf
 	install -o root -g wheel -m 0644 \
