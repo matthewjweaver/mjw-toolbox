@@ -12,6 +12,7 @@ cielago: \
   /etc/pf.sshbots \
   /etc/pfstat.conf \
   /etc/sysctl.conf \
+  /etc/syslog.conf \
   /home/sysop/bin/rrdgraph.sh \
   /home/sysop/bin/rrdstatsloop.sh \
   /home/sysop/bin/rrdupdate.sh \
@@ -78,6 +79,10 @@ cielago: \
 /etc/sysctl.conf : sysctl.conf
 	install -o root -g wheel -m 0644 \
 	  sysctl.conf /etc/sysctl.conf
+
+/etc/syslog.conf : syslog.conf
+	install -o root -g wheel -m 0644 \
+	  syslog.conf /etc/syslog.conf
 
 /home/sysop/bin/rrdgraph.sh : rrdgraph.sh
 	install -o sysop -g sysop -m 0750 \

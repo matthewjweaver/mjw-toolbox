@@ -1,6 +1,7 @@
 korba : \
   /etc/acme-client.conf \
   /etc/daily.local \
+  /etc/dhclient.conf \
   /etc/dhcpd.conf \
   /etc/hostname.vio0 \
   /etc/httpd.conf \
@@ -15,11 +16,13 @@ korba : \
   /etc/softhsm.conf \
   /etc/ssh/ssh_config \
   /etc/ssh/sshd_config \
+  /etc/syslog.conf \
   /var/nsd/etc/nsd.conf \
   /var/nsd/zones/master/ice-nine.org \
   /var/nsd/zones/master/mcweavers.net \
   /var/nsd/zones/master/mjw.wtf \
-  /var/nsd/zones/master/nodeless.net
+  /var/nsd/zones/master/nodeless.net \
+  /var/unbound/etc/unbound.conf
 
 /etc/acme-client.conf : acme-client.conf
 	install -o root -g wheel -m 0644 \
@@ -28,6 +31,10 @@ korba : \
 /etc/daily.local : daily.local
 	install -o root -g wheel -m 0644 \
 	  daily.local /etc/daily.local
+
+/etc/dhclient.conf : dhclient.conf
+	install -o root -g wheel -m 0644 \
+	  dhclient.conf /etc/dhclient.conf
 
 /etc/dhcpd.conf : dhcpd.conf
 	install -o root -g wheel -m 0644 \
@@ -87,6 +94,10 @@ korba : \
 	install -o root -g wheel -m 0644 \
 	  ../openbsd-skel/sshd_config /etc/ssh/sshd_config
 
+/etc/syslog.conf : syslog.conf
+	install -o root -g wheel -m 0644 \
+	  syslog.conf /etc/syslog.conf
+
 /var/nsd/etc/nsd.conf : nsd.conf
 	install -o root -g _nsd -m 0640 \
 	  nsd.conf /var/nsd/etc/nsd.conf
@@ -126,4 +137,8 @@ korba : \
 /var/opendnssec/unsigned/nodeless.net : zones/nodeless.net
 	install -o _opendnssec -g _opendnssec -m 0600 \
 	  zones/nodeless.net /var/opendnssec/unsigned/nodeless.net
+
+/var/unbound/etc/unbound.conf : unbound.conf
+	install -o root -g _unbound -m 0640 \
+	  unbound.conf /var/unbound/etc/unbound.conf
 
