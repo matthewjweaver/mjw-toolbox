@@ -4,9 +4,6 @@ This is roughly everything unique to the configuration of the machine
 that serves layeraleph's DNS, HTTPS, along with providing reasonably
 safe home directories to layeraleph users.
 
-It also serves as the same infrastructure for the experimental domain,
-layerbeh.com.
-
 
 `doas make hq` should install any changes to this repository onto the
 machine, with various caveats which are described below.
