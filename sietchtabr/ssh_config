@@ -2,7 +2,7 @@
 # ssh-keygen -t rsa -b 4096 -o -a 100
 # aes256-ctr included for arubas
 Compression  yes
-ControlMaster yes
+ControlMaster auto
 ControlPath ~/.ssh/control-%r@%h:%p
 ControlPersist yes
 ForwardAgent yes
