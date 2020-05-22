@@ -3,7 +3,7 @@
 Compression  yes
 ControlMaster auto
 ControlPath ~/.ssh/control-%r@%h:%p
-ControlPersist yes
+ControlPersist 8h
 ForwardAgent yes
 ForwardX11  no
 ForwardX11Trusted  no
