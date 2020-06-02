@@ -4,8 +4,3 @@ for DOMAIN in \
   # renew letsencrypt certs as necessary
   acme-client ${DOMAIN} && rcctl reload httpd
 done
-for DOMAIN in \
-  ice-nine.org mcweavers.net mjw.wtf nodeless.net; do
-  # backstop dnssec reloads
-  nsd-control reload ${DOMAIN} > /dev/null
-done
