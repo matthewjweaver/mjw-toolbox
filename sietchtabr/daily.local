@@ -46,5 +46,7 @@ awk '{
 }' > $_unboundconf && rm -f $_tmpfile
 
 # Reload unbound(8) blocklist
-doas -u _unbound unbound-checkconf >/dev/null 2>&1 && \
-doas -u _unbound unbound-control reload 1>/dev/null
+doas -u _unbound unbound-checkconf 2>&1 | \
+  logger -t daily.local -p daemon.notice && \
+doas -u _unbound unbound-control reload 2>&1 | \
+  logger -t daily.local -p daemon.notice

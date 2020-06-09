@@ -17,6 +17,7 @@ sietchtabr: \
   /etc/iked.conf \
   /etc/munin/munin.conf \
   /etc/munin/munin-node.conf \
+  /etc/munin/plugin-conf.d/openbsd-packages \
   /etc/munin/plugin-conf.d/taqwa.here \
   /etc/newsyslog.conf \
   /etc/ntpd.conf \
@@ -27,6 +28,7 @@ sietchtabr: \
   /etc/ssh/sshd_config \
   /etc/sysctl.conf \
   /etc/syslog.conf \
+  /usr/local/libexec/munin/plugins/unbound_munin_ \
   /var/unbound/etc/unbound.conf \
   /var/www/htdocs/pf/index.html \
   /var/www/htdocs/pf/solarized-dark.min.css
@@ -103,6 +105,10 @@ sietchtabr: \
 	install -o root -g wheel -m 0644 \
 	munin-node.conf /etc/munin/munin-node.conf
 
+/etc/munin/plugin-conf.d/openbsd-packages : openbsd-packages
+	install -o root -g wheel -m 0644 \
+	openbsd-packages /etc/munin/plugin-conf.d/openbsd-packages
+
 /etc/munin/plugin-conf.d/taqwa.here : taqwa.here
 	install -o root -g wheel -m 0644 \
 	taqwa.here /etc/munin/plugin-conf.d/taqwa.here
@@ -147,6 +153,10 @@ sietchtabr: \
 /etc/sysctl.conf : sysctl.conf
 	install -o root -g wheel -m 0644 \
 	  sysctl.conf /etc/sysctl.conf
+
+/usr/local/libexec/munin/plugins/unbound_munin_ : unbound_munin_
+	install -o root -g bin -m 0755 \
+	  unbound_munin_ /usr/local/libexec/munin/plugins/unbound_munin_
 
 /var/unbound/etc/unbound.conf : unbound.conf
 	install -o root -g _unbound -m 0640 \
