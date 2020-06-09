@@ -17,6 +17,7 @@ sietchtabr: \
   /etc/iked.conf \
   /etc/munin/munin.conf \
   /etc/munin/munin-node.conf \
+  /etc/munin/plugin-conf.d/openbsd-packages \
   /etc/munin/plugin-conf.d/taqwa.here \
   /etc/newsyslog.conf \
   /etc/ntpd.conf \
@@ -103,6 +104,10 @@ sietchtabr: \
 /etc/munin/munin-node.conf : munin-node.conf
 	install -o root -g wheel -m 0644 \
 	munin-node.conf /etc/munin/munin-node.conf
+
+/etc/munin/plugin-conf.d/openbsd-packages : openbsd-packages
+	install -o root -g wheel -m 0644 \
+	openbsd-packages /etc/munin/plugin-conf.d/openbsd-packages
 
 /etc/munin/plugin-conf.d/taqwa.here : taqwa.here
 	install -o root -g wheel -m 0644 \
