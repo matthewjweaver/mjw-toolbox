@@ -1,0 +1,5 @@
+dhcpd_flags=
+iked_flags=
+ntpd_flags=-s
+pkg_scripts=miniupnpd upsmon messagebus avahi_daemon
+unbound_flags=
