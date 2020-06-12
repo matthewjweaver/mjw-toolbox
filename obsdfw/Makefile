@@ -28,6 +28,7 @@ obsdfw: \
 	/var/unbound/etc/unbound.conf \
 	/var/unbound/etc/adblock.conf 
 	@echo "************ Fix PSK in /etc/iked.conf ************"
+	@echo "************ add cronjob for unbound-adblock ************"
 
 /etc/acme-client.conf : acme-client.conf
 	install -o root -g wheel -m 0644 \
@@ -117,7 +118,7 @@ obsdfw: \
 	install -o root -g wheel -m 0644 \
 	  ssh_config /etc/ssh/ssh_config
 
-/etc/ssh/sshd_config : sshd_config
+/etc/ssh/sshd_config : ../openbsd-skel/sshd_config
 	install -o root -g wheel -m 0644 \
 	  ../openbsd-skel/sshd_config /etc/ssh/sshd_config
 
@@ -138,6 +139,11 @@ obsdfw: \
 	  unbound.conf /var/unbound/etc/unbound.conf
 
 /var/unbound/etc/adblock.conf : adblock.conf
+	useradd -s /sbin/nologin _adblock
+	ftp https://www.geoghegan.ca/scripts/unbound-adblock.sh
+	install -o root -g bin -m 0700 \
+	  unbound-adblock.sh /usr/local/bin/unbound-adblock.sh
+
 	install -o _adblock -g _unbound -m 0640 \
 	  adblock.conf /var/unbound/etc/adblock.conf
 
