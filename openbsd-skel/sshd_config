@@ -14,3 +14,6 @@ PubkeyAuthentication yes
 PasswordAuthentication no
 Subsystem sftp /usr/libexec/sftp-server
 X11Forwarding no
+
+# added per uminac's rec 
+UseDNS no
