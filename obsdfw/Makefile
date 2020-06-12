@@ -119,7 +119,7 @@ obsdfw: \
 
 /etc/ssh/sshd_config : sshd_config
 	install -o root -g wheel -m 0644 \
-	  sshd_config /etc/ssh/sshd_config
+	  ../openbsd-skel/sshd_config /etc/ssh/sshd_config
 
 /etc/sysctl.conf : sysctl.conf
 	install -o root -g wheel -m 0644 \
