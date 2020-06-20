@@ -1,6 +1,6 @@
 docker run \
   -d \
-  --restart \
+  --restart always \
   --name plex \
   --network=host \
   -e TZ="UTC" \
