@@ -17,6 +17,7 @@ obsdfw: \
 	/etc/newsyslog.conf \
 	/etc/ntpd.conf \
 	/etc/pf.conf \
+	/etc/pf.sshbots \
 	/etc/rc.conf.local \
 	/etc/resolv.conf \
 	/etc/shells \
@@ -88,7 +89,7 @@ obsdfw: \
 
 /etc/miniupnpd.conf : miniupnpd.conf
 	install -o root -g wheel -m 0644 \
-	  miniupnd.conf /etc/miniupnpd.conf
+	  miniupnpd.conf /etc/miniupnpd.conf
 
 /etc/newsyslog.conf : newsyslog.conf
 	install -o root -g wheel -m 0644 \
@@ -101,6 +102,10 @@ obsdfw: \
 /etc/pf.conf : pf.conf
 	install -o root -g wheel -m 0600 \
 	  pf.conf /etc/pf.conf
+
+/etc/pf.sshbots: ../openbsd-skel/pf.sshbots
+	install -o root -g wheel -m 0600 \
+	  ../openbsd-skel/pf.sshbots /etc/pf.sshbots
 
 /etc/rc.conf.local : rc.conf.local
 	install -o root -g wheel -m 0644 \
