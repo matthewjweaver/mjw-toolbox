@@ -26,6 +26,7 @@ obsdfw: \
 	/etc/sysctl.conf \
 	/etc/syslog.conf \
 	/etc/nut/upsmon.conf \
+	/var/log/unbound \
 	/var/unbound/etc/unbound.conf \
 	/var/unbound/etc/adblock.conf 
 	@echo "************ Fix PSK in /etc/iked.conf ************"
@@ -138,6 +139,11 @@ obsdfw: \
 /etc/nut/upsmon.conf : upsmon.conf
 	install -o _ups -g wheel -m 0600 \
 	  upsmon.conf /etc/nut/upsmon.conf
+
+/var/log/unbound :
+	touch /var/log/unbound
+	chown root:_unbound /var/log/unbound
+	chmod 644 /var/log/unbound
 
 /var/unbound/etc/unbound.conf : unbound.conf
 	install -o root -g _unbound -m 0640 \
