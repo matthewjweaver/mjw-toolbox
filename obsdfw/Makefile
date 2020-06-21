@@ -28,7 +28,8 @@ obsdfw: \
 	/etc/nut/upsmon.conf \
 	/var/log/unbound \
 	/var/unbound/etc/unbound.conf \
-	/var/unbound/etc/adblock.conf 
+	/var/unbound/etc/adblock.conf \
+	/root/.forward
 	@echo "************ Fix PSK in /etc/iked.conf ************"
 	@echo "************ add cronjob for unbound-adblock ************"
 
@@ -158,3 +159,6 @@ obsdfw: \
 	install -o _adblock -g _unbound -m 0640 \
 	  adblock.conf /var/unbound/etc/adblock.conf
 
+/root/.forward : .forward
+	install -o root -g wheel -m 0644 \
+	  .forward /root/.forward
