@@ -92,6 +92,9 @@ obsdfw: \
 /etc/miniupnpd.conf : miniupnpd.conf
 	install -o root -g wheel -m 0644 \
 	  miniupnpd.conf /etc/miniupnpd.conf
+	pkg_add miniupnpd
+	rcctl enable miniupnpd
+	rcctl start miniupnpd
 
 /etc/newsyslog.conf : newsyslog.conf
 	install -o root -g wheel -m 0644 \
@@ -140,6 +143,9 @@ obsdfw: \
 /etc/nut/upsmon.conf : upsmon.conf
 	install -o _ups -g wheel -m 0600 \
 	  upsmon.conf /etc/nut/upsmon.conf
+	pkg_add nut
+	rcctl enable upsmon
+	rcctl start upsmon
 
 /var/log/unbound :
 	touch /var/log/unbound
