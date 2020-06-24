@@ -16,6 +16,10 @@ sietchumbu: \
 	install -o root -g root -m 0644 \
 	munin-node.conf /etc/munin/munin-node.conf
 
+/etc/network/interfaces : interfaces
+	install -o root -g root -m 0644 \
+	interfaces /etc/network/interfaces
+
 /etc/sudoers : sudoers
 	install -o root -g root -m 0440 \
 	sudoers /etc/sudoers
