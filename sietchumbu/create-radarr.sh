@@ -1,3 +1,8 @@
+#!/bin/sh
+CONTAINER=linuxserver/radarr
+docker stop radarr
+docker rm radarr
+docker pull ${CONTAINER}
 docker run \
   -d \
   --name radarr \
@@ -7,4 +12,5 @@ docker run \
   -p 7878:7878 \
   -v /home/multi/radarr-config:/config \
   -v /home/multi:/multi \
-  linuxserver/radarr
+  ${CONTAINER}
+docker prune

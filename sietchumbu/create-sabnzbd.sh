@@ -1,3 +1,8 @@
+#!/bin/sh
+CONTAINER=hotio/sabnzbd
+docker stop sabnzbd
+docker rm sabnzbd
+docker pull ${CONTAINER}
 docker run \
   -d \
   --name sabnzbd \
@@ -7,4 +12,5 @@ docker run \
   -p 8080:8080 \
   -v /home/multi/sabnzbd-config:/config \
   -v /home/multi:/multi \
-  hotio/sabnzbd
+  ${CONTAINER}
+docker prune

@@ -1,3 +1,8 @@
+#!/bin/sh
+CONTAINER=plexinc/pms-docker
+docker stop plex
+docker rm plex
+docker pull ${CONTAINER}
 docker run \
   -d \
   --device=/dev/dri:/dev/dri \
@@ -12,4 +17,5 @@ docker run \
   -v /home/mistakenot/plex-meta/transcode:/transcode \
   -v /home/mistakenot:/mistakenot \
   -v /home/multi:/multi \
-  plexinc/pms-docker
+  ${CONTAINER}
+docker prune
