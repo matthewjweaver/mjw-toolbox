@@ -9,8 +9,8 @@ docker run \
   --restart always \
   -e PUID="501" \
   -e PGID="100" \
-  -p 8888 \
-  -p 53885 \
+  -p 8888:8888 \
+  -p 55555 \
   -v /home/mistakenot/resilio-meta:/mnt/sync \
   -v /home/mistakenot:/mnt/mounted_folders/mistakenot \
   -v /home/multi:/mnt/mounted_folders/multi \
