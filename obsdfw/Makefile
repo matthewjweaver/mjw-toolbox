@@ -90,11 +90,11 @@ obsdfw: \
 	  login.conf /etc/login.conf
 
 /etc/miniupnpd.conf : miniupnpd.conf
+	@if ! [ -d /var/db/pkg/miniupnpd* ]; then pkg_add miniupnpd; fi
 	install -o root -g wheel -m 0644 \
 	  miniupnpd.conf /etc/miniupnpd.conf
-	pkg_add miniupnpd
-	rcctl enable miniupnpd
-	rcctl start miniupnpd
+	@if ! rcctl ls on | grep miniupnpd > /dev/null; then rcctl enable miniupnpd; fi
+	@if ! rcctl ls started | grep miniupnpd > /dev/null; then rcctl start miniupnpd; fi
 
 /etc/newsyslog.conf : newsyslog.conf
 	install -o root -g wheel -m 0644 \
@@ -141,11 +141,11 @@ obsdfw: \
 	  syslog.conf /etc/syslog.conf
 
 /etc/nut/upsmon.conf : upsmon.conf
+	@if ! [ -d /var/db/pkg/nut* ]; then pkg_add nut; fi
 	install -o _ups -g wheel -m 0600 \
 	  upsmon.conf /etc/nut/upsmon.conf
-	pkg_add nut
-	rcctl enable upsmon
-	rcctl start upsmon
+	@if ! rcctl ls on | grep upsmon > /dev/null; then rcctl enable upsmon; fi
+	@if ! rcctl ls started | grep upsmon > /dev/null; then rcctl start upsmon; fi
 
 /var/log/unbound :
 	touch /var/log/unbound
