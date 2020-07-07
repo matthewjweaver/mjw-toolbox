@@ -31,7 +31,6 @@ obsdfw: \
 	/var/unbound/etc/adblock.conf \
 	/root/.forward
 	@echo "************ Fix PSK in /etc/iked.conf ************"
-	@echo "************ add cronjob for unbound-adblock ************"
 
 /etc/acme-client.conf : acme-client.conf
 	install -o root -g wheel -m 0644 \
@@ -157,13 +156,13 @@ obsdfw: \
 	  unbound.conf /var/unbound/etc/unbound.conf
 
 /var/unbound/etc/adblock.conf : adblock.conf
-	useradd -s /sbin/nologin _adblock
-	ftp https://www.geoghegan.ca/scripts/unbound-adblock.sh
+	@if ! id -u _adblock > /dev/null; then useradd -s /sbin/nologin _adblock; fi
+	ftp https://www.geoghegan.ca/pub/unbound-adblock/0.4/unbound-adblock.sh
 	install -o root -g bin -m 0700 \
 	  unbound-adblock.sh /usr/local/bin/unbound-adblock.sh
-
 	install -o _adblock -g _unbound -m 0640 \
 	  adblock.conf /var/unbound/etc/adblock.conf
+	if ! [ -e /var/cron/tabs/_adblock ]; then cat cronjob-adblock | doas crontab -u _adblock - ; fi
 
 /root/.forward : .forward
 	install -o root -g wheel -m 0644 \
