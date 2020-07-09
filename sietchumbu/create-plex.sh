@@ -18,4 +18,4 @@ docker run \
   -v /home/mistakenot:/mistakenot \
   -v /home/multi:/multi \
   ${CONTAINER}
-docker prune
+docker system prune

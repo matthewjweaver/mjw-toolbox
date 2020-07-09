@@ -15,4 +15,4 @@ docker run \
   -v /home/mistakenot:/mnt/mounted_folders/mistakenot \
   -v /home/multi:/mnt/mounted_folders/multi \
   ${CONTAINER}
-docker prune
+docker system prune
