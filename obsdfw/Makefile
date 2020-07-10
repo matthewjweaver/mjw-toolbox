@@ -25,6 +25,7 @@ obsdfw: \
 	/etc/ssh/sshd_config \
 	/etc/sysctl.conf \
 	/etc/syslog.conf \
+	/etc/telegraf/telegraf.conf \
 	/etc/nut/upsmon.conf \
 	/var/log/unbound \
 	/var/unbound/etc/unbound.conf \
@@ -138,6 +139,11 @@ obsdfw: \
 /etc/syslog.conf : syslog.conf
 	install -o root -g wheel -m 0644 \
 	  syslog.conf /etc/syslog.conf
+
+/etc/telegraf/telegraf.conf : telegraf.conf
+	@if ! [ -d /var/db/pkg/telegraf* ]; then pkg_add telegraf; fi
+	install -o root -g wheel -m 0644 \
+	  telegraf.conf /etc/telegraf/telegraf.conf
 
 /etc/nut/upsmon.conf : upsmon.conf
 	@if ! [ -d /var/db/pkg/nut* ]; then pkg_add nut; fi
