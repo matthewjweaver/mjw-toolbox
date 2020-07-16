@@ -15,4 +15,4 @@ docker run \
   -v /home/multi/inbound/complete:/downloads \
   -v /home/multi:/multi \
   ${CONTAINER}
-docker prune
+docker system prune

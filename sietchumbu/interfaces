@@ -12,4 +12,5 @@ iface bond0 inet static
 	address 10.0.0.2
 	netmask 255.0.0.0
 	bond-slaves eth4 eth5
+	bond-mode balance-rr
 	mtu 9000

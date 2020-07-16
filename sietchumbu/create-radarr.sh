@@ -13,4 +13,4 @@ docker run \
   -v /home/multi/radarr-config:/config \
   -v /home/multi:/multi \
   ${CONTAINER}
-docker prune
+docker system prune

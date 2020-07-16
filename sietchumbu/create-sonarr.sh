@@ -12,5 +12,6 @@ docker run \
   -p 8989:8989 \
   -v /home/multi/sonarr-config:/config \
   -v /home/multi:/multi \
+  -v /home/multi/inbound/complete:/downloads \
   ${CONTAINER}
-docker prune
+docker system prune
