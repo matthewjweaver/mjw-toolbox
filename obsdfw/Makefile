@@ -7,7 +7,7 @@ obsdfw: \
 	/etc/hostname.em0 \
 	/etc/hostname.em1 \
 	/etc/hostname.enc0 \
-	/etc/hostname.vlan100 \
+	/etc/hostname.vlan106 \
 	/etc/hostname.vlan13 \
 	/etc/hostname.vlan666 \
 	/etc/iked.conf \
@@ -65,9 +65,9 @@ obsdfw: \
 	install -o root -g wheel -m 0640 \
 	  hostname.enc0 /etc/hostname.enc0
 
-/etc/hostname.vlan100 : hostname.vlan100
+/etc/hostname.vlan106 : hostname.vlan106
 	install -o root -g wheel -m 0640 \
-	  hostname.vlan100 /etc/hostname.vlan100
+	  hostname.vlan106 /etc/hostname.vlan106
 
 /etc/hostname.vlan13 : hostname.vlan13
 	install -o root -g wheel -m 0640 \
