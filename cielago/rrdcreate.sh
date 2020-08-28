@@ -28,7 +28,11 @@ RRD_EPOCH="1571584238"
 
 for label in $(pfctl -s label|cut -d ' ' -f 1); do
   # We create one RRD per label.
-  RRD_CMD="rrdtool create /var/db/rrd/${label}.rrd"
+  ofile="/var/db/rrd/${label}.rrd"
+  RRD_CMD="rrdtool create ${ofile}"
+  if [ -f ${ofile} ]; then
+    RRD_CMD="${RRD_CMD} -r ${ofile}"
+  fi
 
   # We use rrdcached for a decent permissions story, plus hey
   # scalability is always nice.
