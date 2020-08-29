@@ -33,6 +33,7 @@ bps_graph() {
 
   # bytes, in
   RRD_CMD="${RRD_CMD} DEF:ssh-B-in=/var/db/rrd/em0-22-in.rrd:bytes_in:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:dns_tls-B-in=/var/db/rrd/em0-853-in.rrd:bytes_in:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:dns-B-in=/var/db/rrd/em0-53-in.rrd:bytes_in:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:http-B-in=/var/db/rrd/em0-80-in.rrd:bytes_in:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:https-B-in=/var/db/rrd/em0-443-in.rrd:bytes_in:AVERAGE"
@@ -40,6 +41,7 @@ bps_graph() {
 
   # bytes, out
   RRD_CMD="${RRD_CMD} DEF:ssh-B-out=/var/db/rrd/em0-22-out.rrd:bytes_out:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:dns_tls-B-out=/var/db/rrd/em0-853-out.rrd:bytes_out:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:dns-B-out=/var/db/rrd/em0-53-out.rrd:bytes_out:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:http-B-out=/var/db/rrd/em0-80-out.rrd:bytes_out:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:https-B-out=/var/db/rrd/em0-443-out.rrd:bytes_out:AVERAGE"
@@ -47,6 +49,7 @@ bps_graph() {
 
   # bps in, made negative so it will graph "down"
   RRD_CMD="${RRD_CMD} CDEF:ssh-b-in=0,ssh-B-in,-,8,*"
+  RRD_CMD="${RRD_CMD} CDEF:dns_tls-b-in=0,dns_tls-B-in,-,8,*"
   RRD_CMD="${RRD_CMD} CDEF:dns-b-in=0,dns-B-in,-,8,*"
   RRD_CMD="${RRD_CMD} CDEF:http-b-in=0,http-B-in,-,8,*"
   RRD_CMD="${RRD_CMD} CDEF:https-b-in=0,https-B-in,-,8,*"
@@ -54,6 +57,7 @@ bps_graph() {
   
   # bps out
   RRD_CMD="${RRD_CMD} CDEF:ssh-b-out=ssh-B-out,8,*"
+  RRD_CMD="${RRD_CMD} CDEF:dns_tls-b-out=dns_tls-B-out,8,*"
   RRD_CMD="${RRD_CMD} CDEF:dns-b-out=dns-B-out,8,*"
   RRD_CMD="${RRD_CMD} CDEF:http-b-out=http-B-out,8,*"
   RRD_CMD="${RRD_CMD} CDEF:https-b-out=https-B-out,8,*"
@@ -61,6 +65,7 @@ bps_graph() {
   
   # graph bandwidth in
   RRD_CMD="${RRD_CMD} AREA:ssh-b-in${orange}:ssh_bps:STACK"
+  RRD_CMD="${RRD_CMD} AREA:dns_tls-b-in${green}:dns_tls_bps:STACK"
   RRD_CMD="${RRD_CMD} AREA:dns-b-in${blue}:dns_bps:STACK"
   RRD_CMD="${RRD_CMD} AREA:http-b-in${red}:http_bps:STACK"
   RRD_CMD="${RRD_CMD} AREA:https-b-in${magenta}:https_bps:STACK"
@@ -68,6 +73,7 @@ bps_graph() {
   
   # graph bandwidth out (no legend for these, same colors as above)
   RRD_CMD="${RRD_CMD} AREA:ssh-b-out${orange}::STACK"
+  RRD_CMD="${RRD_CMD} AREA:dns_tls-b-out${green}::STACK"
   RRD_CMD="${RRD_CMD} AREA:dns-b-out${blue}::STACK"
   RRD_CMD="${RRD_CMD} AREA:http-b-out${red}::STACK"
   RRD_CMD="${RRD_CMD} AREA:https-b-out${magenta}::STACK"
@@ -81,6 +87,7 @@ pps_graph() {
 
   # packets, in
   RRD_CMD="${RRD_CMD} DEF:ssh-p-in=/var/db/rrd/em0-22-in.rrd:packets_in:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:dns_tls-p-in=/var/db/rrd/em0-853-in.rrd:packets_in:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:dns-p-in=/var/db/rrd/em0-53-in.rrd:packets_in:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:http-p-in=/var/db/rrd/em0-80-in.rrd:packets_in:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:https-p-in=/var/db/rrd/em0-443-in.rrd:packets_in:AVERAGE"
@@ -88,6 +95,7 @@ pps_graph() {
 
   # packets, out
   RRD_CMD="${RRD_CMD} DEF:ssh-pps-out=/var/db/rrd/em0-22-out.rrd:packets_out:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:dns_tls-pps-out=/var/db/rrd/em0-853-out.rrd:packets_out:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:dns-pps-out=/var/db/rrd/em0-53-out.rrd:packets_out:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:http-pps-out=/var/db/rrd/em0-80-out.rrd:packets_out:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:https-pps-out=/var/db/rrd/em0-443-out.rrd:packets_out:AVERAGE"
@@ -95,6 +103,7 @@ pps_graph() {
 
   # packets in, made negative so it will graph "down"
   RRD_CMD="${RRD_CMD} CDEF:ssh-pps-in=0,ssh-p-in,-"
+  RRD_CMD="${RRD_CMD} CDEF:dns_tls-pps-in=0,dns_tls-p-in,-"
   RRD_CMD="${RRD_CMD} CDEF:dns-pps-in=0,dns-p-in,-"
   RRD_CMD="${RRD_CMD} CDEF:http-pps-in=0,http-p-in,-"
   RRD_CMD="${RRD_CMD} CDEF:https-pps-in=0,https-p-in,-"
@@ -102,6 +111,7 @@ pps_graph() {
 
   # graph packets in
   RRD_CMD="${RRD_CMD} LINE:ssh-pps-in${orange}:ssh_pps"
+  RRD_CMD="${RRD_CMD} LINE:dns_tls-pps-in${green}:dns_tls_pps"
   RRD_CMD="${RRD_CMD} LINE:dns-pps-in${blue}:dns_pps"
   RRD_CMD="${RRD_CMD} LINE:http-pps-in${red}:http_pps"
   RRD_CMD="${RRD_CMD} LINE:https-pps-in${magenta}:https_pps"
@@ -109,6 +119,7 @@ pps_graph() {
 
   # graph packets out
   RRD_CMD="${RRD_CMD} LINE:ssh-pps-out${orange}"
+  RRD_CMD="${RRD_CMD} LINE:dns_tls-pps-out${green}"
   RRD_CMD="${RRD_CMD} LINE:dns-pps-out${blue}"
   RRD_CMD="${RRD_CMD} LINE:http-pps-out${red}"
   RRD_CMD="${RRD_CMD} LINE:https-pps-out${magenta}"
