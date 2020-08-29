@@ -33,16 +33,16 @@ list based on your ssh server logs:
 ```
 # < /var/log/authlog \
   awk '/Invalid user/ {print $10}'| \
-  sort -n|uniq|xargs doas pfctl -t sshbots -T add
+  sort -n|uniq|grep -v '[[:alpha:]]'|xargs doas pfctl -t sshbots -T add
 # < /var/log/authlog \
   awk '/Disconnected from invalid user/ {print $11}'| \
-  sort -n|uniq|xargs doas pfctl -t sshbots -T add
+  sort -n|uniq|grep -v '[[:alpha:]]'|xargs doas pfctl -t sshbots -T add
 # < /var/log/authlog \
   awk '/Disconnected from authenticating user/ {print $11}'| \
-  sort -n|uniq|xargs doas pfctl -t sshbots -T add
+  sort -n|uniq|grep -v '[[:alpha:]]'|xargs doas pfctl -t sshbots -T add
 # < /var/log/authlog \
   awk '/Unable to negotiate/ {print $10}'| \
-  sort -n|uniq| xargs doas pfctl -t sshbots -T add
+  sort -n|uniq|grep -v '[[:alpha:]]'|xargs doas pfctl -t sshbots -T add
 # doas pfctl -t sshbots -T show > /tmp/t && \
   doas mv /tmp/t /etc/pf.sshbots
 ```
