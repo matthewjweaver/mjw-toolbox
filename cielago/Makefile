@@ -11,6 +11,8 @@ cielago: \
   /etc/pf.conf \
   /etc/pf.sshbots \
   /etc/pfstat.conf \
+  /etc/ssh/ssh_config \
+  /etc/ssh/sshd_config \
   /etc/sysctl.conf \
   /etc/syslog.conf \
   /home/sysop/bin/rrdgraph.sh \
