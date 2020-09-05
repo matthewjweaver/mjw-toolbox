@@ -22,6 +22,7 @@ sietchtabr: \
   /etc/newsyslog.conf \
   /etc/ntpd.conf \
   /etc/pf.conf \
+  /etc/pf.sshbots \
   /etc/pfstat.conf \
   /etc/resolv.conf \
   /etc/ssh/ssh_config \
@@ -130,6 +131,10 @@ sietchtabr: \
 /etc/pf.conf : pf.conf
 	install -o root -g wheel -m 0600 \
 	  pf.conf /etc/pf.conf
+
+/etc/pf.sshbots : ../openbsd-skel/pf.sshbots
+	install -o root -g wheel -m 0640 \
+	  ../openbsd-skel/pf.sshbots /etc/pf.sshbots
 
 /etc/pfstat.conf : pfstat.conf
 	install -o root -g wheel -m 0644 \
