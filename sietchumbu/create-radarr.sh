@@ -10,7 +10,8 @@ docker run \
   -e PUID="501" \
   -e PGID="100" \
   -p 7878:7878 \
-  -v /home/multi/radarr-config:/config \
+  -v /home/docker/radarr-config:/config \
   -v /home/multi:/multi \
+  -v /home/docker/inbound/complete:/downloads \
   ${CONTAINER}
 docker system prune
