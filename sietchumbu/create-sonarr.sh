@@ -10,8 +10,8 @@ docker run \
   -e PUID="501" \
   -e PGID="100" \
   -p 8989:8989 \
-  -v /home/multi/sonarr-config:/config \
+  -v /home/docker/sonarr-config:/config \
   -v /home/multi:/multi \
-  -v /home/multi/inbound/complete:/downloads \
+  -v /home/docker/inbound/complete:/downloads \
   ${CONTAINER}
 docker system prune

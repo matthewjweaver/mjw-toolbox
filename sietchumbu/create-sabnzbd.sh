@@ -10,9 +10,9 @@ docker run \
   -e PUID="501" \
   -e PGID="100" \
   -p 8080:8080 \
-  -v /home/multi/sabnzbd-config:/config \
-  -v /home/multi/inbound/incomplete:/incomplete-downloads \
-  -v /home/multi/inbound/complete:/downloads \
+  -v /home/docker/sabnzbd-config:/config \
+  -v /home/docker/inbound/incomplete:/incomplete-downloads \
+  -v /home/docker/inbound/complete:/downloads \
   -v /home/multi:/multi \
   ${CONTAINER}
 docker system prune

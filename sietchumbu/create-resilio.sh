@@ -11,7 +11,7 @@ docker run \
   -e PGID="100" \
   -p 8888:8888 \
   -p 55555 \
-  -v /home/mistakenot/resilio-meta:/mnt/sync \
+  -v /home/docker/resilio-meta:/mnt/sync \
   -v /home/mistakenot:/mnt/mounted_folders/mistakenot \
   -v /home/multi:/mnt/mounted_folders/multi \
   ${CONTAINER}
