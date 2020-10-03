@@ -1,5 +1,6 @@
 obsdfw: \
 	/etc/acme-client.conf \
+	/etc/avahi/avahi-daemon.conf \
 	/etc/boot.conf \
 	/etc/dhclient.conf \
 	/etc/dhcpd.conf \
@@ -36,6 +37,10 @@ obsdfw: \
 /etc/acme-client.conf : acme-client.conf
 	install -o root -g wheel -m 0644 \
 	  acme-client.conf /etc/acme-client.conf
+
+/etc/avahi/avahi-daemon.conf : avahi-daemon.conf
+	install -o root -g wheel -m 0644 \
+	  avahi-daemon.conf /etc/avahi/avahi-daemon.conf
 
 /etc/boot.conf : boot.conf
 	install -o root -g wheel -m 0644 \
