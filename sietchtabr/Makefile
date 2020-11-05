@@ -12,6 +12,7 @@ sietchtabr: \
   /etc/hostname.em4 \
   /etc/hostname.em5 \
   /etc/hostname.pflow0 \
+  /etc/hostname.wg1 \
   /etc/hostname.vether0 \
   /etc/httpd.conf \
   /etc/iked.conf \
@@ -86,6 +87,10 @@ sietchtabr: \
 /etc/hostname.pflow0 : hostname.pflow0
 	install -o root -g wheel -m 0640 \
 	  hostname.pflow0 /etc/hostname.pflow0
+
+/etc/hostname.wg1 : hostname.wg1
+	install -o root -g wheel -m 0640 \
+	  hostname.wg1 /etc/hostname.wg1
 
 /etc/hostname.vether0 : hostname.vether0
 	install -o root -g wheel -m 0640 \
