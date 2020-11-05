@@ -4,6 +4,7 @@ korba : \
   /etc/dhclient.conf \
   /etc/dhcpd.conf \
   /etc/hostname.vio0 \
+  /etc/hostname.wg1 \
   /etc/httpd.conf \
   /etc/iked.conf \
   /etc/munin/munin-node.conf \
@@ -44,6 +45,10 @@ korba : \
 /etc/hostname.vio0 : hostname.vio0
 	install -o root -g wheel -m 0640 \
 	  hostname.vio0 /etc/hostname.vio0
+
+/etc/hostname.wg1 : hostname.wg1
+	install -o root -g wheel -m 0640 \
+	  hostname.wg1 /etc/hostname.wg1
 
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \
