@@ -15,6 +15,6 @@ docker run \
   -v /home/docker/inbound/complete:/downloads \
   ${CONTAINER}
 
-if [ $1 == "--prune" ]; then
+if [ "$1" = "--prune" ]; then
   docker system prune
 fi

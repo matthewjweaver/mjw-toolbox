@@ -16,6 +16,6 @@ docker run \
   -v /home/multi:/mnt/mounted_folders/multi \
   ${CONTAINER}
 
-if [ $1 == "--prune" ]; then
+if [ "$1" = "--prune" ]; then
   docker system prune
 fi
