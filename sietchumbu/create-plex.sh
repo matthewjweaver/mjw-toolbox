@@ -21,4 +21,7 @@ docker run \
   -v /home/mistakenot:/mistakenot \
   -v /home/multi:/multi \
   ${CONTAINER}
-docker system prune
+
+if [ $1 == "--prune" ]; then
+  docker system prune
+fi
