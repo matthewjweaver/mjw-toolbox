@@ -4,7 +4,7 @@ for uh in $(cat /home/sysop/.nodeless ); do
 done
 echo "press enter to continue" ; read trash
 for uh in $(cat /home/sysop/.nodeless ); do
-  ssh ${uh} "doas syspatch; if grep opendnssec /etc/group; then doas chown _opendnssec /var/nsd/zones/master; fi" &
+  ssh ${uh} "doas syspatch; if grep opendnssec /etc/group; then doas chown _opendnssec /var/nsd/zones/master>/dev/null; fi" &
 done;
 wait
 echo "press enter to continue" ; read trash
