@@ -13,7 +13,7 @@ for uh in $(cat /home/sysop/.nodeless ); do
 done
 echo "press enter to continue" ; read trash
 for uh in $(cat /home/sysop/.nodeless ); do
-  ssh ${uh}
+  ssh ${uh} mail
 done
 tail -80 /var/log/daemon | less
 echo "press enter to continue" ; read trash
