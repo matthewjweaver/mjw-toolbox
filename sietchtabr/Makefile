@@ -12,6 +12,7 @@ sietchtabr: \
   /etc/hostname.em4 \
   /etc/hostname.em5 \
   /etc/hostname.pflow0 \
+  /etc/hostname.wg1 \
   /etc/hostname.vether0 \
   /etc/httpd.conf \
   /etc/iked.conf \
@@ -22,12 +23,15 @@ sietchtabr: \
   /etc/newsyslog.conf \
   /etc/ntpd.conf \
   /etc/pf.conf \
+  /etc/pf.sshbots \
   /etc/pfstat.conf \
   /etc/resolv.conf \
   /etc/ssh/ssh_config \
   /etc/ssh/sshd_config \
   /etc/sysctl.conf \
   /etc/syslog.conf \
+  /home/sysop/bin/maintain.sh \
+  /usr/local/libexec/munin/plugins/sensors_ \
   /usr/local/libexec/munin/plugins/unbound_munin_ \
   /var/unbound/etc/unbound.conf \
   /var/www/htdocs/pf/index.html \
@@ -85,6 +89,10 @@ sietchtabr: \
 	install -o root -g wheel -m 0640 \
 	  hostname.pflow0 /etc/hostname.pflow0
 
+/etc/hostname.wg1 : hostname.wg1
+	install -o root -g wheel -m 0640 \
+	  hostname.wg1 /etc/hostname.wg1
+
 /etc/hostname.vether0 : hostname.vether0
 	install -o root -g wheel -m 0640 \
 	  hostname.vether0 /etc/hostname.vether0
@@ -130,6 +138,10 @@ sietchtabr: \
 	install -o root -g wheel -m 0600 \
 	  pf.conf /etc/pf.conf
 
+/etc/pf.sshbots : ../openbsd-skel/pf.sshbots
+	install -o root -g wheel -m 0640 \
+	  ../openbsd-skel/pf.sshbots /etc/pf.sshbots
+
 /etc/pfstat.conf : pfstat.conf
 	install -o root -g wheel -m 0644 \
 	  pfstat.conf /etc/pfstat.conf
@@ -153,6 +165,14 @@ sietchtabr: \
 /etc/sysctl.conf : sysctl.conf
 	install -o root -g wheel -m 0644 \
 	  sysctl.conf /etc/sysctl.conf
+
+/home/sysop/bin/maintain.sh : maintain.sh
+	install -o sysop -g wheel -m 0750 \
+	  maintain.sh /home/sysop/bin/maintain.sh
+
+/usr/local/libexec/munin/plugins/sensors_ : sensors_
+	install -o root -g bin -m 0755 \
+	  sensors_ /usr/local/libexec/munin/plugins/sensors_
 
 /usr/local/libexec/munin/plugins/unbound_munin_ : unbound_munin_
 	install -o root -g bin -m 0755 \

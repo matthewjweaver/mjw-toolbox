@@ -2,6 +2,7 @@ hq : \
   /etc/acme-client.conf \
   /etc/daily.local \
   /etc/dhclient.conf \
+  /etc/hostname.wg1 \
   /etc/httpd.conf \
   /etc/iked.conf \
   /etc/munin/munin-node.conf \
@@ -10,6 +11,7 @@ hq : \
   /etc/opendnssec/conf.xml \
   /etc/opendnssec/kasp.xml \
   /etc/pf.conf \
+  /etc/pf.sshbots \
   /etc/resolv.conf \
   /etc/softhsm.conf \
   /etc/ssh/ssh_config \
@@ -31,6 +33,10 @@ hq : \
 /etc/dhclient.conf : dhclient.conf
 	install -o root -g wheel -m 0644 \
 	  dhclient.conf /etc/dhclient.conf
+
+/etc/hostname.wg1 : hostname.wg1
+	install -o root -g wheel -m 0640 \
+	  hostname.wg1 /etc/hostname.wg1
 
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \
@@ -62,9 +68,13 @@ hq : \
 	  kasp.xml /etc/opendnssec/kasp.xml
 	ods-enforcer policy import
 
-/etc/pf.conf : pf.conf
+/etc/pf.conf : pf.conf /etc/pf.sshbots
 	install -o root -g wheel -m 0600 \
 	  pf.conf /etc/pf.conf
+
+/etc/pf.sshbots : ../openbsd-skel/pf.sshbots
+	install -o root -g wheel -m 0600 \
+	  ../openbsd-skel/pf.sshbots /etc/pf.sshbots
 
 /etc/resolv.conf : resolv.conf
 	install -o root -g wheel -m 0644 \

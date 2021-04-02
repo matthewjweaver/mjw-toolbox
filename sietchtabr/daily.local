@@ -38,15 +38,21 @@ function simpleParse {
   sed -e 's/#.*$//' -e '/^[[:space:]]*$/d' | \
   awk '/^0.0.0.0/ { print $2 }' >> $_tmpfile
 
+# ALLOW LIST HERE
 # Create unbound(8) local zone file
 sort -fu $_tmpfile | grep -v "^[[:space:]]*$" | \
+fgrep -v files.slack.com | \
 awk '{
   print "local-zone: \"" $1 "\" redirect"
   print "local-data: \"" $1 " A 0.0.0.0\""
 }' > $_unboundconf && rm -f $_tmpfile
 
 # Reload unbound(8) blocklist
+f=$(mktemp -t)
+doas -u _unbound unbound-control dump_cache > ${f}
 doas -u _unbound unbound-checkconf 2>&1 | \
   logger -t daily.local -p daemon.notice && \
 doas -u _unbound unbound-control reload 2>&1 | \
   logger -t daily.local -p daemon.notice
+doas -u _unbound unbound-control load_cache < ${f}
+rm ${f}

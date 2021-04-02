@@ -11,11 +11,14 @@ cielago: \
   /etc/pf.conf \
   /etc/pf.sshbots \
   /etc/pfstat.conf \
+  /etc/ssh/ssh_config \
+  /etc/ssh/sshd_config \
   /etc/sysctl.conf \
   /etc/syslog.conf \
   /home/sysop/bin/rrdgraph.sh \
   /home/sysop/bin/rrdstatsloop.sh \
   /home/sysop/bin/rrdupdate.sh \
+  /usr/local/libexec/munin/plugins/sensors_ \
   /var/www/htdocs/pf/nodeless.html \
   /var/www/htdocs/pf/pfstat.html \
   /var/www/htdocs/pf/solarized-dark.min.css
@@ -95,6 +98,10 @@ cielago: \
 /home/sysop/bin/rrdupdate.sh : rrdupdate.sh
 	install -o sysop -g sysop -m 0750 \
 	  rrdupdate.sh /home/sysop/bin/rrdupdate.sh
+
+/usr/local/libexec/munin/plugins/sensors_ : sensors_
+	install -o root -g bin -m 0755 \
+	  sensors_ /usr/local/libexec/munin/plugins/sensors_
 
 /var/www/htdocs/pf/nodeless.html : htdocs/pf/nodeless.html
 	mkdir -p /var/www/htdocs/pf
