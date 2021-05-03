@@ -4,7 +4,6 @@ sietchtabr: \
   /etc/dhclient.conf \
   /etc/dhcpd.conf \
   /etc/doas.conf \
-  /etc/hostname.bridge0 \
   /etc/hostname.em0 \
   /etc/hostname.em1 \
   /etc/hostname.em2 \
@@ -55,10 +54,6 @@ sietchtabr: \
 /etc/doas.conf : doas.conf
 	install -o root -g wheel -m 0600 \
 	  doas.conf /etc/doas.conf
-
-/etc/hostname.bridge0 : hostname.bridge0
-	install -o root -g wheel -m 0640 \
-	  hostname.bridge0 /etc/hostname.bridge0
 
 /etc/hostname.em0 : hostname.em0
 	install -o root -g wheel -m 0640 \
