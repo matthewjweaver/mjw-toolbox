@@ -5,14 +5,10 @@ sietchtabr: \
   /etc/dhcpd.conf \
   /etc/doas.conf \
   /etc/hostname.em0 \
-  /etc/hostname.em1 \
-  /etc/hostname.em2 \
-  /etc/hostname.em3 \
   /etc/hostname.em4 \
   /etc/hostname.em5 \
   /etc/hostname.pflow0 \
   /etc/hostname.wg1 \
-  /etc/hostname.vether0 \
   /etc/httpd.conf \
   /etc/iked.conf \
   /etc/munin/munin.conf \
