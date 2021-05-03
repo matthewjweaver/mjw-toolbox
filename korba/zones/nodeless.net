@@ -26,7 +26,7 @@ mesmtp._domainkey	TXT	(
 
 korba		IN A	155.138.220.216
 ns1		IN A	155.138.220.216
-sietchumbu	IN A	76.24.24.65
-sietchtabr	IN A	76.24.24.65
+sietchumbu	IN A	100.83.5.56
+sietchtabr	IN A	100.83.5.56
 
 nodeless.net.	IN CAA	0 issue "letsencrypt.org"
