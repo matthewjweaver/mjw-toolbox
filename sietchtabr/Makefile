@@ -25,6 +25,7 @@ sietchtabr: \
   /etc/ssh/sshd_config \
   /etc/sysctl.conf \
   /etc/syslog.conf \
+  /home/sysop/bin/mon-uplink.sh \
   /usr/local/libexec/munin/plugins/sensors_ \
   /usr/local/libexec/munin/plugins/unbound_munin_ \
   /var/unbound/etc/unbound.conf \
@@ -155,6 +156,10 @@ sietchtabr: \
 /etc/sysctl.conf : sysctl.conf
 	install -o root -g wheel -m 0644 \
 	  sysctl.conf /etc/sysctl.conf
+
+/home/sysop/bin/mon-uplink.sh : mon-uplink.sh
+	install -o sysop -g wheel -m 0750 \
+	  mon-uplink.sh /home/sysop/bin/mon-uplink.sh
 
 /usr/local/libexec/munin/plugins/sensors_ : sensors_
 	install -o root -g bin -m 0755 \
