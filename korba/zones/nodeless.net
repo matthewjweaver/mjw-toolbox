@@ -1,6 +1,6 @@
 $TTL 3600
 @	IN SOA	ns1 named (
-				2021040400  ; serial
+				2021051700  ; serial
 				1800       ; refresh (30 min)
 				300        ; retry (5 min)
 				8467200    ; expire (14 weeks)
@@ -26,8 +26,8 @@ mesmtp._domainkey	TXT	(
 
 korba		IN A	155.138.220.216
 ns1		IN A	155.138.220.216
-sietchumbu	IN A	76.24.24.65
-sietchtabr	IN A	76.24.24.65
+sietchumbu	IN A	69.4.102.188
+sietchtabr	IN A	69.4.102.188
 kulon		IN CNAME	vpn.grahams.wtf.
 
 nodeless.net.	IN CAA	0 issue "letsencrypt.org"

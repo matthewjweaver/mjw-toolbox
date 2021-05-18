@@ -4,16 +4,11 @@ sietchtabr: \
   /etc/dhclient.conf \
   /etc/dhcpd.conf \
   /etc/doas.conf \
-  /etc/hostname.bridge0 \
   /etc/hostname.em0 \
-  /etc/hostname.em1 \
-  /etc/hostname.em2 \
-  /etc/hostname.em3 \
   /etc/hostname.em4 \
   /etc/hostname.em5 \
   /etc/hostname.pflow0 \
   /etc/hostname.wg1 \
-  /etc/hostname.vether0 \
   /etc/httpd.conf \
   /etc/iked.conf \
   /etc/munin/munin.conf \
@@ -31,6 +26,7 @@ sietchtabr: \
   /etc/sysctl.conf \
   /etc/syslog.conf \
   /home/sysop/bin/maintain.sh \
+  /home/sysop/bin/mon-uplink.sh \
   /usr/local/libexec/munin/plugins/sensors_ \
   /usr/local/libexec/munin/plugins/unbound_munin_ \
   /var/unbound/etc/unbound.conf \
@@ -56,10 +52,6 @@ sietchtabr: \
 /etc/doas.conf : doas.conf
 	install -o root -g wheel -m 0600 \
 	  doas.conf /etc/doas.conf
-
-/etc/hostname.bridge0 : hostname.bridge0
-	install -o root -g wheel -m 0640 \
-	  hostname.bridge0 /etc/hostname.bridge0
 
 /etc/hostname.em0 : hostname.em0
 	install -o root -g wheel -m 0640 \
@@ -169,6 +161,10 @@ sietchtabr: \
 /home/sysop/bin/maintain.sh : maintain.sh
 	install -o sysop -g wheel -m 0750 \
 	  maintain.sh /home/sysop/bin/maintain.sh
+
+/home/sysop/bin/mon-uplink.sh : mon-uplink.sh
+	install -o sysop -g wheel -m 0750 \
+	  mon-uplink.sh /home/sysop/bin/mon-uplink.sh
 
 /usr/local/libexec/munin/plugins/sensors_ : sensors_
 	install -o root -g bin -m 0755 \
