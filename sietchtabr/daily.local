@@ -38,8 +38,10 @@ function simpleParse {
   sed -e 's/#.*$//' -e '/^[[:space:]]*$/d' | \
   awk '/^0.0.0.0/ { print $2 }' >> $_tmpfile
 
+# ALLOW LIST HERE
 # Create unbound(8) local zone file
 sort -fu $_tmpfile | grep -v "^[[:space:]]*$" | \
+fgrep -v files.slack.com | \
 awk '{
   print "local-zone: \"" $1 "\" redirect"
   print "local-data: \"" $1 " A 0.0.0.0\""

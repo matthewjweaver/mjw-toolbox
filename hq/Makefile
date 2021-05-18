@@ -2,6 +2,7 @@ hq : \
   /etc/acme-client.conf \
   /etc/daily.local \
   /etc/dhclient.conf \
+  /etc/hostname.wg1 \
   /etc/httpd.conf \
   /etc/iked.conf \
   /etc/munin/munin-node.conf \
@@ -32,6 +33,10 @@ hq : \
 /etc/dhclient.conf : dhclient.conf
 	install -o root -g wheel -m 0644 \
 	  dhclient.conf /etc/dhclient.conf
+
+/etc/hostname.wg1 : hostname.wg1
+	install -o root -g wheel -m 0640 \
+	  hostname.wg1 /etc/hostname.wg1
 
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \

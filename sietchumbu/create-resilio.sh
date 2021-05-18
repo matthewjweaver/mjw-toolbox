@@ -10,9 +10,12 @@ docker run \
   -e PUID="501" \
   -e PGID="100" \
   -p 8888:8888 \
-  -p 55555 \
+  -p 55555:55555 \
   -v /home/docker/resilio-meta:/mnt/sync \
   -v /home/mistakenot:/mnt/mounted_folders/mistakenot \
   -v /home/multi:/mnt/mounted_folders/multi \
   ${CONTAINER}
-docker system prune
+
+if [ "$1" = "--prune" ]; then
+  docker system prune
+fi
