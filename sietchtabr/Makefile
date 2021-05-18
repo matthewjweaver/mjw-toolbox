@@ -21,6 +21,7 @@ sietchtabr: \
   /etc/pf.sshbots \
   /etc/pfstat.conf \
   /etc/resolv.conf \
+  /etc/smokeping/config \
   /etc/ssh/ssh_config \
   /etc/ssh/sshd_config \
   /etc/sysctl.conf \
@@ -141,6 +142,10 @@ sietchtabr: \
 /etc/resolv.conf : resolv.conf
 	install -o root -g wheel -m 0644 \
 	  resolv.conf /etc/resolv.conf
+
+/etc/smokeping/config : smokeping-config
+	install -o root -g wheel -m 0644 \
+	smokeping-config /etc/smokeping/config
 
 /etc/ssh/ssh_config : ssh_config
 	install -o root -g wheel -m 0644 \
