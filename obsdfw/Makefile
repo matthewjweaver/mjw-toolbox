@@ -11,6 +11,7 @@ obsdfw: \
 	/etc/hostname.vlan106 \
 	/etc/hostname.vlan13 \
 	/etc/hostname.vlan666 \
+	/etc/hostname.wg1 \
 	/etc/iked.conf \
 	/etc/mygate \
 	/etc/login.conf \
@@ -81,6 +82,11 @@ obsdfw: \
 /etc/hostname.vlan666 : hostname.vlan666
 	install -o root -g wheel -m 0640 \
 	  hostname.vlan666 /etc/hostname.vlan666
+
+/etc/hostname.wg1 : hostname.wg1
+	install -o root -g wheel -m 0640 \
+	  hostname.wg1 /etc/hostname.wg1
+	@echo "************ Fix XXXLOLXXX in /etc/hostname.wg1 ************"
 
 /etc/iked.conf : iked.conf
 	install -o root -g wheel -m 0600 \
