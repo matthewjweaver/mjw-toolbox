@@ -1,6 +1,13 @@
+# This Smokeping example configuration file was automatically generated.
+#
+# Everything up to the Probes section is derived from a common template file.
+# See the Probes and Targets sections for the actual example.
+#
+# This example is included in the smokeping_examples document.
+
 *** General ***
 
-owner    = Peter Random
+owner    = sysop
 contact  = root@localhost
 mailhost = localhost
 sendmail = /usr/sbin/sendmail
@@ -11,7 +18,7 @@ imgcache = /var/www/htdocs/smokeping/cache
 imgurl   = cache
 datadir  = /var/db/smokeping
 piddir  = /var/run/smokeping
-cgiurl   = http://localhost/smokeping/smokeping.cgi
+cgiurl   = http://sietchtabr.nodeless.net/smokeping/smokeping.cgi
 smokemail = /etc/smokeping/smokemail
 tmail = /etc/smokeping/tmail
 # specify this to get syslog logging
@@ -104,46 +111,59 @@ unison_tolerance = 2
 #++ location
 #title = Location
 
+# (The actual example starts here.)
+
 *** Probes ***
 
-+ FPing
+# Here we have just one probe, fping, pinging four hosts. 
+# 
+# The fping probe is using the default parameters, some of them supplied
+# from the Database section ("step" and "pings"), and some of them by
+# the probe module.
 
++FPing
 binary = /usr/local/sbin/fping
 
-*** Slaves ***
-secrets=/etc/smokeping/smokeping_secrets
-+boomer
-display_name=boomer
-color=0000ff
-
-+slave2
-display_name=another
-color=00ff00
-
 *** Targets ***
+
+# The hosts are located in three sites
 
 probe = FPing
 
 menu = Top
 title = Network Latency Grapher
-remark = Welcome to the SmokePing website of xxx Company. \
-         Here you will learn all about the latency of our network.
+remark = Welcome to this SmokePing website.
 
-+ Test
-menu= Targets
-#parents = owner:/Test/James location:/
++ mysite1
+menu = EAU
+title = Hosts in Site 1
 
-++ James
+++ localhost
+host = localhost
+++ uplink
+host = 69.4.102.161
+++ FSLY
+host = www.fastly-debug.com
+++ GOOG
+host = 8.8.8.8
+++ quad9
+host = 9.9.9.9
+++ NET
+host = 1.1.1.1
 
-menu = James
-title =James
-alerts = someloss
-slaves = boomer slave2
-host = james.address
 
-++ MultiHost
++ mysite2
+menu = BOS
+title = Hosts in Site 2
 
-menu = Multihost
-title = James and James as seen from Boomer
-host = /Test/James /Test/James~boomer
+++ kulon
+host = kulon.nodeless.net
 
++ mysite3
+menu = the clown
+title = Hosts in the clown
+
+++ korba
+host = korba.nodeless.net
+++ hq
+host = hq.layeraleph.com
