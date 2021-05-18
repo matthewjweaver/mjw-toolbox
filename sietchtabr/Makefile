@@ -9,6 +9,7 @@ sietchtabr: \
   /etc/hostname.em5 \
   /etc/hostname.pflow0 \
   /etc/hostname.wg1 \
+  /etc/hostname.wg2 \
   /etc/httpd.conf \
   /etc/iked.conf \
   /etc/munin/munin.conf \
@@ -85,6 +86,11 @@ sietchtabr: \
 /etc/hostname.wg1 : hostname.wg1
 	install -o root -g wheel -m 0640 \
 	  hostname.wg1 /etc/hostname.wg1
+
+/etc/hostname.wg2 : hostname.wg2
+	install -o root -g wheel -m 0640 \
+	  hostname.wg2 /etc/hostname.wg2
+	@echo "************ Fix XXXLOLXXX in /etc/hostname.wg2 ************"
 
 /etc/hostname.vether0 : hostname.vether0
 	install -o root -g wheel -m 0640 \
