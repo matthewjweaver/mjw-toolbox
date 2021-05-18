@@ -137,7 +137,7 @@ remark = Welcome to this SmokePing website.
 
 + mysite1
 menu = EAU
-title = Hosts in Site 1
+title = EAU connectivity beacons
 
 ++ localhost
 host = localhost
@@ -155,14 +155,14 @@ host = 1.1.1.1
 
 + mysite2
 menu = BOS
-title = Hosts in Site 2
+title = BOS connectivity beacons
 
 ++ kulon
 host = kulon.nodeless.net
 
 + mysite3
 menu = the clown
-title = Hosts in the clown
+title = beacons in the clown
 
 ++ korba
 host = korba.nodeless.net
