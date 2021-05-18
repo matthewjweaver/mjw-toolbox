@@ -14,11 +14,12 @@ sendmail = /usr/sbin/sendmail
 # NOTE: do not put the Image Cache below cgi-bin
 # since all files under cgi-bin will be executed ... this is not
 # good for images.
-imgcache = /var/www/htdocs/smokeping/cache
-imgurl   = cache
+imgcache = /var/www/htdocs/smokeping
+imgurl   = /smokeping/
 datadir  = /var/db/smokeping
 piddir  = /var/run/smokeping
-cgiurl   = http://sietchtabr.nodeless.net/smokeping/smokeping.cgi
+pagedir = /var/www/htdocs/smokeping
+cgiurl   = https://sietchtabr.nodeless.net/smokeping/smokeping.cgi
 smokemail = /etc/smokeping/smokemail
 tmail = /etc/smokeping/tmail
 # specify this to get syslog logging
