@@ -22,6 +22,7 @@ rcctl set ntpd flags -s
 
 rcctl enable munin_node
 rcctl enable smokeping
+rcctl enable smokeping_fcgi
 
 mkdir -p /var/www/htdocs/pf
 

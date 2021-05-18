@@ -1,3 +1,2 @@
 *	*	*	*	*	/usr/local/bin/pfstat -qp
 */5     *       *       *       *       su -s /bin/sh _munin /usr/local/bin/munin-cron
-*/5	*	*	*	*	/usr/bin/doas -u _smokeping /usr/local/bin/smokeping --static=/var/www/htdocs/smokeping
