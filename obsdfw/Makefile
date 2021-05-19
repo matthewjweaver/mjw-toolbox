@@ -32,7 +32,6 @@ obsdfw: \
 	/var/unbound/etc/unbound.conf \
 	/var/unbound/etc/adblock.conf \
 	/root/.forward
-	@echo "************ Fix PSK in /etc/iked.conf ************"
 
 /etc/acme-client.conf : acme-client.conf
 	install -o root -g wheel -m 0644 \
@@ -90,6 +89,7 @@ obsdfw: \
 /etc/iked.conf : iked.conf
 	install -o root -g wheel -m 0600 \
 	  iked.conf /etc/iked.conf
+	@echo "************ Fix PSK in /etc/iked.conf ************"
 
 /etc/mygate : mygate
 	install -o root -g wheel -m 0644 \
