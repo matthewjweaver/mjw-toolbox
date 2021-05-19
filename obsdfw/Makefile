@@ -15,7 +15,6 @@ obsdfw: \
 	/etc/iked.conf \
 	/etc/mygate \
 	/etc/login.conf \
-	/etc/miniupnpd.conf \
 	/etc/newsyslog.conf \
 	/etc/ntpd.conf \
 	/etc/pf.conf \
@@ -99,13 +98,6 @@ obsdfw: \
 /etc/login.conf : login.conf
 	install -o root -g wheel -m 0644 \
 	  login.conf /etc/login.conf
-
-/etc/miniupnpd.conf : miniupnpd.conf
-	@if ! [ -d /var/db/pkg/miniupnpd* ]; then pkg_add miniupnpd; fi
-	install -o root -g wheel -m 0644 \
-	  miniupnpd.conf /etc/miniupnpd.conf
-	@if ! rcctl ls on | grep miniupnpd > /dev/null; then rcctl enable miniupnpd; fi
-	@if ! rcctl ls started | grep miniupnpd > /dev/null; then rcctl start miniupnpd; fi
 
 /etc/newsyslog.conf : newsyslog.conf
 	install -o root -g wheel -m 0644 \
