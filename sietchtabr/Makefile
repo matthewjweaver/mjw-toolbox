@@ -10,6 +10,7 @@ sietchtabr: \
   /etc/hostname.pflow0 \
   /etc/hostname.wg1 \
   /etc/hostname.wg2 \
+  /etc/hostname.vlan666 \
   /etc/httpd.conf \
   /etc/iked.conf \
   /etc/munin/munin.conf \
@@ -93,9 +94,9 @@ sietchtabr: \
 	  hostname.wg2 /etc/hostname.wg2
 	@echo "************ Fix XXXLOLXXX in /etc/hostname.wg2 ************"
 
-/etc/hostname.vether0 : hostname.vether0
+/etc/hostname.vlan666 : hostname.vlan666
 	install -o root -g wheel -m 0640 \
-	  hostname.vether0 /etc/hostname.vether0
+	  hostname.vlan666 /etc/hostname.vlan666
 
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \
