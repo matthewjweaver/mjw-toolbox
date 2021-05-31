@@ -86,6 +86,7 @@ sietchtabr: \
 /etc/hostname.wg1 : hostname.wg1
 	install -o root -g wheel -m 0640 \
 	  hostname.wg1 /etc/hostname.wg1
+	@echo "************ Fix XXXLOLXXX in /etc/hostname.wg1 ************"
 
 /etc/hostname.wg2 : hostname.wg2
 	install -o root -g wheel -m 0640 \
@@ -103,6 +104,7 @@ sietchtabr: \
 /etc/iked.conf : iked.conf
 	install -o root -g wheel -m 0600 \
 	  iked.conf /etc/iked.conf
+	@echo "************ Fix XXXLOLXXX in /etc/iked.conf ************"
 
 /etc/munin/munin.conf : munin.conf
 	install -o root -g wheel -m 0644 \
@@ -119,7 +121,7 @@ sietchtabr: \
 /etc/munin/plugin-conf.d/taqwa.here : taqwa.here
 	install -o root -g wheel -m 0644 \
 	taqwa.here /etc/munin/plugin-conf.d/taqwa.here
-	echo Remember to input SNMP community name.
+	@echo "************ Fix XXXLOLXXX in /etc/munin/plugin-conf.d/taqwa.here ************"
 
 /etc/mygate : mygate
 	install -o root -g wheel -m 0644 \
