@@ -15,7 +15,7 @@ done
 # update unbound blacklists
 
 # Available blocklists - comment line to disable blocklist
-_malwaredom="https://mirror1.malwaredomains.com/files/justdomains"
+#_malwaredom="https://mirror1.malwaredomains.com/files/justdomains"
 _stevenblack="https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling/hosts"
 
 # Global variables
