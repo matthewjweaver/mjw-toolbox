@@ -54,5 +54,5 @@ doas -u _unbound unbound-checkconf 2>&1 | \
   logger -t daily.local -p daemon.notice && \
 doas -u _unbound unbound-control reload 2>&1 | \
   logger -t daily.local -p daemon.notice
-doas -u _unbound unbound-control load_cache < ${f}
+doas -u _unbound unbound-control load_cache < ${f} 2>&1 > /dev/null
 rm ${f}
