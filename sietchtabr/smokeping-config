@@ -168,3 +168,10 @@ title = beacons in the clown
 host = korba.nodeless.net
 ++ hq
 host = hq.layeraleph.com
+
++ mysite4
+menu = SEA
+title = SEA connectivity beacons
+
+++ hose
+host = sea.da39a3ee5e6b4b0d3255bfef95601890afd80709.com
