@@ -37,6 +37,7 @@ hq : \
 /etc/hostname.wg1 : hostname.wg1
 	install -o root -g wheel -m 0640 \
 	  hostname.wg1 /etc/hostname.wg1
+	@echo "************ Fix XXXLOLXXX in /etc/hostname.wg1 ************"
 
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \
@@ -45,6 +46,7 @@ hq : \
 /etc/iked.conf : iked.conf
 	install -o root -g wheel -m 0600 \
 	  iked.conf /etc/iked.conf
+	@echo "************ Fix XXXLOLXXX in /etc/iked.conf ************"
 
 /etc/munin/munin-node.conf : munin-node.conf
 	install -o root -g wheel -m 0644 \
@@ -61,6 +63,8 @@ hq : \
 /etc/opendnssec/conf.xml : conf.xml
 	install -o root -g _opendnssec -m 0640 \
 	  conf.xml /etc/opendnssec/conf.xml
+	@echo "************ Fix XXXLOLXXX in /etc/opendnssec/conf.xml ************"
+	@echo "************ Also, re-run ods-enforcer update conf ************"
 	ods-enforcer update conf
 
 /etc/opendnssec/kasp.xml : kasp.xml

@@ -4,16 +4,13 @@ sietchtabr: \
   /etc/dhclient.conf \
   /etc/dhcpd.conf \
   /etc/doas.conf \
-  /etc/hostname.bridge0 \
   /etc/hostname.em0 \
-  /etc/hostname.em1 \
-  /etc/hostname.em2 \
-  /etc/hostname.em3 \
   /etc/hostname.em4 \
   /etc/hostname.em5 \
   /etc/hostname.pflow0 \
   /etc/hostname.wg1 \
-  /etc/hostname.vether0 \
+  /etc/hostname.wg2 \
+  /etc/hostname.vlan666 \
   /etc/httpd.conf \
   /etc/iked.conf \
   /etc/munin/munin.conf \
@@ -26,11 +23,13 @@ sietchtabr: \
   /etc/pf.sshbots \
   /etc/pfstat.conf \
   /etc/resolv.conf \
+  /etc/smokeping/config \
   /etc/ssh/ssh_config \
   /etc/ssh/sshd_config \
   /etc/sysctl.conf \
   /etc/syslog.conf \
   /home/sysop/bin/maintain.sh \
+  /home/sysop/bin/mon-uplink.sh \
   /usr/local/libexec/munin/plugins/sensors_ \
   /usr/local/libexec/munin/plugins/unbound_munin_ \
   /var/unbound/etc/unbound.conf \
@@ -56,10 +55,6 @@ sietchtabr: \
 /etc/doas.conf : doas.conf
 	install -o root -g wheel -m 0600 \
 	  doas.conf /etc/doas.conf
-
-/etc/hostname.bridge0 : hostname.bridge0
-	install -o root -g wheel -m 0640 \
-	  hostname.bridge0 /etc/hostname.bridge0
 
 /etc/hostname.em0 : hostname.em0
 	install -o root -g wheel -m 0640 \
@@ -92,10 +87,16 @@ sietchtabr: \
 /etc/hostname.wg1 : hostname.wg1
 	install -o root -g wheel -m 0640 \
 	  hostname.wg1 /etc/hostname.wg1
+	@echo "************ Fix XXXLOLXXX in /etc/hostname.wg1 ************"
 
-/etc/hostname.vether0 : hostname.vether0
+/etc/hostname.wg2 : hostname.wg2
 	install -o root -g wheel -m 0640 \
-	  hostname.vether0 /etc/hostname.vether0
+	  hostname.wg2 /etc/hostname.wg2
+	@echo "************ Fix XXXLOLXXX in /etc/hostname.wg2 ************"
+
+/etc/hostname.vlan666 : hostname.vlan666
+	install -o root -g wheel -m 0640 \
+	  hostname.vlan666 /etc/hostname.vlan666
 
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \
@@ -104,6 +105,7 @@ sietchtabr: \
 /etc/iked.conf : iked.conf
 	install -o root -g wheel -m 0600 \
 	  iked.conf /etc/iked.conf
+	@echo "************ Fix XXXLOLXXX in /etc/iked.conf ************"
 
 /etc/munin/munin.conf : munin.conf
 	install -o root -g wheel -m 0644 \
@@ -120,7 +122,7 @@ sietchtabr: \
 /etc/munin/plugin-conf.d/taqwa.here : taqwa.here
 	install -o root -g wheel -m 0644 \
 	taqwa.here /etc/munin/plugin-conf.d/taqwa.here
-	echo Remember to input SNMP community name.
+	@echo "************ Fix XXXLOLXXX in /etc/munin/plugin-conf.d/taqwa.here ************"
 
 /etc/mygate : mygate
 	install -o root -g wheel -m 0644 \
@@ -150,6 +152,10 @@ sietchtabr: \
 	install -o root -g wheel -m 0644 \
 	  resolv.conf /etc/resolv.conf
 
+/etc/smokeping/config : smokeping-config
+	install -o root -g wheel -m 0644 \
+	smokeping-config /etc/smokeping/config
+
 /etc/ssh/ssh_config : ssh_config
 	install -o root -g wheel -m 0644 \
 	  ssh_config /etc/ssh/ssh_config
@@ -169,6 +175,10 @@ sietchtabr: \
 /home/sysop/bin/maintain.sh : maintain.sh
 	install -o sysop -g wheel -m 0750 \
 	  maintain.sh /home/sysop/bin/maintain.sh
+
+/home/sysop/bin/mon-uplink.sh : mon-uplink.sh
+	install -o sysop -g wheel -m 0750 \
+	  mon-uplink.sh /home/sysop/bin/mon-uplink.sh
 
 /usr/local/libexec/munin/plugins/sensors_ : sensors_
 	install -o root -g bin -m 0755 \
