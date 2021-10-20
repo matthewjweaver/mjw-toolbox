@@ -1,7 +1,6 @@
 sietchtabr: \
   /etc/acme-client.conf \
   /etc/daily.local \
-  /etc/dhclient.conf \
   /etc/dhcpd.conf \
   /etc/doas.conf \
   /etc/hostname.em0 \
@@ -48,9 +47,9 @@ sietchtabr: \
 	install -o root -g wheel -m 0644 \
 	  dhcpd.conf /etc/dhcpd.conf
 
-/etc/dhclient.conf : dhclient.conf
+/etc/dhcpleased.conf : dhcpleased.conf
 	install -o root -g wheel -m 0644 \
-	  dhclient.conf /etc/dhclient.conf
+	  dhcpleased.conf /etc/dhcpleased.conf
 
 /etc/doas.conf : doas.conf
 	install -o root -g wheel -m 0600 \
