@@ -17,6 +17,8 @@ rcctl restart syslogd
 rcctl enable dhcpd
 rcctl enable httpd
 rcctl set pflogd flags "-s 1500"
+rcctl disable resolvd
+rcctl stop resolvd
 rcctl enable unbound
 rcctl set ntpd flags -s
 
