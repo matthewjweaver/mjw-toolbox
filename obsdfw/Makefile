@@ -1,4 +1,4 @@
-obsdfw: \
+blackice: \
 	/etc/acme-client.conf \
 	/etc/avahi/avahi-daemon.conf \
 	/etc/boot.conf \
