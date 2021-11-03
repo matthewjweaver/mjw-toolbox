@@ -59,7 +59,7 @@ cielago: \
 	install -o root -g wheel -m 0644 \
 	  ntpd.conf /etc/ntpd.conf
 
-/etc/pf.conf : pf.conf
+/etc/pf.conf : pf.conf /etc/pf.sshbots
 	install -o root -g wheel -m 0600 \
 	  pf.conf /etc/pf.conf
 
