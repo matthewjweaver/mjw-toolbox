@@ -3,3 +3,4 @@ iked_flags=
 ntpd_flags=-s
 pkg_scripts=messagebus avahi_daemon upsmon telegraf
 unbound_flags=
+resolvd_flags=NO
