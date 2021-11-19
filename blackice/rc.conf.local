@@ -1,5 +1,5 @@
 dhcpd_flags=
 iked_flags=
 ntpd_flags=-s
-pkg_scripts=messagebus avahi_daemon miniupnpd upsmon telegraf
+pkg_scripts=messagebus avahi_daemon upsmon telegraf
 unbound_flags=
