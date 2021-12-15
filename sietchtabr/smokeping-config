@@ -159,6 +159,8 @@ title = BOS connectivity beacons
 
 ++ kulon
 host = kulon.nodeless.net
+++ blackice
+host = home.grahams.wtf
 
 + mysite3
 menu = the clown
