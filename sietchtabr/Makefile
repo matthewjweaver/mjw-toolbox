@@ -7,8 +7,10 @@ sietchtabr: \
   /etc/hostname.em4 \
   /etc/hostname.em5 \
   /etc/hostname.enc1 \
+  /etc/hostname.enc2 \
   /etc/hostname.pflow0 \
   /etc/hostname.wg1 \
+  /etc/hostname.vlan42 \
   /etc/hostname.vlan666 \
   /etc/httpd.conf \
   /etc/iked.conf \
@@ -83,6 +85,10 @@ sietchtabr: \
 	install -o root -g wheel -m 0640 \
 	  hostname.enc1 /etc/hostname.enc1
 
+/etc/hostname.enc2 : hostname.enc2
+	install -o root -g wheel -m 0640 \
+	  hostname.enc2 /etc/hostname.enc2
+
 /etc/hostname.pflow0 : hostname.pflow0
 	install -o root -g wheel -m 0640 \
 	  hostname.pflow0 /etc/hostname.pflow0
@@ -91,6 +97,10 @@ sietchtabr: \
 	install -o root -g wheel -m 0640 \
 	  hostname.wg1 /etc/hostname.wg1
 	@echo "************ Fix XXXLOLXXX in /etc/hostname.wg1 ************"
+
+/etc/hostname.vlan42 : hostname.vlan42
+	install -o root -g wheel -m 0640 \
+	  hostname.vlan42 /etc/hostname.vlan42
 
 /etc/hostname.vlan666 : hostname.vlan666
 	install -o root -g wheel -m 0640 \
