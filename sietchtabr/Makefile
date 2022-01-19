@@ -33,6 +33,8 @@ sietchtabr: \
   /home/sysop/bin/mon-uplink.sh \
   /usr/local/libexec/munin/plugins/sensors_ \
   /usr/local/libexec/munin/plugins/unbound_munin_ \
+  /var/nsd/etc/nsd.conf \
+  /var/nsd/zones/master/tpl.nodeless.net \
   /var/unbound/etc/unbound.conf \
   /var/www/htdocs/pf/index.html \
   /var/www/htdocs/pf/solarized-dark.min.css
@@ -175,6 +177,14 @@ sietchtabr: \
 /etc/syslog.conf : syslog.conf
 	install -o root -g wheel -m 0644 \
 	  syslog.conf /etc/syslog.conf
+
+/var/nsd/etc/nsd.conf : nsd.conf
+	install -o root -g _nsd -m 0640 \
+	  nsd.conf /var/nsd/etc/nsd.conf
+
+/var/nsd/zones/master/tpl.nodeless.net :
+	install -o root -g _nsd -m 0640 \
+	  tpl.nodeless.net /var/nsd/zones/master/tpl.nodeless.net
 
 /etc/sysctl.conf : sysctl.conf
 	install -o root -g wheel -m 0644 \
