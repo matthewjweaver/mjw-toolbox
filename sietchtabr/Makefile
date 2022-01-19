@@ -23,8 +23,10 @@ sietchtabr: \
   /etc/newsyslog.conf \
   /etc/ntpd.conf \
   /etc/pf.conf \
+  /etc/pf.conf.promised_lan \
   /etc/pf.sshbots \
   /etc/pfstat.conf \
+  /etc/rc.local \
   /etc/resolv.conf \
   /etc/smokeping/config \
   /etc/ssh/ssh_config \
@@ -164,6 +166,10 @@ sietchtabr: \
 	install -o root -g wheel -m 0600 \
 	  pf.conf /etc/pf.conf
 
+/etc/pf.conf.promised_lan : pf.conf.promised_lan
+	install -o root -g wheel -m 0600 \
+	  pf.conf.promised_lan /etc/pf.conf.promised_lan
+
 /etc/pf.sshbots : ../openbsd-skel/pf.sshbots
 	install -o root -g wheel -m 0640 \
 	  ../openbsd-skel/pf.sshbots /etc/pf.sshbots
@@ -171,6 +177,10 @@ sietchtabr: \
 /etc/pfstat.conf : pfstat.conf
 	install -o root -g wheel -m 0644 \
 	  pfstat.conf /etc/pfstat.conf
+
+/etc/rc.local : rc.local
+	install -o root -g wheel -m 0644 \
+	rc.local /etc/rc.local
 
 /etc/resolv.conf : resolv.conf
 	install -o root -g wheel -m 0644 \
