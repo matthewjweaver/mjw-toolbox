@@ -90,6 +90,7 @@
 <!--
 		<NotifyCommand>/usr/sbin/rndc reload %zone</NotifyCommand>
 -->
+		<NotifyCommand>/usr/sbin/nsd-control reload %zone</NotifyCommand>
 	</Signer>
 
 </Configuration>
