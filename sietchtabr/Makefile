@@ -18,8 +18,6 @@ sietchtabr: \
   /etc/munin/munin-node.conf \
   /etc/munin/plugin-conf.d/openbsd-packages \
   /etc/munin/plugin-conf.d/taqwa.here \
-  /etc/opendnssec/conf.xml \
-  /etc/opendnssec/kasp.xml \
   /etc/newsyslog.conf \
   /etc/ntpd.conf \
   /etc/pf.conf \
@@ -37,8 +35,6 @@ sietchtabr: \
   /home/sysop/bin/mon-uplink.sh \
   /usr/local/libexec/munin/plugins/sensors_ \
   /usr/local/libexec/munin/plugins/unbound_munin_ \
-  /var/nsd/etc/nsd.conf \
-  /var/nsd/zones/master/tpl.nodeless.net \
   /var/unbound/etc/unbound.conf \
   /var/www/htdocs/pf/index.html \
   /var/www/htdocs/pf/solarized-dark.min.css
@@ -142,18 +138,6 @@ sietchtabr: \
 	install -o root -g wheel -m 0644 \
 	  mygate /etc/mygate
 
-/etc/opendnssec/conf.xml : conf.xml
-	install -o root -g _opendnssec -m 0640 \
-	  conf.xml /etc/opendnssec/conf.xml
-	@echo "************ Fix XXXLOLXXX in /etc/opendnssec/conf.xml ************"
-	@echo "************ Also, re-run ods-enforcer update conf ************"
-	ods-enforcer update conf
-
-/etc/opendnssec/kasp.xml : kasp.xml
-	install -o root -g _opendnssec -m 0640 \
-	  kasp.xml /etc/opendnssec/kasp.xml
-	ods-enforcer policy import
-
 /etc/newsyslog.conf : newsyslog.conf
 	install -o root -g wheel -m 0644 \
 	  newsyslog.conf /etc/newsyslog.conf
@@ -221,19 +205,6 @@ sietchtabr: \
 /usr/local/libexec/munin/plugins/unbound_munin_ : unbound_munin_
 	install -o root -g bin -m 0755 \
 	  unbound_munin_ /usr/local/libexec/munin/plugins/unbound_munin_
-
-/var/nsd/etc/nsd.conf : nsd.conf
-	install -o root -g _nsd -m 0640 \
-	  nsd.conf /var/nsd/etc/nsd.conf
-
-/var/nsd/zones/master/tpl.nodeless.net : \
-  /var/opendnssec/unsigned/tpl.nodeless.net
-	chown _opendnssec /var/nsd/zones/master
-	ods-signer sign tpl.nodeless.net
-
-/var/opendnssec/unsigned/tpl.nodeless.net : zones/tpl.nodeless.net
-	install -o _opendnssec -g _opendnssec -m 0600 \
-	  zones/tpl.nodeless.net /var/opendnssec/unsigned/tpl.nodeless.net
 
 /var/unbound/etc/unbound.conf : unbound.conf
 	install -o root -g _unbound -m 0640 \
