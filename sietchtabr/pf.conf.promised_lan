@@ -1,9 +1,7 @@
 ext_if=em0
 promised_lan_routers="{ \
   bb3.nodeless.net, \
-  sietchtabr.nodeless.net, \
-  corp.anacostia.science, \
-  mynydd.haus \
+  sietchtabr.nodeless.net \
 }"
 
 pass in  log quick on $ext_if proto esp from $promised_lan_routers to $ext_if:0
