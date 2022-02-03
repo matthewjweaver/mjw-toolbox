@@ -136,6 +136,8 @@ elif [ "${1}" = "--month" ]; then
   times="28d"
 elif [ "${1}" = "--year" ]; then
   times="1y"
+elif [ "${1}" = "--time" ]; then
+  times="${2}"
 else
   times="1h"
 fi
