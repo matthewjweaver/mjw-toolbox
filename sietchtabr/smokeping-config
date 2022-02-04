@@ -167,6 +167,8 @@ host = home.grahams.wtf
 host = 209.6.224.1
 ++ blackice-neighbor
 host = 209.6.226.18
+++ starscream
+host = jeffm.io
 
 + mysite3
 menu = the clown
