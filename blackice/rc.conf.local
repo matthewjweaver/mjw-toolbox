@@ -1,6 +1,6 @@
 dhcpd_flags=
 iked_flags=
-ntpd_flags=-s
+ntpd_flags=
 pkg_scripts=messagebus avahi_daemon upsmon telegraf
 unbound_flags=
 resolvd_flags=NO
