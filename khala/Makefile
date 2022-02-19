@@ -2,10 +2,12 @@ cielago: \
   /etc/doas.conf \
   /etc/hostname.em0 \
   /etc/hostname.athn0 \
+  /etc/httpd.conf \
   /etc/newsyslog.conf \
   /etc/ntpd.conf \
   /etc/pf.conf \
   /etc/pf.sshbots \
+  /etc/smokeping/config \
   /etc/ssh/ssh_config \
   /etc/ssh/sshd_config \
   /etc/sysctl.conf \
@@ -22,6 +24,10 @@ cielago: \
 	install -o root -g wheel -m 0640 \
 	  hostname.athn0 /etc/hostname.athn0
 
+/etc/httpd.conf : httpd.conf
+	install -o root -g wheel -m 0644 \
+	  httpd.conf /etc/httpd.conf
+
 /etc/newsyslog.conf : newsyslog.conf
 	install -o root -g wheel -m 0644 \
 	  newsyslog.conf /etc/newsyslog.conf
@@ -37,6 +43,10 @@ cielago: \
 /etc/pf.sshbots : ../openbsd-skel/pf.sshbots
 	install -o root -g wheel -m 0600 \
 	  ../openbsd-skel/pf.sshbots /etc/pf.sshbots
+
+/etc/smokeping/config : smokeping-config
+	install -o root -g wheel -m 0644 \
+	smokeping-config /etc/smokeping/config
 
 /etc/ssh/ssh_config : ../openbsd-skel/ssh_config
 	install -o root -g wheel -m 0644 \
