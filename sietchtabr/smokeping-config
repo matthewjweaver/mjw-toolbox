@@ -177,3 +177,10 @@ title = SEA connectivity beacons
 
 ++ hose
 host = sea.da39a3ee5e6b4b0d3255bfef95601890afd80709.com
+
++ mysite5
+menu = community
+title = community beacons
+
+++ live365
+host = ingest.live365.com
