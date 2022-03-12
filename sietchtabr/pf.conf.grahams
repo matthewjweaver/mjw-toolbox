@@ -1,0 +1,30 @@
+ext_if=em0
+ghola="192.168.223.127/32"
+grahams="vpn.grahams.wtf"
+grahams_lan="192.168.2.0/24"
+int_if=em5
+
+pass in log on $ext_if inet proto icmp \
+  from $grahams to $ext_if:0 \
+  icmp-type 8 code 0 keep state
+
+# vpn to grahams; ipsec and ikev2
+pass in  log quick on $ext_if proto esp from $grahams to $ext_if:0
+pass out log quick on $ext_if proto esp from $ext_if:0 to $grahams
+pass in  log quick on $ext_if proto udp from $grahams to $ext_if:0 \
+  port { ipsec-nat-t, isakmp } keep state
+pass out log quick on $ext_if proto udp from $ext_if:0 to $grahams \
+  port { ipsec-nat-t, isakmp } keep state
+
+# vpn to grahams; traffic that may be tunnelled
+# both lans to each other, both lans to each router
+pass log quick on enc1 \
+  from { $ext_if:0, $int_if:network } \
+  to { $grahams, $grahams_lan }
+pass log quick on enc1 \
+  from { $grahams, $grahams_lan } \
+  to { $ext_if:0, $int_if:network }
+# explcitily pass to ghola, for the eventual tightening of above rules
+pass log quick on enc1 \
+  from { $grahams, $grahams_lan } \
+  to $ghola
