@@ -1,0 +1,1 @@
+@hourly 		/usr/bin/doas /home/grahams/bin/set-upstream-bandwidth.sh
