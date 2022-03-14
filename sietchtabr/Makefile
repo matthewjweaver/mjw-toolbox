@@ -21,6 +21,7 @@ sietchtabr: \
   /etc/newsyslog.conf \
   /etc/ntpd.conf \
   /etc/pf.conf \
+  /etc/pf.conf.grahams \
   /etc/pf.conf.promised_lan \
   /etc/pf.sshbots \
   /etc/pfstat.conf \
@@ -146,9 +147,13 @@ sietchtabr: \
 	install -o root -g wheel -m 0644 \
 	  ntpd.conf /etc/ntpd.conf
 
-/etc/pf.conf : pf.conf /etc/pf.sshbots /etc/pf.conf.promised_lan
+/etc/pf.conf : pf.conf /etc/pf.sshbots /etc/pf.conf.promised_lan /etc/pf.conf.grahams
 	install -o root -g wheel -m 0600 \
 	  pf.conf /etc/pf.conf
+
+/etc/pf.conf.grahams : pf.conf.grahams
+	install -o root -g wheel -m 0600 \
+	  pf.conf.grahams /etc/pf.conf.grahams
 
 /etc/pf.conf.promised_lan : pf.conf.promised_lan
 	install -o root -g wheel -m 0600 \
