@@ -141,6 +141,8 @@ title = EAU connectivity beacons
 
 ++ localhost
 host = localhost
+++ ghola
+host = ghola.here
 ++ uplink
 host = 69.4.102.161
 ++ FSLY
@@ -161,6 +163,12 @@ title = BOS connectivity beacons
 host = kulon.nodeless.net
 ++ blackice
 host = home.grahams.wtf
+++ blackice-upstream
+host = 209.6.224.1
+++ blackice-neighbor
+host = 209.6.226.18
+++ starscream
+host = jeffm.io
 
 + mysite3
 menu = the clown
