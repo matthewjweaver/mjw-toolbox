@@ -28,6 +28,7 @@ blackice: \
 	/etc/syslog.conf \
 	/etc/telegraf/telegraf.conf \
 	/etc/nut/upsmon.conf \
+	/home/grahams/bin/set-upstream-bandwidth.sh \
 	/var/log/unbound \
 	/var/unbound/etc/unbound.conf \
 	/var/unbound/etc/adblock.conf \
@@ -106,9 +107,11 @@ blackice: \
 	install -o root -g wheel -m 0644 \
 	  ntpd.conf /etc/ntpd.conf
 
-/etc/pf.conf : pf.conf
+/etc/pf.conf : pf.conf /home/grahams/bin/set-upstream-bandwidth.sh crontab-bandwidth
 	install -o root -g wheel -m 0600 \
 	  pf.conf /etc/pf.conf
+	/home/grahams/bin/set-upstream-bandwidth.sh
+	if ! [ -e /var/cron/tabs/grahams ]; then cat cronjob-bandwidth | doas crontab -u grahams - ; fi
 
 /etc/pf.sshbots: ../openbsd-skel/pf.sshbots
 	install -o root -g wheel -m 0600 \
@@ -153,6 +156,11 @@ blackice: \
 	  upsmon.conf /etc/nut/upsmon.conf
 	@if ! rcctl ls on | grep upsmon > /dev/null; then rcctl enable upsmon; fi
 	@if ! rcctl ls started | grep upsmon > /dev/null; then rcctl start upsmon; fi
+
+/home/grahams/bin/set-upstream-bandwidth.sh : set-upstream-bandwidth.sh
+	@if ! [ -d /home/grahams/bin ]; then mkdir /home/grahams/bin; fi
+	install -o grahams -g grahams -m 0750 \
+	  set-upstream-bandwidth.sh /home/grahams/bin/set-upstream-bandwidth.sh
 
 /var/log/unbound :
 	touch /var/log/unbound
