@@ -107,7 +107,7 @@ blackice: \
 	install -o root -g wheel -m 0644 \
 	  ntpd.conf /etc/ntpd.conf
 
-/etc/pf.conf : pf.conf /home/grahams/bin/set-upstream-bandwidth.sh crontab-bandwidth
+/etc/pf.conf : pf.conf /home/grahams/bin/set-upstream-bandwidth.sh cronjob-bandwidth
 	install -o root -g wheel -m 0600 \
 	  pf.conf /etc/pf.conf
 	/home/grahams/bin/set-upstream-bandwidth.sh
