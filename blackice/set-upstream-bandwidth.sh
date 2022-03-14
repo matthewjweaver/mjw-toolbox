@@ -10,7 +10,7 @@ PEAK_END_HOUR="23"
 # Cut out only the hour portion of the time
 HOUR_NOW=$(date|cut -d ' ' -f 4|cut -d ':' -f 1)
 
-if [ $1 == "-t" ]; then
+if [ "$1" = "-t" ]; then
   OUTPUT="/tmp/pf.conf"
 else
   OUTPUT="/etc/pf.conf"
