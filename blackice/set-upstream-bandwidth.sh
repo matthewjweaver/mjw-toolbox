@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 # Usage: '-t' means to test, outputting to /tmp/pf.conf instead of
 # /etc/pf.conf.
@@ -12,8 +13,10 @@ HOUR_NOW=$(date|cut -d ' ' -f 4|cut -d ':' -f 1)
 
 if [ "$1" = "-t" ]; then
   OUTPUT="/tmp/pf.conf"
+  RELOAD="no"
 else
   OUTPUT="/etc/pf.conf"
+  RELOAD="yes"
 fi
 
 # The ed operations below find lines which start with:
@@ -38,4 +41,8 @@ else
 w $OUTPUT
 q
 EOF
+fi
+
+if [ $RELOAD = "yes" ]; then
+  /sbin/pfctl -nf /etc/pf.conf && /sbin/pfctl -f /etc/pf.conf
 fi
