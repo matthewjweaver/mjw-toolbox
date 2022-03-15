@@ -39,6 +39,7 @@ blackice: \
 	  acme-client.conf /etc/acme-client.conf
 
 /etc/avahi/avahi-daemon.conf : avahi-daemon.conf
+	@if ! [ -d /var/db/pkg/avahi* ]; then pkg_add avahi; fi
 	install -o root -g wheel -m 0644 \
 	  avahi-daemon.conf /etc/avahi/avahi-daemon.conf
 
