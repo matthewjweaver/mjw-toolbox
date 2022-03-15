@@ -112,6 +112,7 @@ blackice: \
 	install -o root -g wheel -m 0600 \
 	  pf.conf /etc/pf.conf
 	/home/grahams/bin/set-upstream-bandwidth.sh
+	chmod 700 /home/grahams/bin/set-upstream-bandwidth.sh
 	if ! [ -e /var/cron/tabs/grahams ]; then cat cronjob-bandwidth | doas crontab -u grahams - ; fi
 
 /etc/pf.sshbots: ../openbsd-skel/pf.sshbots
