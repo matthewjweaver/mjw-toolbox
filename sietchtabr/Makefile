@@ -152,9 +152,10 @@ sietchtabr: \
 	install -o root -g wheel -m 0644 \
 	  ntpd.conf /etc/ntpd.conf
 
-/etc/pf.conf : pf.conf /etc/pf.sshbots /etc/pf.conf.promised_lan /etc/pf.conf.grahams
+/etc/pf.conf : pf.conf /etc/pf.sshbots /etc/pf.conf.promised_lan /etc/pf.conf.grahams /etc/rc.local
 	install -o root -g wheel -m 0600 \
 	  pf.conf /etc/pf.conf
+	pfctl -nf pf.conf && pfctl -f /etc/pf.conf && sh /etc/rc.local
 
 /etc/pf.conf.grahams : pf.conf.grahams
 	install -o root -g wheel -m 0600 \
