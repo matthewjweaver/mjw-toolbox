@@ -119,9 +119,10 @@ sietchtabr: \
 	  httpd.conf /etc/httpd.conf
 
 /etc/iked.conf : iked.conf
-	install -o root -g wheel -m 0600 \
-	  iked.conf /etc/iked.conf
-	@echo "************ Fix XXXLOLXXX in /etc/iked.conf ************"
+	../install-secretfied.sh \
+	  iked.conf \
+	  "-o root -g wheel -m 0600" \
+	  /etc/iked.conf
 
 /etc/munin/munin.conf : munin.conf
 	install -o root -g wheel -m 0644 \
