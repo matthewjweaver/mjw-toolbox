@@ -85,8 +85,10 @@ korba : \
 	ods-enforcer policy import
 
 /etc/pf.conf : pf.conf /etc/pf.sshbots
+	pfctl -nf pf.conf
 	install -o root -g wheel -m 0600 \
 	  pf.conf /etc/pf.conf
+	pfctl -f /etc/pf.conf
 
 /etc/pf.sshbots : ../openbsd-skel/pf.sshbots
 	install -o root -g wheel -m 0600 \
