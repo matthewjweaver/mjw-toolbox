@@ -8,6 +8,7 @@ sietchtabr: \
   /etc/hostname.em5 \
   /etc/hostname.enc1 \
   /etc/hostname.enc2 \
+  /etc/hostname.gre0 \
   /etc/hostname.pflow0 \
   /etc/hostname.wg1 \
   /etc/hostname.vlan42 \
@@ -92,6 +93,10 @@ sietchtabr: \
 	install -o root -g wheel -m 0640 \
 	  hostname.enc2 /etc/hostname.enc2
 
+/etc/hostname.gre0 : hostname.gre0
+	install -o root -g wheel -m 0640 \
+	  hostname.gre0 /etc/hostname.gre0
+
 /etc/hostname.pflow0 : hostname.pflow0
 	install -o root -g wheel -m 0640 \
 	  hostname.pflow0 /etc/hostname.pflow0
@@ -147,9 +152,10 @@ sietchtabr: \
 	install -o root -g wheel -m 0644 \
 	  ntpd.conf /etc/ntpd.conf
 
-/etc/pf.conf : pf.conf /etc/pf.sshbots /etc/pf.conf.promised_lan /etc/pf.conf.grahams
+/etc/pf.conf : pf.conf /etc/pf.sshbots /etc/pf.conf.promised_lan /etc/pf.conf.grahams /etc/rc.local
 	install -o root -g wheel -m 0600 \
 	  pf.conf /etc/pf.conf
+	pfctl -nf pf.conf && pfctl -f /etc/pf.conf && sh /etc/rc.local
 
 /etc/pf.conf.grahams : pf.conf.grahams
 	install -o root -g wheel -m 0600 \
