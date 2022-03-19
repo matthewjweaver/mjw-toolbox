@@ -39,7 +39,7 @@ blackice: \
 	  acme-client.conf /etc/acme-client.conf
 
 /etc/avahi/avahi-daemon.conf : avahi-daemon.conf
-	@if ! [ -d /var/db/pkg/avahi* ]; then pkg_add avahi; fi
+	@if ! [ -d /var/db/pkg/avahi-libs* ]; then pkg_add avahi; fi
 	install -o root -g wheel -m 0644 \
 	  avahi-daemon.conf /etc/avahi/avahi-daemon.conf
 
@@ -112,7 +112,7 @@ blackice: \
 	install -o root -g wheel -m 0600 \
 	  pf.conf /etc/pf.conf
 	/home/grahams/bin/set-upstream-bandwidth.sh
-	if ! [ -e /var/cron/tabs/grahams ]; then cat cronjob-bandwidth | doas crontab -u grahams - ; fi
+	@if ! [ -e /var/cron/tabs/grahams ]; then cat cronjob-bandwidth | doas crontab -u grahams - ; fi
 
 /etc/pf.sshbots: ../openbsd-skel/pf.sshbots
 	install -o root -g wheel -m 0600 \
