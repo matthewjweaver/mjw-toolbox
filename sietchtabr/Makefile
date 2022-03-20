@@ -102,9 +102,11 @@ sietchtabr: \
 	  hostname.pflow0 /etc/hostname.pflow0
 
 /etc/hostname.wg1 : hostname.wg1
-	doas install -o root -g wheel -m 0640 \
-	  hostname.wg1 /etc/hostname.wg1
-	@echo "************ Fix XXXLOLXXX in /etc/hostname.wg1 ************"
+	~/bin/op run --env-file=.env -- \
+	  sh ../install-secretfied.sh \
+	    hostname.wg1 \
+	    "-o root -g wheel -m 0640" \
+	    /etc/hostname.wg1
 
 /etc/hostname.vlan42 : hostname.vlan42
 	doas install -o root -g wheel -m 0640 \
@@ -136,11 +138,6 @@ sietchtabr: \
 /etc/munin/plugin-conf.d/openbsd-packages : openbsd-packages
 	doas install -o root -g wheel -m 0644 \
 	  openbsd-packages /etc/munin/plugin-conf.d/openbsd-packages
-
-/etc/munin/plugin-conf.d/taqwa.here : taqwa.here
-	doas install -o root -g wheel -m 0644 \
-	  taqwa.here /etc/munin/plugin-conf.d/taqwa.here
-	@echo "************ Fix XXXLOLXXX in /etc/munin/plugin-conf.d/taqwa.here ************"
 
 /etc/mygate : mygate
 	doas install -o root -g wheel -m 0644 \
