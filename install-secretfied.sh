@@ -5,16 +5,25 @@
 # This script will create a tmp file as its output, and use install(1)
 # to copy that file to the specified target.
 #
-# For each string in the form XXX_SOMETHING_XXX in the input file, the
-# script will prompt the user for a replacement, and replace the string
-# with the provided input in the temp file.
+# This script is expected to be run via the 1Password CLI's "run"
+# command, ie 'op run -- sh install-0secretfied.sh'.
 #
-# User input is not echoed, so this can be used to place scerets into
-# files prior to their installation in a system.
+# For each string in the form XXX_SOMETHING_XXX in the input file, the
+# script assumes the presence of a matching env variable containing a
+# secret fetched by op. See .env files near the Makefiles for a mapping
+# of variable names to vault locations.
 #
 # Finally, the script removes the temporary file.
+#
+# This script will break badly if a secret contains an '@', since that
+# is what the script uses as a field delimiter for the sed command.
 
+#set -x
 set -e
+
+OP="/home/sysop/bin/op"
+VAULT="Personal"
+FIELD="password"
 
 if ! [[ -f "$1" ]]; then
   echo "Usage: "
@@ -25,14 +34,9 @@ fi
 TMPFILE=`mktemp` || exit 1
 cp $1 $TMPFILE
 
-for TOKEN in $(grep XXX $TMPFILE |sed -e's/^[^X]*//g' -e's/XXX[^_]*$/XXX/g'); do
-  # Don't echo input, read preserving whitespace and ignoring backslash
-  # escapes.
-  stty -echo
-  IFS= read -r SECRET?"$TOKEN ? "
-  stty echo
-  echo
-  sed -i -e "s@$TOKEN@\"$SECRET\"@" $TMPFILE
+for TOKEN in $(grep XXX $TMPFILE |sed -e's/^[^X]*XXX_/XXX_/g' -e's/_XXX[^_]*$/_XXX/g'); do
+  eval "SECRET=\$$TOKEN"
+  sed -i -e "s@$TOKEN@$SECRET@" $TMPFILE
 done
-/usr/bin/install $2 $TMPFILE $3
+/usr/bin/doas /usr/bin/install $2 $TMPFILE $3
 /bin/rm $TMPFILE
