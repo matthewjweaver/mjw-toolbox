@@ -6,7 +6,7 @@
 # to copy that file to the specified target.
 #
 # This script is expected to be run via the 1Password CLI's "run"
-# command, ie 'op run -- sh install-0secretfied.sh'.
+# command, ie 'op run -- sh install-secretfied.sh'.
 #
 # For each string in the form XXX_SOMETHING_XXX in the input file, the
 # script assumes the presence of a matching env variable containing a
@@ -20,10 +20,6 @@
 
 #set -x
 set -e
-
-OP="/home/sysop/bin/op"
-VAULT="Personal"
-FIELD="password"
 
 if ! [[ -f "$1" ]]; then
   echo "Usage: "
