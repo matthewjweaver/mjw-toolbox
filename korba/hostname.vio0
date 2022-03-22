@@ -1,2 +1,6 @@
-# external interface.
-dhcp
+# external interface. inet6 alias is second one in our autoconf-assigned
+# prefix.
+inet autoconf
+inet6 autoconf -soii -temporary
+inet6 alias 2001:19f0:5401:d29:5400:2ff:fe9f:b322 64
+inet6 alias 2001:19f0:5401:d29:5400:2ff:fe9f:b323 64

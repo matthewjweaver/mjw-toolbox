@@ -2,6 +2,7 @@ hq : \
   /etc/acme-client.conf \
   /etc/daily.local \
   /etc/dhclient.conf \
+  /etc/hostname.vio0 \
   /etc/hostname.wg1 \
   /etc/httpd.conf \
   /etc/iked.conf \
@@ -33,6 +34,10 @@ hq : \
 /etc/dhclient.conf : dhclient.conf
 	install -o root -g wheel -m 0644 \
 	  dhclient.conf /etc/dhclient.conf
+
+/etc/hostname.vio0 : hostname.vio0
+	install -o root -g wheel -m 0640 \
+	  hostname.vio0 /etc/hostname.vio0
 
 /etc/hostname.wg1 : hostname.wg1
 	install -o root -g wheel -m 0640 \
@@ -73,8 +78,10 @@ hq : \
 	ods-enforcer policy import
 
 /etc/pf.conf : pf.conf /etc/pf.sshbots
+	pfctl -nf pf.conf
 	install -o root -g wheel -m 0600 \
 	  pf.conf /etc/pf.conf
+	pfctl -f /etc/pf.conf
 
 /etc/pf.sshbots : ../openbsd-skel/pf.sshbots
 	install -o root -g wheel -m 0600 \
