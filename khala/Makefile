@@ -1,7 +1,7 @@
 cielago: \
   /etc/doas.conf \
   /etc/hostname.em0 \
-  /etc/hostname.athn0 \
+  /etc/hostname.em2 \
   /etc/httpd.conf \
   /etc/newsyslog.conf \
   /etc/ntpd.conf \
@@ -20,9 +20,9 @@ cielago: \
 	install -o root -g wheel -m 0640 \
 	  hostname.em0 /etc/hostname.em0
 
-/etc/hostname.athn0 : hostname.athn0
+/etc/hostname.em2 : hostname.em2
 	install -o root -g wheel -m 0640 \
-	  hostname.athn0 /etc/hostname.athn0
+	  hostname.em2 /etc/hostname.em2
 
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \
@@ -37,8 +37,10 @@ cielago: \
 	  ntpd.conf /etc/ntpd.conf
 
 /etc/pf.conf : pf.conf /etc/pf.sshbots
+	pfctl -nf ./pf.conf
 	install -o root -g wheel -m 0600 \
 	  pf.conf /etc/pf.conf
+	pfctl -f /etc/pf.conf
 
 /etc/pf.sshbots : ../openbsd-skel/pf.sshbots
 	install -o root -g wheel -m 0600 \

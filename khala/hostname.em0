@@ -1,3 +1,4 @@
-# wired LAN facing
-#autoconf
-inet 192.168.223.27 255.255.255.0 192.168.223.255
+# low earth orbit-facing
+#!ifconfig athn0 rdomain 255
+inet autoconf
+inet6 autoconf
