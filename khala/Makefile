@@ -3,6 +3,7 @@ cielago: \
   /etc/hostname.em0 \
   /etc/hostname.em2 \
   /etc/httpd.conf \
+  /etc/munin/munin-node.conf \
   /etc/newsyslog.conf \
   /etc/ntpd.conf \
   /etc/pf.conf \
@@ -27,6 +28,10 @@ cielago: \
 /etc/httpd.conf : httpd.conf
 	install -o root -g wheel -m 0644 \
 	  httpd.conf /etc/httpd.conf
+
+/etc/munin/munin-node.conf : munin-node.conf
+	install -o root -g wheel -m 0644 \
+	munin-node.conf /etc/munin/munin-node.conf
 
 /etc/newsyslog.conf : newsyslog.conf
 	install -o root -g wheel -m 0644 \
