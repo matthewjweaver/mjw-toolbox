@@ -1,5 +1,0 @@
-# low earth orbit-facing
-#!ifconfig athn0 rdomain 255
-nwid tleilaxu wpakey 1GjqHg5URpPA
-inet autoconf
-inet6 autoconf
