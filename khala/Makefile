@@ -1,4 +1,5 @@
 cielago: \
+  /etc/dhcpleased.conf \
   /etc/doas.conf \
   /etc/hostname.em0 \
   /etc/hostname.em2 \
@@ -12,6 +13,11 @@ cielago: \
   /etc/ssh/ssh_config \
   /etc/ssh/sshd_config \
   /etc/sysctl.conf \
+
+/etc/dhcpleased.conf : dhcpleased.conf
+	dhcpleased -nf dhcpleased.conf
+	install -o root -g wheel -m 0640 \
+	  dhcpleased.conf /etc/dhcpleased.conf
 
 /etc/doas.conf : ../openbsd-skel/doas.conf
 	install -o root -g wheel -m 0600 \
