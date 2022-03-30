@@ -225,8 +225,10 @@ sietchtabr: \
 	  unbound_munin_ /usr/local/libexec/munin/plugins/unbound_munin_
 
 /var/unbound/etc/unbound.conf : unbound.conf
+	doas unbound-checkconf unbound.conf
 	doas install -o root -g _unbound -m 0640 \
 	  unbound.conf /var/unbound/etc/unbound.conf
+	doas rcctl reload unbound
 
 /var/www/htdocs/pf/index.html : pf-index.html
 	doas install -o root -g daemon -m 0644 \
