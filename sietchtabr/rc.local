@@ -1,0 +1,2 @@
+/sbin/pfctl -a promised_lan -f /etc/pf.conf.promised_lan
+/sbin/pfctl -a grahams -f /etc/pf.conf.grahams

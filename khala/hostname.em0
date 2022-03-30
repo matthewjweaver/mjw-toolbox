@@ -1,0 +1,4 @@
+# low earth orbit-facing
+#!ifconfig athn0 rdomain 255
+inet autoconf
+inet6 autoconf

@@ -1,0 +1,1 @@
+inet 10.42.1.1 255.255.255.0 10.42.1.255 parent em5 vnetid 42 group untrusted

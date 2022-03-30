@@ -136,15 +136,17 @@ title = Network Latency Grapher
 remark = Welcome to this SmokePing website.
 
 + mysite1
-menu = EAU
-title = EAU connectivity beacons
+menu = LEO
+title = starlink connectivity beacons
 
 ++ localhost
 host = localhost
-++ ghola
-host = ghola.here
-++ uplink
-host = 69.4.102.161
+++ dishy
+host = 192.168.100.1
+++ gateway
+host = 129.222.24.1
+++ groundstation
+host = 129.222.24.1
 ++ FSLY
 host = www.fastly-debug.com
 ++ GOOG
@@ -156,19 +158,11 @@ host = 1.1.1.1
 
 
 + mysite2
-menu = BOS
-title = BOS connectivity beacons
+menu = nodeless
+title = land-based connectivity beacons
 
-++ kulon
-host = kulon.nodeless.net
-++ blackice
-host = home.grahams.wtf
-++ blackice-upstream
-host = 209.6.224.1
-++ blackice-neighbor
-host = 209.6.226.18
-++ starscream
-host = jeffm.io
+++ sietchtabr
+host = sietchtabr.nodeless.net
 
 + mysite3
 menu = the clown
@@ -179,16 +173,3 @@ host = korba.nodeless.net
 ++ hq
 host = hq.layeraleph.com
 
-+ mysite4
-menu = SEA
-title = SEA connectivity beacons
-
-++ hose
-host = sea.da39a3ee5e6b4b0d3255bfef95601890afd80709.com
-
-+ mysite5
-menu = community
-title = community beacons
-
-++ live365
-host = ingest.live365.com

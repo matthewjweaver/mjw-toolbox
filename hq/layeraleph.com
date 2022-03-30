@@ -1,6 +1,6 @@
 $TTL 3600
 @	IN SOA	ns1 named (
-				2020031802 ; serial
+				2022031900 ; serial
 				300        ; refresh (5m)
 				600        ; retry (5m)
 				8467200    ; expire (14w)
@@ -11,8 +11,12 @@ $TTL 3600
 @		NS	ns6.gandi.net.
 
 		IN A	207.148.3.69
+		IN AAAA	2001:19f0:6401:7ee:5400:2ff:fe9f:e7bd
 ns		IN A	207.148.3.69
+ns		IN AAAA	2001:19f0:6401:7ee:5400:2ff:fe9f:e7bc
 hq		IN A	207.148.3.69
+hq		IN AAAA	2001:19f0:6401:7ee:5400:2ff:fe9f:e7bb
+p15		IN A	69.4.102.188
 
 mail		CNAME	ghs.googlehosted.com.
 @		MX 	1 ASPMX.L.GOOGLE.COM.
