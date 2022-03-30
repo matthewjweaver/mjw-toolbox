@@ -12,6 +12,7 @@ blackice: \
 	/etc/hostname.vlan106 \
 	/etc/hostname.vlan13 \
 	/etc/hostname.vlan666 \
+	/etc/httpd.conf \
 	/etc/iked.conf \
 	/etc/mygate \
 	/etc/login.conf \
@@ -22,6 +23,7 @@ blackice: \
 	/etc/rc.conf.local \
 	/etc/resolv.conf \
 	/etc/shells \
+	/etc/smokeping/config \
 	/etc/ssh/ssh_config \
 	/etc/ssh/sshd_config \
 	/etc/sysctl.conf \
@@ -87,6 +89,10 @@ blackice: \
 	doas install -o root -g wheel -m 0640 \
 	  hostname.vlan666 /etc/hostname.vlan666
 
+/etc/httpd.conf : httpd.conf
+	doas install -o root -g wheel -m 0644 \
+	  httpd.conf /etc/httpd.conf
+
 /etc/iked.conf : iked.conf
 	~/bin/op run --env-file=.env -- \
 	  sh ../install-secretfied.sh \
@@ -131,6 +137,10 @@ blackice: \
 /etc/shells : shells
 	doas install -o root -g wheel -m 0644 \
 	  shells /etc/shells
+
+/etc/smokeping/config : smokeping-config
+	doas install -o root -g wheel -m 0644 \
+	  smokeping-config /etc/smokeping/config
 
 /etc/ssh/ssh_config : ssh_config
 	doas install -o root -g wheel -m 0644 \
