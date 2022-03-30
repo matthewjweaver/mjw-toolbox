@@ -12,6 +12,7 @@ pkg_add pfstat
 pkg_add munin-server
 pkg_add p5-Net-SNMP
 pkg_add opendnssec
+pkg_add dhcpcd
 
 rcctl set syslogd flags "-U 127.0.0.1"
 rcctl restart syslogd
@@ -26,6 +27,7 @@ rcctl set ntpd flags -s
 rcctl enable munin_node
 rcctl enable smokeping
 rcctl enable smokeping_fcgi
+rcctl enable dhcpcd
 
 mkdir -p /var/www/htdocs/pf
 
