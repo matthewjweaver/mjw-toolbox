@@ -19,7 +19,7 @@ imgurl   = /smokeping/
 datadir  = /var/db/smokeping
 piddir  = /var/run/smokeping
 pagedir = /var/www/htdocs/smokeping
-cgiurl   = http://192.168.2.1/smokeping/smokeping.cgi
+cgiurl   = https://blackice.grahams.wtf/smokeping/smokeping.cgi
 smokemail = /etc/smokeping/smokemail
 tmail = /etc/smokeping/tmail
 # specify this to get syslog logging
