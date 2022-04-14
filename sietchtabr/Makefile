@@ -2,6 +2,7 @@ sietchtabr: \
   /etc/acme-client.conf \
   /etc/daily.local \
   /etc/dhcpd.conf \
+  /etc/dhcpcd.conf \
   /etc/doas.conf \
   /etc/hostname.em0 \
   /etc/hostname.em4 \
@@ -48,6 +49,10 @@ sietchtabr: \
 /etc/daily.local : daily.local
 	doas install -o root -g wheel -m 0644 \
 	  daily.local /etc/daily.local
+
+/etc/dhcpcd.conf : dhcpcd.conf
+	doas install -o root -g wheel -m 0644 \
+	  dhcpcd.conf /etc/dhcpcd.conf
 
 /etc/dhcpd.conf : dhcpd.conf
 	doas install -o root -g wheel -m 0644 \
@@ -220,8 +225,10 @@ sietchtabr: \
 	  unbound_munin_ /usr/local/libexec/munin/plugins/unbound_munin_
 
 /var/unbound/etc/unbound.conf : unbound.conf
+	doas unbound-checkconf unbound.conf
 	doas install -o root -g _unbound -m 0640 \
 	  unbound.conf /var/unbound/etc/unbound.conf
+	doas rcctl reload unbound
 
 /var/www/htdocs/pf/index.html : pf-index.html
 	doas install -o root -g daemon -m 0644 \
