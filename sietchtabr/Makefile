@@ -27,6 +27,7 @@ sietchtabr: \
   /etc/pf.conf.promised_lan \
   /etc/pf.sshbots \
   /etc/pfstat.conf \
+  /etc/rad.conf \
   /etc/rc.local \
   /etc/resolv.conf \
   /etc/smokeping/config \
@@ -179,6 +180,10 @@ sietchtabr: \
 /etc/pfstat.conf : pfstat.conf
 	doas install -o root -g wheel -m 0644 \
 	  pfstat.conf /etc/pfstat.conf
+
+/etc/rad.conf : rad.conf
+	doas install -o root -g wheel -m 0644 \
+	  rad.conf /etc/rad.conf
 
 /etc/rc.local : rc.local
 	doas install -o root -g wheel -m 0644 \
