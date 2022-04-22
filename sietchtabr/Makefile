@@ -16,6 +16,7 @@ sietchtabr: \
   /etc/hostname.vlan666 \
   /etc/httpd.conf \
   /etc/iked.conf \
+  /etc/login.conf \
   /etc/munin/munin.conf \
   /etc/munin/munin-node.conf \
   /etc/munin/plugin-conf.d/openbsd-packages \
@@ -132,6 +133,10 @@ sietchtabr: \
 	    iked.conf \
 	    "-o root -g wheel -m 0600" \
 	    /etc/iked.conf
+
+/etc/login.conf : login.conf
+	doas install -o root -g wheel -m 0644 \
+	  login.conf /etc/login.conf
 
 /etc/munin/munin.conf : munin.conf
 	doas install -o root -g wheel -m 0644 \
