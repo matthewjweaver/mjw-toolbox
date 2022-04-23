@@ -172,8 +172,8 @@ blackice: \
 	@if ! [ -d /var/db/pkg/nut* ]; then pkg_add nut; fi
 	doas install -o _ups -g wheel -m 0600 \
 	  upsmon.conf /etc/nut/upsmon.conf
-	@if ! rcctl ls on | grep upsmon > /dev/null; then rcctl enable upsmon; fi
-	@if ! rcctl ls started | grep upsmon > /dev/null; then rcctl start upsmon; fi
+	@if ! rcctl ls on | grep upsmon > /dev/null; then doas rcctl enable upsmon; fi
+	@if ! rcctl ls started | grep upsmon > /dev/null; then doas rcctl start upsmon; fi
 
 /home/grahams/bin/set-upstream-bandwidth.sh : set-upstream-bandwidth.sh
 	@if ! [ -d /home/grahams/bin ]; then mkdir /home/grahams/bin; fi
