@@ -19,7 +19,8 @@ ykman config usb -d OTP
 ykman fido access change-pin
 ```
 
-To generate sk key, leaving it on a FIDO2 device:
+To generate sk key, leaving it on a FIDO2 device (you will not need the
+resulting on-disk ~/.ssh/id_ed25519_sk{,.pub} files and may rm them):
 ```
 ssh-keygen -t ed25519-sk -O resident -C "matt@ice-nine.org"
 ```
