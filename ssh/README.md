@@ -19,7 +19,7 @@ ykman config usb -d OTP
 ykman fido access change-pin
 ```
 
-The following command generates sk key, leaving it on a FIDO2 device.
+The following command generates a key, leaving it on a FIDO2 device.
 The resulting on-disk ~/.ssh/id_ed25519_sk{,.pub} files are unnecessary.
 They may be rm'd them after adding the .pub to authorized_keys:
 ```
@@ -45,8 +45,8 @@ ssh-keygen -K
 rm id_ed25519_sk_rk{,.pub}
 ```
 
-To add all keys on a hardware token to ssh-agent on a machine (requires
-PIN):
+To add all keys on a hardware token to an ssh-agent on a machine
+(requires PIN):
 ```
 ssh-add -K
 ```
