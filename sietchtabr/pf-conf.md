@@ -2,7 +2,12 @@
 
 ## Overview
 
+1. Settings/Definitions
+    1. PF settings
+    1. Table definitions
+    1. Queue definitions
 1. Essentials
+    1. Uplink packet normalization
     1. Global blocking
     1. Autoconfiguration
         1. DHCP
