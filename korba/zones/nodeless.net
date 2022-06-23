@@ -1,6 +1,6 @@
 $TTL 3600
 @	IN SOA	ns1 named (
-				2022031901  ; serial
+				2022041800  ; serial
 				1800       ; refresh (30 min)
 				300        ; retry (5 min)
 				8467200    ; expire (14 weeks)
@@ -32,6 +32,7 @@ ns1		IN A	155.138.220.216
 ns1		IN AAAA	2001:19f0:5401:d29:5400:2ff:fe9f:b323
 sietchumbu	IN A	69.4.102.188
 sietchtabr	IN A	69.4.102.188
+taqwa		IN AAAA	2603:b078:445d:2:211:32ff:fe93:9f45
 kulon		IN CNAME	vpn.grahams.wtf.
 
 nodeless.net.	IN CAA	0 issue "letsencrypt.org"

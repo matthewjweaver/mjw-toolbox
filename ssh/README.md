@@ -1,5 +1,8 @@
 Authorized ssh keys, signed.
 
+To generate sk key:
+`ssh-keygen -t ed25519-sk -O resident -C "matt@ice-nine.org"`
+
 To create signature:
 `ssh-keygen -Y sign -f ~/.ssh/id_ed25519_sk.pub -n "file" authorized_keys`
 

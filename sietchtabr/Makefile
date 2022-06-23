@@ -16,6 +16,7 @@ sietchtabr: \
   /etc/hostname.vlan666 \
   /etc/httpd.conf \
   /etc/iked.conf \
+  /etc/login.conf \
   /etc/munin/munin.conf \
   /etc/munin/munin-node.conf \
   /etc/munin/plugin-conf.d/openbsd-packages \
@@ -27,6 +28,7 @@ sietchtabr: \
   /etc/pf.conf.promised_lan \
   /etc/pf.sshbots \
   /etc/pfstat.conf \
+  /etc/rad.conf \
   /etc/rc.local \
   /etc/resolv.conf \
   /etc/smokeping/config \
@@ -132,6 +134,10 @@ sietchtabr: \
 	    "-o root -g wheel -m 0600" \
 	    /etc/iked.conf
 
+/etc/login.conf : login.conf
+	doas install -o root -g wheel -m 0644 \
+	  login.conf /etc/login.conf
+
 /etc/munin/munin.conf : munin.conf
 	doas install -o root -g wheel -m 0644 \
 	  munin.conf /etc/munin/munin.conf
@@ -179,6 +185,10 @@ sietchtabr: \
 /etc/pfstat.conf : pfstat.conf
 	doas install -o root -g wheel -m 0644 \
 	  pfstat.conf /etc/pfstat.conf
+
+/etc/rad.conf : rad.conf
+	doas install -o root -g wheel -m 0644 \
+	  rad.conf /etc/rad.conf
 
 /etc/rc.local : rc.local
 	doas install -o root -g wheel -m 0644 \
