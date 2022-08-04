@@ -13,6 +13,9 @@
 # secret fetched by op. See .env files near the Makefiles for a mapping
 # of variable names to vault locations.
 #
+# The "SOMETHING" in XXX_SOMETHING_XXX must not contain whitespace or
+# "XXX". It may contain "_".
+#
 # Finally, the script removes the temporary file.
 #
 # This script will break badly if a secret contains an '@', since that
@@ -30,7 +33,7 @@ fi
 TMPFILE=`mktemp` || exit 1
 cp $1 $TMPFILE
 
-for TOKEN in $(grep XXX $TMPFILE |sed -e's/^[^X]*XXX_/XXX_/g' -e's/_XXX[^_]*$/_XXX/g'); do
+for TOKEN in $(grep -o 'XXX_[^ ]*_XXX' $TMPFILE); do
   eval "SECRET=\$$TOKEN"
   sed -i -e "s@$TOKEN@$SECRET@" $TMPFILE
 done

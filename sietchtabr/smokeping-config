@@ -143,6 +143,8 @@ title = EAU connectivity beacons
 host = localhost
 ++ ghola
 host = ghola.here
+++ qanat
+host = qanat.here
 ++ uplink
 host = 69.4.102.161
 ++ FSLY
