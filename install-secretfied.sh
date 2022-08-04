@@ -13,6 +13,9 @@
 # secret fetched by op. See .env files near the Makefiles for a mapping
 # of variable names to vault locations.
 #
+# The "SOMETHING" in XXX_SOMETHING_XXX must not contain whitespace or
+# "XXX". It may contain "_".
+#
 # Finally, the script removes the temporary file.
 #
 # This script will break badly if a secret contains an '@', since that
