@@ -30,7 +30,7 @@ fi
 TMPFILE=`mktemp` || exit 1
 cp $1 $TMPFILE
 
-for TOKEN in $(grep XXX $TMPFILE |sed -e's/^[^X]*XXX_/XXX_/g' -e's/_XXX[^_]*$/_XXX/g'); do
+for TOKEN in $(grep -o 'XXX_[^ ]*_XXX' $TMPFILE); do
   eval "SECRET=\$$TOKEN"
   sed -i -e "s@$TOKEN@$SECRET@" $TMPFILE
 done
