@@ -135,9 +135,9 @@ menu = Top
 title = Network Latency Grapher
 remark = Welcome to this SmokePing website.
 
-+ mysite1
-menu = EAU
-title = EAU connectivity beacons
++ mysite0
+menu = LAN
+title = Local Connectivity Beacons
 
 ++ localhost
 host = localhost
@@ -145,6 +145,31 @@ host = localhost
 host = ghola.here
 ++ qanat
 host = qanat.here
+++ ptpA
+host = ptpA.here
+++ ptpB
+host = ptpB.here
+++ wap1
+host = wap1.here
+++ wap2
+host = wap2.here
+++ wap3
+host = wap3.here
+++ wap4
+host = wap4.here
+++ wap5
+host = wap5.here
+++ wap6
+host = wap6.here
+++ wap7
+host = wap7.here
+
+
+
++ mysite1
+menu = EAU
+title = EAU connectivity beacons
+
 ++ uplink
 host = 69.4.102.161
 ++ FSLY
