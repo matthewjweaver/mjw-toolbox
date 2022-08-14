@@ -160,8 +160,10 @@ sietchtabr: \
 	  newsyslog.conf /etc/newsyslog.conf
 
 /etc/ntpd.conf : ntpd.conf
+	doas ntpd -nf ./ntpd.conf
 	doas install -o root -g wheel -m 0644 \
 	  ntpd.conf /etc/ntpd.conf
+	doas rcctl restart ntpd
 
 /etc/pf.conf : pf.conf /etc/pf.conf.lans /etc/pf.conf.lan-based-services /etc/pf.conf.vpns /etc/pf.sshbots /etc/rc.local
 	doas pfctl -nf pf.conf
