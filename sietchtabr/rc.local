@@ -1,2 +1,3 @@
-/sbin/pfctl -a promised_lan -f /etc/pf.conf.promised_lan
-/sbin/pfctl -a grahams -f /etc/pf.conf.grahams
+for ruleset in vpns lans lan-based-services; do
+  /sbin/pfctl -a ${ruleset} -f /etc/pf.conf.${ruleset}
+done
