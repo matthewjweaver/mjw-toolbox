@@ -1,9 +1,3 @@
-# XXX : You are doing LAN-hosted, externally available services next.
-# XXX : After that, modify the Makefile. Made need to cherry-pick
-# secrets management, non-doas targets, etc.
-# XXX : after that, overhaul rc.local
-# XXX : after that, testing
-
 # The Whole Yak: A modular-ish approach to pf configuration
 
 ## Overview
@@ -44,10 +38,10 @@
 Only essential rules are in the main pf.conf, along with a set of
 anchors for the other rules.
 
+After a pf.conf load, which should always work, router-based services
+(including ssh) are available.
+
 The additional rulesets are loaded via rc.local, after the network has
 otherwise spun up. Among other things, it means these rules may depend
 on hostname resolution.
-
-## Constraints
-
 
