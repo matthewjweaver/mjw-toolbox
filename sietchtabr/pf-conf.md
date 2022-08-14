@@ -1,3 +1,9 @@
+# XXX : You are doing LAN-hosted, externally available services next.
+# XXX : After that, modify the Makefile. Made need to cherry-pick
+# secrets management, non-doas targets, etc.
+# XXX : after that, overhaul rc.local
+# XXX : after that, testing
+
 # The Whole Yak: A modular-ish approach to pf configuration
 
 ## Overview
@@ -28,6 +34,9 @@
         1. GRE
     1. Wireguard
 1. LANs (loaded later)
+    1. Capture DNS
+    1. NAT outbound
+    1. Restrict traffic where needed
 1. LAN-based service endpoints (loaded later)
 
 ## How it works
