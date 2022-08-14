@@ -76,7 +76,7 @@ pass out log quick on em4 inet \
   proto icmp \
   from em4 \
   to em4:network \
-  icmp-type 8 code 0
+  icmp-type echoreq code 0
 pass out log quick on em4 inet \
   proto tcp \
   from em4 \
