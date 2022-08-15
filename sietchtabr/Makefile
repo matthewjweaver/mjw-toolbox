@@ -66,6 +66,7 @@ sietchtabr: \
 	  dhcpleased.conf /etc/dhcpleased.conf
 
 /etc/doas.conf : doas.conf
+	doas -C ./doas.conf
 	doas install -o root -g wheel -m 0600 \
 	  doas.conf /etc/doas.conf
 
