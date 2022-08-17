@@ -186,5 +186,5 @@ pass log quick on enc1 inet \
 
 # Out onto LAN
 pass out log quick on em5 inet \
-  from vpn.grahams.wtf \
+  from { vpn.grahams.wtf, 192.168.2.208 - 192.168.2.210 } \
   to ghola.here
