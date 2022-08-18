@@ -141,6 +141,8 @@ title = Local Connectivity Beacons
 
 ++ localhost
 host = localhost
+++ el-sayal
+host = el-sayal.here
 ++ ghola
 host = ghola.here
 ++ qanat
