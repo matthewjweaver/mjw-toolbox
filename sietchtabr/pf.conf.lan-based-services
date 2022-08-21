@@ -1,0 +1,20 @@
+########################################################################
+# sietchumbu's externally available services
+match in on em0 inet \
+  proto tcp \
+  from any \
+  to em0 port 24625 \
+  rdr-to sietchumbu.here port 32400
+pass in log quick on em0 inet \
+  proto tcp \
+  from any to sietchumbu.here port 32400
+
+match in on em0 inet \
+  proto { udp, tcp } \
+  from any \
+  to em0 port 55555 \
+  rdr-to sietchumbu.here
+pass in log quick on em0 inet \
+  proto { udp, tcp } \
+  from any \
+  to sietchumbu.here port 55555

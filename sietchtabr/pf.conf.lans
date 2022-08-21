@@ -1,0 +1,146 @@
+########################################################################
+# Home LAN (wifi, etc)
+# NAT outbound
+pass out log quick on em0 inet \
+  from { 192.168.223.21, 192.168.223.24 } \
+  nat-to (em0) static-port
+pass out log quick on em0 inet \
+  from em5:network \
+  nat-to (em0)
+pass out log quick on em0 inet6 \
+  from (em5:network) \
+  nat-to (em0)
+
+# Capture all DNS
+pass in log quick on em5 inet \
+  proto { tcp, udp } \
+  from any \
+  to any port { domain, domain-s } \
+  rdr-to em5
+pass in log quick on em5 inet6 \
+  proto { tcp, udp } \
+  from any \
+  to any port { domain, domain-s } \
+  rdr-to (em5)
+
+# Pass this LAN's outbound traffic
+pass in  log quick on em5 inet \
+  from em5:network to any
+pass in  log quick on em5 inet6 \
+  from (em5:network) to any
+
+# Pass traffic from the router to this LAN
+pass out log quick on em5 inet \
+  from em5 to em5:network
+pass out log quick on em5 inet6 \
+  from (em5) to (em5:network)
+
+# Pass multicast
+pass in  log quick on em5 inet \
+  from 224.0.0.0/24 to any
+pass out log quick on em5 inet \
+  from any to 224.0.0.0/24
+
+# Hack plex (XXX: confirm unneeded)
+#pass in  log on em5 inet \
+  #proto tcp \
+  #from any to em0 port 24625 \
+  #rdr-to sietchumbu.here port 32400
+#pass out log quick on em5 inet \
+  #proto tcp \
+  #to sietchumbu.here port 32400 \
+  #received-on em5 nat-to em5
+
+
+########################################################################
+# Haven LAN (OOB)
+# NAT outbound
+pass out log quick on em0 inet \
+  from em4:network \
+  nat-to (em0)
+
+# Pass a restricted set of outbound traffic from Haven
+pass in  log quick on em4 inet \
+  proto tcp \
+  from em4:network \
+  to any port { http, https, ssh, syslog-tls }
+
+# Pass a restricted set of traffic from the router and home LAN
+pass out log quick on em4 inet \
+  proto tcp \
+  from { em4, em5:network } \
+  to em4:network port { http, https, ssh, 4949 }
+
+# Pass monitoring traffic from router (munin, pings)
+pass out log quick on em4 inet \
+  proto icmp \
+  from em4 \
+  to em4:network \
+  icmp-type echoreq code 0
+pass out log quick on em4 inet \
+  proto tcp \
+  from em4 \
+  to em4:network port 4949
+
+
+########################################################################
+# Untrusted LAN (internet of shit)
+# NAT Outbound
+pass out log quick on em0 inet \
+  from vlan666:network \
+  nat-to (em0)
+
+# Capture DNS
+pass in log quick on vlan666 inet \
+  proto { tcp, udp } \
+  from any \
+  to any port { domain, domain-s } \
+  rdr-to vlan666
+pass in log quick on vlan666 inet6 \
+  proto { tcp, udp } \
+  from any \
+  to any port { domain, domain-s } \
+  rdr-to (vlan666)
+
+# Allow various media, zeroconf traffic
+pass in log quick on vlan666 inet \
+  proto { tcp, udp } \
+  from vlan666:network \
+  to any port { daap, ssdp, 5350, 5351, mdns, 49152:65535 }
+pass out log quick on vlan666 inet \
+  proto { tcp, udp } \
+  from any \
+  to vlan666:network port { daap, ssdp, 5350, 5351, mdns, 49152:65535 }
+
+# Permit outbound http and https
+pass in  log quick on vlan666 inet \
+  proto tcp \
+  from vlan666:network \
+  to any port { https, www } keep state
+
+# Permit http and https from router, lans
+pass out log quick on vlan666 inet \
+  proto tcp \
+  from { vlan666, em5, em5:network } \
+  to vlan666:network \
+  port { https, www }
+
+# Pass multicast UDP
+pass log quick on vlan666 inet \
+  proto udp \
+  from 224.0.0.0/24 \
+  to any
+pass log quick on vlan666 inet \
+  proto udp \
+  from any \
+  to 224.0.0.0/24
+
+# Pass outbound traffic only
+pass in  log quick on vlan666 inet \
+  from vlan666:network \
+  to ! em5:network
+
+# Pass traffic from router
+pass out log quick on vlan666 inet \
+  from vlan666 \
+  to vlan666:network 

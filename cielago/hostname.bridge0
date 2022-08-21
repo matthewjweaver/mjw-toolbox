@@ -1,9 +1,4 @@
 add em0
 add em1
 blocknonip em0
-rule block in on em0 arp reply spa 72.83.160.18
-rule block in on em0 arp reply spa 72.83.160.19
-rule block in on em0 arp reply spa 72.83.160.20
-rule block in on em0 arp reply spa 72.83.160.21
-rule block in on em0 arp reply spa 72.83.160.22
 up

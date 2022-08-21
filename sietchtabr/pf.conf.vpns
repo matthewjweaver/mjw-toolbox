@@ -1,0 +1,190 @@
+########################################################################
+# Clown VPN
+nodeless="{ \
+  sietchtabr.nodeless.net, \
+  korba.nodeless.net, \
+  hq.layeraleph.com }"
+
+# IPSEC
+pass in  log quick on em0 inet \
+  proto esp \
+  from $nodeless to (em0)
+pass in  log quick on em0 inet6 \
+  proto esp \
+  from $nodeless to (em0)
+pass out log quick on em0 inet \
+  proto esp \
+  from (em0) to $nodeless
+pass out log quick on em0 inet6 \
+  proto esp \
+  from (em0) to $nodeless
+
+# IKEv2, NAT traversal
+pass in  log quick on em0 inet \
+  proto udp \
+  from $nodeless to (em0) \
+  port { ipsec-nat-t, isakmp, 22713 } \
+  keep state
+pass in  log quick on em0 inet6 \
+  proto udp \
+  from $nodeless to (em0) \
+  port { ipsec-nat-t, isakmp, 22713 } \
+  keep state
+pass out log quick on em0 inet \
+  proto udp \
+  from (em0) to $nodeless \
+  port { ipsec-nat-t, isakmp, 22713 } \
+  keep state
+pass out log quick on em0 inet6 \
+  proto udp \
+  from (em0) to $nodeless \
+  port { ipsec-nat-t, isakmp, 22713 } \
+  keep state
+
+# Wireguard (fixed random port, 22713)
+pass in  log quick on em0 inet \
+  proto udp \
+  from $nodeless to (em0) \
+  port 22713 \
+  keep state
+pass in  log quick on em0 inet6 \
+  proto udp \
+  from $nodeless to (em0) \
+  port 22713 \
+  keep state
+pass out log quick on em0 inet \
+  proto udp \
+  from (em0) to $nodeless \
+  port 22713 \
+  keep state
+pass out log quick on em0 inet6 \
+  proto udp \
+  from (em0) to $nodeless \
+  port 22713 \
+  keep state
+pass in  log on wg1 inet \
+  from 192.168.221.0/24 to any \
+  keep state
+pass out log on wg1 inet \
+  from any to 192.168.221.0/24 \
+  keep state
+
+
+########################################################################
+# The Promised Lan VPN
+# XXX: make ipv6 work
+promised_lan_routers="{ bb3.nodeless.net }"
+
+# IPSEC
+pass in  log quick on em0 inet \
+  proto esp \
+  from $promised_lan_routers \
+  to (em0)
+#pass in  log quick on em0 inet6 \
+  #proto esp \
+  #from $promised_lan_routers \
+  #to (em0) 
+pass out log quick on em0 inet \
+  proto esp \
+  from (em0) \
+  to $promised_lan_routers
+#pass out log quick on em0 inet6 \
+  #proto esp \
+  #from (em0) \
+  #to $promised_lan_routers
+
+# IKEv2, NAT traversal
+pass in  log quick on em0 inet \
+  proto udp \
+  from $promised_lan_routers \
+  to (em0) \
+  port { ipsec-nat-t, isakmp } keep state
+#pass in  log quick on em0 inet6 \
+  #proto udp \
+  #from $promised_lan_routers \
+  #to (em0) \
+  #port { ipsec-nat-t, isakmp } keep state
+pass out log quick on em0 inet \
+  proto udp \
+  from (em0) \
+  to $promised_lan_routers \
+  port { ipsec-nat-t, isakmp } keep state
+#pass out log quick on em0 inet6 \
+  #proto udp \
+  #from (em0) \
+  #to $promised_lan_routers \
+  #port { ipsec-nat-t, isakmp } keep state
+
+# Safety: drop all other traffic between TPL routers
+block out log quick on em0 \
+  from (em0) \
+  to $promised_lan_routers
+block in  log quick on em0 \
+  from $promised_lan_routers \
+  to (em0)
+
+# Tunneled Traffic
+pass log quick on enc2
+
+
+########################################################################
+# Grahams VPN
+# XXX: make ipv6 work
+
+# ICMP pings
+pass in log on em0 inet \
+  proto icmp \
+  from vpn.grahams.wtf to (em0) \
+  icmp-type echoreq code 0 keep state
+#pass in log on em0 inet6 \
+  #proto icmp6 \
+  #from vpn.grahams.wtf to (em0) \
+  #icmp6-type { echoreq }
+
+# IPSEC
+pass in  log quick on em0 inet \
+  proto esp \
+  from vpn.grahams.wtf to (em0)
+#pass in  log quick on em0 inet6 \
+  #proto esp \
+  #from vpn.grahams.wtf to (em0)
+pass out log quick on em0 inet \
+  proto esp \
+  from (em0) to vpn.grahams.wtf
+#pass out log quick on em0 inet6 \
+  #proto esp \
+  #from (em0) to vpn.grahams.wtf
+
+# IKEv2, NAT traversal
+pass in  log quick on em0 inet \
+  proto udp \
+  from vpn.grahams.wtf to (em0) \
+  port { ipsec-nat-t, isakmp } keep state
+#pass in  log quick on em0 inet6 \
+  #proto udp \
+  #from vpn.grahams.wtf to (em0) \
+  #port { ipsec-nat-t, isakmp } keep state
+pass out log quick on em0 inet \
+  proto udp \
+  from (em0) to vpn.grahams.wtf \
+  port { ipsec-nat-t, isakmp } keep state
+#pass out log quick on em0 inet6 \
+  #proto udp \
+  #from (em0) to vpn.grahams.wtf \
+  #port { ipsec-nat-t, isakmp } keep state
+
+# Tunneled Traffic
+pass log quick on enc1 inet \
+  from { ghola.here, vpn.grahams.wtf, 192.168.2.0/24 } \
+  to   { ghola.here, vpn.grahams.wtf, 192.168.2.0/24 }
+pass log quick on enc1 inet \
+  from { sietchtabr.nodeless.net, taqwa.here } \
+  to kulon.nodeless.net
+pass log quick on enc1 inet \
+  from { sietchtabr.nodeless.net, sietchumbu.here, vpn.grahams.wtf, 192.168.2.208 - 192.168.2.210 } \
+  to   { sietchtabr.nodeless.net, sietchumbu.here, vpn.grahams.wtf, 192.168.2.208 - 192.168.2.210 }
+
+# Out onto LAN
+pass out log quick on em5 inet \
+  from { vpn.grahams.wtf, 192.168.2.208 - 192.168.2.210 } \
+  to ghola.here

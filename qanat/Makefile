@@ -36,8 +36,10 @@ qanat: \
 	munin-node.conf /etc/munin/munin-node.conf
 
 /etc/ntpd.conf : ntpd.conf
+	doas ntpd -nf ./ntpd.conf
 	doas install -o root -g wheel -m 0644 \
 	  ntpd.conf /etc/ntpd.conf
+	doas rcctl restart ntpd
 
 /etc/pf.conf : pf.conf /etc/pf.sshbots
 	doas pfctl -nf pf.conf

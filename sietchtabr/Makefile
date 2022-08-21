@@ -24,8 +24,9 @@ sietchtabr: \
   /etc/newsyslog.conf \
   /etc/ntpd.conf \
   /etc/pf.conf \
-  /etc/pf.conf.grahams \
-  /etc/pf.conf.promised_lan \
+  /etc/pf.conf.vpns \
+  /etc/pf.conf.lans \
+  /etc/pf.conf.lan-based-services \
   /etc/pf.sshbots \
   /etc/pfstat.conf \
   /etc/rad.conf \
@@ -65,6 +66,7 @@ sietchtabr: \
 	  dhcpleased.conf /etc/dhcpleased.conf
 
 /etc/doas.conf : doas.conf
+	doas -C ./doas.conf
 	doas install -o root -g wheel -m 0600 \
 	  doas.conf /etc/doas.conf
 
@@ -159,24 +161,31 @@ sietchtabr: \
 	  newsyslog.conf /etc/newsyslog.conf
 
 /etc/ntpd.conf : ntpd.conf
+	doas ntpd -nf ./ntpd.conf
 	doas install -o root -g wheel -m 0644 \
 	  ntpd.conf /etc/ntpd.conf
+	doas rcctl restart ntpd
 
-/etc/pf.conf : pf.conf /etc/pf.sshbots /etc/pf.conf.promised_lan /etc/pf.conf.grahams /etc/rc.local
+/etc/pf.conf : pf.conf /etc/pf.conf.lans /etc/pf.conf.lan-based-services /etc/pf.conf.vpns /etc/pf.sshbots /etc/rc.local
 	doas pfctl -nf pf.conf
 	doas install -o root -g wheel -m 0600 \
 	  pf.conf /etc/pf.conf
 	doas pfctl -f /etc/pf.conf && doas sh /etc/rc.local
 
-/etc/pf.conf.grahams : pf.conf.grahams
-	doas pfctl -nf pf.conf.grahams
+/etc/pf.conf.lans : pf.conf.lans
+	doas pfctl -nf pf.conf.lans
 	doas install -o root -g wheel -m 0600 \
-	  pf.conf.grahams /etc/pf.conf.grahams
+	  pf.conf.lans /etc/pf.conf.lans
 
-/etc/pf.conf.promised_lan : pf.conf.promised_lan
-	doas pfctl -nf pf.conf.promised_lan
+/etc/pf.conf.lan-based-services : pf.conf.lan-based-services
+	doas pfctl -nf pf.conf.lan-based-services
 	doas install -o root -g wheel -m 0600 \
-	  pf.conf.promised_lan /etc/pf.conf.promised_lan
+	  pf.conf.lan-based-services /etc/pf.conf.lan-based-services
+
+/etc/pf.conf.vpns : pf.conf.vpns
+	doas pfctl -nf pf.conf.vpns
+	doas install -o root -g wheel -m 0600 \
+	  pf.conf.vpns /etc/pf.conf.vpns
 
 /etc/pf.sshbots : ../openbsd-skel/pf.sshbots
 	doas install -o root -g wheel -m 0640 \
