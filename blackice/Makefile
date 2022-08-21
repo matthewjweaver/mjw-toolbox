@@ -146,6 +146,10 @@ blackice: \
 /etc/smokeping/config : smokeping-config
 	doas install -o root -g wheel -m 0644 \
 	  smokeping-config /etc/smokeping/config
+	@if ! rcctl ls on | grep smokeping > /dev/null; then doas rcctl enable smokeping; fi
+	@if ! rcctl ls started | grep smokeping > /dev/null; then doas rcctl start smokeping; fi
+	@if ! rcctl ls on | grep smokeping_fcgi > /dev/null; then doas rcctl enable smokeping_fcgi; fi
+	@if ! rcctl ls started | grep smokeping_fcgi > /dev/null; then doas rcctl start smokeping_fcgi; fi
 
 /etc/ssh/ssh_config : ssh_config
 	doas install -o root -g wheel -m 0644 \
