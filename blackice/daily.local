@@ -1,4 +1,0 @@
-# renew letsencrypt certs as necessary
-for DOMAIN in blackice.grahams.wtf; do
-  acme-client ${DOMAIN} && rcctl reload httpd
-done

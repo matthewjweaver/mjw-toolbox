@@ -1,1 +1,0 @@
-inet 192.168.106.1 255.255.255.0 NONE vlan 106 vlandev em1

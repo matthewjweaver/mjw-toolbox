@@ -1,6 +1,0 @@
-dhcpd_flags=
-iked_flags=
-ntpd_flags=-s
-pkg_scripts=messagebus upsmon telegraf
-unbound_flags=
-resolvd_flags=NO

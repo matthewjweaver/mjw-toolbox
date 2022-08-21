@@ -1,1 +1,0 @@
-inet 192.168.13.1 255.255.255.0 NONE vlan 13 vlandev em1
