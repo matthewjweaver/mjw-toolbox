@@ -181,10 +181,10 @@ pass log quick on enc1 inet \
   from { sietchtabr.nodeless.net, taqwa.here } \
   to kulon.nodeless.net
 pass log quick on enc1 inet \
-  from { sietchtabr.nodeless.net, sietchumbu.here, vpn.grahams.wtf, 192.168.2.208 - 192.168.2.210 } \
-  to   { sietchtabr.nodeless.net, sietchumbu.here, vpn.grahams.wtf, 192.168.2.208 - 192.168.2.210 }
+  from { sietchtabr.nodeless.net, sietchumbu.here, vpn.grahams.wtf, 192.168.2.42, 192.168.2.242, 192.168.2.208 - 192.168.2.210 } \
+  to   { sietchtabr.nodeless.net, sietchumbu.here, vpn.grahams.wtf, 192.168.2.42, 192.168.2.242, 192.168.2.208 - 192.168.2.210 }
 
 # Out onto LAN
 pass out log quick on em5 inet \
-  from { vpn.grahams.wtf, 192.168.2.208 - 192.168.2.210 } \
+  from { vpn.grahams.wtf, 192.168.2.42, 192.168.2.242, 192.168.2.208 - 192.168.2.210 } \
   to ghola.here
