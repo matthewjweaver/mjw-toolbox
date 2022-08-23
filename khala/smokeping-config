@@ -173,3 +173,10 @@ host = korba.nodeless.net
 ++ hq
 host = hq.layeraleph.com
 
++ mysite4
+menu = community
+title = community beacons
+
+++ live365
+host = ingest.live365.com
+
