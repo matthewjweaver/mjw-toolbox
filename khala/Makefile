@@ -1,6 +1,8 @@
 cielago: \
+  /etc/dhcpcd.conf \
   /etc/dhcpleased.conf \
   /etc/doas.conf \
+  /etc/hostname.athn0 \
   /etc/hostname.em0 \
   /etc/hostname.em2 \
   /etc/httpd.conf \
@@ -14,6 +16,10 @@ cielago: \
   /etc/ssh/sshd_config \
   /etc/sysctl.conf \
 
+/etc/dhcpcd.conf : dhcpcd.conf
+	doas install -o root -g wheel -m 0644 \
+	  dhcpcd.conf /etc/dhcpcd.conf
+
 /etc/dhcpleased.conf : dhcpleased.conf
 	dhcpleased -nf dhcpleased.conf
 	install -o root -g wheel -m 0640 \
@@ -22,6 +28,13 @@ cielago: \
 /etc/doas.conf : ../openbsd-skel/doas.conf
 	install -o root -g wheel -m 0600 \
 	  ../openbsd-skel/doas.conf /etc/doas.conf
+
+/etc/hostname.athn0 : hostname.athn0
+	~/bin/op run --env-file=.env -- \
+	  sh ../install-secretfied.sh \
+	    hostname.athn0 \
+	    "-o root -g wheel -m 0640" \
+	    /etc/hostname.athn0
 
 /etc/hostname.em0 : hostname.em0
 	install -o root -g wheel -m 0640 \
