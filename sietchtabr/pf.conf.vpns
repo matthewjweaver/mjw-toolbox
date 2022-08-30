@@ -126,6 +126,47 @@ block in  log quick on em0 \
 # Tunneled Traffic
 pass log quick on enc2
 
+########################################################################
+# khala (LEO) VPN
+# XXX: move to ipv6 once spacex gets its shit together
+# Starlink IP address blocks per ARIN
+# SpaceX Services, Inc. SPACEX-STARLINK-IPV4-03 (NET-98-97-0-0-1) 98.97.0.0 - 98.97.127.255
+# SpaceX Services, Inc. NET-SUB-98-97-9-0 (NET-98-97-9-0-1) 98.97.9.0 - 98.97.9.255
+# khala itself gets a "carrier grade" NAT address in 100.64.0.0/10
+
+
+# IPSEC
+pass in  log quick on em0 inet \
+  proto esp \
+  from { 98.97.0.0/15, 98.97.9.0/24 } to (em0)
+pass in  log quick on em0 inet \
+  proto esp \
+  from (em0) to { 98.97.0.0/15, 98.97.9.0/24 }
+
+# IKEv2, NAT traversal
+pass in  log quick on em0 inet \
+  proto udp \
+  from { 98.97.0.0/15, 98.97.9.0/24 } to (em0) \
+  port { ipsec-nat-t, isakmp } keep state
+pass out log quick on em0 inet \
+  proto udp \
+  from (em0) to { 98.97.0.0/15, 98.97.9.0/24 } \
+  port { ipsec-nat-t, isakmp } keep state
+
+# Tunneled Traffic
+pass log quick on enc3 inet \
+  from { 100.64.0.0/10, 98.97.0.0/15, 98.97.9.0/24, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24 } \
+  to   { 100.64.0.0/10, 98.97.0.0/15, 98.97.9.0/24, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24 }
+pass in log on em0 inet \
+  proto icmp \
+  from { 100.64.0.0/10, 98.97.0.0/15, 98.97.9.0/24, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24 } \
+  to (em0) \
+  icmp-type echoreq code 0 keep state
+
+# Out onto LAN
+pass out log quick on em5 inet \
+  from { 100.64.0.0/10, 98.97.0.0/15, 98.97.9.0/24, 192.168.25.0/24 } \
+  to 192.168.223.0/24
 
 ########################################################################
 # Grahams VPN
@@ -181,10 +222,10 @@ pass log quick on enc1 inet \
   from { sietchtabr.nodeless.net, taqwa.here } \
   to kulon.nodeless.net
 pass log quick on enc1 inet \
-  from { sietchtabr.nodeless.net, sietchumbu.here, vpn.grahams.wtf, 192.168.2.42, 192.168.2.242, 192.168.2.208 - 192.168.2.210 } \
-  to   { sietchtabr.nodeless.net, sietchumbu.here, vpn.grahams.wtf, 192.168.2.42, 192.168.2.242, 192.168.2.208 - 192.168.2.210 }
+  from { sietchtabr.nodeless.net, sietchumbu.here, vpn.grahams.wtf, 192.168.2.1, 192.168.2.42, 192.168.2.208 - 192.168.2.210, 192.168.2.242 } \
+  to   { sietchtabr.nodeless.net, sietchumbu.here, vpn.grahams.wtf, 192.168.2.1, 192.168.2.42, 192.168.2.208 - 192.168.2.210, 192.168.2.242 }
 
 # Out onto LAN
 pass out log quick on em5 inet \
-  from { vpn.grahams.wtf, 192.168.2.42, 192.168.2.242, 192.168.2.208 - 192.168.2.210 } \
-  to ghola.here
+  from { vpn.grahams.wtf, 192.168.2.1, 192.168.2.42, 192.168.2.208 - 192.168.2.210, 192.168.2.242 } \
+  to { ghola.here, sietchumbu.here }
