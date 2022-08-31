@@ -9,6 +9,7 @@ sietchtabr: \
   /etc/hostname.em5 \
   /etc/hostname.enc1 \
   /etc/hostname.enc2 \
+  /etc/hostname.enc3 \
   /etc/hostname.gre0 \
   /etc/hostname.pflow0 \
   /etc/hostname.wg1 \
@@ -101,6 +102,10 @@ sietchtabr: \
 /etc/hostname.enc2 : hostname.enc2
 	doas install -o root -g wheel -m 0640 \
 	  hostname.enc2 /etc/hostname.enc2
+
+/etc/hostname.enc3 : hostname.enc3
+	doas install -o root -g wheel -m 0640 \
+	  hostname.enc3 /etc/hostname.enc3
 
 /etc/hostname.gre0 : hostname.gre0
 	doas install -o root -g wheel -m 0640 \
