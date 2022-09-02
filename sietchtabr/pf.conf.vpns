@@ -23,51 +23,41 @@ pass out log quick on em0 inet6 \
 pass in  log quick on em0 inet \
   proto udp \
   from $nodeless to (em0) \
-  port { ipsec-nat-t, isakmp, 22713 } \
-  keep state
+  port { ipsec-nat-t, isakmp, 22713 }
 pass in  log quick on em0 inet6 \
   proto udp \
   from $nodeless to (em0) \
-  port { ipsec-nat-t, isakmp, 22713 } \
-  keep state
+  port { ipsec-nat-t, isakmp, 22713 }
 pass out log quick on em0 inet \
   proto udp \
   from (em0) to $nodeless \
-  port { ipsec-nat-t, isakmp, 22713 } \
-  keep state
+  port { ipsec-nat-t, isakmp, 22713 }
 pass out log quick on em0 inet6 \
   proto udp \
   from (em0) to $nodeless \
-  port { ipsec-nat-t, isakmp, 22713 } \
-  keep state
+  port { ipsec-nat-t, isakmp, 22713 }
 
 # Wireguard (fixed random port, 22713)
 pass in  log quick on em0 inet \
   proto udp \
   from $nodeless to (em0) \
-  port 22713 \
-  keep state
+  port 22713
 pass in  log quick on em0 inet6 \
   proto udp \
   from $nodeless to (em0) \
-  port 22713 \
-  keep state
+  port 22713
 pass out log quick on em0 inet \
   proto udp \
   from (em0) to $nodeless \
-  port 22713 \
-  keep state
+  port 22713
 pass out log quick on em0 inet6 \
   proto udp \
   from (em0) to $nodeless \
-  port 22713 \
-  keep state
+  port 22713
 pass in  log on wg1 inet \
-  from 192.168.221.0/24 to any \
-  keep state
+  from 192.168.221.0/24 to any
 pass out log on wg1 inet \
-  from any to 192.168.221.0/24 \
-  keep state
+  from any to 192.168.221.0/24
 
 
 ########################################################################
@@ -132,40 +122,53 @@ pass log quick on enc2
 # Starlink IP address blocks per ARIN
 # SpaceX Services, Inc. SPACEX-STARLINK-IPV4-03 (NET-98-97-0-0-1) 98.97.0.0 - 98.97.127.255
 # SpaceX Services, Inc. NET-SUB-98-97-9-0 (NET-98-97-9-0-1) 98.97.9.0 - 98.97.9.255
+# SpaceX Services, Inc. SPACEX-STARLINK-IPV4 (NET-129-222-0-0-1) 129.222.0.0 - 129.222.255.255
 # khala itself gets a "carrier grade" NAT address in 100.64.0.0/10
 
+starlink="{ 98.97.0.0/15, 98.97.9.0/24, 129.222.0.0/16 }"
 
 # IPSEC
 pass in  log quick on em0 inet \
   proto esp \
-  from { 98.97.0.0/15, 98.97.9.0/24 } to (em0)
+  from $starlink to (em0)
 pass in  log quick on em0 inet \
   proto esp \
-  from (em0) to { 98.97.0.0/15, 98.97.9.0/24 }
+  from (em0) to $starlink
 
 # IKEv2, NAT traversal
 pass in  log quick on em0 inet \
   proto udp \
-  from { 98.97.0.0/15, 98.97.9.0/24 } to (em0) \
+  from $starlink to (em0) \
   port { ipsec-nat-t, isakmp } keep state
 pass out log quick on em0 inet \
   proto udp \
-  from (em0) to { 98.97.0.0/15, 98.97.9.0/24 } \
+  from (em0) to $starlink \
   port { ipsec-nat-t, isakmp } keep state
 
 # Tunneled Traffic
 pass log quick on enc3 inet \
-  from { 100.64.0.0/10, 98.97.0.0/15, 98.97.9.0/24, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24 } \
-  to   { 100.64.0.0/10, 98.97.0.0/15, 98.97.9.0/24, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24 }
+  from $starlink \
+  to   { 100.64.0.0/10, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24 }
+pass log quick on enc3 inet \
+  from { 100.64.0.0/10, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24 } \
+  to   $starlink
 pass in log on em0 inet \
   proto icmp \
-  from { 100.64.0.0/10, 98.97.0.0/15, 98.97.9.0/24, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24 } \
+  from $starlink \
+  to (em0) \
+  icmp-type echoreq code 0 keep state
+pass in log on em0 inet \
+  proto icmp \
+  from { 100.64.0.0/10, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24 } \
   to (em0) \
   icmp-type echoreq code 0 keep state
 
 # Out onto LAN
 pass out log quick on em5 inet \
-  from { 100.64.0.0/10, 98.97.0.0/15, 98.97.9.0/24, 192.168.25.0/24 } \
+  from $starlink \
+  to 192.168.223.0/24
+pass out log quick on em5 inet \
+  from { 100.64.0.0/10, 192.168.25.0/24 } \
   to 192.168.223.0/24
 
 ########################################################################
