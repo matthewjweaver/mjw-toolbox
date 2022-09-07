@@ -152,6 +152,9 @@ pass log quick on enc3 inet \
 pass log quick on enc3 inet \
   from { 100.64.0.0/10, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24 } \
   to   $starlink
+pass log quick on enc3 inet \
+  from { 100.64.0.0/10, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24 } \
+  to   { 100.64.0.0/10, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24 }
 pass in log on em0 inet \
   proto icmp \
   from $starlink \
