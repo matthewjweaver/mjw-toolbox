@@ -1,17 +1,19 @@
 #!/bin/sh
 set -e
-for uh in $(cat /home/sysop/.nodeless ); do
+user_hosts=$( grep -v '^#' /home/sysop/.nodeless )
+
+for uh in $user_hosts; do
   ssh ${uh} hostname;
 done
-for uh in $(cat /home/sysop/.nodeless ); do
+for uh in $user_hosts; do
   ssh ${uh} "doas syspatch; doas pkg_add -u; if grep -q opendnssec /etc/group; then doas chown _opendnssec /var/nsd/zones/master; fi" &
 done;
 wait
-for uh in $(cat /home/sysop/.nodeless ); do
+for uh in $user_hosts; do
   ssh ${uh} "if [ -d /var/nsd/zones/master ]; then doas ls -la /var/nsd/zones/master; fi";
 done
 echo "press enter to continue" ; read trash
-for uh in $(cat /home/sysop/.nodeless ); do
+for uh in $user_hosts; do
   ssh ${uh} mail
 done
 tail -80 /var/log/daemon | less
