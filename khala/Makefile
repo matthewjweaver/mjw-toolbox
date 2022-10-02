@@ -1,5 +1,6 @@
 khala: \
   /etc/dhcpcd.conf \
+  /etc/dhcpd.conf \
   /etc/dhcpleased.conf \
   /etc/doas.conf \
   /etc/hostname.athn0 \
@@ -21,6 +22,10 @@ khala: \
 /etc/dhcpcd.conf : dhcpcd.conf
 	doas install -o root -g wheel -m 0644 \
 	  dhcpcd.conf /etc/dhcpcd.conf
+
+/etc/dhcpd.conf : dhcpd.conf
+	doas install -o root -g wheel -m 0644 \
+	  dhcpd.conf /etc/dhcpd.conf
 
 /etc/dhcpleased.conf : dhcpleased.conf
 	doas dhcpleased -nf dhcpleased.conf
