@@ -153,8 +153,8 @@ pass log quick on enc3 inet \
   from { 100.64.0.0/10, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24 } \
   to   $starlink
 pass log quick on enc3 inet \
-  from { 100.64.0.0/10, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24 } \
-  to   { 100.64.0.0/10, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24 }
+  from { 100.64.0.0/10, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24, 10.42.0.0/16 } \
+  to   { 100.64.0.0/10, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24, 10.42.0.0/16 }
 pass in log on em0 inet \
   proto icmp \
   from $starlink \
@@ -173,6 +173,10 @@ pass out log quick on em5 inet \
 pass out log quick on em5 inet \
   from { 100.64.0.0/10, 192.168.25.0/24 } \
   to 192.168.223.0/24
+pass out log quick on vlan42 inet \
+  from 10.42.1.128/25 \
+  to  10.42.1.0/25
+
 
 ########################################################################
 # Grahams VPN
