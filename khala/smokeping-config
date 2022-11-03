@@ -162,7 +162,7 @@ menu = nodeless
 title = land-based connectivity beacons
 
 ++ sietchtabr
-host = sietchtabr.nodeless.net
+host = 192.168.223.1
 
 + mysite3
 menu = the clown

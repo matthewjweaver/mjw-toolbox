@@ -1,0 +1,50 @@
+# TODO(weaver) : update block lists.
+# doas grep "invalid user" /var/log/authlog| \
+# sed -e's/.*invalid user [^ ]* //g' -e's/ port.*//g'| \
+# sed -e's/[^0123456789.]//g'|sort -n|uniq>/tmp/t
+# then combine with /etc/pf.sshbots
+
+# update unbound blacklists
+
+# Available blocklists - comment line to disable blocklist
+#_malwaredom="https://mirror1.malwaredomains.com/files/justdomains"
+_stevenblack="https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling/hosts"
+
+# Global variables
+_tmpfile="$(mktemp)" && echo '' > $_tmpfile
+_unboundconf="/var/unbound/etc/unbound-blacklist.conf"
+
+# Remove comments from blocklist
+function simpleParse {
+  ftp -VMo - $1 | \
+  sed -e 's/#.*$//' -e '/^[[:space:]]*$/d' >> $2
+}
+
+# Parse MalwareDom
+[[ -n ${_malwaredom+x} ]] && simpleParse $_malwaredom $_tmpfile
+
+# Parse StevenBlack
+[[ -n ${_stevenblack+x} ]] && \
+  ftp -VMo - $_stevenblack | \
+  sed -n '/Start/,$p' | \
+  sed -e 's/#.*$//' -e '/^[[:space:]]*$/d' | \
+  awk '/^0.0.0.0/ { print $2 }' >> $_tmpfile
+
+# ALLOW LIST HERE
+# Create unbound(8) local zone file
+sort -fu $_tmpfile | grep -v "^[[:space:]]*$" | \
+fgrep -v files.slack.com | \
+awk '{
+  print "local-zone: \"" $1 "\" redirect"
+  print "local-data: \"" $1 " A 0.0.0.0\""
+}' > $_unboundconf && rm -f $_tmpfile
+
+# Reload unbound(8) blocklist
+f=$(mktemp -t)
+doas -u _unbound unbound-control dump_cache > ${f}
+doas -u _unbound unbound-checkconf 2>&1 | \
+  logger -t daily.local -p daemon.notice && \
+doas -u _unbound unbound-control reload 2>&1 | \
+  logger -t daily.local -p daemon.notice
+doas -u _unbound unbound-control load_cache < ${f} 2>&1 > /dev/null
+rm ${f}
