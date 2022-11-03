@@ -9,8 +9,7 @@ export PKG_PATH="https://cdn.openbsd.org/%m/"
 umask 027
 
 if [ -n $SSH_AUTH_SOCK ]; then 
-  set|grep SSH_AUTH_SOCK|sed -e's/^/export /'|tee ~/.ssha;
-  alias ssha=". ~/.ssha"
+  ln -sf $SSH_AUTH_SOCK ~/.ssha
 fi
 
 if groups | grep -q wheel; then
