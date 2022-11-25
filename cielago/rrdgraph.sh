@@ -37,6 +37,7 @@ bps_graph() {
   RRD_CMD="${RRD_CMD} DEF:dns-B-in=/var/db/rrd/em0-53-in.rrd:bytes_in:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:http-B-in=/var/db/rrd/em0-80-in.rrd:bytes_in:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:https-B-in=/var/db/rrd/em0-443-in.rrd:bytes_in:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:esp-B-in=/var/db/rrd/em0-esp-in.rrd:bytes_in:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:other-B-in=/var/db/rrd/em0-other-in.rrd:bytes_in:AVERAGE"
 
   # bytes, out
@@ -45,6 +46,7 @@ bps_graph() {
   RRD_CMD="${RRD_CMD} DEF:dns-B-out=/var/db/rrd/em0-53-out.rrd:bytes_out:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:http-B-out=/var/db/rrd/em0-80-out.rrd:bytes_out:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:https-B-out=/var/db/rrd/em0-443-out.rrd:bytes_out:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:esp-B-out=/var/db/rrd/em0-esp-out.rrd:bytes_out:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:other-B-out=/var/db/rrd/em0-other-out.rrd:bytes_out:AVERAGE"
 
   # bps in, made negative so it will graph "down"
@@ -53,6 +55,7 @@ bps_graph() {
   RRD_CMD="${RRD_CMD} CDEF:dns-b-in=0,dns-B-in,-,8,*"
   RRD_CMD="${RRD_CMD} CDEF:http-b-in=0,http-B-in,-,8,*"
   RRD_CMD="${RRD_CMD} CDEF:https-b-in=0,https-B-in,-,8,*"
+  RRD_CMD="${RRD_CMD} CDEF:esp-b-in=0,esp-B-in,-,8,*"
   RRD_CMD="${RRD_CMD} CDEF:other-b-in=0,other-B-in,-,8,*"
   
   # bps out
@@ -61,6 +64,7 @@ bps_graph() {
   RRD_CMD="${RRD_CMD} CDEF:dns-b-out=dns-B-out,8,*"
   RRD_CMD="${RRD_CMD} CDEF:http-b-out=http-B-out,8,*"
   RRD_CMD="${RRD_CMD} CDEF:https-b-out=https-B-out,8,*"
+  RRD_CMD="${RRD_CMD} CDEF:esp-b-out=esp-B-out,8,*"
   RRD_CMD="${RRD_CMD} CDEF:other-b-out=other-B-out,8,*"
   
   # graph bandwidth in
@@ -69,6 +73,7 @@ bps_graph() {
   RRD_CMD="${RRD_CMD} AREA:dns-b-in${blue}:dns_bps:STACK"
   RRD_CMD="${RRD_CMD} AREA:http-b-in${red}:http_bps:STACK"
   RRD_CMD="${RRD_CMD} AREA:https-b-in${magenta}:https_bps:STACK"
+  RRD_CMD="${RRD_CMD} AREA:esp-b-in${violet}:esp_bps:STACK"
   RRD_CMD="${RRD_CMD} AREA:other-b-in${cyan}:other_bps:STACK"
   
   # graph bandwidth out (no legend for these, same colors as above)
@@ -77,6 +82,7 @@ bps_graph() {
   RRD_CMD="${RRD_CMD} AREA:dns-b-out${blue}::STACK"
   RRD_CMD="${RRD_CMD} AREA:http-b-out${red}::STACK"
   RRD_CMD="${RRD_CMD} AREA:https-b-out${magenta}::STACK"
+  RRD_CMD="${RRD_CMD} AREA:esp-b-out${violet}::STACK"
   RRD_CMD="${RRD_CMD} AREA:other-b-out${cyan}::STACK"
 
   doas nice $RRD_CMD > /dev/null
@@ -91,6 +97,7 @@ pps_graph() {
   RRD_CMD="${RRD_CMD} DEF:dns-p-in=/var/db/rrd/em0-53-in.rrd:packets_in:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:http-p-in=/var/db/rrd/em0-80-in.rrd:packets_in:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:https-p-in=/var/db/rrd/em0-443-in.rrd:packets_in:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:esp-p-in=/var/db/rrd/em0-esp-in.rrd:packets_in:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:other-p-in=/var/db/rrd/em0-other-in.rrd:packets_in:AVERAGE"
 
   # packets, out
@@ -99,6 +106,7 @@ pps_graph() {
   RRD_CMD="${RRD_CMD} DEF:dns-pps-out=/var/db/rrd/em0-53-out.rrd:packets_out:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:http-pps-out=/var/db/rrd/em0-80-out.rrd:packets_out:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:https-pps-out=/var/db/rrd/em0-443-out.rrd:packets_out:AVERAGE"
+  RRD_CMD="${RRD_CMD} DEF:esp-pps-out=/var/db/rrd/em0-esp-out.rrd:packets_out:AVERAGE"
   RRD_CMD="${RRD_CMD} DEF:other-pps-out=/var/db/rrd/em0-other-out.rrd:packets_out:AVERAGE"
 
   # packets in, made negative so it will graph "down"
@@ -107,6 +115,7 @@ pps_graph() {
   RRD_CMD="${RRD_CMD} CDEF:dns-pps-in=0,dns-p-in,-"
   RRD_CMD="${RRD_CMD} CDEF:http-pps-in=0,http-p-in,-"
   RRD_CMD="${RRD_CMD} CDEF:https-pps-in=0,https-p-in,-"
+  RRD_CMD="${RRD_CMD} CDEF:esp-pps-in=0,esp-p-in,-"
   RRD_CMD="${RRD_CMD} CDEF:other-pps-in=0,other-p-in,-"
 
   # graph packets in
@@ -115,6 +124,7 @@ pps_graph() {
   RRD_CMD="${RRD_CMD} LINE:dns-pps-in${blue}:dns_pps"
   RRD_CMD="${RRD_CMD} LINE:http-pps-in${red}:http_pps"
   RRD_CMD="${RRD_CMD} LINE:https-pps-in${magenta}:https_pps"
+  RRD_CMD="${RRD_CMD} LINE:esp-pps-in${violet}:esp_pps"
   RRD_CMD="${RRD_CMD} LINE:other-pps-in${cyan}:other_pps"
 
   # graph packets out
@@ -123,6 +133,7 @@ pps_graph() {
   RRD_CMD="${RRD_CMD} LINE:dns-pps-out${blue}"
   RRD_CMD="${RRD_CMD} LINE:http-pps-out${red}"
   RRD_CMD="${RRD_CMD} LINE:https-pps-out${magenta}"
+  RRD_CMD="${RRD_CMD} LINE:esp-pps-out${violet}"
   RRD_CMD="${RRD_CMD} LINE:other-pps-out${cyan}"
 
   doas nice $RRD_CMD > /dev/null
