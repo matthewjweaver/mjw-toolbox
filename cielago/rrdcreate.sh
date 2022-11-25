@@ -29,6 +29,10 @@ RRD_EPOCH="1571584238"
 for label in $(pfctl -s label|cut -d ' ' -f 1); do
   # We create one RRD per label.
   ofile="/var/db/rrd/${label}.rrd"
+  if [ -f $ofile ]; then
+    echo "Skipping ${ofile}; already exists"
+    continue
+  fi
   RRD_CMD="rrdtool create ${ofile}"
   if [ -f ${ofile} ]; then
     RRD_CMD="${RRD_CMD} -r ${ofile}"
