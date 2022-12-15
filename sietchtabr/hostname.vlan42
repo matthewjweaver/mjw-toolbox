@@ -1,1 +1,1 @@
-inet 10.42.1.1 255.255.255.128 10.42.1.127 parent em5 vnetid 42 group untrusted
+inet 10.42.1.1 255.255.255.0 10.42.1.255 parent em5 vnetid 42

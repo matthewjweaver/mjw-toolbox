@@ -4,6 +4,7 @@ sietchtabr: \
   /etc/dhcpd.conf \
   /etc/dhcpcd.conf \
   /etc/doas.conf \
+  /etc/hostname.bridge42 \
   /etc/hostname.em0 \
   /etc/hostname.em4 \
   /etc/hostname.em5 \
@@ -38,8 +39,10 @@ sietchtabr: \
   /etc/ssh/sshd_config \
   /etc/sysctl.conf \
   /etc/syslog.conf \
+  /etc/vm.conf \
   /home/sysop/bin/maintain.sh \
   /home/sysop/bin/mon-uplink.sh \
+  /homedirs/vmd/ns1.weaver.tpl.qcow2 \
   /usr/local/libexec/munin/plugins/sensors_ \
   /usr/local/libexec/munin/plugins/unbound_munin_ \
   /var/unbound/etc/unbound.conf \
@@ -59,6 +62,7 @@ sietchtabr: \
 	  dhcpcd.conf /etc/dhcpcd.conf
 
 /etc/dhcpd.conf : dhcpd.conf
+	doas dhcpd -nc dhcpd.conf
 	doas install -o root -g wheel -m 0644 \
 	  dhcpd.conf /etc/dhcpd.conf
 
@@ -70,6 +74,10 @@ sietchtabr: \
 	doas -C ./doas.conf
 	doas install -o root -g wheel -m 0600 \
 	  doas.conf /etc/doas.conf
+
+/etc/hostname.bridge42 : hostname.bridge42
+	doas install -o root -g wheel -m 0640 \
+	  hostname.bridge42 /etc/hostname.bridge42
 
 /etc/hostname.em0 : hostname.em0
 	doas install -o root -g wheel -m 0640 \
@@ -232,6 +240,11 @@ sietchtabr: \
 	doas install -o root -g wheel -m 0644 \
 	  sysctl.conf /etc/sysctl.conf
 
+/etc/vm.conf : vm.conf /homedirs/vmd/ns1.weaver.tpl.qcow2
+	doas vmd -ndf ./vm.conf
+	doas install -o root -g wheel -m 0644 \
+	  vm.conf /etc/vm.conf
+
 /home/sysop/bin/maintain.sh : maintain.sh
 	doas install -o sysop -g wheel -m 0750 \
 	  maintain.sh /home/sysop/bin/maintain.sh
@@ -239,6 +252,9 @@ sietchtabr: \
 /home/sysop/bin/mon-uplink.sh : mon-uplink.sh
 	doas install -o sysop -g wheel -m 0750 \
 	  mon-uplink.sh /home/sysop/bin/mon-uplink.sh
+
+/homedirs/vmd/ns1.weaver.tpl.qcow2 :
+	vmctl create -s 4G /homedirs/vmd/ns1.weaver.tpl.qcow2
 
 /usr/local/libexec/munin/plugins/sensors_ : sensors_
 	doas install -o root -g bin -m 0755 \
