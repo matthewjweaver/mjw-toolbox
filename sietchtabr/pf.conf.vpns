@@ -173,7 +173,7 @@ pass out log quick on em5 inet \
 pass out log quick on em5 inet \
   from { 100.64.0.0/10, 192.168.25.0/24 } \
   to 192.168.223.0/24
-pass out log quick on vlan42 inet \
+pass out log quick on vether0 inet \
   from 10.42.0.0/16 \
   to  10.42.1.0/24
 

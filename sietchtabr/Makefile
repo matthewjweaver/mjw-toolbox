@@ -14,6 +14,7 @@ sietchtabr: \
   /etc/hostname.gre0 \
   /etc/hostname.pflow0 \
   /etc/hostname.wg1 \
+  /etc/hostname.vether0 \
   /etc/hostname.vlan42 \
   /etc/hostname.vlan666 \
   /etc/httpd.conf \
@@ -129,6 +130,10 @@ sietchtabr: \
 	    hostname.wg1 \
 	    "-o root -g wheel -m 0640" \
 	    /etc/hostname.wg1
+
+/etc/hostname.vether0 : hostname.vether0
+	doas install -o root -g wheel -m 0640 \
+	  hostname.vether0 /etc/hostname.vether0
 
 /etc/hostname.vlan42 : hostname.vlan42
 	doas install -o root -g wheel -m 0640 \
