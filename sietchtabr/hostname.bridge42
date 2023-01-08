@@ -1,0 +1,3 @@
+add vlan42
+add vether0
+up

@@ -5,7 +5,15 @@ match in on em0 inet \
   from any \
   to em0 port 24625 \
   rdr-to sietchumbu.here port 32400
-pass in log quick on em0 inet \
+match in on any inet \
+  proto tcp \
+  from any \
+  to 10.42.1.1 port 32400 \
+  rdr-to sietchumbu.here port 32400
+pass in log quick on any inet \
+  proto tcp \
+  from any to sietchumbu.here port 32400
+pass out log quick on em5 inet \
   proto tcp \
   from any to sietchumbu.here port 32400
 

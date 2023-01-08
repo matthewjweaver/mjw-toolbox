@@ -24,6 +24,7 @@ rcctl disable resolvd
 rcctl stop resolvd
 rcctl enable unbound
 rcctl set ntpd flags -s
+rcctl enable vmd
 
 rcctl enable munin_node
 rcctl enable smokeping
