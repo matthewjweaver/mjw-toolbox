@@ -147,6 +147,7 @@ sietchtabr: \
 	doas httpd -nf httpd.conf
 	doas install -o root -g wheel -m 0644 \
 	  httpd.conf /etc/httpd.conf
+	doas rcctl reload httpd
 
 /etc/iked.conf : iked.conf
 	~/bin/op run --env-file=.env -- \
