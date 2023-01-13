@@ -144,6 +144,7 @@ sietchtabr: \
 	  hostname.vlan666 /etc/hostname.vlan666
 
 /etc/httpd.conf : httpd.conf
+	doas httpd -nf httpd.conf
 	doas install -o root -g wheel -m 0644 \
 	  httpd.conf /etc/httpd.conf
 
