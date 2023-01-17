@@ -62,6 +62,6 @@ rm ${f}
 # Update OpenBSD mirror, if there is one
 if [ -d /var/www/htdocs/pub/OpenBSD ]; then
   cd /var/www/htdocs/pub/OpenBSD
-  rsync --exclude snapshots -av --delete --delete-excluded rsync://ftp.usa.openbsd.org/ftp . | logger -p "daemon.debug" -t rsync
+  /usr/bin/openrsync --exclude snapshots -av --delete rsync://ftp.usa.openbsd.org/ftp . | logger -p "daemon.debug" -t rsync
   logger -p daemon.notice -t rsync "OpenBSD mirror updated successfully"
 fi
