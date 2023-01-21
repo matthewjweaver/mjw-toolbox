@@ -34,6 +34,7 @@ sietchtabr: \
   /etc/pfstat.conf \
   /etc/rad.conf \
   /etc/rc.local \
+  /etc/relayd.conf \
   /etc/resolv.conf \
   /etc/smokeping/config \
   /etc/ssh/ssh_config \
@@ -222,6 +223,12 @@ sietchtabr: \
 /etc/rc.local : rc.local
 	doas install -o root -g wheel -m 0644 \
 	  rc.local /etc/rc.local
+
+/etc/relayd.conf : relayd.conf
+	doas relayd -nf ./relayd.conf
+	doas install -o root -g wheel -m 0600 \
+	  relayd.conf /etc/relayd.conf
+	doas rcctl reload relayd
 
 /etc/resolv.conf : resolv.conf
 	doas install -o root -g wheel -m 0644 \
