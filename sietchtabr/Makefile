@@ -44,7 +44,8 @@ sietchtabr: \
   /etc/vm.conf \
   /home/sysop/bin/maintain.sh \
   /home/sysop/bin/mon-uplink.sh \
-  /home/vmd/ns1.weaver.tpl.qcow2 \
+  /tpl/vmd/ns1.weaver.tpl.qcow2 \
+  /tpl/vmd/arrakeen.weaver.tpl.qcow2 \
   /usr/local/libexec/munin/plugins/sensors_ \
   /usr/local/libexec/munin/plugins/unbound_munin_ \
   /var/unbound/etc/unbound.conf \
@@ -254,7 +255,7 @@ sietchtabr: \
 	doas install -o root -g wheel -m 0644 \
 	  sysctl.conf /etc/sysctl.conf
 
-/etc/vm.conf : vm.conf /home/vmd/ns1.weaver.tpl.qcow2
+/etc/vm.conf : vm.conf /tpl/vmd/ns1.weaver.tpl.qcow2 /tpl/vmd/arrakeen.weaver.tpl.qcow2
 	doas vmd -ndf ./vm.conf
 	doas install -o root -g wheel -m 0644 \
 	  vm.conf /etc/vm.conf
@@ -267,8 +268,11 @@ sietchtabr: \
 	doas install -o sysop -g wheel -m 0750 \
 	  mon-uplink.sh /home/sysop/bin/mon-uplink.sh
 
-/home/vmd/ns1.weaver.tpl.qcow2 :
-	vmctl create -s 4G /home/vmd/ns1.weaver.tpl.qcow2
+/tpl/vmd/arrakeen.weaver.tpl.qcow2 :
+	vmctl create -s 256G /tpl/vmd/arrakeen.weaver.tpl.qcow2
+
+/tpl/vmd/ns1.weaver.tpl.qcow2 :
+	vmctl create -s 4G /tpl/vmd/ns1.weaver.tpl.qcow2
 
 /usr/local/libexec/munin/plugins/sensors_ : sensors_
 	doas install -o root -g bin -m 0755 \
