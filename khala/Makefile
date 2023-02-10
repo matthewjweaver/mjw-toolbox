@@ -5,7 +5,9 @@ khala: \
   /etc/dhcpleased.conf \
   /etc/doas.conf \
   /etc/hostname.athn0 \
+  /etc/hostname.bridge0 \
   /etc/hostname.em0 \
+  /etc/hostname.em1 \
   /etc/hostname.em2 \
   /etc/httpd.conf \
   /etc/iked.conf \
@@ -49,9 +51,17 @@ khala: \
 	    "-o root -g wheel -m 0640" \
 	    /etc/hostname.athn0
 
+/etc/hostname.bridge0 : hostname.bridge0
+	doas install -o root -g wheel -m 0640 \
+	  hostname.bridge0 /etc/hostname.bridge0
+
 /etc/hostname.em0 : hostname.em0
 	doas install -o root -g wheel -m 0640 \
 	  hostname.em0 /etc/hostname.em0
+
+/etc/hostname.em1 : hostname.em1
+	doas install -o root -g wheel -m 0640 \
+	  hostname.em1 /etc/hostname.em1
 
 /etc/hostname.em2 : hostname.em2
 	doas install -o root -g wheel -m 0640 \

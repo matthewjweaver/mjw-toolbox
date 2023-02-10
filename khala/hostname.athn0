@@ -1,4 +1,5 @@
 mediaopt hostap
 nwid XXX_ATHN0_NWID_XXX wpakey "XXX_ATHN0_WPAKEY_XXX"
 inet 192.168.25.1 255.255.255.0
+inet alias 10.42.1.128 255.255.255.128
 !route add 192.168.223.0/24 192.168.25.1
