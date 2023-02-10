@@ -147,10 +147,14 @@ host = el-sayal.here
 host = ghola.here
 ++ qanat
 host = qanat.here
-++ ptpA
-host = ptpA.here
-++ ptpB
-host = ptpB.here
+++ ptp-gb-A
+host = ptp-gb-A.here
+++ ptp-gb-B
+host = ptp-gb-B.here
+++ ptp-pb-A
+host = ptp-pb-A.here
+++ ptp-pb-B
+host = ptp-pb-B.here
 ++ wap1
 host = wap1.here
 ++ wap2

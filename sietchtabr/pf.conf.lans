@@ -144,3 +144,14 @@ pass in  log quick on vlan666 inet \
 pass out log quick on vlan666 inet \
   from vlan666 \
   to vlan666:network 
+
+
+########################################################################
+# Local Promised Lan Segment
+# Pass this LAN's outbound traffic
+pass in  log quick on vether0 inet \
+  from vether0:network to any
+
+# Pass traffic from the router to this LAN
+pass out log quick on vether0 inet \
+  from vether0 to vether0:network

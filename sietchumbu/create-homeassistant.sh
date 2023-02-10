@@ -1,0 +1,18 @@
+#!/bin/sh
+CONTAINER=ghcr.io/home-assistant/home-assistant:stable
+docker stop homeassistant
+docker rm homeassistant
+docker pull $CONTAINER
+docker run -d \
+  --name homeassistant \
+  --privileged \
+  --restart=unless-stopped \
+  -e PUID="30001" \
+  -e TZ="America/Chicago" \
+  -v /arc/sys/homeassistant:/config \
+  --network=host \
+  ${CONTAINER}
+
+if [ "$1" = "--prune" ]; then
+  docker system prune
+fi
