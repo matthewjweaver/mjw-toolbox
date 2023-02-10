@@ -1,3 +1,2 @@
-# wired LAN facing
-#autoconf
-#inet 192.168.223.27 255.255.255.0 192.168.223.255
+# wired LAN facing, in LAN bridge
+up
