@@ -161,7 +161,7 @@ pass in log quick on vether0 inet \
 pass out log quick on vether0 inet \
   from vether0 to vether0:network
 
-# Pass traffic from the shitternet LAN to arrakeen
+# Pass traffic from the shitternet LAN to TPL
 pass out log quick on vether0 inet \
-  from 192.168.223.0/24 to 10.42.1.2 \
+  from 192.168.223.0/24 to 10.42.0.0/16 \
   nat-to 10.42.1.1
