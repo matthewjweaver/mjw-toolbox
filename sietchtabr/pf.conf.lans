@@ -152,6 +152,16 @@ pass out log quick on vlan666 inet \
 pass in  log quick on vether0 inet \
   from vether0:network to any
 
+# redirect to umbu
+pass in log quick on vether0 inet \
+  from 10.42.0.0/16 to 10.42.1.10 \
+  rdr-to sietchumbu.here
+
 # Pass traffic from the router to this LAN
 pass out log quick on vether0 inet \
   from vether0 to vether0:network
+
+# Pass traffic from the shitternet LAN to TPL
+pass out log quick on vether0 inet \
+  from 192.168.223.0/24 to 10.42.0.0/16 \
+  nat-to 10.42.1.1
