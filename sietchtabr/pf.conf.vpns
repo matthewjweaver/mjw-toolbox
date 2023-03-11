@@ -285,3 +285,25 @@ pass out log quick on em0 inet \
 pass log quick on enc4 inet \
   from { (em0), 172.3.141.2 } \
   to   { (em0), 172.3.141.2 }
+
+
+########################################################################
+# Deepcore VPN / shadowhax wireguard endpoint
+# TODO: move to ipv6
+# TODO: deprecated, replace with ikev2/ipsec
+
+# Wireguard (fixed random port, 25672)
+pass in  log quick on em0 inet \
+  proto udp \
+  from 174.21.88.6 to (em0) \
+  port 25672
+pass out log quick on em0 inet \
+  proto udp \
+  from (em0) to 174.21.88.6 \
+  port 25672
+pass in  log on wg1 inet \
+  from 169.254.87.0/24 to any
+pass out log on wg1 inet \
+  from any to 169.254.87.0/24
+
+
