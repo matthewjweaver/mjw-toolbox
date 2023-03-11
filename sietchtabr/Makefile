@@ -14,7 +14,7 @@ sietchtabr: \
   /etc/hostname.enc4 \
   /etc/hostname.gre0 \
   /etc/hostname.pflow0 \
-  /etc/hostname.wg1 \
+  /etc/hostname.wg0 \
   /etc/hostname.vether0 \
   /etc/hostname.vlan42 \
   /etc/hostname.vlan666 \
@@ -131,12 +131,12 @@ sietchtabr: \
 	doas install -o root -g wheel -m 0640 \
 	  hostname.pflow0 /etc/hostname.pflow0
 
-/etc/hostname.wg1 : hostname.wg1
+/etc/hostname.wg0 : hostname.wg0
 	~/bin/op run --env-file=.env -- \
 	  sh ../install-secretfied.sh \
-	    hostname.wg1 \
+	    hostname.wg0 \
 	    "-o root -g wheel -m 0640" \
-	    /etc/hostname.wg1
+	    /etc/hostname.wg0
 
 /etc/hostname.vether0 : hostname.vether0
 	doas install -o root -g wheel -m 0640 \
