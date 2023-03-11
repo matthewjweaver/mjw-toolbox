@@ -251,3 +251,37 @@ pass log quick on enc1 inet \
 pass out log quick on em5 inet \
   from { vpn.grahams.wtf, 192.168.2.1, 192.168.2.42, 192.168.2.208 - 192.168.2.210, 192.168.2.242 } \
   to { ghola.here, sietchumbu.here }
+
+
+########################################################################
+# Adamf VPN
+# XXX: make ipv6 work
+
+# ICMP pings
+pass in log on em0 inet \
+  proto icmp \
+  from 172.3.141.2 to (em0) \
+  icmp-type echoreq code 0 keep state
+
+# IPSEC
+pass in  log quick on em0 inet \
+  proto esp \
+  from 172.3.141.2 to (em0)
+pass out log quick on em0 inet \
+  proto esp \
+  from (em0) to 172.3.141.2
+
+# IKEv2, NAT traversal
+pass in  log quick on em0 inet \
+  proto udp \
+  from 172.3.141.2 to (em0) \
+  port { ipsec-nat-t, isakmp } keep state
+pass out log quick on em0 inet \
+  proto udp \
+  from (em0) to 172.3.141.2 \
+  port { ipsec-nat-t, isakmp } keep state
+
+# Tunneled Traffic
+pass log quick on enc4 inet \
+  from { (em0), 172.3.141.2 } \
+  to   { (em0), 172.3.141.2 }
