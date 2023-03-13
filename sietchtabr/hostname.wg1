@@ -1,4 +1,4 @@
-wgkey XXX_WG1_XXX wgport 22713
-wgpeer TB3uVShUWXfH1D5Co0DmHY96Bwb8FSP3NzbhH+V2+E0= wgendpoint 155.138.220.216 22713 wgaip 192.168.221.2
-wgpeer 6U6mnjOcjkjG+p+bwYz1yLLFxJoZEpziCfaIeqr+4jM= wgendpoint 207.148.3.69 22713 wgaip 192.168.221.3
-192.168.221.1/24
+wgkey XXX_WG1_XXX wgport 25672
+wgpeer eAAOoiE6+wQGGCV6ctuWaWdGKBfpdu+mOinoHbDY0Ws= wgendpoint 174.21.88.6 51820 wgaip 169.254.87.2
+169.254.87.1/24
+inet alias 169.254.87.254/32
