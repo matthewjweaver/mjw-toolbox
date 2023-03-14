@@ -307,11 +307,15 @@ pass out log quick on em0 inet \
   port 51820
 pass in  log quick on em0 inet6 \
   proto udp \
-  from any to (em0) \
+  from { 2607:fb91:1587:1878:b522:c231:bc82:3aad, \
+         2607:fb91:1587:1878:226d:31ff:fe21:1c0e } \
+  to (em0) \
   port 25672
 pass out log quick on em0 inet6 \
   proto udp \
-  from (em0) to any \
+  from (em0) \
+  to { 2607:fb91:1587:1878:b522:c231:bc82:3aad, \
+         2607:fb91:1587:1878:226d:31ff:fe21:1c0e } \
   port 51820
 pass in  log on wg1 inet \
   from 169.254.87.0/24 to any
