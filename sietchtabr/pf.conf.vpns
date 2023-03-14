@@ -305,6 +305,16 @@ pass out log quick on em0 inet \
   proto udp \
   from (em0) to 174.21.88.6 \
   port 51820
+pass in  log quick on em0 inet6 \
+  proto udp \
+  from any to (em0) \
+  port 25672
+pass out log quick on em0 inet6 \
+  proto udp \
+  from (em0) to any \
+  port 51820
+pass in  log on wg1 inet \
+  from 169.254.87.0/24 to any
 pass in  log on wg1 inet \
   from 169.254.87.0/24 to any
 pass out log on wg1 inet \
