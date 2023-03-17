@@ -283,10 +283,10 @@ pass out log quick on em0 inet \
 
 # Tunneled Traffic
 pass log quick on enc4 inet \
-  from { (em0), 10.42.1.22, 192.168.1.70, 192.168.1.75 } \
-  to   { (em0), 10.42.1.22, 192.168.1.70, 192.168.1.75 }
+  from { (em0), 10.42.1.22, 192.168.1.80, 192.168.1.75 } \
+  to   { (em0), 10.42.1.22, 192.168.1.80, 192.168.1.75 }
 pass out log quick on vether0 inet \
-  from { 192.168.1.70, 192.168.1.75 } \
+  from { 192.168.1.80, 192.168.1.75 } \
   to   10.42.1.22 \
   nat-to 10.42.1.1 keep state
 
