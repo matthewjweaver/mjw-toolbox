@@ -194,12 +194,8 @@ title = BOS connectivity beacons
 
 ++ kulon
 host = kulon.nodeless.net
-++ blackice
+++ blueant
 host = home.grahams.wtf
-++ blackice-upstream
-host = 209.6.224.1
-++ blackice-neighbor
-host = 209.6.226.18
 ++ starscream
 host = jeffm.io
 
@@ -227,3 +223,13 @@ title = community beacons
 
 ++ live365
 host = ingest.live365.com
+
++ mysite6
+menu = vpns
+title = vpns
+++ tpl
+host = bb3.nodeless.net
+++ dixieflatline
+host = 192.168.2.209
+++ mneumonic
+host = 192.168.2.210
