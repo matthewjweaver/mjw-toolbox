@@ -244,8 +244,8 @@ pass log quick on enc1 inet \
   from { gurneyhalleck.here, sietchtabr.nodeless.net, taqwa.here } \
   to kulon.nodeless.net
 pass log quick on enc1 inet \
-  from { gurneyhalleck.here, sietchtabr.nodeless.net, sietchumbu.here, vpn.grahams.wtf, 192.168.2.1 - 192.168.2.3, 192.168.2.18, 192.168.2.42, 192.168.2.208 - 192.168.2.210, 192.168.2.242 } \
-  to   { gurneyhalleck.here, sietchtabr.nodeless.net, sietchumbu.here, vpn.grahams.wtf, 192.168.2.1 - 192.168.2.3, 192.168.2.18, 192.168.2.42, 192.168.2.208 - 192.168.2.210, 192.168.2.242 }
+  from { gurneyhalleck.here, sietchtabr.nodeless.net, sietchumbu.here, vpn.grahams.wtf, 192.168.2.1 - 192.168.2.3, 192.168.2.18, 192.168.2.42, 192.168.2.207 - 192.168.2.210, 192.168.2.242 } \
+  to   { gurneyhalleck.here, sietchtabr.nodeless.net, sietchumbu.here, vpn.grahams.wtf, 192.168.2.1 - 192.168.2.3, 192.168.2.18, 192.168.2.42, 192.168.2.207 - 192.168.2.210, 192.168.2.242 }
 
 # Out onto LAN
 pass out log quick on em5 inet \
@@ -283,8 +283,12 @@ pass out log quick on em0 inet \
 
 # Tunneled Traffic
 pass log quick on enc4 inet \
-  from { (em0), 10.42.1.22, 172.3.141.2 } \
-  to   { (em0), 10.42.1.22, 172.3.141.2 }
+  from { (em0), 10.42.1.22, 192.168.1.80, 192.168.1.75 } \
+  to   { (em0), 10.42.1.22, 192.168.1.80, 192.168.1.75 }
+pass out log quick on vether0 inet \
+  from { 192.168.1.80, 192.168.1.75 } \
+  to   10.42.1.22 \
+  nat-to 10.42.1.1 keep state
 
 
 ########################################################################
@@ -301,6 +305,20 @@ pass out log quick on em0 inet \
   proto udp \
   from (em0) to 174.21.88.6 \
   port 51820
+pass in  log quick on em0 inet6 \
+  proto udp \
+  from { 2607:fb91:1587:1878:b522:c231:bc82:3aad, \
+         2607:fb91:1587:1878:226d:31ff:fe21:1c0e } \
+  to (em0) \
+  port 25672
+pass out log quick on em0 inet6 \
+  proto udp \
+  from (em0) \
+  to { 2607:fb91:1587:1878:b522:c231:bc82:3aad, \
+         2607:fb91:1587:1878:226d:31ff:fe21:1c0e } \
+  port 51820
+pass in  log on wg1 inet \
+  from 169.254.87.0/24 to any
 pass in  log on wg1 inet \
   from 169.254.87.0/24 to any
 pass out log on wg1 inet \
