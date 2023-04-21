@@ -121,21 +121,25 @@ korba : \
 /var/nsd/zones/master/ice-nine.org : \
   /var/opendnssec/unsigned/ice-nine.org
 	chown _opendnssec /var/nsd/zones/master
+	chgrp _nsd /var/nsd/zones/master
 	ods-signer sign ice-nine.org
 
 /var/nsd/zones/master/mcweavers.net : \
   /var/opendnssec/unsigned/mcweavers.net
 	chown _opendnssec /var/nsd/zones/master
+	chgrp _nsd /var/nsd/zones/master
 	ods-signer sign mcweavers.net
 
 /var/nsd/zones/master/mjw.wtf : \
   /var/opendnssec/unsigned/mjw.wtf
 	chown _opendnssec /var/nsd/zones/master
+	chgrp _nsd /var/nsd/zones/master
 	ods-signer sign mjw.wtf
 
 /var/nsd/zones/master/nodeless.net : \
   /var/opendnssec/unsigned/nodeless.net
 	chown _opendnssec /var/nsd/zones/master
+	chgrp _nsd /var/nsd/zones/master
 	ods-signer sign nodeless.net
 
 /var/opendnssec/unsigned/ice-nine.org : zones/ice-nine.org
