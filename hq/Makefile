@@ -118,6 +118,7 @@ hq : \
 /var/nsd/zones/master/layeraleph.com : \
   /var/opendnssec/unsigned/layeraleph.com
 	chown _opendnssec /var/nsd/zones/master
+	chgrp _nsd /var/nsd/zones/master
 	ods-signer sign layeraleph.com
 
 /var/opendnssec/unsigned/layeraleph.com : layeraleph.com
