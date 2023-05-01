@@ -2,6 +2,10 @@
 set -e
 umask 027
 
+# XXX 20230501 TODO(mjw):
+#   1. fetch secret directly from op
+#   2. automate somehow
+
 read_secret() {
   # preserve terminal settings since we're going to disable echoes.
   OLDTTY=$(stty -g)
