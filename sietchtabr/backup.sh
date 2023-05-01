@@ -83,6 +83,6 @@ for PARTITION in $( < ${BACKUP_DIR}/fstab awk '/ffs/ { print $1 }' ); do
   doas chmod 660 ${LOG_OUTPUT}
 
   ssh ${TARGET_USER}@${TARGET_HOST} "doas dump -0af - ${PARTITION}|gzip -" 2>> ${LOG_OUTPUT} | \
-    /usr/bin/openssl enc -chacha -pbkdf2 -k "${PASSWORD}" 2>> ${LOG_OUTPUT} | \
+    /usr/bin/openssl enc -chacha -iter 1000000 -k "${PASSWORD}" 2>> ${LOG_OUTPUT} | \
     doas dd of=${BACKUP_OUTPUT} bs=4M 2>> ${LOG_OUTPUT}
 done
