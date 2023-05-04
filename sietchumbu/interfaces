@@ -12,4 +12,4 @@ iface vlan42 inet static
 	address 10.42.1.22
 	netmask 255.255.255.0
 	vlan-raw-device eth0
-	post-up ip route add 10.42.0.0/16 dev vlan42 src 10.42.1.22
+	post-up ip route add 10.42.0.0/16 via 10.42.1.1
