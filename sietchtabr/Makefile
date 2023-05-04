@@ -44,6 +44,7 @@ sietchtabr: \
   /etc/sysctl.conf \
   /etc/syslog.conf \
   /etc/vm.conf \
+  /home/sysop/bin/backup.sh \
   /home/sysop/bin/maintain.sh \
   /home/sysop/bin/mon-uplink.sh \
   /tpl/vmd/ns1.weaver.tpl.qcow2 \
@@ -272,6 +273,10 @@ sietchtabr: \
 	doas vmd -ndf ./vm.conf
 	doas install -o root -g wheel -m 0644 \
 	  vm.conf /etc/vm.conf
+
+/home/sysop/bin/backup.sh : backup.sh
+	doas install -o sysop -g wheel -m 0750 \
+	  backup.sh /home/sysop/bin/backup.sh
 
 /home/sysop/bin/maintain.sh : maintain.sh
 	doas install -o sysop -g wheel -m 0750 \
