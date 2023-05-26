@@ -15,7 +15,7 @@ usage() {
   echo "  backup.sh korba.nodeless.net"
 }
 
-if ! op whoami > 2>&1 /dev/null; then
+if ! op whoami 2>&1 > /dev/null; then
   echo "Requires authenticated 1password."
   echo "Perhaps, eval $(op signin) first."
   exit
