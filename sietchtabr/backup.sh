@@ -2,43 +2,36 @@
 set -e
 umask 027
 
-# XXX 20230501 TODO(mjw):
-#   1. fetch secret directly from op
+# XXX 20230526 TODO(mjw):
+#   1. parallelize somehow
 #   2. automate somehow
 
-read_secret() {
-  # preserve terminal settings since we're going to disable echoes.
-  OLDTTY=$(stty -g)
-  stty -echo
-  # restore terminal if we receive an interrupt during the read
-  trap "stty $OLDTTY" EXIT
-  read "$@"
-  stty $OLDTTY
-  trap - EXIT
-  # print a newline since the newline entered during the read isn't
-  # echoed.
-  echo
-}
+# This entire thing depends on the 1password CLI, op.
 
 usage() {
   echo "Usage:"
-  echo "  backup.sh <user>@<hostname>"
+  echo "  backup.sh <hostname>"
   echo
   echo "Example:"
-  echo "  backup.sh sysop@korba.nodeless.net"
+  echo "  backup.sh korba.nodeless.net"
 }
 
-TARGET_HOST=$(echo $1|sed -e's/[^@]*[@]//g')
-TARGET_USER=$(echo $1|sed -e's/@.*$//g')
+if ! op whoami 2>&1 > /dev/null; then
+  echo "Requires authenticated 1password."
+  echo "Perhaps, eval $(op signin) first."
+  exit
+fi
+
+TARGET_HOST=${1}
+TARGET_USER=$(op read op://Personal/${TARGET_HOST}/admin)
 if ! [ -z ${TARGET_HOST} ] && ! [ -z ${TARGET_USER} ]; then
   echo "Will login as ${TARGET_USER} to ${TARGET_HOST}."
 else
   usage
   exit
 fi
-  
-printf "Encryption password: "
-read_secret PASSWORD
+
+PASSWORD=$(op read op://Personal/${TARGET_HOST}/dump-chacha-key)
 
 BACKUPS_ROOT=/arc/obsd-bak/dumps/${TARGET_HOST}
 if ! [ -d ${BACKUPS_ROOT} ]; then
