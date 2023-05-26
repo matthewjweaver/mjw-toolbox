@@ -3,6 +3,7 @@ set -e
 umask 027
 
 # XXX 20230526 TODO(mjw):
+#   1. parallelize somehow
 #   2. automate somehow
 
 # This entire thing depends on the 1password CLI, op.
