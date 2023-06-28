@@ -29,7 +29,8 @@ all traffic from these addresses if this file is placed in
 
 
 The following set of commands are useful for updating the bad ssh actors
-list based on your ssh server logs:
+list based on your ssh server logs. See ../sietchtabr/sshbot-exlcusions
+for an example exclusions list:
 ```
 # < /var/log/authlog \
   awk '/Invalid user/ {print $10}'| \
@@ -43,6 +44,7 @@ list based on your ssh server logs:
 # < /var/log/authlog \
   awk '/Unable to negotiate/ {print $10}'| \
   sort -n|uniq|grep -v '[[:alpha:]]'|xargs doas pfctl -t sshbots -T add
+# doas pfctl -t sshbots -T delete -f sshbot-exclusions
 # doas pfctl -t sshbots -T show > /tmp/t && \
   doas mv /tmp/t /etc/pf.sshbots
 ```
