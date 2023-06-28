@@ -17,6 +17,7 @@ pkg_add dhcpcd
 rcctl set syslogd flags "-U 127.0.0.1"
 rcctl restart syslogd
 rcctl enable dhcpd
+rcctl set dhcpd flags "-A dhcpd_abandoned -L dhcpd_leased"
 rcctl enable httpd
 rcctl set pflogd flags "-s 1500"
 rcctl enable rad
