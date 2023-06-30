@@ -20,32 +20,19 @@ necessary NAT rules to allow a gateway to NAT outbound traffic from a
 local network to the internet on the egress interface.
 
 
-## pf.sshbots
+## pf.sshbots / update-sshbots.sh
 
 The pf.sshbots is a persistent table of addresses and netblocks observed
 doing funny business to ssh. The pf.conf(5) files will, by default, drop
 all traffic from these addresses if this file is placed in
 `/etc/pf.sshbots`.
 
+The commands for collecting suspected hostile addresses from logs are
+collected in `update-sshbots.sh`. They're OK, but could use some work.
+Existing liabilities include connection attempts with cute usernames
+like shellcode.
 
-The following set of commands are useful for updating the bad ssh actors
-list based on your ssh server logs:
-```
-# < /var/log/authlog \
-  awk '/Invalid user/ {print $10}'| \
-  sort -n|uniq|grep -v '[[:alpha:]]'|xargs doas pfctl -t sshbots -T add
-# < /var/log/authlog \
-  awk '/Disconnected from invalid user/ {print $11}'| \
-  sort -n|uniq|grep -v '[[:alpha:]]'|xargs doas pfctl -t sshbots -T add
-# < /var/log/authlog \
-  awk '/Disconnected from authenticating user/ {print $11}'| \
-  sort -n|uniq|grep -v '[[:alpha:]]'|xargs doas pfctl -t sshbots -T add
-# < /var/log/authlog \
-  awk '/Unable to negotiate/ {print $10}'| \
-  sort -n|uniq|grep -v '[[:alpha:]]'|xargs doas pfctl -t sshbots -T add
-# doas pfctl -t sshbots -T show > /tmp/t && \
-  doas mv /tmp/t /etc/pf.sshbots
-```
+See ../sietchtabr/sshbot-exlcusions for an example exclusions list.
 
 
 ## ssh_config; sshd_config

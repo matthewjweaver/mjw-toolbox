@@ -1,5 +1,7 @@
 ########################################################################
 # Home LAN (wifi, etc)
+# TODO: enable dhcp enforcement using dhcpd(8)'s -L and -A pf table
+# maintenance.
 # NAT outbound
 pass out log quick on em0 inet \
   from { 192.168.223.21, 192.168.223.24 } \
