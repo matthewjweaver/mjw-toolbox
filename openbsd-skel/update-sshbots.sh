@@ -1,4 +1,5 @@
 #!/bin/sh
+# TODO: fix all these to support weird usernames and ipv6
 < /var/log/authlog \
   grep 'sshd.*Invalid user'|sed -es'%^.* from%%g' -es'% port.*$%%g' |\
   xargs doas pfctl -t sshbots -T add
