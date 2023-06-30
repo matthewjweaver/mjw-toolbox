@@ -145,8 +145,8 @@ host = localhost
 host = el-sayal.here
 ++ ghola
 host = ghola.here
-++ qanat
-host = qanat.here
+++ otheym
+host = otheym.here
 ++ ptp-gb-A
 host = ptp-gb-A.here
 ++ ptp-gb-B
@@ -155,6 +155,8 @@ host = ptp-gb-B.here
 host = ptp-pb-A.here
 ++ ptp-pb-B
 host = ptp-pb-B.here
+++ qanat
+host = qanat.here
 ++ wap1
 host = wap1.here
 ++ wap2
