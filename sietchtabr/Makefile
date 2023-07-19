@@ -275,7 +275,7 @@ sietchtabr: \
 	doas install -o root -g wheel -m 0644 \
 	  sysctl.conf /etc/sysctl.conf
 
-/etc/vm.conf : vm.conf /tpl/vmd/ns1.weaver.tpl.qcow2 /tpl/vmd/arrakeen.weaver.tpl.qcow2
+/etc/vm.conf : vm.conf /tpl/vmd/ns1.weaver.tpl.qcow2 /tpl/vmd/arrakeen.weaver.tpl.qcow2 /tpl/vmd/axlotl-tank.here.qcow2
 	doas vmd -ndf ./vm.conf
 	doas install -o root -g wheel -m 0644 \
 	  vm.conf /etc/vm.conf
