@@ -116,3 +116,6 @@ for DUMP in $(ls ${BACKUP_DIR}/*chacha); do
     doas /sbin/restore ryf -
 done
 
+doas /usr/sbin/installboot installboot -vr /mnt ${TARGET_DISK}
+
+
