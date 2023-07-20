@@ -241,7 +241,7 @@ pass log quick on enc1 inet \
   from { ghola.here, vpn.grahams.wtf, 192.168.2.0/24 } \
   to   { ghola.here, vpn.grahams.wtf, 192.168.2.0/24 }
 pass log quick on enc1 inet \
-  from { gurneyhalleck.here, sietchtabr.nodeless.net, taqwa.here } \
+  from { gurneyhalleck.here, otheym.here, sietchtabr.nodeless.net, taqwa.here } \
   to kulon.nodeless.net
 pass log quick on enc1 inet \
   from { gurneyhalleck.here, sietchtabr.nodeless.net, sietchumbu.here, vpn.grahams.wtf, 192.168.2.1 - 192.168.2.3, 192.168.2.18, 192.168.2.42, 192.168.2.207 - 192.168.2.210, 192.168.2.242 } \

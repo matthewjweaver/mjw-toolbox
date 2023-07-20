@@ -152,14 +152,19 @@ pass out log quick on vlan666 inet \
 
 ########################################################################
 # Local Promised Lan Segment
-# Pass this LAN's outbound traffic
-pass in  log quick on vether0 inet \
-  from vether0:network to any
-
 # redirect to umbu
 pass in log quick on vether0 inet \
   from 10.42.0.0/16 to 10.42.1.22 \
   rdr-to sietchumbu.here
+
+# Pass this LAN's outbound traffic
+pass in  log quick on vether0 inet \
+  from vether0:network to any
+
+pass in  log quick on vether0 inet \
+  from 10.42.1.254 to taqwa.here
+pass out log quick on em5 inet \
+  from 10.42.1.254 to taqwa.here
 
 # Pass traffic from the router to this LAN
 pass out log quick on vether0 inet \
