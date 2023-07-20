@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e
+set -ex
 umask 027
 
 # TODO(mjw)
@@ -103,10 +103,11 @@ doas /sbin/disklabel -R ${TARGET_DISK} ${DISKLABEL}
 # A grand assumption here is that / is partition a every time, and
 # therefore comes first!
 for DUMP in $(ls ${BACKUP_DIR}/*chacha); do
-  PARTITION=$(basename ${DUMP} .gz.chacha)
-  TARGET_DIR=$(< ${BACKUP_DIR}/fstab awk "/${PARTITION}/ {print "'$2}')
+  DUID_PARTITION=$(basename ${DUMP} .gz.chacha)
+  TARGET_DIR=$(< ${BACKUP_DIR}/fstab awk "/${DUID_PARTITION}/ {print "'$2}')
   # Strip the disk uuid from the partition
-  PARTITION=$(echo ${PARTITION}|sed -e's/[^.]*[.]//g')
+  PARTITION=$(echo ${DUID_PARTITION}|sed -e's/[^.]*[.]//g')
+  OLD_DUID=$(echo ${DUID_PARTITION}|sed -e's/[.].*//g')
   echo "Restoring ${DUMP} to ${TARGET_DIR}."
   doas /sbin/newfs /dev/r${TARGET_DISK}${PARTITION}
   doas /sbin/mount /dev/${TARGET_DISK}${PARTITION} /mnt${TARGET_DIR}
@@ -116,6 +117,8 @@ for DUMP in $(ls ${BACKUP_DIR}/*chacha); do
     doas /sbin/restore ryf -
 done
 
-doas /usr/sbin/installboot installboot -vr /mnt ${TARGET_DISK}
+NEW_DUID=$(doas disklabel ${TARGET_DISK}|awk '/duid/ {print $2}')
+doas /usr/bin/sed -ie "s/${OLD_DUID}/${NEW_DUID}/g" /mnt/etc/fstab
+doas /usr/sbin/installboot -vr /mnt ${TARGET_DISK}
 
 
