@@ -4,6 +4,7 @@ umask 027
 
 # TODO(mjw)
 #   1. make work via an openbsd ramdisk kernel
+#   1. maybe make this not such a giant footgun?
 
 # This entire thing depends on the 1password CLI, op.
 
@@ -20,10 +21,10 @@ umask 027
 
 usage() {
   echo "Usage:"
-  echo "  backup.sh <hostname> <backup number> <disk UUID>"
+  echo "  backup.sh <hostname> <backup number> <target disk>"
   echo
   echo "Example:"
-  echo "  backup.sh korba.nodeless.net c99a329534106e59 num-1"
+  echo "  backup.sh korba.nodeless.net num-1 sd1"
   echo
   echo "Requires authenticated 1password."
   echo 'For instance, eval $(op signin) before executing.'
@@ -32,13 +33,13 @@ usage() {
 if ! op whoami 2>&1 > /dev/null; then
   echo "ERROR: Unable to confirm that op (1password) is available."
   usage
-  exit
+  exit 1
 fi
 
 TARGET_HOST=${1}
 if [ -z ${TARGET_HOST} ]; then
   usage
-  exit
+  exit 1
 fi
 
 # We assume the machine is a more or less new install, with only a root
@@ -50,7 +51,7 @@ if [ -z ${PASSWORD} ]; then
   echo "ERROR: Cannot find encryption password for target host using op."
   echo
   usage
-  exit
+  exit 1
 fi
 
 BACKUPS_ROOT=/arc/obsd-bak/dumps/${TARGET_HOST}
@@ -58,7 +59,7 @@ if ! [ -d ${BACKUPS_ROOT} ]; then
   echo "ERROR: ${BACKUPS_ROOT} doesn't exist, exiting."
   echo
   usage()
-  exit
+  exit 1
 fi
 
 BACKUP_DIR=${BACKUPS_ROOT}/lvl-0-${2}
@@ -68,16 +69,49 @@ if ! [ -d ${BACKUP_DIR} ]; then
   ls ${BACKUPS_ROOT}
   echo
   usage()
-  exit
+  exit 1
 fi
 
+DISKLABEL=${BACKUP_DIR}/disklabel-*
+if ! [ -f ${DISKLABEL} ]; then
+  echo "ERROR: ${DISKLABEL} doesn't exist, exiting."
+  echo
+  usage()
+  exit 1
+fi
+
+TARGET_DISK=${3}
+if ! [ -z $(doas /sbin/mount|grep ${TARGET_DISK}) ]; then
+  echo "ERROR: It appears ${TARGET_DISK} is mounted."
+  echo
+  usage()
+  exit 1
+fi
+
+if ! [ -z $(doas /sbin/mount|grep /mnt) ]; then
+  echo "ERROR: It appears /mnt is mounted."
+  echo
+  usage()
+  exit 1
+fi
+
+# OK, from here out we are shooting without looking further.
+
+doas /sbin/disklabel -R ${TARGET_DISK} ${DISKLABEL}
+
+# A grand assumption here is that / is partition a every time, and
+# therefore comes first!
 for DUMP in $(ls ${BACKUP_DIR}/*chacha); do
   PARTITION=$(basename ${DUMP} .gz.chacha)
   TARGET_DIR=$(< ${BACKUP_DIR}/fstab awk "/${PARTITION}/ {print "'$2}')
-  # We ssh with StrictHostKeyChecking=no because we haven't restored the
-  # ssh host keys from backup yet.
-  #< $DUMP /usr/bin/openssl enc -d -chacha -iter 1000000 -k "${PASSWORD}" |\
-  #gunzip - |\
-  #ssh -o StrictHostKeyChecking=no root@${TARGET_HOST} "set -e; cd ${TARGET_DIR}; restore ryf -" 
+  # Strip the disk uuid from the partition
+  PARTITION=$(echo ${PARTITION}|sed -e's/[^.]*[.]//g')
+  echo "Restoring ${DUMP} to ${TARGET_DIR}."
+  doas /sbin/newfs /dev/r${TARGET_DISK}${PARTITION}
+  doas /sbin/mount /dev/${TARGET_DISK}${PARTITION} /mnt${TARGET_DIR}
+  cd /mnt${TARGET_DIR}
+  < $DUMP /usr/bin/openssl enc -d -chacha -iter 1000000 -k "${PASSWORD}" |\
+    /usr/bin/gunzip - |\
+    doas /sbin/restore ryf -
 done
 
