@@ -14,9 +14,11 @@ umask 027
 #   1. The target system disk exists as /dev/sd1
 #   2. The target system disk has sufficient size to support the backed
 #   up disklabel.
+#   3. The target system backup is the same OpenBSD version as the
+#   system performing the restore.
 #
 # In general, the assumption is that this script is run on a host like
-# axlotl.tank.int.nodeless.net, with the target disk as sd1.
+# axlotl-tank.int.nodeless.net, with the target disk as sd1.
 
 
 usage() {
