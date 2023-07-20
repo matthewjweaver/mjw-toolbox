@@ -21,10 +21,10 @@ umask 027
 
 usage() {
   echo "Usage:"
-  echo "  backup.sh <hostname> <backup number> <target disk>"
+  echo "  restore-backup.sh <hostname> <backup number> <target disk>"
   echo
   echo "Example:"
-  echo "  backup.sh korba.nodeless.net num-1 sd1"
+  echo "  restore-backup.sh korba.nodeless.net num-1 sd1"
   echo
   echo "Requires authenticated 1password."
   echo 'For instance, eval $(op signin) before executing.'
@@ -97,6 +97,7 @@ fi
 
 # OK, from here out we are shooting without looking further.
 
+doas /sbin/fdisk -i ${TARGET_DISK}
 doas /sbin/disklabel -R ${TARGET_DISK} ${DISKLABEL}
 
 # A grand assumption here is that / is partition a every time, and
