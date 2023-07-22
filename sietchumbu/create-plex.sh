@@ -1,7 +1,6 @@
 #!/bin/sh
 # If running for the first time, include the plex claim token:
 #  -e PLEX_CLAIM="XXXLOLXXX" \
-#  --device=/dev/dri:/dev/dri \
 
 CONTAINER=plexinc/pms-docker
 docker stop plex
@@ -10,6 +9,7 @@ docker pull ${CONTAINER}
 docker run \
   --cpus="4" \
   -d \
+ --device=/dev/dri:/dev/dri \
   --name plex \
   --network=host \
   --restart always \
