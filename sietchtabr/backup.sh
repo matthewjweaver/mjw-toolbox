@@ -16,7 +16,7 @@ usage() {
   echo "  backup.sh korba.nodeless.net"
   echo
   echo "Requires authenticated 1password."
-  echo "For instance, eval $(op signin) before executing."
+  echo 'For instance, eval $(op signin) before executing.'
 }
 
 if ! op whoami 2>&1 > /dev/null; then
