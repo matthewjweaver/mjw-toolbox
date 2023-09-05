@@ -152,11 +152,6 @@ pass out log quick on vlan666 inet \
 
 ########################################################################
 # Local Promised Lan Segment
-# redirect to umbu
-pass in log quick on vether0 inet \
-  from 10.42.0.0/16 to 10.42.1.22 \
-  rdr-to sietchumbu.here
-
 # Pass this LAN's outbound traffic
 pass in  log quick on vether0 inet \
   from vether0:network to any
@@ -169,11 +164,6 @@ pass out log quick on em5 inet \
 # Pass traffic from the router to this LAN
 pass out log quick on vether0 inet \
   from vether0 to vether0:network
-
-# Pass traffic to sietchumbu, natting to TPL
-pass out log quick on vether0 inet \
-  from any to 10.42.1.22 \
-  nat-to 10.42.1.1
 
 # Pass traffic from the shitternet LAN to TPL
 pass out log quick on vether0 inet \
