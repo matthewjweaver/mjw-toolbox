@@ -1,1 +1,1 @@
-parent em5 vnetid 42 up
+parent em5 vnetid 42 up mtu 1414
