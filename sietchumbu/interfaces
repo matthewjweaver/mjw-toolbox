@@ -10,7 +10,7 @@ iface eth0 inet static
 auto vlan42
 iface vlan42 inet static
 	address 10.42.1.22
-	mtu 1420
+	mtu 1414
 	netmask 255.255.255.0
 	vlan-raw-device eth0
 	post-up ip route add 10.42.0.0/16 via 10.42.1.1
