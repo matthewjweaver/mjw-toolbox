@@ -7,7 +7,6 @@ docker stop plex
 docker rm plex
 docker pull ${CONTAINER}
 docker run \
-  --cpus="4" \
   -d \
  --device=/dev/dri:/dev/dri \
   --name plex \
