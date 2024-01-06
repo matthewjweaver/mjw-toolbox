@@ -13,8 +13,8 @@ sietchtabr: \
   /etc/hostname.enc2 \
   /etc/hostname.enc3 \
   /etc/hostname.enc4 \
-  /etc/hostname.gre0 \
   /etc/hostname.pflow0 \
+  /etc/hostname.sec0 \
   /etc/hostname.wg0 \
   /etc/hostname.wg1 \
   /etc/hostname.vether0 \
@@ -131,13 +131,13 @@ sietchtabr: \
 	doas install -o root -g wheel -m 0640 \
 	  hostname.enc4 /etc/hostname.enc4
 
-/etc/hostname.gre0 : hostname.gre0
-	doas install -o root -g wheel -m 0640 \
-	  hostname.gre0 /etc/hostname.gre0
-
 /etc/hostname.pflow0 : hostname.pflow0
 	doas install -o root -g wheel -m 0640 \
 	  hostname.pflow0 /etc/hostname.pflow0
+
+/etc/hostname.sec0 : hostname.sec0
+	doas install -o root -g wheel -m 0640 \
+	  hostname.sec0 /etc/hostname.sec0
 
 /etc/hostname.wg0 : hostname.wg0
 	~/bin/op run --env-file=.env -- \

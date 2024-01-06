@@ -113,15 +113,15 @@ block in  log quick on em0 \
   from $promised_lan_routers \
   to (em0)
 
-# GRE link to bb3
-pass out log quick on gre0 \
+# sec(4) link to bb3
+pass out log quick on sec0 \
   from 10.42.1.0/24 \
   to 10.42.0.0/16
-pass out log quick on gre0 \
+pass out log quick on sec0 \
   from 192.168.223.0/24 \
   to 10.42.0.0/16 \
   nat-to 10.42.1.1
-pass in  log quick on gre0 \
+pass in  log quick on sec0 \
   from 10.42.0.0/16 \
   to 10.42.1.0/24
 
