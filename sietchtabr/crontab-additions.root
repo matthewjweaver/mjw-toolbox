@@ -1,3 +1,4 @@
 *	*	*	*	*	/usr/local/bin/pfstat -qp
+*/2	*	*	*	*	/usr/bin/doas -u _smokeping /usr/local/bin/smokeping --static
 */5     *       *       *       *       su -s /bin/sh _munin /usr/local/bin/munin-cron
 53	*	*	*	*	if ! /usr/sbin/rcctl check iked > /dev/null; then /usr/sbin/rcctl start iked; fi
