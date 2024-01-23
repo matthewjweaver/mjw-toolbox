@@ -7,6 +7,11 @@ iface eth0 inet static
 	netmask 255.255.255.0
 	gateway 192.168.223.1
 
+auto eth4
+iface eth4 inet static
+	address 172.23.0.65
+	netmask 255.255.255.192
+
 auto vlan42
 iface vlan42 inet static
 	address 10.42.1.22
