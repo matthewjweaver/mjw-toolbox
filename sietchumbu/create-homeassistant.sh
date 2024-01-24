@@ -9,7 +9,7 @@ docker run -d \
   --restart=unless-stopped \
   -e PUID="30001" \
   -e TZ="America/Chicago" \
-  -v /arc/sys/homeassistant:/config \
+  -v /home/docker/homeassistant:/config \
   --network=host \
   ${CONTAINER}
 
