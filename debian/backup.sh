@@ -61,7 +61,7 @@ TARGET_BLKID=${BACKUP_DIR}/blkid-output
 /sbin/blkid > ${TARGET_BLKID}
 
 for FILESYSTEM in $(/bin/mount|/bin/awk '/ext/ {print $3}'); do
-  UUID=$(/bin/findmnt -no UUID /)
+  UUID=$(/bin/findmnt -no UUID ${FILESYSTEM})
   BACKUP_OUTPUT=${BACKUP_DIR}/${UUID}.gz.chacha
   LOG_OUTPUT=${BACKUP_DIR}/${UUID}.log
   cp /dev/null ${LOG_OUTPUT}
