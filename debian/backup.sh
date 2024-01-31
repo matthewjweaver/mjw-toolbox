@@ -62,7 +62,7 @@ TARGET_BLKID=${BACKUP_DIR}/blkid-output
 
 for FILESYSTEM in $(/bin/mount|/bin/awk '/ext/ {print $3}'); do
   UUID=$(/bin/findmnt -no UUID ${FILESYSTEM})
-  BACKUP_OUTPUT=${BACKUP_DIR}/${UUID}.gz.chacha
+  BACKUP_OUTPUT=${BACKUP_DIR}/${UUID}.dump.lzo.chacha
   LOG_OUTPUT=${BACKUP_DIR}/${UUID}.log
   cp /dev/null ${LOG_OUTPUT}
   cp /dev/null ${BACKUP_OUTPUT}
@@ -70,7 +70,7 @@ for FILESYSTEM in $(/bin/mount|/bin/awk '/ext/ {print $3}'); do
   chmod 660 ${BACKUP_OUTPUT}
 
   doas /sbin/dump -0af - ${FILESYSTEM}| \
-    /bin/gzip --fast - 2>> ${LOG_OUTPUT} | \
+    /bin/lzop -1c 2>> ${LOG_OUTPUT} | \
     /bin/openssl enc -chacha20 -iter 1000000 -k "${PASSWORD}" 2>> ${LOG_OUTPUT} \
     > ${BACKUP_OUTPUT}
 done
