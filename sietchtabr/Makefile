@@ -263,9 +263,9 @@ sietchtabr: \
 	doas install -o root -g wheel -m 0644 \
 	  ssh_config /etc/ssh/ssh_config
 
-/etc/ssh/sshd_config : ../openbsd-skel/sshd_config
+/etc/ssh/sshd_config : sshd_config
 	doas install -o root -g wheel -m 0644 \
-	  ../openbsd-skel/sshd_config /etc/ssh/sshd_config
+	  sshd_config /etc/ssh/sshd_config
 
 /etc/syslog.conf : syslog.conf
 	doas install -o root -g wheel -m 0644 \
