@@ -1,6 +1,6 @@
 $TTL 3600
 @ 	IN SOA ns named (
-				2020031702 ; serial
+				2024013000 ; serial
 				1800       ; refresh, 30 min
 				300        ; retry 5 min
 				7776000    ; expire 90 days
