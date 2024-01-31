@@ -105,7 +105,7 @@ doas /sbin/disklabel -R ${TARGET_DISK} ${DISKLABEL}
 # A grand assumption here is that / is partition a every time, and
 # therefore comes first!
 for DUMP in $(ls ${BACKUP_DIR}/*chacha); do
-  DUID_PARTITION=$(basename ${DUMP} .gz.chacha)
+  DUID_PARTITION=$(basename ${DUMP} .dump.gz.chacha)
   TARGET_DIR=$(< ${BACKUP_DIR}/fstab awk "/${DUID_PARTITION}/ {print "'$2}')
   # Strip the disk uuid from the partition
   PARTITION=$(echo ${DUID_PARTITION}|sed -e's/[^.]*[.]//g')

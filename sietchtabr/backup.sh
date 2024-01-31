@@ -85,7 +85,7 @@ for DISK in ${UUIDS}; do
 done
 
 for PARTITION in $( < ${BACKUP_DIR}/fstab awk '/ffs/ { print $1 }' ); do
-  BACKUP_OUTPUT=${BACKUP_DIR}/${PARTITION}.gz.chacha
+  BACKUP_OUTPUT=${BACKUP_DIR}/${PARTITION}.dump.gz.chacha
   if ! [ -f ${BACKUP_OUTPUT} ]; then
     doas touch ${BACKUP_OUTPUT}
   fi
@@ -96,7 +96,8 @@ for PARTITION in $( < ${BACKUP_DIR}/fstab awk '/ffs/ { print $1 }' ); do
   doas chown root.wheel ${LOG_OUTPUT}
   doas chmod 660 ${LOG_OUTPUT}
 
-  ssh ${TARGET_USER}@${TARGET_HOST} "doas dump -0af - ${PARTITION}|gzip -" 2>> ${LOG_OUTPUT} | \
+  ssh ${TARGET_USER}@${TARGET_HOST} "doas dump -0af - ${PARTITION}| \
+    gzip -1 -" 2>> ${LOG_OUTPUT} | \
     /usr/bin/openssl enc -chacha -iter 1000000 -k "${PASSWORD}" 2>> ${LOG_OUTPUT} | \
     doas dd of=${BACKUP_OUTPUT} bs=4M 2>> ${LOG_OUTPUT}
 done
