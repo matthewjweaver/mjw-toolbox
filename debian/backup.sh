@@ -74,3 +74,5 @@ for FILESYSTEM in $(/bin/mount|/bin/awk '/ext/ {print $3}'); do
     /bin/openssl enc -chacha20 -iter 1000000 -k "${PASSWORD}" 2>> ${LOG_OUTPUT} \
     > ${BACKUP_OUTPUT}
 done
+
+doas touch ${BACKUP_DIR}

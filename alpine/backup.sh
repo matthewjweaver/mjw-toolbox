@@ -79,3 +79,5 @@ for UUID in $(< /etc/fstab /usr/bin/awk '/ext/ {print $1}'); do
     /usr/bin/openssl enc -chacha20 -iter 1000000 -k "${PASSWORD}" 2>> ${LOG_OUTPUT} \
     > ${BACKUP_OUTPUT}
 done
+
+doas touch ${BACKUP_DIR}

@@ -101,3 +101,5 @@ for PARTITION in $( < ${BACKUP_DIR}/fstab awk '/ffs/ { print $1 }' ); do
     /usr/bin/openssl enc -chacha -iter 1000000 -k "${PASSWORD}" 2>> ${LOG_OUTPUT} | \
     doas dd of=${BACKUP_OUTPUT} bs=4M 2>> ${LOG_OUTPUT}
 done
+
+doas touch ${BACKUP_DIR}
