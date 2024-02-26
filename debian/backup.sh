@@ -45,7 +45,7 @@ fi
 
 # Keep backups within a 12 week window, so we mod the number of the
 # week by twelve to number the output files.
-BACKUP_NUMBER=$(( $(date "+%U") % 12 ))
+BACKUP_NUMBER=$(echo "$(date '+%U') % 12"|bc)
 BACKUP_SUFFIX=lvl-0-num-${BACKUP_NUMBER}
 
 BACKUP_DIR=${BACKUPS_ROOT}/${BACKUP_SUFFIX}
