@@ -14,6 +14,7 @@ docker run \
   -v /home/docker/resilio-meta:/mnt/sync \
   -v /home/mistakenot:/mnt/mounted_folders/mistakenot \
   -v /home/multi:/mnt/mounted_folders/multi \
+  -v /home/shadowhax-movies:/mnt/mounted_folders/shadowhax-movies \
   ${CONTAINER}
 
 if [ "$1" = "--prune" ]; then

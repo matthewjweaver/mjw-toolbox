@@ -20,6 +20,7 @@ docker run \
   -v /home/docker/plex-meta/config:/config \
   -v /home/mistakenot:/mistakenot \
   -v /home/multi:/multi \
+  -v /home/shadowhax-movies:/shadowhax-movies \
   -v /home/docker/plex-tmp:/transcode \
   ${CONTAINER}
 

@@ -16,6 +16,7 @@ docker run \
   -v /home/docker/jellyfin/cache:/cache \
   -v /home/mistakenot:/media,readonly \
   -v /home/multi:/media2,readonly \
+  -v /home/shadowhax-movies:/media3,readonly \
   ${CONTAINER}
 
 if [ "$1" = "--prune" ]; then
