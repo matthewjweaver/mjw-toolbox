@@ -73,6 +73,7 @@ sietchtabr: \
 	doas dhcpd -nc dhcpd.conf
 	doas install -o root -g wheel -m 0644 \
 	  dhcpd.conf /etc/dhcpd.conf
+	doas rcctl restart dhcpd
 
 /etc/dhcpleased.conf : dhcpleased.conf
 	doas install -o root -g wheel -m 0644 \
