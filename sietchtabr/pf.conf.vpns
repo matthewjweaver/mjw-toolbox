@@ -254,44 +254,6 @@ pass out log quick on em5 inet \
 
 
 ########################################################################
-# Adamf VPN
-# XXX: make ipv6 work
-
-# ICMP pings
-pass in log on em0 inet \
-  proto icmp \
-  from 172.3.141.2 to (em0) \
-  icmp-type echoreq code 0 keep state
-
-# IPSEC
-pass in  log quick on em0 inet \
-  proto esp \
-  from 172.3.141.2 to (em0)
-pass out log quick on em0 inet \
-  proto esp \
-  from (em0) to 172.3.141.2
-
-# IKEv2, NAT traversal
-pass in  log quick on em0 inet \
-  proto udp \
-  from 172.3.141.2 to (em0) \
-  port { ipsec-nat-t, isakmp } keep state
-pass out log quick on em0 inet \
-  proto udp \
-  from (em0) to 172.3.141.2 \
-  port { ipsec-nat-t, isakmp } keep state
-
-# Tunneled Traffic
-pass log quick on enc4 inet \
-  from { (em0), 10.42.1.22, 192.168.1.80, 192.168.1.75 } \
-  to   { (em0), 10.42.1.22, 192.168.1.80, 192.168.1.75 }
-pass out log quick on vether0 inet \
-  from { 192.168.1.80, 192.168.1.75 } \
-  to   10.42.1.22 \
-  nat-to 10.42.1.1 keep state
-
-
-########################################################################
 # Deepcore VPN / shadowhax wireguard endpoint
 # TODO: move to ipv6
 # TODO: deprecated, replace with ikev2/ipsec
