@@ -249,7 +249,7 @@ pass log quick on enc1 inet \
 
 # Out onto LAN
 pass out log quick on em5 inet \
-  from { vpn.grahams.wtf, 192.168.2.1, 192.168.2.42, 192.168.2.208 - 192.168.2.210, 192.168.2.242 } \
+  from { vpn.grahams.wtf, 192.168.2.0/24 } \
   to { ghola.here, sietchumbu.here }
 
 
