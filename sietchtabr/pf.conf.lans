@@ -10,7 +10,7 @@ pass out log quick on em0 inet \
   from em5:network \
   nat-to (em0)
 pass out log quick on em0 inet6 \
-  from (em5:network) \
+  from any \
   nat-to (em0)
 
 # Capture all DNS
