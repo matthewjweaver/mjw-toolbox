@@ -1,8 +1,12 @@
 qanat: \
   /etc/dhcpd.conf \
   /etc/doas.conf \
+  /etc/hostname.bridge0 \
   /etc/hostname.em0 \
-  /etc/hostname.athn0 \
+  /etc/hostname.em1 \
+  /etc/hostname.em2 \
+  /etc/hostname.em3 \
+  /etc/hostname.vether0 \
   /etc/munin/munin-node.conf \
   /etc/ntpd.conf \
   /etc/pf.conf \
@@ -20,16 +24,29 @@ qanat: \
 	doas install -o root -g wheel -m 0600 \
 	  ../openbsd-skel/doas.conf /etc/doas.conf
 
+/etc/hostname.bridge0 : hostname.bridge0
+	doas install -o root -g wheel -m 0640 \
+	hostname.bridge0 /etc/hostname.bridge0
+
 /etc/hostname.em0 : hostname.em0
 	doas install -o root -g wheel -m 0640 \
-	  hostname.em0 /etc/hostname.em0
+	hostname.em0 /etc/hostname.em0
 
-/etc/hostname.athn0 : hostname.athn0
-	~/bin/op run --env-file=.env -- \
-	  sh ../install-secretfied.sh \
-	    hostname.athn0 \
-	    "-o root -g wheel -m 0640" \
-	    /etc/hostname.athn0
+/etc/hostname.em1 : hostname.em1
+	doas install -o root -g wheel -m 0640 \
+	hostname.em1 /etc/hostname.em1
+
+/etc/hostname.em2 : hostname.em2
+	doas install -o root -g wheel -m 0640 \
+	hostname.em2 /etc/hostname.em2
+
+/etc/hostname.em3 : hostname.em3
+	doas install -o root -g wheel -m 0640 \
+	hostname.em3 /etc/hostname.em3
+
+/etc/hostname.vether0 : hostname.vether0
+	doas install -o root -g wheel -m 0640 \
+	hostname.vether0 /etc/hostname.vether0
 
 /etc/munin/munin-node.conf : munin-node.conf
 	doas install -o root -g wheel -m 0644 \
