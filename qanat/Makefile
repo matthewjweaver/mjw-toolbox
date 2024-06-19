@@ -1,8 +1,8 @@
 qanat: \
   /etc/dhcpd.conf \
   /etc/doas.conf \
+  /etc/hostname.bridge0 \
   /etc/hostname.em0 \
-  /etc/hostname.athn0 \
   /etc/munin/munin-node.conf \
   /etc/ntpd.conf \
   /etc/pf.conf \
@@ -20,16 +20,13 @@ qanat: \
 	doas install -o root -g wheel -m 0600 \
 	  ../openbsd-skel/doas.conf /etc/doas.conf
 
+/etc/hostname.bridge0 : hostname.bridge0
+	doas install -o root -g wheel -m 0640 \
+	hostname.bridge0 /etc/hostname.bridge0
+
 /etc/hostname.em0 : hostname.em0
 	doas install -o root -g wheel -m 0640 \
-	  hostname.em0 /etc/hostname.em0
-
-/etc/hostname.athn0 : hostname.athn0
-	~/bin/op run --env-file=.env -- \
-	  sh ../install-secretfied.sh \
-	    hostname.athn0 \
-	    "-o root -g wheel -m 0640" \
-	    /etc/hostname.athn0
+	hostname.em0 /etc/hostname.em0
 
 /etc/munin/munin-node.conf : munin-node.conf
 	doas install -o root -g wheel -m 0644 \
