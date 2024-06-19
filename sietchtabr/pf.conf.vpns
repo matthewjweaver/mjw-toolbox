@@ -185,7 +185,7 @@ pass out log quick on em5 inet \
 pass out log quick on em5 inet \
   from { 100.64.0.0/10, 192.168.25.0/24 } \
   to 192.168.223.0/24
-pass out log quick on vether0 inet \
+pass out log quick on vlan42 inet \
   from 10.42.0.0/16 \
   to  10.42.1.0/24
 
@@ -246,11 +246,20 @@ pass log quick on enc1 inet \
 pass log quick on enc1 inet \
   from { gurneyhalleck.here, sietchtabr.nodeless.net, sietchumbu.here, vpn.grahams.wtf, 192.168.2.1 - 192.168.2.3, 192.168.2.18, 192.168.2.42, 192.168.2.114, 192.168.2.207 - 192.168.2.210, 192.168.2.242 } \
   to { gurneyhalleck.here, sietchtabr.nodeless.net, sietchumbu.here, vpn.grahams.wtf, 192.168.2.1 - 192.168.2.3, 192.168.2.18, 192.168.2.42, 192.168.2.114, 192.168.2.207 - 192.168.2.210, 192.168.2.242 }
+# sync traffic
+grahams_sync_hosts = "{ 192.168.2.173, 192.168.2.207, 192.168.2.209, 192.168.2.210 }"
+local_sync_hosts = "{ sietchumbu.here, ghola.here }"
+pass log quick on enc1 inet \
+  from $grahams_sync_hosts to $local_sync_hosts
+pass log quick on enc1 inet \
+  from $local_sync_hosts to $grahams_sync_hosts
 
 # Out onto LAN
 pass out log quick on em5 inet \
   from { vpn.grahams.wtf, 192.168.2.0/24 } \
   to { ghola.here, sietchumbu.here }
+pass out log quick on em5 inet \
+  from $grahams_sync_hosts to $local_sync_hosts
 
 
 ########################################################################
