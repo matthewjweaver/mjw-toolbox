@@ -11,10 +11,12 @@ qanat: \
   /etc/ntpd.conf \
   /etc/pf.conf \
   /etc/pf.sshbots \
+  /etc/rc.d/weewx \
   /etc/ssh/ssh_config \
   /etc/ssh/sshd_config \
   /etc/sysctl.conf \
-  /etc/syslog.conf
+  /etc/syslog.conf \
+  /home/weewx/weewx-data/weewx.conf
 
 /etc/dhcpd.conf : dhcpd.conf
 	doas install -o root -g wheel -m 0644 \
@@ -64,6 +66,10 @@ qanat: \
 	  pf.conf /etc/pf.conf
 	doas pfctl -f /etc/pf.conf
 
+/etc/rc.d/weewx : weewx
+	doas install -o root -g bin -m 0755 \
+	  weewx /etc/rc.d/weewx
+
 /etc/pf.sshbots : ../openbsd-skel/pf.sshbots
 	doas install -o root -g wheel -m 0600 \
 	  ../openbsd-skel/pf.sshbots /etc/pf.sshbots
@@ -83,4 +89,8 @@ qanat: \
 /etc/syslog.conf : syslog.conf
 	doas install -o root -g wheel -m 0644 \
 	  syslog.conf /etc/syslog.conf
+
+/home/weewx/weewx-data/weewx.conf : weewx.conf
+	doas install -o weewx -g weewx -m 0644 \
+	  weewx.conf /home/weewx/weewx-data/weewx.conf
 

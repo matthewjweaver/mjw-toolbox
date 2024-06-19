@@ -1,0 +1,35 @@
+#!/bin/ksh
+WEEWX_PID="/home/weewx/weewx.pid"
+DOAS="/usr/bin/doas -u weewx"
+
+case "$1" in
+  "start")
+    echo "Starting weewx..."
+    ${DOAS} /bin/ksh -c "cd /home/weewx; . venv/bin/activate; weewxd --daemon --pidfile=${WEEWX_PID} 2>&1 | logger -p daemon.info" &
+    echo "done"
+  ;;
+
+  "stop")
+    echo "Stopping weewx..."
+    if [ -f ${WEEWX_PID} ] ; then
+      kill `cat ${WEEWX_PID}`
+      rm ${WEEWX_PID}
+      echo "done"
+    else
+      echo "not running?"
+    fi
+  ;;
+
+  "restart")
+    echo "Restarting weewx..."
+    $0 stop
+    sleep 2
+    $0 start
+  ;;
+
+  *)
+    echo "$0 [start|stop|restart]"
+  ;;
+
+esac
+
