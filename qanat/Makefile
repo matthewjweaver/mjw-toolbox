@@ -3,6 +3,9 @@ qanat: \
   /etc/doas.conf \
   /etc/hostname.bridge0 \
   /etc/hostname.em0 \
+  /etc/hostname.em1 \
+  /etc/hostname.em2 \
+  /etc/hostname.em3 \
   /etc/munin/munin-node.conf \
   /etc/ntpd.conf \
   /etc/pf.conf \
@@ -27,6 +30,18 @@ qanat: \
 /etc/hostname.em0 : hostname.em0
 	doas install -o root -g wheel -m 0640 \
 	hostname.em0 /etc/hostname.em0
+
+/etc/hostname.em1 : hostname.em1
+	doas install -o root -g wheel -m 0640 \
+	hostname.em1 /etc/hostname.em1
+
+/etc/hostname.em2 : hostname.em2
+	doas install -o root -g wheel -m 0640 \
+	hostname.em2 /etc/hostname.em2
+
+/etc/hostname.em3 : hostname.em3
+	doas install -o root -g wheel -m 0640 \
+	hostname.em3 /etc/hostname.em3
 
 /etc/munin/munin-node.conf : munin-node.conf
 	doas install -o root -g wheel -m 0644 \
