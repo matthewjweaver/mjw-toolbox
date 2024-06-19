@@ -6,6 +6,7 @@ qanat: \
   /etc/hostname.em1 \
   /etc/hostname.em2 \
   /etc/hostname.em3 \
+  /etc/hostname.vether0 \
   /etc/munin/munin-node.conf \
   /etc/ntpd.conf \
   /etc/pf.conf \
@@ -42,6 +43,10 @@ qanat: \
 /etc/hostname.em3 : hostname.em3
 	doas install -o root -g wheel -m 0640 \
 	hostname.em3 /etc/hostname.em3
+
+/etc/hostname.vether0 : hostname.vether0
+	doas install -o root -g wheel -m 0640 \
+	hostname.vether0 /etc/hostname.vether0
 
 /etc/munin/munin-node.conf : munin-node.conf
 	doas install -o root -g wheel -m 0644 \
