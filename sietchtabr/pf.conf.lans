@@ -157,6 +157,11 @@ pass out log quick on em0 inet \
   from vlan42:network to ! 10.42.0.0/16 \
   nat-to (em0)
   
+# XXX TODO(mjw) for now, binat plan55-a until VLANs are working
+pass     log quick on vlan42 inet \
+  from 192.168.223.36 to any \
+  binat-to 10.42.1.4
+
 pass in  log quick on vlan42 inet \
   from vlan42:network to any
 
