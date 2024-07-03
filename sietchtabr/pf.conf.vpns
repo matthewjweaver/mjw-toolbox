@@ -59,6 +59,8 @@ pass in  log on wg0 inet \
 pass out log on wg0 inet \
   from any to 192.168.221.0/24
 
+# tunneled traffic
+pass on enc0
 
 ########################################################################
 # The Promised Lan VPN
@@ -240,6 +242,15 @@ pass out log quick on em0 inet \
 pass log quick on enc1 inet \
   from { ghola.here, vpn.grahams.wtf, 192.168.2.0/24 } \
   to   { ghola.here, vpn.grahams.wtf, 192.168.2.0/24 }
+
+# between gateways
+pass log quick on enc1 inet \
+  from { 192.168.223.1, 192.168.2.1 } \
+  to   { 192.168.223.1, 192.168.2.1 }
+pass log quick on enc1 inet \
+  from { vpn.grahams.wtf, sietchtabr.nodeless.net } \
+  to   { vpn.grahams.wtf, sietchtabr.nodeless.net }
+
 pass log quick on enc1 inet \
   from { gurneyhalleck.here, otheym.here, sietchtabr.nodeless.net, taqwa.here } \
   to kulon.nodeless.net
@@ -247,8 +258,8 @@ pass log quick on enc1 inet \
   from { gurneyhalleck.here, sietchtabr.nodeless.net, sietchumbu.here, vpn.grahams.wtf, 192.168.2.1 - 192.168.2.3, 192.168.2.18, 192.168.2.42, 192.168.2.114, 192.168.2.207 - 192.168.2.210, 192.168.2.242 } \
   to { gurneyhalleck.here, sietchtabr.nodeless.net, sietchumbu.here, vpn.grahams.wtf, 192.168.2.1 - 192.168.2.3, 192.168.2.18, 192.168.2.42, 192.168.2.114, 192.168.2.207 - 192.168.2.210, 192.168.2.242 }
 # sync traffic
-grahams_sync_hosts = "{ 192.168.2.173, 192.168.2.207, 192.168.2.209, 192.168.2.210 }"
-local_sync_hosts = "{ sietchumbu.here, ghola.here }"
+grahams_sync_hosts = "{ 192.168.2.173, 192.168.2.206, 192.168.2.207, 192.168.2.209, 192.168.2.210 }"
+local_sync_hosts = "{ sietchtabr.nodeless.net, sietchumbu.here, ghola.here }"
 pass log quick on enc1 inet \
   from $grahams_sync_hosts to $local_sync_hosts
 pass log quick on enc1 inet \
