@@ -1,5 +1,5 @@
 #!/bin/sh
-CONTAINER=linuxserver/sonarr
+CONTAINER=ghcr.io/linuxserver/sonarr:latest
 docker stop sonarr
 docker rm sonarr
 docker pull ${CONTAINER}

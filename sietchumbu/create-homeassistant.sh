@@ -1,5 +1,5 @@
 #!/bin/sh
-CONTAINER=ghcr.io/home-assistant/home-assistant:stable
+CONTAINER=ghcr.io/linuxserver/homeassistant:latest
 docker stop homeassistant
 docker rm homeassistant
 docker pull $CONTAINER

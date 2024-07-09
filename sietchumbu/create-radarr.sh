@@ -1,5 +1,5 @@
 #!/bin/sh
-CONTAINER=linuxserver/radarr
+CONTAINER=ghcr.io/linuxserver/radarr:latest
 docker stop radarr
 docker rm radarr
 docker pull ${CONTAINER}

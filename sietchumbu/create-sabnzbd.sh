@@ -1,5 +1,5 @@
 #!/bin/sh
-CONTAINER=linuxserver/sabnzbd
+CONTAINER=ghcr.io/linuxserver/sabnzbd:latest
 docker stop sabnzbd
 docker rm sabnzbd
 docker pull ${CONTAINER}
