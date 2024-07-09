@@ -15,3 +15,11 @@ pass in log quick on em0 inet \
   proto { udp, tcp } \
   from any \
   to sietchumbu.here port 55555
+
+
+########################################################################
+# WebDAV access to ghola from grahams
+pass in log quick on em0 inet \
+  proto tcp \
+  from burro.grahams.wtf \
+  to sietchtabr.nodeless.net port 20623
