@@ -1,6 +1,6 @@
 $TTL 3600
 @	IN SOA	ns1 named (
-				2024013000  ; serial
+				2024070900  ; serial
 				1800       ; refresh (30 min)
 				300        ; retry (5 min)
 				8467200    ; expire (14 weeks)
@@ -26,6 +26,7 @@ mesmtp._domainkey	TXT	(
 @		IN AAAA	2001:19f0:5401:d29:5400:2ff:fe9f:b321
 
 bb3		IN A	45.76.228.43
+ghola		IN CNAME	sietchtabr.nodeless.net.
 korba		IN A	155.138.220.216
 korba		IN AAAA	2001:19f0:5401:d29:5400:2ff:fe9f:b322
 ns1		IN A	155.138.220.216
