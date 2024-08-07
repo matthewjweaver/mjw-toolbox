@@ -1,4 +1,0 @@
-wgkey XXX_WG1_XXX wgport 25672
-wgpeer eAAOoiE6+wQGGCV6ctuWaWdGKBfpdu+mOinoHbDY0Ws= wgendpoint 174.21.88.6 51820 wgaip 169.254.87.2
-169.254.87.1/24
-inet alias 169.254.87.254/32
