@@ -1,6 +1,6 @@
 $TTL 3600
 @ 	IN SOA ns named (
-				2024013000 ; serial
+				2024080700 ; serial
 				1800       ; refresh, 30 min
 				300        ; retry 5 min
 				7776000    ; expire 90 days
@@ -12,9 +12,6 @@ $TTL 3600
 
 
 @	IN A	155.138.220.216
-p	IN A	155.138.220.216
-ph	IN A	155.138.220.216
-photos	IN A	155.138.220.216
 www	IN A	155.138.220.216
 
 mcweavers.net.	IN CAA	0 issue "letsencrypt.org"

@@ -1,6 +1,5 @@
 for DOMAIN in \
-  ice-nine.org mcweavers.net mjw.wtf nodeless.net \
-  photos.mcweavers.net p.mcweavers.net; do
+  ice-nine.org mcweavers.net mjw.wtf nodeless.net ; do
   # renew letsencrypt certs as necessary
   acme-client ${DOMAIN} && rcctl reload httpd
 done
