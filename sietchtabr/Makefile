@@ -14,6 +14,8 @@ sietchtabr: \
   /etc/hostname.enc4 \
   /etc/hostname.pflow0 \
   /etc/hostname.sec0 \
+  /etc/hostname.sec1 \
+  /etc/hostname.sec2 \
   /etc/hostname.wg0 \
   /etc/hostname.vlan42 \
   /etc/hostname.vlan666 \
@@ -132,6 +134,14 @@ sietchtabr: \
 /etc/hostname.sec0 : hostname.sec0
 	doas install -o root -g wheel -m 0640 \
 	  hostname.sec0 /etc/hostname.sec0
+
+/etc/hostname.sec1 : hostname.sec1
+	doas install -o root -g wheel -m 0640 \
+	  hostname.sec1 /etc/hostname.sec1
+
+/etc/hostname.sec2 : hostname.sec2
+	doas install -o root -g wheel -m 0640 \
+	  hostname.sec2 /etc/hostname.sec2
 
 /etc/hostname.wg0 : hostname.wg0
 	~/bin/op run --env-file=.env -- \
