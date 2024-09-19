@@ -91,14 +91,6 @@ sietchtabr: \
 	doas install -o root -g wheel -m 0640 \
 	  hostname.em0 /etc/hostname.em0
 
-/etc/hostname.em1 : hostname.em1
-	doas install -o root -g wheel -m 0640 \
-	  hostname.em1 /etc/hostname.em1
-
-/etc/hostname.em2 : hostname.em2
-	doas install -o root -g wheel -m 0640 \
-	  hostname.em2 /etc/hostname.em2
-
 /etc/hostname.em3 : hostname.em3
 	doas install -o root -g wheel -m 0640 \
 	  hostname.em3 /etc/hostname.em3
@@ -186,10 +178,6 @@ sietchtabr: \
 /etc/munin/plugin-conf.d/openbsd-packages : openbsd-packages
 	doas install -o root -g wheel -m 0644 \
 	  openbsd-packages /etc/munin/plugin-conf.d/openbsd-packages
-
-/etc/mygate : mygate
-	doas install -o root -g wheel -m 0644 \
-	  mygate /etc/mygate
 
 /etc/newsyslog.conf : newsyslog.conf
 	doas install -o root -g wheel -m 0644 \
