@@ -27,6 +27,15 @@ rcctl enable unbound
 rcctl set ntpd flags -s
 rcctl enable vmd
 
+# tftpd configuration
+if ! [ -d /var/tftpd ]; then
+  mkdir /var/tftpd
+fi
+chown root.wheel /var/tftpd
+chmod 755 /var/tftpd
+rcctl enable tftpd
+rcctl set tftpd flags "-l 192.168.223.1 /var/tftpd"
+
 rcctl enable munin_node
 rcctl enable smokeping
 rcctl enable smokeping_fcgi
