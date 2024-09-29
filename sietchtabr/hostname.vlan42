@@ -1,3 +1,3 @@
-parent em5 vnetid 42 up
+parent ixl0 vnetid 42 up
 inet 10.42.1.1 255.255.255.0 10.42.1.255
 inet alias 10.42.1.4 255.255.255.255

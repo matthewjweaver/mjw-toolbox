@@ -3,16 +3,33 @@
 # To be run on a new machine, serves as knowledge store for everything
 # inappropriate for storage in another format.
 
-echo "https://cdn.openbsd.org/pub/OpenBSD/" > /etc/installurl
-
-export PKG_PATH=https://cdn.openbsd.org/%m
-pkg_add git
-pkg_add vim
-pkg_add pfstat
-pkg_add munin-server
-pkg_add p5-Net-SNMP
-pkg_add opendnssec
+export PKG_PATH=https://sietchtabr.nodeless.net/%m
+pkg_add aggregate
 pkg_add dhcpcd
+pkg_add gettext
+pkg_add git
+pkg_add gitwrapper
+pkg_add gnupg
+pkg_add go
+pkg_add got
+pkg_add iperf
+pkg_add iperf3
+pkg_add libgpg
+pkg_add munin
+pkg_add netpbm
+pkg_add nmap
+pkg_add openvpn
+pkg_add pfstat
+pkg_add pftop
+pkg_add portslist
+pkg_add reposync
+pkg_add rsync
+pkg_add smokeping
+pkg_add sysclean
+pkg_add unzip
+pkg_add vim
+pkg_add wget
+pkg_add zip
 
 rcctl set syslogd flags "-U 127.0.0.1"
 rcctl restart syslogd
@@ -46,4 +63,3 @@ mkdir -p /var/www/htdocs/pf
 usermod -G _munin www
 
 echo "For pfstat stats and graphs, add pfstat -qp to root's crontab."
-echo "For OpenDNSSEC setup, less /usr/local/share/doc/pkg-readmes/opendnssec."

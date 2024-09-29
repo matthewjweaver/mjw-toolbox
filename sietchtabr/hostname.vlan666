@@ -1,1 +1,1 @@
-inet 192.168.166.1 255.255.255.0 192.168.166.255 parent em5 vnetid 666 group untrusted
+inet 192.168.166.1 255.255.255.0 192.168.166.255 parent ixl0 vnetid 666 group untrusted

@@ -7,11 +7,11 @@ sietchtabr: \
   /etc/hostname.bridge42 \
   /etc/hostname.em0 \
   /etc/hostname.em4 \
-  /etc/hostname.em5 \
   /etc/hostname.enc1 \
   /etc/hostname.enc2 \
   /etc/hostname.enc3 \
   /etc/hostname.enc4 \
+  /etc/hostname.ixl0 \
   /etc/hostname.pflow0 \
   /etc/hostname.sec0 \
   /etc/hostname.sec1 \
@@ -99,10 +99,6 @@ sietchtabr: \
 	doas install -o root -g wheel -m 0640 \
 	  hostname.em4 /etc/hostname.em4
 
-/etc/hostname.em5 : hostname.em5
-	doas install -o root -g wheel -m 0640 \
-	  hostname.em5 /etc/hostname.em5
-
 /etc/hostname.enc1 : hostname.enc1
 	doas install -o root -g wheel -m 0640 \
 	  hostname.enc1 /etc/hostname.enc1
@@ -118,6 +114,10 @@ sietchtabr: \
 /etc/hostname.enc4 : hostname.enc4
 	doas install -o root -g wheel -m 0640 \
 	  hostname.enc4 /etc/hostname.enc4
+
+/etc/hostname.ixl0 : hostname.ixl0
+	doas install -o root -g wheel -m 0640 \
+	  hostname.ixl0 /etc/hostname.ixl0
 
 /etc/hostname.pflow0 : hostname.pflow0
 	doas install -o root -g wheel -m 0640 \
