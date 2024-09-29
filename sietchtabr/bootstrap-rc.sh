@@ -1,35 +1,7 @@
 #!/bin/sh
 
-# To be run on a new machine, serves as knowledge store for everything
-# inappropriate for storage in another format.
-
-export PKG_PATH=https://sietchtabr.nodeless.net/%m
-pkg_add aggregate
-pkg_add dhcpcd
-pkg_add gettext
-pkg_add git
-pkg_add gitwrapper
-pkg_add gnupg
-pkg_add go
-pkg_add got
-pkg_add iperf
-pkg_add iperf3
-pkg_add libgpg
-pkg_add munin
-pkg_add netpbm
-pkg_add nmap
-pkg_add openvpn
-pkg_add pfstat
-pkg_add pftop
-pkg_add portslist
-pkg_add reposync
-pkg_add rsync
-pkg_add smokeping
-pkg_add sysclean
-pkg_add unzip
-pkg_add vim
-pkg_add wget
-pkg_add zip
+# To be run on a new machine, serves as knowledge store for 
+# various rcctl configuration, plus arbitrary filesystem changes.
 
 rcctl set syslogd flags "-U 127.0.0.1"
 rcctl restart syslogd
