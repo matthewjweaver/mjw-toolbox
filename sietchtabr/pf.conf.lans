@@ -60,31 +60,31 @@ pass out log quick on ixl0 inet \
 # Haven LAN (OOB)
 # NAT outbound
 pass out log quick on em0 inet \
-  from em4:network \
+  from em1:network \
   nat-to (em0)
 
 # Pass a restricted set of outbound traffic from Haven
-pass in  log quick on em4 inet \
+pass in  log quick on em1 inet \
   proto tcp \
-  from em4:network \
+  from em1:network \
   to any port { http, https, ssh, syslog-tls }
 
 # Pass a restricted set of traffic from the router and home LAN
-pass out log quick on em4 inet \
+pass out log quick on em1 inet \
   proto tcp \
-  from { em4, ixl0:network } \
-  to em4:network port { http, https, ssh, 4949 }
+  from { em1, ixl0:network } \
+  to em1:network port { http, https, ssh, 4949 }
 
 # Pass monitoring traffic from router (munin, pings)
-pass out log quick on em4 inet \
+pass out log quick on em1 inet \
   proto icmp \
-  from em4 \
-  to em4:network \
+  from em1 \
+  to em1:network \
   icmp-type echoreq code 0
-pass out log quick on em4 inet \
+pass out log quick on em1 inet \
   proto tcp \
-  from em4 \
-  to em4:network port 4949
+  from em1 \
+  to em1:network port 4949
 
 
 ########################################################################

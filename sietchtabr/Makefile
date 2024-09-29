@@ -6,7 +6,7 @@ sietchtabr: \
   /etc/doas.conf \
   /etc/hostname.bridge42 \
   /etc/hostname.em0 \
-  /etc/hostname.em4 \
+  /etc/hostname.em1 \
   /etc/hostname.enc1 \
   /etc/hostname.enc2 \
   /etc/hostname.enc3 \
@@ -95,9 +95,9 @@ sietchtabr: \
 	doas install -o root -g wheel -m 0640 \
 	  hostname.em3 /etc/hostname.em3
 
-/etc/hostname.em4 : hostname.em4
+/etc/hostname.em1 : hostname.em1
 	doas install -o root -g wheel -m 0640 \
-	  hostname.em4 /etc/hostname.em4
+	  hostname.em1 /etc/hostname.em1
 
 /etc/hostname.enc1 : hostname.enc1
 	doas install -o root -g wheel -m 0640 \
