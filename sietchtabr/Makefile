@@ -91,10 +91,6 @@ sietchtabr: \
 	doas install -o root -g wheel -m 0640 \
 	  hostname.em0 /etc/hostname.em0
 
-/etc/hostname.em3 : hostname.em3
-	doas install -o root -g wheel -m 0640 \
-	  hostname.em3 /etc/hostname.em3
-
 /etc/hostname.em1 : hostname.em1
 	doas install -o root -g wheel -m 0640 \
 	  hostname.em1 /etc/hostname.em1

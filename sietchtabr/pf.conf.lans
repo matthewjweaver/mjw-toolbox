@@ -59,32 +59,33 @@ pass out log quick on ixl0 inet \
 ########################################################################
 # Haven LAN (OOB)
 # NAT outbound
-pass out log quick on em0 inet \
-  from em1:network \
-  nat-to (em0)
-
-# Pass a restricted set of outbound traffic from Haven
-pass in  log quick on em1 inet \
-  proto tcp \
-  from em1:network \
-  to any port { http, https, ssh, syslog-tls }
-
-# Pass a restricted set of traffic from the router and home LAN
-pass out log quick on em1 inet \
-  proto tcp \
-  from { em1, ixl0:network } \
-  to em1:network port { http, https, ssh, 4949 }
-
-# Pass monitoring traffic from router (munin, pings)
-pass out log quick on em1 inet \
-  proto icmp \
-  from em1 \
-  to em1:network \
-  icmp-type echoreq code 0
-pass out log quick on em1 inet \
-  proto tcp \
-  from em1 \
-  to em1:network port 4949
+# XXX TODO(switch to vm cielago)
+#pass out log quick on em0 inet \
+#  from XXX:network \
+#  nat-to (em0)
+#
+## Pass a restricted set of outbound traffic from Haven
+#pass in  log quick on XXX inet \
+#  proto tcp \
+#  from XXX:network \
+#  to any port { http, https, ssh, syslog-tls }
+#
+## Pass a restricted set of traffic from the router and home LAN
+#pass out log quick on XXX inet \
+#  proto tcp \
+#  from { XXX, ixl0:network } \
+#  to XXX:network port { http, https, ssh, 4949 }
+#
+## Pass monitoring traffic from router (munin, pings)
+#pass out log quick on XXX inet \
+#  proto icmp \
+#  from XXX \
+#  to XXX:network \
+#  icmp-type echoreq code 0
+#pass out log quick on XXX inet \
+#  proto tcp \
+#  from XXX \
+#  to XXX:network port 4949
 
 
 ########################################################################
