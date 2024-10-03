@@ -156,7 +156,11 @@ pass out log quick on vlan666 inet \
 pass out log quick on em0 inet \
   from vlan42:network to ! 10.42.0.0/16 \
   nat-to (em0)
-  
+
+pass in  log quick on vlan42 inet \
+  from 10.42.0.0/16 to 10.42.1.10 \
+  rdr-to taqwa.here
+
 pass in  log quick on vlan42 inet \
   from vlan42:network to any
 
