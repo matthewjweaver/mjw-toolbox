@@ -2,7 +2,7 @@
 pass in log quick on any inet \
   proto tcp \
   from any to sietchumbu.here port 32400
-pass out log quick on em5 inet \
+pass out log quick on ixl0 inet \
   proto tcp \
   from any to sietchumbu.here port 32400
 

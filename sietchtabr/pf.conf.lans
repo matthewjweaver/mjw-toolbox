@@ -7,84 +7,85 @@ pass out log quick on em0 inet \
   from { 192.168.223.21, 192.168.223.24 } \
   nat-to (em0) static-port
 pass out log quick on em0 inet \
-  from em5:network \
+  from ixl0:network \
   nat-to (em0)
 pass out log quick on em0 inet6 \
   from any \
   nat-to (em0)
 
 # Capture all DNS
-pass in log quick on em5 inet \
+pass in log quick on ixl0 inet \
   proto { tcp, udp } \
   from any \
   to any port { domain, domain-s } \
-  rdr-to em5
-pass in log quick on em5 inet6 \
+  rdr-to ixl0
+pass in log quick on ixl0 inet6 \
   proto { tcp, udp } \
   from any \
   to any port { domain, domain-s } \
-  rdr-to (em5)
+  rdr-to (ixl0)
 
 # Pass this LAN's outbound traffic
-pass in  log quick on em5 inet \
-  from em5:network to any
-pass in  log quick on em5 inet6 \
-  from (em5:network) to any
+pass in  log quick on ixl0 inet \
+  from ixl0:network to any
+pass in  log quick on ixl0 inet6 \
+  from (ixl0:network) to any
 
 # Pass traffic from the router to this LAN
-pass out log quick on em5 inet \
-  from em5 to em5:network
-pass out log quick on em5 inet \
-  from em5:network to em5:network
-pass out log quick on em5 inet6 \
-  from (em5) to (em5:network)
+pass out log quick on ixl0 inet \
+  from ixl0 to ixl0:network
+pass out log quick on ixl0 inet \
+  from ixl0:network to ixl0:network
+pass out log quick on ixl0 inet6 \
+  from (ixl0) to (ixl0:network)
 
 # Pass multicast
-pass in  log quick on em5 inet \
+pass in  log quick on ixl0 inet \
   from 224.0.0.0/24 to any
-pass out log quick on em5 inet \
+pass out log quick on ixl0 inet \
   from any to 224.0.0.0/24
 
 # Hack plex (XXX: confirm unneeded)
-#pass in  log on em5 inet \
+#pass in  log on ixl0 inet \
   #proto tcp \
   #from any to em0 port 24625 \
   #rdr-to sietchumbu.here port 32400
-#pass out log quick on em5 inet \
+#pass out log quick on ixl0 inet \
   #proto tcp \
   #to sietchumbu.here port 32400 \
-  #received-on em5 nat-to em5
+  #received-on ixl0 nat-to ixl0
 
 
 ########################################################################
 # Haven LAN (OOB)
 # NAT outbound
-pass out log quick on em0 inet \
-  from em4:network \
-  nat-to (em0)
-
-# Pass a restricted set of outbound traffic from Haven
-pass in  log quick on em4 inet \
-  proto tcp \
-  from em4:network \
-  to any port { http, https, ssh, syslog-tls }
-
-# Pass a restricted set of traffic from the router and home LAN
-pass out log quick on em4 inet \
-  proto tcp \
-  from { em4, em5:network } \
-  to em4:network port { http, https, ssh, 4949 }
-
-# Pass monitoring traffic from router (munin, pings)
-pass out log quick on em4 inet \
-  proto icmp \
-  from em4 \
-  to em4:network \
-  icmp-type echoreq code 0
-pass out log quick on em4 inet \
-  proto tcp \
-  from em4 \
-  to em4:network port 4949
+# XXX TODO(switch to vm cielago)
+#pass out log quick on em0 inet \
+#  from XXX:network \
+#  nat-to (em0)
+#
+## Pass a restricted set of outbound traffic from Haven
+#pass in  log quick on XXX inet \
+#  proto tcp \
+#  from XXX:network \
+#  to any port { http, https, ssh, syslog-tls }
+#
+## Pass a restricted set of traffic from the router and home LAN
+#pass out log quick on XXX inet \
+#  proto tcp \
+#  from { XXX, ixl0:network } \
+#  to XXX:network port { http, https, ssh, 4949 }
+#
+## Pass monitoring traffic from router (munin, pings)
+#pass out log quick on XXX inet \
+#  proto icmp \
+#  from XXX \
+#  to XXX:network \
+#  icmp-type echoreq code 0
+#pass out log quick on XXX inet \
+#  proto tcp \
+#  from XXX \
+#  to XXX:network port 4949
 
 
 ########################################################################
@@ -125,7 +126,7 @@ pass in  log quick on vlan666 inet \
 # Permit http and https from router, lans
 pass out log quick on vlan666 inet \
   proto tcp \
-  from { vlan666, em5, em5:network } \
+  from { vlan666, ixl0, ixl0:network } \
   to vlan666:network \
   port { https, www }
 
@@ -142,7 +143,7 @@ pass log quick on vlan666 inet \
 # Pass outbound traffic only
 pass in  log quick on vlan666 inet \
   from vlan666:network \
-  to ! em5:network
+  to ! ixl0:network
 
 # Pass traffic from router
 pass out log quick on vlan666 inet \
@@ -162,7 +163,7 @@ pass in  log quick on vlan42 inet \
 
 pass in  log quick on vlan42 inet \
   from 10.42.1.254 to taqwa.here
-pass out log quick on em5 inet \
+pass out log quick on ixl0 inet \
   from 10.42.1.254 to taqwa.here
 
 # taqwa relayd

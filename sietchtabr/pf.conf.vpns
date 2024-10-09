@@ -182,10 +182,10 @@ pass in log on em0 inet \
   icmp-type echoreq code 0 keep state
 
 # Out onto LAN
-pass out log quick on em5 inet \
+pass out log quick on ixl0 inet \
   from $starlink \
   to 192.168.223.0/24
-pass out log quick on em5 inet \
+pass out log quick on ixl0 inet \
   from { 100.64.0.0/10, 192.168.25.0/24 } \
   to 192.168.223.0/24
 pass out log quick on vlan42 inet \
@@ -267,9 +267,9 @@ pass log quick on enc1 inet \
   from $local_sync_hosts to $grahams_sync_hosts
 
 # Out onto LAN
-pass out log quick on em5 inet \
+pass out log quick on ixl0 inet \
   from { vpn.grahams.wtf, 192.168.2.0/24 } \
   to { ghola.here, sietchumbu.here }
-pass out log quick on em5 inet \
+pass out log quick on ixl0 inet \
   from $grahams_sync_hosts to $local_sync_hosts
 
