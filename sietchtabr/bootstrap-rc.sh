@@ -8,12 +8,14 @@ rcctl restart syslogd
 rcctl enable dhcpd
 rcctl set dhcpd flags "-A dhcpd_abandoned -L dhcpd_leased"
 rcctl enable httpd
+rcctl enable iked
 rcctl set pflogd flags "-s 1500"
 rcctl enable rad
+rcctl enable relayd
 rcctl disable resolvd
 rcctl stop resolvd
 rcctl enable unbound
-rcctl set ntpd flags -s
+rcctl enable ntpd
 rcctl enable vmd
 
 # tftpd configuration
@@ -28,7 +30,6 @@ rcctl set tftpd flags "-l 192.168.223.1 /var/tftpd"
 rcctl enable munin_node
 rcctl enable smokeping
 rcctl enable smokeping_fcgi
-rcctl enable dhcpcd
 
 mkdir -p /var/www/htdocs/pf
 

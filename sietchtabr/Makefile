@@ -22,6 +22,7 @@ sietchtabr: \
   /etc/httpd.conf \
   /etc/iked.conf \
   /etc/login.conf \
+  /etc/mk.conf \
   /etc/munin/munin.conf \
   /etc/munin/munin-node.conf \
   /etc/munin/plugin-conf.d/openbsd-packages \
@@ -162,6 +163,10 @@ sietchtabr: \
 /etc/login.conf : login.conf
 	doas install -o root -g wheel -m 0644 \
 	  login.conf /etc/login.conf
+
+/etc/mk.conf : mk.conf
+	doas install -o root -g wheel -m 0644 \
+	  mk.conf /etc/mk.conf
 
 /etc/munin/munin.conf : munin.conf
 	doas install -o root -g wheel -m 0644 \
