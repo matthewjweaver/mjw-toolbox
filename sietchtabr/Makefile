@@ -4,6 +4,7 @@ sietchtabr: \
   /etc/dhcpd.conf \
   /etc/dhcpcd.conf \
   /etc/doas.conf \
+  /etc/hostname.bridge0 \
   /etc/hostname.bridge42 \
   /etc/hostname.em0 \
   /etc/hostname.em1 \
@@ -17,6 +18,7 @@ sietchtabr: \
   /etc/hostname.sec1 \
   /etc/hostname.sec2 \
   /etc/hostname.wg0 \
+  /etc/hostname.vether0 \
   /etc/hostname.vlan42 \
   /etc/hostname.vlan666 \
   /etc/httpd.conf \
@@ -84,6 +86,10 @@ sietchtabr: \
 	doas install -o root -g wheel -m 0600 \
 	  doas.conf /etc/doas.conf
 
+/etc/hostname.bridge0 : hostname.bridge0
+	doas install -o root -g wheel -m 0640 \
+	  hostname.bridge0 /etc/hostname.bridge0
+
 /etc/hostname.bridge42 : hostname.bridge42
 	doas install -o root -g wheel -m 0640 \
 	  hostname.bridge42 /etc/hostname.bridge42
@@ -138,6 +144,10 @@ sietchtabr: \
 	    hostname.wg0 \
 	    "-o root -g wheel -m 0640" \
 	    /etc/hostname.wg0
+
+/etc/hostname.vether0 : hostname.vether0
+	doas install -o root -g wheel -m 0640 \
+	  hostname.vether0 /etc/hostname.vether0
 
 /etc/hostname.vlan42 : hostname.vlan42
 	doas install -o root -g wheel -m 0640 \

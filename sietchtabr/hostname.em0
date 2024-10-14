@@ -1,4 +1,1 @@
-# uplink
-inet autoconf
-lladdr 00:e0:67:18:73:a2
-#inet6 autoconf
+up

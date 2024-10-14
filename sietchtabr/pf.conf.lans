@@ -3,15 +3,15 @@
 # TODO: enable dhcp enforcement using dhcpd(8)'s -L and -A pf table
 # maintenance.
 # NAT outbound
-pass out log quick on em0 inet \
+pass out log quick on vether0 inet \
   from { 192.168.223.21, 192.168.223.24 } \
-  nat-to (em0) static-port
-pass out log quick on em0 inet \
+  nat-to (vether0) static-port
+pass out log quick on vether0 inet \
   from ixl0:network \
-  nat-to (em0)
-pass out log quick on em0 inet6 \
+  nat-to (vether0)
+pass out log quick on vether0 inet6 \
   from any \
-  nat-to (em0)
+  nat-to (vether0)
 
 # Capture all DNS
 pass in log quick on ixl0 inet \
@@ -48,7 +48,7 @@ pass out log quick on ixl0 inet \
 # Hack plex (XXX: confirm unneeded)
 #pass in  log on ixl0 inet \
   #proto tcp \
-  #from any to em0 port 24625 \
+  #from any to vether0 port 24625 \
   #rdr-to sietchumbu.here port 32400
 #pass out log quick on ixl0 inet \
   #proto tcp \
@@ -60,9 +60,9 @@ pass out log quick on ixl0 inet \
 # Haven LAN (OOB)
 # NAT outbound
 # XXX TODO(switch to vm cielago)
-#pass out log quick on em0 inet \
+#pass out log quick on vether0 inet \
 #  from XXX:network \
-#  nat-to (em0)
+#  nat-to (vether0)
 #
 ## Pass a restricted set of outbound traffic from Haven
 #pass in  log quick on XXX inet \
@@ -91,9 +91,9 @@ pass out log quick on ixl0 inet \
 ########################################################################
 # Untrusted LAN (internet of shit)
 # NAT Outbound
-pass out log quick on em0 inet \
+pass out log quick on vether0 inet \
   from vlan666:network \
-  nat-to (em0)
+  nat-to (vether0)
 
 # Capture DNS
 pass in log quick on vlan666 inet \
@@ -154,9 +154,9 @@ pass out log quick on vlan666 inet \
 ########################################################################
 # Local Promised Lan Segment
 # Pass this LAN's outbound traffic
-pass out log quick on em0 inet \
+pass out log quick on vether0 inet \
   from vlan42:network to ! 10.42.0.0/16 \
-  nat-to (em0)
+  nat-to (vether0)
 
 pass in  log quick on vlan42 inet \
   from vlan42:network to any
