@@ -14,6 +14,8 @@ rcctl enable rad
 rcctl enable relayd
 rcctl disable resolvd
 rcctl stop resolvd
+rcctl enable rrdcached
+rcctl set rrdcached flags "rrdcached_flags=-b /var/db/rrd -m 770 -l unix:/var/run/rrd/rrdcached.sock -j /var/db/rrd/journal -p /var/run/rrd/rrdcached.pid -w 60 -z 30"
 rcctl enable unbound
 rcctl enable ntpd
 rcctl enable vmd

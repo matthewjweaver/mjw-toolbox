@@ -91,22 +91,22 @@ pass in  log quick on vether0 inet \
   proto udp \
   from $promised_lan_routers \
   to (vether0) \
-  port { ipsec-nat-t, isakmp } keep state
+  port { ipsec-nat-t, isakmp }
 #pass in  log quick on vether0 inet6 \
   #proto udp \
   #from $promised_lan_routers \
   #to (vether0) \
-  #port { ipsec-nat-t, isakmp } keep state
+  #port { ipsec-nat-t, isakmp }
 pass out log quick on vether0 inet \
   proto udp \
   from (vether0) \
   to $promised_lan_routers \
-  port { ipsec-nat-t, isakmp } keep state
+  port { ipsec-nat-t, isakmp }
 #pass out log quick on vether0 inet6 \
   #proto udp \
   #from (vether0) \
   #to $promised_lan_routers \
-  #port { ipsec-nat-t, isakmp } keep state
+  #port { ipsec-nat-t, isakmp }
 
 # Safety: drop all other traffic between TPL routers
 block out log quick on vether0 \
@@ -154,11 +154,11 @@ pass in  log quick on vether0 inet \
 pass in  log quick on vether0 inet \
   proto udp \
   from $starlink to (vether0) \
-  port { ipsec-nat-t, isakmp } keep state
+  port { ipsec-nat-t, isakmp }
 pass out log quick on vether0 inet \
   proto udp \
   from (vether0) to $starlink \
-  port { ipsec-nat-t, isakmp } keep state
+  port { ipsec-nat-t, isakmp }
 
 # Tunneled Traffic
 pass log quick on enc3 inet \
@@ -174,12 +174,12 @@ pass in log on vether0 inet \
   proto icmp \
   from $starlink \
   to (vether0) \
-  icmp-type echoreq code 0 keep state
+  icmp-type echoreq code 0
 pass in log on vether0 inet \
   proto icmp \
   from { 100.64.0.0/10, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24 } \
   to (vether0) \
-  icmp-type echoreq code 0 keep state
+  icmp-type echoreq code 0
 
 # Out onto LAN
 pass out log quick on ixl0 inet \
@@ -201,7 +201,7 @@ pass out log quick on vlan42 inet \
 pass in log on vether0 inet \
   proto icmp \
   from vpn.grahams.wtf to (vether0) \
-  icmp-type echoreq code 0 keep state
+  icmp-type echoreq code 0
 #pass in log on vether0 inet6 \
   #proto icmp6 \
   #from vpn.grahams.wtf to (vether0) \
@@ -225,19 +225,19 @@ pass out log quick on vether0 inet \
 pass in  log quick on vether0 inet \
   proto udp \
   from vpn.grahams.wtf to (vether0) \
-  port { ipsec-nat-t, isakmp } keep state
+  port { ipsec-nat-t, isakmp }
 #pass in  log quick on vether0 inet6 \
   #proto udp \
   #from vpn.grahams.wtf to (vether0) \
-  #port { ipsec-nat-t, isakmp } keep state
+  #port { ipsec-nat-t, isakmp }
 pass out log quick on vether0 inet \
   proto udp \
   from (vether0) to vpn.grahams.wtf \
-  port { ipsec-nat-t, isakmp } keep state
+  port { ipsec-nat-t, isakmp }
 #pass out log quick on vether0 inet6 \
   #proto udp \
   #from (vether0) to vpn.grahams.wtf \
-  #port { ipsec-nat-t, isakmp } keep state
+  #port { ipsec-nat-t, isakmp }
 
 # Tunneled Traffic
 pass log quick on enc1 inet \

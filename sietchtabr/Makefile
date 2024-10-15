@@ -28,7 +28,6 @@ sietchtabr: \
   /etc/munin/munin.conf \
   /etc/munin/munin-node.conf \
   /etc/munin/plugin-conf.d/openbsd-packages \
-  /etc/munin/plugin-conf.d/taqwa.here \
   /etc/newsyslog.conf \
   /etc/ntpd.conf \
   /etc/pf.conf \
@@ -50,13 +49,19 @@ sietchtabr: \
   /home/sysop/bin/backup.sh \
   /home/sysop/bin/maintain.sh \
   /home/sysop/bin/mon-uplink.sh \
+  /home/sysop/bin/rrdgraph.sh \
+  /home/sysop/bin/rrdstatsloop.sh \
+  /home/sysop/bin/rrdupdate.sh \
   /var/vmd/arrakeen.weaver.tpl.qcow2 \
   /var/vmd/axlotl-tank.here.qcow2 \
   /var/vmd/ns1.weaver.tpl.qcow2 \
   /usr/local/libexec/munin/plugins/sensors_ \
   /usr/local/libexec/munin/plugins/unbound_munin_ \
   /var/unbound/etc/unbound.conf \
-  /var/www/htdocs/pf/index.html \
+  /var/www/htdocs/pfstat/index.html \
+  /var/www/htdocs/pfstat/solarized-dark.min.css \
+  /var/www/htdocs/pf/nodeless.html \
+  /var/www/htdocs/pf/pfstat.html \
   /var/www/htdocs/pf/solarized-dark.min.css
 
 /etc/acme-client.conf : acme-client.conf
@@ -284,6 +289,18 @@ sietchtabr: \
 	doas install -o sysop -g wheel -m 0750 \
 	  mon-uplink.sh /home/sysop/bin/mon-uplink.sh
 
+/home/sysop/bin/rrdgraph.sh : rrdgraph.sh
+	doas install -o sysop -g sysop -m 0750 \
+	  rrdgraph.sh /home/sysop/bin/rrdgraph.sh
+
+/home/sysop/bin/rrdstatsloop.sh : rrdstatsloop.sh
+	doas install -o sysop -g sysop -m 0750 \
+	  rrdstatsloop.sh /home/sysop/bin/rrdstatsloop.sh
+
+/home/sysop/bin/rrdupdate.sh : rrdupdate.sh
+	doas install -o sysop -g sysop -m 0750 \
+	  rrdupdate.sh /home/sysop/bin/rrdupdate.sh
+
 /var/vmd/arrakeen.weaver.tpl.qcow2 :
 	vmctl create -s 256G /var/vmd/arrakeen.weaver.tpl.qcow2
 	doas chown sysop._vmd /var/vmd/arrakeen.weaver.tpl.qcow2
@@ -313,11 +330,32 @@ sietchtabr: \
 	  unbound.conf /var/unbound/etc/unbound.conf
 	doas rcctl reload unbound
 
-/var/www/htdocs/pf/index.html : pf-index.html
-	doas install -o root -g daemon -m 0644 \
-	  pf-index.html /var/www/htdocs/pf/index.html
+/var/www/htdocs/pf/nodeless.html : htdocs/pf/nodeless.html
+	doas mkdir -p /var/www/htdocs/pf
+	doas chown -R sysop.wheel /var/www/htdocs/pf
+	doas chmod 755 /var/www/htdocs/pf
+	doas install -o sysop -g wheel -m 0644 \
+	htdocs/pf/nodeless.html /var/www/htdocs/pf/nodeless.html
 
-/var/www/htdocs/pf/solarized-dark.min.css : solarized-dark.min.css
+/var/www/htdocs/pf/pfstat.html : htdocs/pf/pfstat.html
+	doas mkdir -p /var/www/htdocs/pf
+	doas chown -R sysop.wheel /var/www/htdocs/pf
+	doas chmod 755 /var/www/htdocs/pf
+	doas install -o sysop -g wheel -m 0644 \
+	htdocs/pf/pfstat.html /var/www/htdocs/pf/pfstat.html
+
+/var/www/htdocs/pf/solarized-dark.min.css : htdocs/pf/solarized-dark.min.css
+	doas mkdir -p /var/www/htdocs/pf
+	doas chown -R sysop.wheel /var/www/htdocs/pf
+	doas chmod 755 /var/www/htdocs/pf
+	doas install -o sysop -g wheel -m 0644 \
+	htdocs/pf/solarized-dark.min.css /var/www/htdocs/pf/solarized-dark.min.css 
+
+/var/www/htdocs/pfstat/index.html : pfstats-index.html
 	doas install -o root -g daemon -m 0644 \
-	  solarized-dark.min.css /var/www/htdocs/pf/solarized-dark.min.css
+	  pfstats-index.html /var/www/htdocs/pfstat/index.html
+
+/var/www/htdocs/pfstat/solarized-dark.min.css : solarized-dark.min.css
+	doas install -o root -g daemon -m 0644 \
+	  solarized-dark.min.css /var/www/htdocs/pfstat/solarized-dark.min.css
 

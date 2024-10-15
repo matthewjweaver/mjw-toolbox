@@ -121,7 +121,7 @@ pass out log quick on vlan666 inet \
 pass in  log quick on vlan666 inet \
   proto tcp \
   from vlan666:network \
-  to any port { https, www } keep state
+  to any port { https, www }
 
 # Permit http and https from router, lans
 pass out log quick on vlan666 inet \
