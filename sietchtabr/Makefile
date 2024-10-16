@@ -4,28 +4,30 @@ sietchtabr: \
   /etc/dhcpd.conf \
   /etc/dhcpcd.conf \
   /etc/doas.conf \
+  /etc/hostname.bridge0 \
   /etc/hostname.bridge42 \
   /etc/hostname.em0 \
-  /etc/hostname.em4 \
-  /etc/hostname.em5 \
+  /etc/hostname.em1 \
   /etc/hostname.enc1 \
   /etc/hostname.enc2 \
   /etc/hostname.enc3 \
   /etc/hostname.enc4 \
+  /etc/hostname.ixl0 \
   /etc/hostname.pflow0 \
   /etc/hostname.sec0 \
   /etc/hostname.sec1 \
   /etc/hostname.sec2 \
   /etc/hostname.wg0 \
+  /etc/hostname.vether0 \
   /etc/hostname.vlan42 \
   /etc/hostname.vlan666 \
   /etc/httpd.conf \
   /etc/iked.conf \
   /etc/login.conf \
+  /etc/mk.conf \
   /etc/munin/munin.conf \
   /etc/munin/munin-node.conf \
   /etc/munin/plugin-conf.d/openbsd-packages \
-  /etc/munin/plugin-conf.d/taqwa.here \
   /etc/newsyslog.conf \
   /etc/ntpd.conf \
   /etc/pf.conf \
@@ -47,13 +49,19 @@ sietchtabr: \
   /home/sysop/bin/backup.sh \
   /home/sysop/bin/maintain.sh \
   /home/sysop/bin/mon-uplink.sh \
+  /home/sysop/bin/rrdgraph.sh \
+  /home/sysop/bin/rrdstatsloop.sh \
+  /home/sysop/bin/rrdupdate.sh \
   /var/vmd/arrakeen.weaver.tpl.qcow2 \
   /var/vmd/axlotl-tank.here.qcow2 \
   /var/vmd/ns1.weaver.tpl.qcow2 \
   /usr/local/libexec/munin/plugins/sensors_ \
   /usr/local/libexec/munin/plugins/unbound_munin_ \
   /var/unbound/etc/unbound.conf \
-  /var/www/htdocs/pf/index.html \
+  /var/www/htdocs/pfstat/index.html \
+  /var/www/htdocs/pfstat/solarized-dark.min.css \
+  /var/www/htdocs/pf/nodeless.html \
+  /var/www/htdocs/pf/pfstat.html \
   /var/www/htdocs/pf/solarized-dark.min.css
 
 /etc/acme-client.conf : acme-client.conf
@@ -83,6 +91,10 @@ sietchtabr: \
 	doas install -o root -g wheel -m 0600 \
 	  doas.conf /etc/doas.conf
 
+/etc/hostname.bridge0 : hostname.bridge0
+	doas install -o root -g wheel -m 0640 \
+	  hostname.bridge0 /etc/hostname.bridge0
+
 /etc/hostname.bridge42 : hostname.bridge42
 	doas install -o root -g wheel -m 0640 \
 	  hostname.bridge42 /etc/hostname.bridge42
@@ -91,17 +103,9 @@ sietchtabr: \
 	doas install -o root -g wheel -m 0640 \
 	  hostname.em0 /etc/hostname.em0
 
-/etc/hostname.em3 : hostname.em3
+/etc/hostname.em1 : hostname.em1
 	doas install -o root -g wheel -m 0640 \
-	  hostname.em3 /etc/hostname.em3
-
-/etc/hostname.em4 : hostname.em4
-	doas install -o root -g wheel -m 0640 \
-	  hostname.em4 /etc/hostname.em4
-
-/etc/hostname.em5 : hostname.em5
-	doas install -o root -g wheel -m 0640 \
-	  hostname.em5 /etc/hostname.em5
+	  hostname.em1 /etc/hostname.em1
 
 /etc/hostname.enc1 : hostname.enc1
 	doas install -o root -g wheel -m 0640 \
@@ -118,6 +122,10 @@ sietchtabr: \
 /etc/hostname.enc4 : hostname.enc4
 	doas install -o root -g wheel -m 0640 \
 	  hostname.enc4 /etc/hostname.enc4
+
+/etc/hostname.ixl0 : hostname.ixl0
+	doas install -o root -g wheel -m 0640 \
+	  hostname.ixl0 /etc/hostname.ixl0
 
 /etc/hostname.pflow0 : hostname.pflow0
 	doas install -o root -g wheel -m 0640 \
@@ -141,6 +149,10 @@ sietchtabr: \
 	    hostname.wg0 \
 	    "-o root -g wheel -m 0640" \
 	    /etc/hostname.wg0
+
+/etc/hostname.vether0 : hostname.vether0
+	doas install -o root -g wheel -m 0640 \
+	  hostname.vether0 /etc/hostname.vether0
 
 /etc/hostname.vlan42 : hostname.vlan42
 	doas install -o root -g wheel -m 0640 \
@@ -166,6 +178,10 @@ sietchtabr: \
 /etc/login.conf : login.conf
 	doas install -o root -g wheel -m 0644 \
 	  login.conf /etc/login.conf
+
+/etc/mk.conf : mk.conf
+	doas install -o root -g wheel -m 0644 \
+	  mk.conf /etc/mk.conf
 
 /etc/munin/munin.conf : munin.conf
 	doas install -o root -g wheel -m 0644 \
@@ -273,6 +289,18 @@ sietchtabr: \
 	doas install -o sysop -g wheel -m 0750 \
 	  mon-uplink.sh /home/sysop/bin/mon-uplink.sh
 
+/home/sysop/bin/rrdgraph.sh : rrdgraph.sh
+	doas install -o sysop -g sysop -m 0750 \
+	  rrdgraph.sh /home/sysop/bin/rrdgraph.sh
+
+/home/sysop/bin/rrdstatsloop.sh : rrdstatsloop.sh
+	doas install -o sysop -g sysop -m 0750 \
+	  rrdstatsloop.sh /home/sysop/bin/rrdstatsloop.sh
+
+/home/sysop/bin/rrdupdate.sh : rrdupdate.sh
+	doas install -o sysop -g sysop -m 0750 \
+	  rrdupdate.sh /home/sysop/bin/rrdupdate.sh
+
 /var/vmd/arrakeen.weaver.tpl.qcow2 :
 	vmctl create -s 256G /var/vmd/arrakeen.weaver.tpl.qcow2
 	doas chown sysop._vmd /var/vmd/arrakeen.weaver.tpl.qcow2
@@ -302,11 +330,32 @@ sietchtabr: \
 	  unbound.conf /var/unbound/etc/unbound.conf
 	doas rcctl reload unbound
 
-/var/www/htdocs/pf/index.html : pf-index.html
-	doas install -o root -g daemon -m 0644 \
-	  pf-index.html /var/www/htdocs/pf/index.html
+/var/www/htdocs/pf/nodeless.html : htdocs/pf/nodeless.html
+	doas mkdir -p /var/www/htdocs/pf
+	doas chown -R sysop.wheel /var/www/htdocs/pf
+	doas chmod 755 /var/www/htdocs/pf
+	doas install -o sysop -g wheel -m 0644 \
+	htdocs/pf/nodeless.html /var/www/htdocs/pf/nodeless.html
 
-/var/www/htdocs/pf/solarized-dark.min.css : solarized-dark.min.css
+/var/www/htdocs/pf/pfstat.html : htdocs/pf/pfstat.html
+	doas mkdir -p /var/www/htdocs/pf
+	doas chown -R sysop.wheel /var/www/htdocs/pf
+	doas chmod 755 /var/www/htdocs/pf
+	doas install -o sysop -g wheel -m 0644 \
+	htdocs/pf/pfstat.html /var/www/htdocs/pf/pfstat.html
+
+/var/www/htdocs/pf/solarized-dark.min.css : htdocs/pf/solarized-dark.min.css
+	doas mkdir -p /var/www/htdocs/pf
+	doas chown -R sysop.wheel /var/www/htdocs/pf
+	doas chmod 755 /var/www/htdocs/pf
+	doas install -o sysop -g wheel -m 0644 \
+	htdocs/pf/solarized-dark.min.css /var/www/htdocs/pf/solarized-dark.min.css 
+
+/var/www/htdocs/pfstat/index.html : pfstats-index.html
 	doas install -o root -g daemon -m 0644 \
-	  solarized-dark.min.css /var/www/htdocs/pf/solarized-dark.min.css
+	  pfstats-index.html /var/www/htdocs/pfstat/index.html
+
+/var/www/htdocs/pfstat/solarized-dark.min.css : solarized-dark.min.css
+	doas install -o root -g daemon -m 0644 \
+	  solarized-dark.min.css /var/www/htdocs/pfstat/solarized-dark.min.css
 

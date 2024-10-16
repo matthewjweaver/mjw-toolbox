@@ -6,53 +6,53 @@ nodeless="{ \
   hq.layeraleph.com }"
 
 # IPSEC
-pass in  log quick on em0 inet \
+pass in  log quick on vether0 inet \
   proto esp \
-  from $nodeless to (em0)
-pass in  log quick on em0 inet6 \
+  from $nodeless to (vether0)
+pass in  log quick on vether0 inet6 \
   proto esp \
-  from $nodeless to (em0)
-pass out log quick on em0 inet \
+  from $nodeless to (vether0)
+pass out log quick on vether0 inet \
   proto esp \
-  from (em0) to $nodeless
-pass out log quick on em0 inet6 \
+  from (vether0) to $nodeless
+pass out log quick on vether0 inet6 \
   proto esp \
-  from (em0) to $nodeless
+  from (vether0) to $nodeless
 
 # IKEv2, NAT traversal
-pass in  log quick on em0 inet \
+pass in  log quick on vether0 inet \
   proto udp \
-  from $nodeless to (em0) \
+  from $nodeless to (vether0) \
   port { ipsec-nat-t, isakmp, 22713 }
-pass in  log quick on em0 inet6 \
+pass in  log quick on vether0 inet6 \
   proto udp \
-  from $nodeless to (em0) \
+  from $nodeless to (vether0) \
   port { ipsec-nat-t, isakmp, 22713 }
-pass out log quick on em0 inet \
+pass out log quick on vether0 inet \
   proto udp \
-  from (em0) to $nodeless \
+  from (vether0) to $nodeless \
   port { ipsec-nat-t, isakmp, 22713 }
-pass out log quick on em0 inet6 \
+pass out log quick on vether0 inet6 \
   proto udp \
-  from (em0) to $nodeless \
+  from (vether0) to $nodeless \
   port { ipsec-nat-t, isakmp, 22713 }
 
 # Wireguard (fixed random port, 22713)
-pass in  log quick on em0 inet \
+pass in  log quick on vether0 inet \
   proto udp \
-  from $nodeless to (em0) \
+  from $nodeless to (vether0) \
   port 22713
-pass in  log quick on em0 inet6 \
+pass in  log quick on vether0 inet6 \
   proto udp \
-  from $nodeless to (em0) \
+  from $nodeless to (vether0) \
   port 22713
-pass out log quick on em0 inet \
+pass out log quick on vether0 inet \
   proto udp \
-  from (em0) to $nodeless \
+  from (vether0) to $nodeless \
   port 22713
-pass out log quick on em0 inet6 \
+pass out log quick on vether0 inet6 \
   proto udp \
-  from (em0) to $nodeless \
+  from (vether0) to $nodeless \
   port 22713
 pass in  log on wg0 inet \
   from 192.168.221.0/24 to any
@@ -69,52 +69,52 @@ pass on enc3
 promised_lan_routers="{ bb3.nodeless.net }"
 
 # IPSEC
-pass in  log quick on em0 inet \
+pass in  log quick on vether0 inet \
   proto esp \
   from $promised_lan_routers \
-  to (em0)
-#pass in  log quick on em0 inet6 \
+  to (vether0)
+#pass in  log quick on vether0 inet6 \
   #proto esp \
   #from $promised_lan_routers \
-  #to (em0) 
-pass out log quick on em0 inet \
+  #to (vether0) 
+pass out log quick on vether0 inet \
   proto esp \
-  from (em0) \
+  from (vether0) \
   to $promised_lan_routers
-#pass out log quick on em0 inet6 \
+#pass out log quick on vether0 inet6 \
   #proto esp \
-  #from (em0) \
+  #from (vether0) \
   #to $promised_lan_routers
 
 # IKEv2, NAT traversal
-pass in  log quick on em0 inet \
+pass in  log quick on vether0 inet \
   proto udp \
   from $promised_lan_routers \
-  to (em0) \
-  port { ipsec-nat-t, isakmp } keep state
-#pass in  log quick on em0 inet6 \
+  to (vether0) \
+  port { ipsec-nat-t, isakmp }
+#pass in  log quick on vether0 inet6 \
   #proto udp \
   #from $promised_lan_routers \
-  #to (em0) \
-  #port { ipsec-nat-t, isakmp } keep state
-pass out log quick on em0 inet \
+  #to (vether0) \
+  #port { ipsec-nat-t, isakmp }
+pass out log quick on vether0 inet \
   proto udp \
-  from (em0) \
+  from (vether0) \
   to $promised_lan_routers \
-  port { ipsec-nat-t, isakmp } keep state
-#pass out log quick on em0 inet6 \
+  port { ipsec-nat-t, isakmp }
+#pass out log quick on vether0 inet6 \
   #proto udp \
-  #from (em0) \
+  #from (vether0) \
   #to $promised_lan_routers \
-  #port { ipsec-nat-t, isakmp } keep state
+  #port { ipsec-nat-t, isakmp }
 
 # Safety: drop all other traffic between TPL routers
-block out log quick on em0 \
-  from (em0) \
+block out log quick on vether0 \
+  from (vether0) \
   to $promised_lan_routers
-block in  log quick on em0 \
+block in  log quick on vether0 \
   from $promised_lan_routers \
-  to (em0)
+  to (vether0)
 
 # sec(4) link to bb3
 pass out log quick on sec0 \
@@ -143,22 +143,22 @@ pass log quick on enc2
 starlink="{ 98.97.0.0/15, 98.97.9.0/24, 129.222.0.0/16 }"
 
 # IPSEC
-pass in  log quick on em0 inet \
+pass in  log quick on vether0 inet \
   proto esp \
-  from $starlink to (em0)
-pass in  log quick on em0 inet \
+  from $starlink to (vether0)
+pass in  log quick on vether0 inet \
   proto esp \
-  from (em0) to $starlink
+  from (vether0) to $starlink
 
 # IKEv2, NAT traversal
-pass in  log quick on em0 inet \
+pass in  log quick on vether0 inet \
   proto udp \
-  from $starlink to (em0) \
-  port { ipsec-nat-t, isakmp } keep state
-pass out log quick on em0 inet \
+  from $starlink to (vether0) \
+  port { ipsec-nat-t, isakmp }
+pass out log quick on vether0 inet \
   proto udp \
-  from (em0) to $starlink \
-  port { ipsec-nat-t, isakmp } keep state
+  from (vether0) to $starlink \
+  port { ipsec-nat-t, isakmp }
 
 # Tunneled Traffic
 pass log quick on enc3 inet \
@@ -170,22 +170,22 @@ pass log quick on enc3 inet \
 pass log quick on enc3 inet \
   from { 100.64.0.0/10, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24, 10.42.0.0/16 } \
   to   { 100.64.0.0/10, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24, 10.42.0.0/16 }
-pass in log on em0 inet \
+pass in log on vether0 inet \
   proto icmp \
   from $starlink \
-  to (em0) \
-  icmp-type echoreq code 0 keep state
-pass in log on em0 inet \
+  to (vether0) \
+  icmp-type echoreq code 0
+pass in log on vether0 inet \
   proto icmp \
   from { 100.64.0.0/10, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24 } \
-  to (em0) \
-  icmp-type echoreq code 0 keep state
+  to (vether0) \
+  icmp-type echoreq code 0
 
 # Out onto LAN
-pass out log quick on em5 inet \
+pass out log quick on ixl0 inet \
   from $starlink \
   to 192.168.223.0/24
-pass out log quick on em5 inet \
+pass out log quick on ixl0 inet \
   from { 100.64.0.0/10, 192.168.25.0/24 } \
   to 192.168.223.0/24
 pass out log quick on vlan42 inet \
@@ -198,46 +198,46 @@ pass out log quick on vlan42 inet \
 # XXX: make ipv6 work
 
 # ICMP pings
-pass in log on em0 inet \
+pass in log on vether0 inet \
   proto icmp \
-  from vpn.grahams.wtf to (em0) \
-  icmp-type echoreq code 0 keep state
-#pass in log on em0 inet6 \
+  from vpn.grahams.wtf to (vether0) \
+  icmp-type echoreq code 0
+#pass in log on vether0 inet6 \
   #proto icmp6 \
-  #from vpn.grahams.wtf to (em0) \
+  #from vpn.grahams.wtf to (vether0) \
   #icmp6-type { echoreq }
 
 # IPSEC
-pass in  log quick on em0 inet \
+pass in  log quick on vether0 inet \
   proto esp \
-  from vpn.grahams.wtf to (em0)
-#pass in  log quick on em0 inet6 \
+  from vpn.grahams.wtf to (vether0)
+#pass in  log quick on vether0 inet6 \
   #proto esp \
-  #from vpn.grahams.wtf to (em0)
-pass out log quick on em0 inet \
+  #from vpn.grahams.wtf to (vether0)
+pass out log quick on vether0 inet \
   proto esp \
-  from (em0) to vpn.grahams.wtf
-#pass out log quick on em0 inet6 \
+  from (vether0) to vpn.grahams.wtf
+#pass out log quick on vether0 inet6 \
   #proto esp \
-  #from (em0) to vpn.grahams.wtf
+  #from (vether0) to vpn.grahams.wtf
 
 # IKEv2, NAT traversal
-pass in  log quick on em0 inet \
+pass in  log quick on vether0 inet \
   proto udp \
-  from vpn.grahams.wtf to (em0) \
-  port { ipsec-nat-t, isakmp } keep state
-#pass in  log quick on em0 inet6 \
+  from vpn.grahams.wtf to (vether0) \
+  port { ipsec-nat-t, isakmp }
+#pass in  log quick on vether0 inet6 \
   #proto udp \
-  #from vpn.grahams.wtf to (em0) \
-  #port { ipsec-nat-t, isakmp } keep state
-pass out log quick on em0 inet \
+  #from vpn.grahams.wtf to (vether0) \
+  #port { ipsec-nat-t, isakmp }
+pass out log quick on vether0 inet \
   proto udp \
-  from (em0) to vpn.grahams.wtf \
-  port { ipsec-nat-t, isakmp } keep state
-#pass out log quick on em0 inet6 \
+  from (vether0) to vpn.grahams.wtf \
+  port { ipsec-nat-t, isakmp }
+#pass out log quick on vether0 inet6 \
   #proto udp \
-  #from (em0) to vpn.grahams.wtf \
-  #port { ipsec-nat-t, isakmp } keep state
+  #from (vether0) to vpn.grahams.wtf \
+  #port { ipsec-nat-t, isakmp }
 
 # Tunneled Traffic
 pass log quick on enc1 inet \
@@ -267,9 +267,9 @@ pass log quick on enc1 inet \
   from $local_sync_hosts to $grahams_sync_hosts
 
 # Out onto LAN
-pass out log quick on em5 inet \
+pass out log quick on ixl0 inet \
   from { vpn.grahams.wtf, 192.168.2.0/24 } \
   to { ghola.here, sietchumbu.here }
-pass out log quick on em5 inet \
+pass out log quick on ixl0 inet \
   from $grahams_sync_hosts to $local_sync_hosts
 

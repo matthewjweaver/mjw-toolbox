@@ -21,4 +21,4 @@ NOW=$(date +%s)
     -e's%^%rrdtool update /var/db/rrd/%g' \
     -e"s%in:%in.rrd -d unix:/var/run/rrd/rrdcached.sock ${NOW}:%g" \
     -e"s%out:%out.rrd -d unix:/var/run/rrd/rrdcached.sock ${NOW}:%g" |
-  /bin/sh &
+  /bin/sh -x &

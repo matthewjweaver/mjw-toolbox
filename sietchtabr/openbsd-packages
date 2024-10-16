@@ -6,9 +6,9 @@
 #[postfix_mailqueue]
 #user _postfix
 
-# TODO: maybe figure out how to do this without root?
 [unbound*]
-user root
+user _unbound
+group _unbound
 env.statefile /var/db/munin-pluginstate/unbound-state
 env.unbound_conf /var/unbound/etc/unbound.conf
 env.unbound_control /usr/sbin/unbound-control
