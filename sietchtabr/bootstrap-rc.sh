@@ -39,4 +39,4 @@ mkdir -p /var/www/htdocs/pf
 
 usermod -G _munin www
 
-echo "For pfstat stats and graphs, add pfstat -qp to root's crontab."
+echo "Check crontab-additions.*"

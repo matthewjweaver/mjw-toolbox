@@ -1,3 +1,4 @@
+#minute hour    mday    month   wday    command
 *	*	*	*	*	/usr/local/bin/pfstat -qp
 */2	*	*	*	*	/usr/bin/doas -u _smokeping /usr/local/bin/smokeping --static
 */5     *       *       *       *       su -s /bin/sh _munin /usr/local/bin/munin-cron
