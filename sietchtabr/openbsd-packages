@@ -9,7 +9,7 @@
 [unbound*]
 user _unbound
 group _unbound
-env.statefile /var/db/munin-pluginstate/unbound-state
+env.statefile /var/db/munin-pluginstate/_unbound/unbound-state
 env.unbound_conf /var/unbound/etc/unbound.conf
 env.unbound_control /usr/sbin/unbound-control
 env.spoof_warn 1000
