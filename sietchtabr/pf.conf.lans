@@ -1,3 +1,4 @@
+set state-defaults pflow
 ########################################################################
 # Home LAN (wifi, etc)
 # TODO: enable dhcp enforcement using dhcpd(8)'s -L and -A pf table

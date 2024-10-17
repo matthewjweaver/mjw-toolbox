@@ -29,6 +29,7 @@ sietchtabr: \
   /etc/munin/munin-node.conf \
   /etc/munin/plugin-conf.d/openbsd-packages \
   /etc/newsyslog.conf \
+  /etc/nfsen.conf \
   /etc/ntpd.conf \
   /etc/pf.conf \
   /etc/pf.conf.vpns \
@@ -58,6 +59,7 @@ sietchtabr: \
   /usr/local/libexec/munin/plugins/sensors_ \
   /usr/local/libexec/munin/plugins/unbound_munin_ \
   /var/unbound/etc/unbound.conf \
+  /var/www/etc/hosts \
   /var/www/htdocs/pfstat/index.html \
   /var/www/htdocs/pfstat/solarized-dark.min.css \
   /var/www/htdocs/pf/nodeless.html \
@@ -199,6 +201,11 @@ sietchtabr: \
 	doas install -o root -g wheel -m 0644 \
 	  newsyslog.conf /etc/newsyslog.conf
 
+/etc/nfsen.conf : nfsen.conf
+	doas install -o root -g wheel -m 0644 \
+	  nfsen.conf /etc/nfsen.conf
+	doas install-nfsen.pl /etc/nfsen.conf
+
 /etc/ntpd.conf : ntpd.conf
 	doas ntpd -nf ./ntpd.conf
 	doas install -o root -g wheel -m 0644 \
@@ -330,12 +337,19 @@ sietchtabr: \
 	  unbound.conf /var/unbound/etc/unbound.conf
 	doas rcctl reload unbound
 
+/var/www/etc/hosts : www-chroot-hosts
+	doas mkdir -p /var/www/etc
+	doas chown root.wheel /var/www/etc
+	doas chmod 755 /var/www/etc
+	doas install -o root -g wheel -m 0644 \
+	  www-chroot-hosts /var/www/etc/hosts
+
 /var/www/htdocs/pf/nodeless.html : htdocs/pf/nodeless.html
 	doas mkdir -p /var/www/htdocs/pf
 	doas chown -R sysop.wheel /var/www/htdocs/pf
 	doas chmod 755 /var/www/htdocs/pf
 	doas install -o sysop -g wheel -m 0644 \
-	htdocs/pf/nodeless.html /var/www/htdocs/pf/nodeless.html
+	  htdocs/pf/nodeless.html /var/www/htdocs/pf/nodeless.html
 
 /var/www/htdocs/pf/pfstat.html : htdocs/pf/pfstat.html
 	doas mkdir -p /var/www/htdocs/pf
