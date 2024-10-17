@@ -16,6 +16,7 @@ doas pkg_add \
   munin-server \
   netpbm \
   nmap \
+  nfsen \
   openvpn \
   pfstat \
   pftop \

@@ -9,7 +9,9 @@ rcctl enable dhcpd
 rcctl set dhcpd flags "-A dhcpd_abandoned -L dhcpd_leased"
 rcctl enable httpd
 rcctl enable iked
+rcctl enable nfsen
 rcctl set pflogd flags "-s 1500"
+rcctl enable php82_fpm
 rcctl enable rad
 rcctl enable relayd
 rcctl disable resolvd
@@ -37,4 +39,4 @@ mkdir -p /var/www/htdocs/pf
 
 usermod -G _munin www
 
-echo "For pfstat stats and graphs, add pfstat -qp to root's crontab."
+echo "Check crontab-additions.*"
