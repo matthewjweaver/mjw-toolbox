@@ -4,6 +4,15 @@ set state-defaults pflow
 # TODO: enable dhcp enforcement using dhcpd(8)'s -L and -A pf table
 # maintenance.
 # NAT outbound
+
+# uncomment to nuke tablets
+#block log quick on vether0 inet \
+  #from { 192.168.223.37, 192.168.223.38 } \
+  #to any
+#block log quick on vether0 inet \
+  #from any \
+  #to { 192.168.223.37, 192.168.223.38 }
+
 pass out log quick on vether0 inet \
   from { 192.168.223.21, 192.168.223.24 } \
   nat-to (vether0) static-port
