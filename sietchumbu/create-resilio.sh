@@ -1,5 +1,5 @@
 #!/bin/sh
-CONTAINER=ghcr.io/linuxserver/resilio-sync:latest
+CONTAINER=ghcr.io/linuxserver/resilio-sync:2.8.1.1390-1-ls187 
 docker stop resilio-sync
 docker rm resilio-sync
 docker pull ${CONTAINER}
