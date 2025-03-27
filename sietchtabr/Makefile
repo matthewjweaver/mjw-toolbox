@@ -1,344 +1,371 @@
+FAKE_ROOT=fakeroot
+
+clean : 
+	doas rm -rf ${FAKE_ROOT}
+	doas rm -rf sietchtabr-payload.tgz
+
+fakeroot : \
+  ${FAKE_ROOT}/etc \
+  ${FAKE_ROOT}/etc/munin \
+  ${FAKE_ROOT}/etc/munin/plugin-conf.d \
+  ${FAKE_ROOT}/etc/smokeping \
+  ${FAKE_ROOT}/etc/ssh/ \
+  ${FAKE_ROOT}/home/sysop/bin \
+  ${FAKE_ROOT}/usr/local/libexec/munin/plugins/ \
+  ${FAKE_ROOT}/var/unbound/etc \
+  ${FAKE_ROOT}/var/www/etc \
+  ${FAKE_ROOT}/var/www/htdocs/pfstat
+
+${FAKE_ROOT}/etc :
+	mkdir -p ${FAKE_ROOT}/etc
+
+${FAKE_ROOT}/etc/munin :
+	mkdir -p ${FAKE_ROOT}/etc/munin
+
+${FAKE_ROOT}/etc/munin/plugin-conf.d :
+	mkdir -p ${FAKE_ROOT}/etc/munin/plugin-conf.d
+
+${FAKE_ROOT}/etc/smokeping :
+	mkdir -p ${FAKE_ROOT}/etc/smokeping
+
+${FAKE_ROOT}/etc/ssh/ :
+	mkdir -p ${FAKE_ROOT}/etc/ssh/
+
+${FAKE_ROOT}/home/sysop/bin :
+	mkdir -p ${FAKE_ROOT}/home/sysop/bin
+
+${FAKE_ROOT}/usr/local/libexec/munin/plugins/ :
+	mkdir -p ${FAKE_ROOT}/usr/local/libexec/munin/plugins/
+
+${FAKE_ROOT}/var/unbound/etc :
+	mkdir -p ${FAKE_ROOT}/var/unbound/etc
+
+${FAKE_ROOT}/var/www/etc :
+	mkdir -p ${FAKE_ROOT}/var/www/etc
+
+${FAKE_ROOT}/var/www/htdocs/pfstat :
+	mkdir -p ${FAKE_ROOT}/var/www/htdocs/pfstat
+
 sietchtabr: \
-  /etc/acme-client.conf \
-  /etc/daily.local \
-  /etc/dhcpd.conf \
-  /etc/dhcpcd.conf \
-  /etc/doas.conf \
-  /etc/hostname.bridge0 \
-  /etc/hostname.bridge42 \
-  /etc/hostname.em0 \
-  /etc/hostname.em1 \
-  /etc/hostname.enc1 \
-  /etc/hostname.enc2 \
-  /etc/hostname.enc3 \
-  /etc/hostname.enc4 \
-  /etc/hostname.ixl0 \
-  /etc/hostname.pflow0 \
-  /etc/hostname.sec0 \
-  /etc/hostname.sec1 \
-  /etc/hostname.sec2 \
-  /etc/hostname.wg0 \
-  /etc/hostname.vether0 \
-  /etc/hostname.vlan42 \
-  /etc/hostname.vlan666 \
-  /etc/httpd.conf \
-  /etc/iked.conf \
-  /etc/login.conf \
-  /etc/mk.conf \
-  /etc/monthly.local \
-  /etc/munin/munin.conf \
-  /etc/munin/munin-node.conf \
-  /etc/munin/plugin-conf.d/openbsd-packages \
-  /etc/newsyslog.conf \
-  /etc/nfsen.conf \
-  /etc/ntpd.conf \
-  /etc/pf.conf \
-  /etc/pf.conf.vpns \
-  /etc/pf.conf.lans \
-  /etc/pf.conf.lan-based-services \
-  /etc/pf.sshbots \
-  /etc/pfstat.conf \
-  /etc/rad.conf \
-  /etc/rc.local \
-  /etc/relayd.conf \
-  /etc/resolv.conf \
-  /etc/smokeping/config \
-  /etc/ssh/ssh_config \
-  /etc/ssh/sshd_config \
-  /etc/sysctl.conf \
-  /etc/syslog.conf \
-  /etc/vm.conf \
-  /home/sysop/bin/backup.sh \
-  /home/sysop/bin/maintain.sh \
-  /home/sysop/bin/mon-uplink.sh \
-  /var/vmd/arrakeen.weaver.tpl.qcow2 \
-  /var/vmd/axlotl-tank.here.qcow2 \
-  /var/vmd/ns1.weaver.tpl.qcow2 \
-  /usr/local/libexec/munin/plugins/sensors_ \
-  /usr/local/libexec/munin/plugins/unbound_munin_ \
-  /var/unbound/etc/unbound.conf \
-  /var/www/etc/hosts \
-  /var/www/htdocs/pfstat/index.html \
-  /var/www/htdocs/pfstat/solarized-dark.min.css
+  ${FAKE_ROOT}/etc/acme-client.conf \
+  ${FAKE_ROOT}/etc/daily.local \
+  ${FAKE_ROOT}/etc/dhcpd.conf \
+  ${FAKE_ROOT}/etc/dhcpcd.conf \
+  ${FAKE_ROOT}/etc/doas.conf \
+  ${FAKE_ROOT}/etc/hostname.bridge0 \
+  ${FAKE_ROOT}/etc/hostname.bridge42 \
+  ${FAKE_ROOT}/etc/hostname.em0 \
+  ${FAKE_ROOT}/etc/hostname.em1 \
+  ${FAKE_ROOT}/etc/hostname.enc1 \
+  ${FAKE_ROOT}/etc/hostname.enc2 \
+  ${FAKE_ROOT}/etc/hostname.enc3 \
+  ${FAKE_ROOT}/etc/hostname.enc4 \
+  ${FAKE_ROOT}/etc/hostname.ixl0 \
+  ${FAKE_ROOT}/etc/hostname.pflow0 \
+  ${FAKE_ROOT}/etc/hostname.sec0 \
+  ${FAKE_ROOT}/etc/hostname.sec1 \
+  ${FAKE_ROOT}/etc/hostname.sec2 \
+  ${FAKE_ROOT}/etc/hostname.wg0 \
+  ${FAKE_ROOT}/etc/hostname.vether0 \
+  ${FAKE_ROOT}/etc/hostname.vlan42 \
+  ${FAKE_ROOT}/etc/hostname.vlan666 \
+  ${FAKE_ROOT}/etc/httpd.conf \
+  ${FAKE_ROOT}/etc/iked.conf \
+  ${FAKE_ROOT}/etc/login.conf \
+  ${FAKE_ROOT}/etc/mk.conf \
+  ${FAKE_ROOT}/etc/monthly.local \
+  ${FAKE_ROOT}/etc/munin/munin.conf \
+  ${FAKE_ROOT}/etc/munin/munin-node.conf \
+  ${FAKE_ROOT}/etc/munin/plugin-conf.d/openbsd-packages \
+  ${FAKE_ROOT}/etc/newsyslog.conf \
+  ${FAKE_ROOT}/etc/nfsen.conf \
+  ${FAKE_ROOT}/etc/ntpd.conf \
+  ${FAKE_ROOT}/etc/pf.conf \
+  ${FAKE_ROOT}/etc/pf.conf.vpns \
+  ${FAKE_ROOT}/etc/pf.conf.lans \
+  ${FAKE_ROOT}/etc/pf.conf.lan-based-services \
+  ${FAKE_ROOT}/etc/pf.sshbots \
+  ${FAKE_ROOT}/etc/pfstat.conf \
+  ${FAKE_ROOT}/etc/rc.local \
+  ${FAKE_ROOT}/etc/relayd.conf \
+  ${FAKE_ROOT}/etc/resolv.conf \
+  ${FAKE_ROOT}/etc/smokeping/config \
+  ${FAKE_ROOT}/etc/ssh/ssh_config \
+  ${FAKE_ROOT}/etc/ssh/sshd_config \
+  ${FAKE_ROOT}/etc/sysctl.conf \
+  ${FAKE_ROOT}/etc/syslog.conf \
+  ${FAKE_ROOT}/etc/vm.conf \
+  ${FAKE_ROOT}/home/sysop/bin/backup.sh \
+  ${FAKE_ROOT}/home/sysop/bin/maintain.sh \
+  ${FAKE_ROOT}/home/sysop/bin/mon-uplink.sh \
+  ${FAKE_ROOT}/usr/local/libexec/munin/plugins/sensors_ \
+  ${FAKE_ROOT}/usr/local/libexec/munin/plugins/unbound_munin_ \
+  ${FAKE_ROOT}/var/unbound/etc/unbound.conf \
+  ${FAKE_ROOT}/var/www/etc/hosts \
+  ${FAKE_ROOT}/var/www/htdocs/pfstat/index.html \
+  ${FAKE_ROOT}/var/www/htdocs/pfstat/solarized-dark.min.css
 
-/etc/acme-client.conf : acme-client.conf
+${FAKE_ROOT}/etc/acme-client.conf : acme-client.conf
 	doas install -o root -g wheel -m 0644 \
-	  acme-client.conf /etc/acme-client.conf
+	  acme-client.conf ${FAKE_ROOT}/etc/acme-client.conf
 
-/etc/daily.local : daily.local
+${FAKE_ROOT}/etc/daily.local : daily.local
 	doas install -o root -g wheel -m 0644 \
-	  daily.local /etc/daily.local
+	  daily.local ${FAKE_ROOT}/etc/daily.local
 
-/etc/dhcpcd.conf : dhcpcd.conf
+${FAKE_ROOT}/etc/dhcpcd.conf : dhcpcd.conf
 	doas install -o root -g wheel -m 0644 \
-	  dhcpcd.conf /etc/dhcpcd.conf
+	  dhcpcd.conf ${FAKE_ROOT}/etc/dhcpcd.conf
 
-/etc/dhcpd.conf : dhcpd.conf
-	doas dhcpd -nc dhcpd.conf
+${FAKE_ROOT}/etc/dhcpd.conf : dhcpd.conf
+	#doas dhcpd -nc dhcpd.conf
 	doas install -o root -g wheel -m 0644 \
-	  dhcpd.conf /etc/dhcpd.conf
-	doas rcctl restart dhcpd
+	  dhcpd.conf ${FAKE_ROOT}/etc/dhcpd.conf
+	#doas rcctl restart dhcpd
 
-/etc/dhcpleased.conf : dhcpleased.conf
+${FAKE_ROOT}/etc/dhcpleased.conf : dhcpleased.conf
 	doas install -o root -g wheel -m 0644 \
-	  dhcpleased.conf /etc/dhcpleased.conf
+	  dhcpleased.conf ${FAKE_ROOT}/etc/dhcpleased.conf
 
-/etc/doas.conf : doas.conf
-	doas -C ./doas.conf
+${FAKE_ROOT}/etc/doas.conf : doas.conf
+	#doas -C ./doas.conf
 	doas install -o root -g wheel -m 0600 \
-	  doas.conf /etc/doas.conf
+	  doas.conf ${FAKE_ROOT}/etc/doas.conf
 
-/etc/hostname.bridge0 : hostname.bridge0
+${FAKE_ROOT}/etc/hostname.bridge0 : hostname.bridge0
 	doas install -o root -g wheel -m 0640 \
-	  hostname.bridge0 /etc/hostname.bridge0
+	  hostname.bridge0 ${FAKE_ROOT}/etc/hostname.bridge0
 
-/etc/hostname.bridge42 : hostname.bridge42
+${FAKE_ROOT}/etc/hostname.bridge42 : hostname.bridge42
 	doas install -o root -g wheel -m 0640 \
-	  hostname.bridge42 /etc/hostname.bridge42
+	  hostname.bridge42 ${FAKE_ROOT}/etc/hostname.bridge42
 
-/etc/hostname.em0 : hostname.em0
+${FAKE_ROOT}/etc/hostname.em0 : hostname.em0
 	doas install -o root -g wheel -m 0640 \
-	  hostname.em0 /etc/hostname.em0
+	  hostname.em0 ${FAKE_ROOT}/etc/hostname.em0
 
-/etc/hostname.em1 : hostname.em1
+${FAKE_ROOT}/etc/hostname.em1 : hostname.em1
 	doas install -o root -g wheel -m 0640 \
-	  hostname.em1 /etc/hostname.em1
+	  hostname.em1 ${FAKE_ROOT}/etc/hostname.em1
 
-/etc/hostname.enc1 : hostname.enc1
+${FAKE_ROOT}/etc/hostname.enc1 : hostname.enc1
 	doas install -o root -g wheel -m 0640 \
-	  hostname.enc1 /etc/hostname.enc1
+	  hostname.enc1 ${FAKE_ROOT}/etc/hostname.enc1
 
-/etc/hostname.enc2 : hostname.enc2
+${FAKE_ROOT}/etc/hostname.enc2 : hostname.enc2
 	doas install -o root -g wheel -m 0640 \
-	  hostname.enc2 /etc/hostname.enc2
+	  hostname.enc2 ${FAKE_ROOT}/etc/hostname.enc2
 
-/etc/hostname.enc3 : hostname.enc3
+${FAKE_ROOT}/etc/hostname.enc3 : hostname.enc3
 	doas install -o root -g wheel -m 0640 \
-	  hostname.enc3 /etc/hostname.enc3
+	  hostname.enc3 ${FAKE_ROOT}/etc/hostname.enc3
 
-/etc/hostname.enc4 : hostname.enc4
+${FAKE_ROOT}/etc/hostname.enc4 : hostname.enc4
 	doas install -o root -g wheel -m 0640 \
-	  hostname.enc4 /etc/hostname.enc4
+	  hostname.enc4 ${FAKE_ROOT}/etc/hostname.enc4
 
-/etc/hostname.ixl0 : hostname.ixl0
+${FAKE_ROOT}/etc/hostname.ixl0 : hostname.ixl0
 	doas install -o root -g wheel -m 0640 \
-	  hostname.ixl0 /etc/hostname.ixl0
+	  hostname.ixl0 ${FAKE_ROOT}/etc/hostname.ixl0
 
-/etc/hostname.pflow0 : hostname.pflow0
+${FAKE_ROOT}/etc/hostname.pflow0 : hostname.pflow0
 	doas install -o root -g wheel -m 0640 \
-	  hostname.pflow0 /etc/hostname.pflow0
+	  hostname.pflow0 ${FAKE_ROOT}/etc/hostname.pflow0
 
-/etc/hostname.sec0 : hostname.sec0
+${FAKE_ROOT}/etc/hostname.sec0 : hostname.sec0
 	doas install -o root -g wheel -m 0640 \
-	  hostname.sec0 /etc/hostname.sec0
+	  hostname.sec0 ${FAKE_ROOT}/etc/hostname.sec0
 
-/etc/hostname.sec1 : hostname.sec1
+${FAKE_ROOT}/etc/hostname.sec1 : hostname.sec1
 	doas install -o root -g wheel -m 0640 \
-	  hostname.sec1 /etc/hostname.sec1
+	  hostname.sec1 ${FAKE_ROOT}/etc/hostname.sec1
 
-/etc/hostname.sec2 : hostname.sec2
+${FAKE_ROOT}/etc/hostname.sec2 : hostname.sec2
 	doas install -o root -g wheel -m 0640 \
-	  hostname.sec2 /etc/hostname.sec2
+	  hostname.sec2 ${FAKE_ROOT}/etc/hostname.sec2
 
-/etc/hostname.wg0 : hostname.wg0
+${FAKE_ROOT}/etc/hostname.wg0 : hostname.wg0
 	~/bin/op run --env-file=.env -- \
 	  sh ../install-secretfied.sh \
 	    hostname.wg0 \
 	    "-o root -g wheel -m 0640" \
-	    /etc/hostname.wg0
+	    ${FAKE_ROOT}/etc/hostname.wg0
 
-/etc/hostname.vether0 : hostname.vether0
+${FAKE_ROOT}/etc/hostname.vether0 : hostname.vether0
 	doas install -o root -g wheel -m 0640 \
-	  hostname.vether0 /etc/hostname.vether0
+	  hostname.vether0 ${FAKE_ROOT}/etc/hostname.vether0
 
-/etc/hostname.vlan42 : hostname.vlan42
+${FAKE_ROOT}/etc/hostname.vlan42 : hostname.vlan42
 	doas install -o root -g wheel -m 0640 \
-	  hostname.vlan42 /etc/hostname.vlan42
+	  hostname.vlan42 ${FAKE_ROOT}/etc/hostname.vlan42
 
-/etc/hostname.vlan666 : hostname.vlan666
+${FAKE_ROOT}/etc/hostname.vlan666 : hostname.vlan666
 	doas install -o root -g wheel -m 0640 \
-	  hostname.vlan666 /etc/hostname.vlan666
+	  hostname.vlan666 ${FAKE_ROOT}/etc/hostname.vlan666
 
-/etc/httpd.conf : httpd.conf
-	doas httpd -nf httpd.conf
+${FAKE_ROOT}/etc/httpd.conf : httpd.conf
+	#doas httpd -nf httpd.conf
 	doas install -o root -g wheel -m 0644 \
-	  httpd.conf /etc/httpd.conf
-	doas rcctl reload httpd
+	  httpd.conf ${FAKE_ROOT}/etc/httpd.conf
+	#doas rcctl reload httpd
 
-/etc/iked.conf : iked.conf
+${FAKE_ROOT}/etc/iked.conf : iked.conf
 	~/bin/op run --env-file=.env -- \
 	  sh ../install-secretfied.sh \
 	    iked.conf \
 	    "-o root -g wheel -m 0600" \
-	    /etc/iked.conf
+	    ${FAKE_ROOT}/etc/iked.conf
 
-/etc/login.conf : login.conf
+${FAKE_ROOT}/etc/login.conf : login.conf
 	doas install -o root -g wheel -m 0644 \
-	  login.conf /etc/login.conf
+	  login.conf ${FAKE_ROOT}/etc/login.conf
 
-/etc/mk.conf : mk.conf
+${FAKE_ROOT}/etc/mk.conf : mk.conf
 	doas install -o root -g wheel -m 0644 \
-	  mk.conf /etc/mk.conf
+	  mk.conf ${FAKE_ROOT}/etc/mk.conf
 
-/etc/monthly.local : monthly.local
+${FAKE_ROOT}/etc/monthly.local : monthly.local
 	doas install -o root -g wheel -m 0644 \
-	  monthly.local /etc/monthly.local
+	  monthly.local ${FAKE_ROOT}/etc/monthly.local
 
-/etc/munin/munin.conf : munin.conf
+${FAKE_ROOT}/etc/munin/munin.conf : munin.conf
 	doas install -o root -g wheel -m 0644 \
-	  munin.conf /etc/munin/munin.conf
+	  munin.conf ${FAKE_ROOT}/etc/munin/munin.conf
 
-/etc/munin/munin-node.conf : munin-node.conf
+${FAKE_ROOT}/etc/munin/munin-node.conf : munin-node.conf
 	doas install -o root -g wheel -m 0644 \
-	  munin-node.conf /etc/munin/munin-node.conf
+	  munin-node.conf ${FAKE_ROOT}/etc/munin/munin-node.conf
 
-/etc/munin/plugin-conf.d/openbsd-packages : openbsd-packages
+${FAKE_ROOT}/etc/munin/plugin-conf.d/openbsd-packages : openbsd-packages
 	doas install -o root -g wheel -m 0644 \
-	  openbsd-packages /etc/munin/plugin-conf.d/openbsd-packages
+	  openbsd-packages ${FAKE_ROOT}/etc/munin/plugin-conf.d/openbsd-packages
 
-/etc/newsyslog.conf : newsyslog.conf
+${FAKE_ROOT}/etc/newsyslog.conf : newsyslog.conf
 	doas install -o root -g wheel -m 0644 \
-	  newsyslog.conf /etc/newsyslog.conf
+	  newsyslog.conf ${FAKE_ROOT}/etc/newsyslog.conf
 
-/etc/nfsen.conf : nfsen.conf
+${FAKE_ROOT}/etc/nfsen.conf : nfsen.conf
 	doas install -o root -g wheel -m 0644 \
-	  nfsen.conf /etc/nfsen.conf
-	doas install-nfsen.pl /etc/nfsen.conf
+	  nfsen.conf ${FAKE_ROOT}/etc/nfsen.conf
+	#doas install-nfsen.pl ${FAKE_ROOT}/etc/nfsen.conf
 
-/etc/ntpd.conf : ntpd.conf
-	doas ntpd -nf ./ntpd.conf
+${FAKE_ROOT}/etc/ntpd.conf : ntpd.conf
+	#doas ntpd -nf ./ntpd.conf
 	doas install -o root -g wheel -m 0644 \
-	  ntpd.conf /etc/ntpd.conf
-	doas rcctl restart ntpd
+	  ntpd.conf ${FAKE_ROOT}/etc/ntpd.conf
+	#doas rcctl restart ntpd
 
-/etc/pf.conf : pf.conf /etc/pf.conf.lans /etc/pf.conf.lan-based-services /etc/pf.conf.vpns /etc/pf.sshbots /etc/rc.local
-	doas pfctl -nf pf.conf
+${FAKE_ROOT}/etc/pf.conf : pf.conf ${FAKE_ROOT}/etc/pf.conf.lans ${FAKE_ROOT}/etc/pf.conf.lan-based-services ${FAKE_ROOT}/etc/pf.conf.vpns ${FAKE_ROOT}/etc/pf.sshbots ${FAKE_ROOT}/etc/rc.local
+	#doas pfctl -nf pf.conf
 	doas install -o root -g wheel -m 0600 \
-	  pf.conf /etc/pf.conf
-	doas pfctl -f /etc/pf.conf && doas sh /etc/rc.local
+	  pf.conf ${FAKE_ROOT}/etc/pf.conf
+	#doas pfctl -f ${FAKE_ROOT}/etc/pf.conf && doas sh ${FAKE_ROOT}/etc/rc.local
 
-/etc/pf.conf.lans : pf.conf.lans
-	doas pfctl -nf pf.conf.lans
+${FAKE_ROOT}/etc/pf.conf.lans : pf.conf.lans
+	#doas pfctl -nf pf.conf.lans
 	doas install -o root -g wheel -m 0600 \
-	  pf.conf.lans /etc/pf.conf.lans
+	  pf.conf.lans ${FAKE_ROOT}/etc/pf.conf.lans
 
-/etc/pf.conf.lan-based-services : pf.conf.lan-based-services
-	doas pfctl -nf pf.conf.lan-based-services
+${FAKE_ROOT}/etc/pf.conf.lan-based-services : pf.conf.lan-based-services
+	#doas pfctl -nf pf.conf.lan-based-services
 	doas install -o root -g wheel -m 0600 \
-	  pf.conf.lan-based-services /etc/pf.conf.lan-based-services
+	  pf.conf.lan-based-services ${FAKE_ROOT}/etc/pf.conf.lan-based-services
 
-/etc/pf.conf.vpns : pf.conf.vpns
-	doas pfctl -nf pf.conf.vpns
+${FAKE_ROOT}/etc/pf.conf.vpns : pf.conf.vpns
+	#doas pfctl -nf pf.conf.vpns
 	doas install -o root -g wheel -m 0600 \
-	  pf.conf.vpns /etc/pf.conf.vpns
+	  pf.conf.vpns ${FAKE_ROOT}/etc/pf.conf.vpns
 
-/etc/pf.sshbots : ../openbsd-skel/pf.sshbots
+${FAKE_ROOT}/etc/pf.sshbots : ../openbsd-skel/pf.sshbots
 	doas install -o root -g wheel -m 0640 \
-	  ../openbsd-skel/pf.sshbots /etc/pf.sshbots
+	  ../openbsd-skel/pf.sshbots ${FAKE_ROOT}/etc/pf.sshbots
 
-/etc/pfstat.conf : pfstat.conf
+${FAKE_ROOT}/etc/pfstat.conf : pfstat.conf
 	doas install -o root -g wheel -m 0644 \
-	  pfstat.conf /etc/pfstat.conf
+	  pfstat.conf ${FAKE_ROOT}/etc/pfstat.conf
 
-/etc/rad.conf : rad.conf
+${FAKE_ROOT}/etc/rc.local : rc.local
 	doas install -o root -g wheel -m 0644 \
-	  rad.conf /etc/rad.conf
+	  rc.local ${FAKE_ROOT}/etc/rc.local
 
-/etc/rc.local : rc.local
-	doas install -o root -g wheel -m 0644 \
-	  rc.local /etc/rc.local
-
-/etc/relayd.conf : relayd.conf
-	doas relayd -nf ./relayd.conf
+${FAKE_ROOT}/etc/relayd.conf : relayd.conf
+	#doas relayd -nf ./relayd.conf
 	doas install -o root -g wheel -m 0600 \
-	  relayd.conf /etc/relayd.conf
-	doas rcctl reload relayd
+	  relayd.conf ${FAKE_ROOT}/etc/relayd.conf
+	#doas rcctl reload relayd
 
-/etc/resolv.conf : resolv.conf
+${FAKE_ROOT}/etc/resolv.conf : resolv.conf
 	doas install -o root -g wheel -m 0644 \
-	  resolv.conf /etc/resolv.conf
+	  resolv.conf ${FAKE_ROOT}/etc/resolv.conf
 
-/etc/smokeping/config : smokeping-config
+${FAKE_ROOT}/etc/smokeping/config : smokeping-config
 	doas install -o root -g wheel -m 0644 \
-	  smokeping-config /etc/smokeping/config
+	  smokeping-config ${FAKE_ROOT}/etc/smokeping/config
 
-/etc/ssh/ssh_config : ssh_config
+${FAKE_ROOT}/etc/ssh/ssh_config : ssh_config
 	doas install -o root -g wheel -m 0644 \
-	  ssh_config /etc/ssh/ssh_config
+	  ssh_config ${FAKE_ROOT}/etc/ssh/ssh_config
 
-/etc/ssh/sshd_config : sshd_config
+${FAKE_ROOT}/etc/ssh/sshd_config : sshd_config
 	doas install -o root -g wheel -m 0644 \
-	  sshd_config /etc/ssh/sshd_config
+	  sshd_config ${FAKE_ROOT}/etc/ssh/sshd_config
 
-/etc/syslog.conf : syslog.conf
+${FAKE_ROOT}/etc/syslog.conf : syslog.conf
 	doas install -o root -g wheel -m 0644 \
-	  syslog.conf /etc/syslog.conf
+	  syslog.conf ${FAKE_ROOT}/etc/syslog.conf
 
-/etc/sysctl.conf : sysctl.conf
+${FAKE_ROOT}/etc/sysctl.conf : sysctl.conf
 	doas install -o root -g wheel -m 0644 \
-	  sysctl.conf /etc/sysctl.conf
+	  sysctl.conf ${FAKE_ROOT}/etc/sysctl.conf
 
-/etc/vm.conf : vm.conf /var/vmd/ns1.weaver.tpl.qcow2 /var/vmd/arrakeen.weaver.tpl.qcow2 /var/vmd/axlotl-tank.here.qcow2
-	doas vmd -ndf ./vm.conf
+${FAKE_ROOT}/etc/vm.conf : vm.conf
+	#doas vmd -ndf ./vm.conf
 	doas install -o root -g wheel -m 0644 \
-	  vm.conf /etc/vm.conf
+	  vm.conf ${FAKE_ROOT}/etc/vm.conf
 
-/home/sysop/bin/backup.sh : backup.sh
+${FAKE_ROOT}/home/sysop/bin/backup.sh : backup.sh
 	doas install -o sysop -g wheel -m 0750 \
-	  backup.sh /home/sysop/bin/backup.sh
+	  backup.sh ${FAKE_ROOT}/home/sysop/bin/backup.sh
 
-/home/sysop/bin/maintain.sh : maintain.sh
+${FAKE_ROOT}/home/sysop/bin/maintain.sh : maintain.sh
 	doas install -o sysop -g wheel -m 0750 \
-	  maintain.sh /home/sysop/bin/maintain.sh
+	  maintain.sh ${FAKE_ROOT}/home/sysop/bin/maintain.sh
 
-/home/sysop/bin/mon-uplink.sh : mon-uplink.sh
+${FAKE_ROOT}/home/sysop/bin/mon-uplink.sh : mon-uplink.sh
 	doas install -o sysop -g wheel -m 0750 \
-	  mon-uplink.sh /home/sysop/bin/mon-uplink.sh
+	  mon-uplink.sh ${FAKE_ROOT}/home/sysop/bin/mon-uplink.sh
 
-/var/vmd/arrakeen.weaver.tpl.qcow2 :
-	vmctl create -s 256G /var/vmd/arrakeen.weaver.tpl.qcow2
-	doas chown sysop._vmd /var/vmd/arrakeen.weaver.tpl.qcow2
-	doas chmod 660 /var/vmd/arrakeen.weaver.tpl.qcow2
-
-/var/vmd/axlotl-tank.here.qcow2 :
-	vmctl create -s 1T /var/vmd/axlotl-tank.here.qcow2
-	doas chown sysop._vmd /var/vmd/axlotl-tank.here.qcow2
-	doas chmod 660 /var/vmd/axlotl-tank.here.qcow2
-
-/var/vmd/ns1.weaver.tpl.qcow2 :
-	vmctl create -s 4G /var/vmd/ns1.weaver.tpl.qcow2
-	doas chown sysop._vmd /var/vmd/ns1.weaver.tpl.qcow2
-	doas chmod 660 /var/vmd/ns1.weaver.tpl.qcow2
-
-/usr/local/libexec/munin/plugins/sensors_ : sensors_
+${FAKE_ROOT}/usr/local/libexec/munin/plugins/sensors_ : sensors_
 	doas install -o root -g bin -m 0755 \
-	  sensors_ /usr/local/libexec/munin/plugins/sensors_
+	  sensors_ ${FAKE_ROOT}/usr/local/libexec/munin/plugins/sensors_
 
-/usr/local/libexec/munin/plugins/unbound_munin_ : unbound_munin_
+${FAKE_ROOT}/usr/local/libexec/munin/plugins/unbound_munin_ : unbound_munin_
 	doas install -o root -g bin -m 0755 \
-	  unbound_munin_ /usr/local/libexec/munin/plugins/unbound_munin_
+	  unbound_munin_ ${FAKE_ROOT}/usr/local/libexec/munin/plugins/unbound_munin_
 
-/var/unbound/etc/unbound.conf : unbound.conf
-	doas unbound-checkconf unbound.conf
+${FAKE_ROOT}/var/unbound/etc/unbound.conf : unbound.conf
+	#doas unbound-checkconf unbound.conf
 	doas install -o root -g _unbound -m 0640 \
-	  unbound.conf /var/unbound/etc/unbound.conf
-	doas rcctl reload unbound
+	  unbound.conf ${FAKE_ROOT}/var/unbound/etc/unbound.conf
+	#doas rcctl reload unbound
 
-/var/www/etc/hosts : www-chroot-hosts
-	doas mkdir -p /var/www/etc
-	doas chown root.wheel /var/www/etc
-	doas chmod 755 /var/www/etc
+${FAKE_ROOT}/var/www/etc/hosts : www-chroot-hosts
+	doas mkdir -p ${FAKE_ROOT}/var/www/etc
+	doas chown root.wheel ${FAKE_ROOT}/var/www/etc
+	doas chmod 755 ${FAKE_ROOT}/var/www/etc
 	doas install -o root -g wheel -m 0644 \
-	  www-chroot-hosts /var/www/etc/hosts
+	  www-chroot-hosts ${FAKE_ROOT}/var/www/etc/hosts
 
-/var/www/htdocs/pfstat/index.html : pfstat-index.html
-	doas mkdir -p /var/www/htdocs/pfstat
-	doas chown -R sysop.wheel /var/www/htdocs/pfstat
-	doas chmod 755 /var/www/htdocs/pfstat
+${FAKE_ROOT}/var/www/htdocs/pfstat/index.html : pfstat-index.html
+	doas mkdir -p ${FAKE_ROOT}/var/www/htdocs/pfstat
+	doas chown -R sysop.wheel ${FAKE_ROOT}/var/www/htdocs/pfstat
+	doas chmod 755 ${FAKE_ROOT}/var/www/htdocs/pfstat
 	doas install -o root -g daemon -m 0644 \
-	  pfstat-index.html /var/www/htdocs/pfstat/index.html
+	  pfstat-index.html ${FAKE_ROOT}/var/www/htdocs/pfstat/index.html
 
-/var/www/htdocs/pfstat/solarized-dark.min.css : solarized-dark.min.css
+${FAKE_ROOT}/var/www/htdocs/pfstat/solarized-dark.min.css : solarized-dark.min.css
 	doas install -o root -g daemon -m 0644 \
-	  solarized-dark.min.css /var/www/htdocs/pfstat/solarized-dark.min.css
+	  solarized-dark.min.css ${FAKE_ROOT}/var/www/htdocs/pfstat/solarized-dark.min.css
 
+payload: fakeroot sietchtabr
+	cd ${FAKE_ROOT}; doas tar -czpf ../sietchtabr-payload.tgz .
