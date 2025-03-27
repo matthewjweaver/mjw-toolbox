@@ -10,7 +10,6 @@ TMP_FAKE_ROOT=`mktemp -d` || exit 1
 doas tar -C $TMP_FAKE_ROOT -xzpf $PAYLOAD
 cd $TMP_FAKE_ROOT
 for file in $(find ./ -type f); do
-  echo ${file}
   doas diff -u ${file} $(echo ${file}|sed -e's%^[.][/]%/%g')
 done
 

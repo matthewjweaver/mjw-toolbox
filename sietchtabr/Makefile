@@ -46,7 +46,7 @@ ${FAKE_ROOT}/var/www/etc :
 ${FAKE_ROOT}/var/www/htdocs/pfstat :
 	mkdir -p ${FAKE_ROOT}/var/www/htdocs/pfstat
 
-sietchtabr: \
+sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/acme-client.conf \
   ${FAKE_ROOT}/etc/daily.local \
   ${FAKE_ROOT}/etc/dhcpd.conf \
@@ -367,5 +367,9 @@ ${FAKE_ROOT}/var/www/htdocs/pfstat/solarized-dark.min.css : solarized-dark.min.c
 	doas install -o root -g daemon -m 0644 \
 	  solarized-dark.min.css ${FAKE_ROOT}/var/www/htdocs/pfstat/solarized-dark.min.css
 
-payload: fakeroot sietchtabr
-	cd ${FAKE_ROOT}; doas tar -czpf ../sietchtabr-payload.tgz .
+# This tar invocation is goofy because we really don't want to archive
+# the directories themselves, with goofy ownership and permissions.
+payload: sietchtabr-payload.tgz
+
+sietchtabr-payload.tgz: sietchtabr
+	cd ${FAKE_ROOT}; doas find ./ -type f -print0 | xargs -0 doas tar -cpzf ../sietchtabr-payload.tgz
