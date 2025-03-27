@@ -60,6 +60,7 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/hostname.enc2 \
   ${FAKE_ROOT}/etc/hostname.enc3 \
   ${FAKE_ROOT}/etc/hostname.enc4 \
+  ${FAKE_ROOT}/etc/hostname.gre0 \
   ${FAKE_ROOT}/etc/hostname.ixl0 \
   ${FAKE_ROOT}/etc/hostname.pflow0 \
   ${FAKE_ROOT}/etc/hostname.sec0 \
@@ -163,6 +164,10 @@ ${FAKE_ROOT}/etc/hostname.enc3 : hostname.enc3
 ${FAKE_ROOT}/etc/hostname.enc4 : hostname.enc4
 	doas install -o root -g wheel -m 0640 \
 	  hostname.enc4 ${FAKE_ROOT}/etc/hostname.enc4
+
+${FAKE_ROOT}/etc/hostname.gre0 : hostname.gre0
+	doas install -o root -g wheel -m 0640 \
+	  hostname.gre0 ${FAKE_ROOT}/etc/hostname.gre0
 
 ${FAKE_ROOT}/etc/hostname.ixl0 : hostname.ixl0
 	doas install -o root -g wheel -m 0640 \

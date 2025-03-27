@@ -167,6 +167,10 @@ pass out log quick on vlan666 inet \
 pass out log quick on vether0 inet \
   from vlan42:network to ! 10.42.0.0/16 \
   nat-to (vether0)
+# special gre tunnel
+pass out log quick on vether0 inet \
+  from 10.128.10.1 to any \
+  nat-to (vether0)
 
 pass in  log quick on vlan42 inet \
   from vlan42:network to any
