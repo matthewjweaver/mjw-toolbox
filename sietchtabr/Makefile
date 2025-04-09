@@ -1,9 +1,5 @@
 FAKE_ROOT=fakeroot
 
-clean : 
-	doas rm -rf ${FAKE_ROOT}
-	doas rm -rf sietchtabr-payload.tgz
-
 fakeroot : \
   ${FAKE_ROOT}/etc \
   ${FAKE_ROOT}/etc/munin \
@@ -401,3 +397,15 @@ payload: sietchtabr sietchtabr-payload.tgz
 
 sietchtabr-payload.tgz: sietchtabr
 	cd ${FAKE_ROOT}; doas find ./ -type f -print0 | xargs -0 doas tar -cpzf ../sietchtabr-payload.tgz
+
+test-payload: payload
+	./deploy-payload.sh
+
+load-payload: payload
+	./load-payload.sh
+
+
+clean : 
+	doas rm -rf ${FAKE_ROOT}
+	doas rm -rf sietchtabr-payload.tgz
+
