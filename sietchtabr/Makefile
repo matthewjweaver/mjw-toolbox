@@ -96,8 +96,6 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/sysctl.conf \
   ${FAKE_ROOT}/etc/syslog.conf \
   ${FAKE_ROOT}/etc/vm.conf \
-  ${FAKE_ROOT}/home/sysop/bin/backup.sh \
-  ${FAKE_ROOT}/home/sysop/bin/maintain.sh \
   ${FAKE_ROOT}/home/sysop/bin/mon-uplink.sh \
   ${FAKE_ROOT}/usr/local/libexec/munin/plugins/sensors_ \
   ${FAKE_ROOT}/usr/local/libexec/munin/plugins/unbound_munin_ \
@@ -345,14 +343,6 @@ ${FAKE_ROOT}/etc/vm.conf : vm.conf
 	echo "rcctl reload vmd" \
 	  >> ${FAKE_ROOT}/tmp/load-payload.sh
 
-${FAKE_ROOT}/home/sysop/bin/backup.sh : backup.sh
-	doas install -o sysop -g wheel -m 0750 \
-	  backup.sh ${FAKE_ROOT}/home/sysop/bin/backup.sh
-
-${FAKE_ROOT}/home/sysop/bin/maintain.sh : maintain.sh
-	doas install -o sysop -g wheel -m 0750 \
-	  maintain.sh ${FAKE_ROOT}/home/sysop/bin/maintain.sh
-
 ${FAKE_ROOT}/home/sysop/bin/mon-uplink.sh : mon-uplink.sh
 	doas install -o sysop -g wheel -m 0750 \
 	  mon-uplink.sh ${FAKE_ROOT}/home/sysop/bin/mon-uplink.sh
@@ -403,7 +393,6 @@ test-payload: payload
 
 load-payload: payload
 	./load-payload.sh
-
 
 clean : 
 	doas rm -rf ${FAKE_ROOT}
