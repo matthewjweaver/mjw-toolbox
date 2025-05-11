@@ -53,6 +53,7 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/dhcpcd.conf \
   ${FAKE_ROOT}/etc/doas.conf \
   ${FAKE_ROOT}/etc/hostname.bridge0 \
+  ${FAKE_ROOT}/etc/hostname.bridge23 \
   ${FAKE_ROOT}/etc/hostname.bridge42 \
   ${FAKE_ROOT}/etc/hostname.em0 \
   ${FAKE_ROOT}/etc/hostname.em1 \
@@ -68,6 +69,7 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/hostname.sec2 \
   ${FAKE_ROOT}/etc/hostname.wg0 \
   ${FAKE_ROOT}/etc/hostname.vether0 \
+  ${FAKE_ROOT}/etc/hostname.vether23 \
   ${FAKE_ROOT}/etc/hostname.vlan42 \
   ${FAKE_ROOT}/etc/hostname.vlan666 \
   ${FAKE_ROOT}/etc/httpd.conf \
@@ -137,6 +139,10 @@ ${FAKE_ROOT}/etc/hostname.bridge0 : hostname.bridge0
 	doas install -o root -g wheel -m 0640 \
 	  hostname.bridge0 ${FAKE_ROOT}/etc/hostname.bridge0
 
+${FAKE_ROOT}/etc/hostname.bridge23 : hostname.bridge23
+	doas install -o root -g wheel -m 0640 \
+	  hostname.bridge23 ${FAKE_ROOT}/etc/hostname.bridge23
+
 ${FAKE_ROOT}/etc/hostname.bridge42 : hostname.bridge42
 	doas install -o root -g wheel -m 0640 \
 	  hostname.bridge42 ${FAKE_ROOT}/etc/hostname.bridge42
@@ -199,6 +205,10 @@ ${FAKE_ROOT}/etc/hostname.wg0 : hostname.wg0
 ${FAKE_ROOT}/etc/hostname.vether0 : hostname.vether0
 	doas install -o root -g wheel -m 0640 \
 	  hostname.vether0 ${FAKE_ROOT}/etc/hostname.vether0
+
+${FAKE_ROOT}/etc/hostname.vether23 : hostname.vether23
+	doas install -o root -g wheel -m 0640 \
+	  hostname.vether23 ${FAKE_ROOT}/etc/hostname.vether23
 
 ${FAKE_ROOT}/etc/hostname.vlan42 : hostname.vlan42
 	doas install -o root -g wheel -m 0640 \
