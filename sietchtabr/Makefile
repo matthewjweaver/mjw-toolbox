@@ -52,6 +52,7 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/dhcpd.conf \
   ${FAKE_ROOT}/etc/dhcpcd.conf \
   ${FAKE_ROOT}/etc/doas.conf \
+  ${FAKE_ROOT}/etc/exports \
   ${FAKE_ROOT}/etc/hostname.bridge0 \
   ${FAKE_ROOT}/etc/hostname.bridge23 \
   ${FAKE_ROOT}/etc/hostname.bridge42 \
@@ -134,6 +135,10 @@ ${FAKE_ROOT}/etc/doas.conf : doas.conf
 	#doas -C ./doas.conf
 	doas install -o root -g wheel -m 0600 \
 	  doas.conf ${FAKE_ROOT}/etc/doas.conf
+
+${FAKE_ROOT}/etc/exports : exports
+	doas install -o root -g wheel -m 0644 \
+	  exports ${FAKE_ROOT}/etc/exports
 
 ${FAKE_ROOT}/etc/hostname.bridge0 : hostname.bridge0
 	doas install -o root -g wheel -m 0640 \
