@@ -121,11 +121,11 @@ ${FAKE_ROOT}/etc/dhcpcd.conf : dhcpcd.conf
 
 ${FAKE_ROOT}/etc/dhcpd.conf : dhcpd.conf
 	echo "dhcpd -nc etc/dhcpd.conf" \
-	  >> ${FAKE_ROOT}/tmp/test-payload.sh
+	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g wheel -m 0644 \
 	  dhcpd.conf ${FAKE_ROOT}/etc/dhcpd.conf
 	echo "rcctl restart dhcpd" \
-	  >> ${FAKE_ROOT}/tmp/load-payload.sh
+	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/etc/dhcpleased.conf : dhcpleased.conf
 	doas install -o root -g wheel -m 0644 \
@@ -225,11 +225,11 @@ ${FAKE_ROOT}/etc/hostname.vlan666 : hostname.vlan666
 
 ${FAKE_ROOT}/etc/httpd.conf : httpd.conf
 	echo "httpd -nf etc/httpd.conf" \
-	  >> ${FAKE_ROOT}/tmp/test-payload.sh
+	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g wheel -m 0644 \
 	  httpd.conf ${FAKE_ROOT}/etc/httpd.conf
 	echo "rcctl reload httpd" \
-	  >> ${FAKE_ROOT}/tmp/load-payload.sh
+	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/etc/iked.conf : iked.conf
 	~/bin/op run --env-file=.env -- \
@@ -270,39 +270,39 @@ ${FAKE_ROOT}/etc/nfsen.conf : nfsen.conf
 	doas install -o root -g wheel -m 0644 \
 	  nfsen.conf ${FAKE_ROOT}/etc/nfsen.conf
 	echo "install-nfsen.pl ${FAKE_ROOT}/etc/nfsen.conf" \
-	  >> ${FAKE_ROOT}/tmp/load-payload.sh
+	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/etc/ntpd.conf : ntpd.conf
 	echo "ntpd -nf etc/ntpd.conf" \
-	  >> ${FAKE_ROOT}/tmp/test-payload.sh
+	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g wheel -m 0644 \
 	  ntpd.conf ${FAKE_ROOT}/etc/ntpd.conf
 	echo "rcctl restart ntpd" \
-	  >> ${FAKE_ROOT}/tmp/load-payload.sh
+	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/etc/pf.conf : pf.conf ${FAKE_ROOT}/etc/pf.conf.lans ${FAKE_ROOT}/etc/pf.conf.lan-based-services ${FAKE_ROOT}/etc/pf.conf.vpns ${FAKE_ROOT}/etc/pf.sshbots ${FAKE_ROOT}/etc/rc.local
 	echo "pfctl -nf etc/pf.conf" \
-	  >> ${FAKE_ROOT}/tmp/test-payload.sh
+	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g wheel -m 0600 \
 	  pf.conf ${FAKE_ROOT}/etc/pf.conf
 	echo "pfctl -f /etc/pf.conf && sh /etc/rc.local" \
-	  >> ${FAKE_ROOT}/tmp/load-payload.sh
+	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/etc/pf.conf.lans : pf.conf.lans
 	echo "pfctl -nf etc/pf.conf.lans" \
-	  >> ${FAKE_ROOT}/tmp/test-payload.sh
+	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g wheel -m 0600 \
 	  pf.conf.lans ${FAKE_ROOT}/etc/pf.conf.lans
 
 ${FAKE_ROOT}/etc/pf.conf.lan-based-services : pf.conf.lan-based-services
 	echo "pfctl -nf etc/pf.conf.lan-based-services" \
-	  >> ${FAKE_ROOT}/tmp/test-payload.sh
+	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g wheel -m 0600 \
 	  pf.conf.lan-based-services ${FAKE_ROOT}/etc/pf.conf.lan-based-services
 
 ${FAKE_ROOT}/etc/pf.conf.vpns : pf.conf.vpns
 	echo "pfctl -nf etc/pf.conf.vpns" \
-	  >> ${FAKE_ROOT}/tmp/test-payload.sh
+	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g wheel -m 0600 \
 	  pf.conf.vpns ${FAKE_ROOT}/etc/pf.conf.vpns
 
@@ -320,11 +320,11 @@ ${FAKE_ROOT}/etc/rc.local : rc.local
 
 ${FAKE_ROOT}/etc/relayd.conf : relayd.conf
 	echo "relayd -nf etc/relayd.conf" \
-	  >> ${FAKE_ROOT}/tmp/test-payload.sh
+	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g wheel -m 0600 \
 	  relayd.conf ${FAKE_ROOT}/etc/relayd.conf
 	echo "rcctl reload relayd" \
-	  >> ${FAKE_ROOT}/tmp/load-payload.sh
+	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/etc/resolv.conf : resolv.conf
 	doas install -o root -g wheel -m 0644 \
@@ -352,11 +352,11 @@ ${FAKE_ROOT}/etc/sysctl.conf : sysctl.conf
 
 ${FAKE_ROOT}/etc/vm.conf : vm.conf
 	echo "vmd -ndf etc/vm.conf" \
-	  >> ${FAKE_ROOT}/tmp/test-payload.sh
+	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g wheel -m 0644 \
 	  vm.conf ${FAKE_ROOT}/etc/vm.conf
 	echo "rcctl reload vmd" \
-	  >> ${FAKE_ROOT}/tmp/load-payload.sh
+	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/home/sysop/bin/mon-uplink.sh : mon-uplink.sh
 	doas install -o sysop -g wheel -m 0750 \
@@ -372,11 +372,11 @@ ${FAKE_ROOT}/usr/local/libexec/munin/plugins/unbound_munin_ : unbound_munin_
 
 ${FAKE_ROOT}/var/unbound/etc/unbound.conf : unbound.conf
 	echo "unbound-checkconf var/unbound/etc/unbound.conf" \
-	  >> ${FAKE_ROOT}/tmp/test-payload.sh
+	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g _unbound -m 0640 \
 	  unbound.conf ${FAKE_ROOT}/var/unbound/etc/unbound.conf
 	echo "rcctl reload unbound" \
-	  >> ${FAKE_ROOT}/tmp/load-payload.sh
+	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/var/www/etc/hosts : www-chroot-hosts
 	doas mkdir -p ${FAKE_ROOT}/var/www/etc
@@ -396,15 +396,23 @@ ${FAKE_ROOT}/var/www/htdocs/pfstat/solarized-dark.min.css : solarized-dark.min.c
 	doas install -o root -g daemon -m 0644 \
 	  solarized-dark.min.css ${FAKE_ROOT}/var/www/htdocs/pfstat/solarized-dark.min.css
 
+${FAKE_ROOT}/tmp/load-payload.sh : ${FAKE_ROOT}/tmp/load-payload-commands
+	echo "set -e" > ${FAKE_ROOT}/tmp/load-payload.sh
+	doas sort -u -o ${FAKE_ROOT}/tmp/load-payload.sh ${FAKE_ROOT}/tmp/load-payload-commands
+
+${FAKE_ROOT}/tmp/test-payload.sh : ${FAKE_ROOT}/tmp/test-payload-commands
+	echo "set -e" > ${FAKE_ROOT}/tmp/test-payload.sh
+	doas sort -u -o ${FAKE_ROOT}/tmp/test-payload.sh ${FAKE_ROOT}/tmp/test-payload-commands
+
 # This tar invocation is goofy because we really don't want to archive
 # the directories themselves, with goofy ownership and permissions.
 payload: sietchtabr sietchtabr-payload.tgz
 
-sietchtabr-payload.tgz: sietchtabr
+sietchtabr-payload.tgz: sietchtabr ${FAKE_ROOT}/tmp/load-payload.sh ${FAKE_ROOT}/tmp/test-payload.sh
 	cd ${FAKE_ROOT}; doas find ./ -type f -print0 | xargs -0 doas tar -cpzf ../sietchtabr-payload.tgz
 
 test-payload: payload
-	./deploy-payload.sh
+	./deploy-and-test-payload.sh
 
 load-payload: payload
 	./load-payload.sh
