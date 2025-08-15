@@ -242,36 +242,11 @@ pass out log quick on vether0 inet \
 
 # Tunneled Traffic
 pass log quick on enc1 inet \
-  from { ghola.here, vpn.grahams.wtf, 192.168.2.0/24 } \
-  to   { ghola.here, vpn.grahams.wtf, 192.168.2.0/24 }
-
-# between gateways
-pass log quick on enc1 inet \
-  from { 192.168.223.1, 192.168.2.1 } \
-  to   { 192.168.223.1, 192.168.2.1 }
-pass log quick on enc1 inet \
-  from { vpn.grahams.wtf, sietchtabr.nodeless.net } \
-  to   { vpn.grahams.wtf, sietchtabr.nodeless.net }
-
-pass log quick on enc1 inet \
-  from { gurneyhalleck.here, otheym.here, sietchtabr.nodeless.net, taqwa.here } \
-  to kulon.nodeless.net
-pass log quick on enc1 inet \
-  from { gurneyhalleck.here, sietchtabr.nodeless.net, sietchumbu.here, vpn.grahams.wtf, 192.168.223.39, 192.168.2.0/24 } \
-  to { gurneyhalleck.here, sietchtabr.nodeless.net, sietchumbu.here, vpn.grahams.wtf, 192.168.223.39, 192.168.2.0/24 }
-
-# sync traffic
-grahams_sync_hosts = "{ 192.168.2.173, 192.168.2.206, 192.168.2.207, 192.168.2.209, 192.168.2.210, 192.168.2.222 }"
-local_sync_hosts = "{ sietchtabr.nodeless.net, sietchumbu.here, ghola.here }"
-pass log quick on enc1 inet \
-  from $grahams_sync_hosts to $local_sync_hosts
-pass log quick on enc1 inet \
-  from $local_sync_hosts to $grahams_sync_hosts
+  from { sietchtabr.nodeless.net, vpn.grahams.wtf, 192.168.2.0/24, 192.168.223.0/24 } \
+  to { sietchtabr.nodeless.net, vpn.grahams.wtf, 192.168.2.0/24, 192.168.223.0/24 }
 
 # Out onto LAN
 pass out log quick on ixl0 inet \
   from { vpn.grahams.wtf, 192.168.2.0/24 } \
-  to { ghola.here, sietchumbu.here }
-pass out log quick on ixl0 inet \
-  from $grahams_sync_hosts to $local_sync_hosts
+  to { 192.168.223.0/24 }
 
