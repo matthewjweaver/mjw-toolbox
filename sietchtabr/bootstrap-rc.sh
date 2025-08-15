@@ -9,9 +9,12 @@ rcctl enable dhcpd
 rcctl set dhcpd flags "-A dhcpd_abandoned -L dhcpd_leased"
 rcctl enable httpd
 rcctl enable iked
+rcctl enable nfsd
+rcctl set nfsd flags -u -t -n 6
 rcctl enable nfsen
 rcctl set pflogd flags "-s 1500"
 rcctl enable php82_fpm
+rcctl enable portmap
 rcctl enable rad
 rcctl enable relayd
 rcctl disable resolvd

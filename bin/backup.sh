@@ -2,9 +2,8 @@
 set -e
 umask 027
 
-# XXX 20230526 TODO(mjw):
-#   1. parallelize somehow
-#   2. automate somehow
+# XXX 20250808 TODO(mjw):
+#   1. automate somehow
 
 # This entire thing depends on the 1password CLI, op.
 
@@ -97,8 +96,8 @@ for PARTITION in $( < ${BACKUP_DIR}/fstab awk '/ffs/ { print $1 }' ); do
   doas chmod 660 ${LOG_OUTPUT}
 
   ssh ${TARGET_USER}@${TARGET_HOST} "doas dump -0af - ${PARTITION}| \
-    gzip -1 -" 2>> ${LOG_OUTPUT} | \
-    /usr/bin/openssl enc -chacha -iter 1000000 -k "${PASSWORD}" 2>> ${LOG_OUTPUT} | \
+    gzip -1 -| \
+    /usr/bin/openssl enc -chacha -iter 1000000 -k \"${PASSWORD}\"" 2>> ${LOG_OUTPUT} | \
     doas dd of=${BACKUP_OUTPUT} bs=4M 2>> ${LOG_OUTPUT}
 done
 
