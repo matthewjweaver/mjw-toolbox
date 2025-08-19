@@ -68,7 +68,6 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/hostname.sec0 \
   ${FAKE_ROOT}/etc/hostname.sec1 \
   ${FAKE_ROOT}/etc/hostname.sec2 \
-  ${FAKE_ROOT}/etc/hostname.wg0 \
   ${FAKE_ROOT}/etc/hostname.vether0 \
   ${FAKE_ROOT}/etc/hostname.vether23 \
   ${FAKE_ROOT}/etc/hostname.vlan42 \
@@ -199,13 +198,6 @@ ${FAKE_ROOT}/etc/hostname.sec1 : hostname.sec1
 ${FAKE_ROOT}/etc/hostname.sec2 : hostname.sec2
 	doas install -o root -g wheel -m 0640 \
 	  hostname.sec2 ${FAKE_ROOT}/etc/hostname.sec2
-
-${FAKE_ROOT}/etc/hostname.wg0 : hostname.wg0
-	~/bin/op run --env-file=.env -- \
-	  sh ../install-secretfied.sh \
-	    hostname.wg0 \
-	    "-o root -g wheel -m 0640" \
-	    ${FAKE_ROOT}/etc/hostname.wg0
 
 ${FAKE_ROOT}/etc/hostname.vether0 : hostname.vether0
 	doas install -o root -g wheel -m 0640 \

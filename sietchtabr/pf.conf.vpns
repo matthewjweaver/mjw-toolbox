@@ -55,10 +55,6 @@ pass out log quick on vether0 inet6 \
   proto udp \
   from (vether0) to $nodeless \
   port 22713
-pass in  log on wg0 inet \
-  from 192.168.221.0/24 to any
-pass out log on wg0 inet \
-  from any to 192.168.221.0/24
 
 # tunneled traffic
 pass on enc0
