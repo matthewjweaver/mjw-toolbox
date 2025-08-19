@@ -1,3 +1,3 @@
-for ruleset in vpns lans lan-based-services; do
+for ruleset in vpns lans; do
   /sbin/pfctl -a ${ruleset} -f /etc/pf.conf.${ruleset}
 done

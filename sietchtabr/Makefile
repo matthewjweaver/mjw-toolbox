@@ -86,7 +86,6 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/pf.conf \
   ${FAKE_ROOT}/etc/pf.conf.vpns \
   ${FAKE_ROOT}/etc/pf.conf.lans \
-  ${FAKE_ROOT}/etc/pf.conf.lan-based-services \
   ${FAKE_ROOT}/etc/pf.sshbots \
   ${FAKE_ROOT}/etc/pfstat.conf \
   ${FAKE_ROOT}/etc/rc.local \
@@ -272,7 +271,7 @@ ${FAKE_ROOT}/etc/ntpd.conf : ntpd.conf
 	echo "rcctl restart ntpd" \
 	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
-${FAKE_ROOT}/etc/pf.conf : pf.conf ${FAKE_ROOT}/etc/pf.conf.lans ${FAKE_ROOT}/etc/pf.conf.lan-based-services ${FAKE_ROOT}/etc/pf.conf.vpns ${FAKE_ROOT}/etc/pf.sshbots ${FAKE_ROOT}/etc/rc.local
+${FAKE_ROOT}/etc/pf.conf : pf.conf ${FAKE_ROOT}/etc/pf.conf.lans ${FAKE_ROOT}/etc/pf.conf.vpns ${FAKE_ROOT}/etc/pf.sshbots ${FAKE_ROOT}/etc/rc.local
 	echo "pfctl -nf etc/pf.conf" \
 	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g wheel -m 0600 \
@@ -285,12 +284,6 @@ ${FAKE_ROOT}/etc/pf.conf.lans : pf.conf.lans
 	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g wheel -m 0600 \
 	  pf.conf.lans ${FAKE_ROOT}/etc/pf.conf.lans
-
-${FAKE_ROOT}/etc/pf.conf.lan-based-services : pf.conf.lan-based-services
-	echo "pfctl -nf etc/pf.conf.lan-based-services" \
-	  >> ${FAKE_ROOT}/tmp/test-payload-commands
-	doas install -o root -g wheel -m 0600 \
-	  pf.conf.lan-based-services ${FAKE_ROOT}/etc/pf.conf.lan-based-services
 
 ${FAKE_ROOT}/etc/pf.conf.vpns : pf.conf.vpns
 	echo "pfctl -nf etc/pf.conf.vpns" \
