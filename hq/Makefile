@@ -20,6 +20,7 @@ hq : \
   /home/ebde7a06/.ssh/authorized_keys \
   /var/nsd/etc/nsd.conf \
   /var/nsd/zones/master/layeraleph.com \
+  /var/nsd/zones/master/crisisengineering.com \
   /var/unbound/etc/unbound.conf
 
 /etc/acme-client.conf : acme-client.conf
@@ -109,11 +110,21 @@ hq : \
 	install -o root -g _nsd -m 0640 \
 	  nsd.conf /var/nsd/etc/nsd.conf
 
+/var/nsd/zones/master/crisisengineering.com : \
+  /var/opendnssec/unsigned/crisisengineering.com
+	chown _opendnssec /var/nsd/zones/master
+	chgrp _nsd /var/nsd/zones/master
+	ods-signer sign crisisengineering.com
+
 /var/nsd/zones/master/layeraleph.com : \
   /var/opendnssec/unsigned/layeraleph.com
 	chown _opendnssec /var/nsd/zones/master
 	chgrp _nsd /var/nsd/zones/master
 	ods-signer sign layeraleph.com
+
+/var/opendnssec/unsigned/crisisengineering.com : crisisengineering.com
+	install -o _opendnssec -g _opendnssec -m 0600 \
+	  crisisengineering.com /var/opendnssec/unsigned/crisisengineering.com
 
 /var/opendnssec/unsigned/layeraleph.com : layeraleph.com
 	install -o _opendnssec -g _opendnssec -m 0600 \
