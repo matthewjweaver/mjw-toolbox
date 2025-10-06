@@ -401,6 +401,7 @@ test-payload: payload
 
 load-payload: payload
 	./load-payload.sh
+	doas rm -rf ${FAKE_ROOT}/tmp/*
 
 clean : 
 	doas rm -rf ${FAKE_ROOT}
