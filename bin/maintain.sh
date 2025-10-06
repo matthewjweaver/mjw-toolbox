@@ -15,6 +15,7 @@ done
 echo "press enter to continue" ; read trash
 for uh in $user_hosts; do
   ssh -4 ${uh} mail
+  ssh -4 ${uh} doas mail
 done
 tail -80 /var/log/daemon | less
 tail -80 /var/log/messages | less
