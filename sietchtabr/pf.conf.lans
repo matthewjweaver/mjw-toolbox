@@ -1,20 +1,6 @@
 set state-defaults pflow
 
 ########################################################################
-# Hive LAN
-pass out log quick on vether0 inet \
-  from 192.168.23.0/24 \
-  to any \
-  nat-to (vether0) static-port
-
-pass in  log quick on vether23 inet \
-  from vether23:network \
-  to any
-pass out log quick on vether23 inet \
-  from any \
-  to vether23:network
-
-########################################################################
 # Home LAN (wifi, etc)
 # TODO: enable dhcp enforcement using dhcpd(8)'s -L and -A pf table
 # maintenance.
