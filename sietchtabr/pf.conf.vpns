@@ -179,10 +179,10 @@ pass in log on vether0 inet \
   icmp-type echoreq code 0
 
 # Out onto LAN
-pass out log quick on ixl0 inet \
+pass out log quick on vether223 inet \
   from $starlink \
   to 192.168.223.0/24
-pass out log quick on ixl0 inet \
+pass out log quick on vether223 inet \
   from { 100.64.0.0/10, 192.168.25.0/24 } \
   to 192.168.223.0/24
 pass out log quick on vlan42 inet \
@@ -242,7 +242,7 @@ pass log quick on enc1 inet \
   to { sietchtabr.nodeless.net, vpn.grahams.wtf, 192.168.2.0/24, 192.168.223.0/24 }
 
 # Out onto LAN
-pass out log quick on ixl0 inet \
+pass out log quick on vether223 inet \
   from { vpn.grahams.wtf, 192.168.2.0/24 } \
   to { 192.168.223.0/24 }
 
