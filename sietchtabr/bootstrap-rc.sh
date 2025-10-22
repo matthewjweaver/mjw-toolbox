@@ -42,6 +42,8 @@ mkdir -p /var/www/htdocs/pf
 
 usermod -G _munin www
 usermod -G _rrdcached _munin
+chgrp _rrdcached /var/db/munin
+chmod g+w /var/db/munin
 
 # make more tap interfaces for vmd
 cd /dev
