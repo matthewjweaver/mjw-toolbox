@@ -381,6 +381,12 @@ ${FAKE_ROOT}/var/www/htdocs/pfstat/solarized-dark.min.css : solarized-dark.min.c
 	doas install -o root -g daemon -m 0644 \
 	  solarized-dark.min.css ${FAKE_ROOT}/var/www/htdocs/pfstat/solarized-dark.min.css
 
+${FAKE_ROOT}/tmp/load-payload-commands:
+	touch ${FAKE_ROOT}/tmp/load-payload-commands
+
+${FAKE_ROOT}/tmp/test-payload-commands:
+	touch ${FAKE_ROOT}/tmp/test-payload-commands
+
 ${FAKE_ROOT}/tmp/load-payload.sh : ${FAKE_ROOT}/tmp/load-payload-commands
 	echo "set -e" > ${FAKE_ROOT}/tmp/load-payload.sh
 	doas sort -u -o ${FAKE_ROOT}/tmp/load-payload.sh ${FAKE_ROOT}/tmp/load-payload-commands
