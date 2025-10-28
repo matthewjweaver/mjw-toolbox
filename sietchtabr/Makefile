@@ -54,7 +54,7 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/doas.conf \
   ${FAKE_ROOT}/etc/exports \
   ${FAKE_ROOT}/etc/hostname.bridge0 \
-  ${FAKE_ROOT}/etc/hostname.bridge23 \
+  ${FAKE_ROOT}/etc/hostname.bridge223 \
   ${FAKE_ROOT}/etc/hostname.bridge42 \
   ${FAKE_ROOT}/etc/hostname.em0 \
   ${FAKE_ROOT}/etc/hostname.em1 \
@@ -69,7 +69,7 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/hostname.sec1 \
   ${FAKE_ROOT}/etc/hostname.sec2 \
   ${FAKE_ROOT}/etc/hostname.vether0 \
-  ${FAKE_ROOT}/etc/hostname.vether23 \
+  ${FAKE_ROOT}/etc/hostname.vether223 \
   ${FAKE_ROOT}/etc/hostname.vlan42 \
   ${FAKE_ROOT}/etc/hostname.vlan666 \
   ${FAKE_ROOT}/etc/httpd.conf \
@@ -142,9 +142,9 @@ ${FAKE_ROOT}/etc/hostname.bridge0 : hostname.bridge0
 	doas install -o root -g wheel -m 0640 \
 	  hostname.bridge0 ${FAKE_ROOT}/etc/hostname.bridge0
 
-${FAKE_ROOT}/etc/hostname.bridge23 : hostname.bridge23
+${FAKE_ROOT}/etc/hostname.bridge223 : hostname.bridge223
 	doas install -o root -g wheel -m 0640 \
-	  hostname.bridge23 ${FAKE_ROOT}/etc/hostname.bridge23
+	  hostname.bridge223 ${FAKE_ROOT}/etc/hostname.bridge223
 
 ${FAKE_ROOT}/etc/hostname.bridge42 : hostname.bridge42
 	doas install -o root -g wheel -m 0640 \
@@ -202,9 +202,9 @@ ${FAKE_ROOT}/etc/hostname.vether0 : hostname.vether0
 	doas install -o root -g wheel -m 0640 \
 	  hostname.vether0 ${FAKE_ROOT}/etc/hostname.vether0
 
-${FAKE_ROOT}/etc/hostname.vether23 : hostname.vether23
+${FAKE_ROOT}/etc/hostname.vether223 : hostname.vether223
 	doas install -o root -g wheel -m 0640 \
-	  hostname.vether23 ${FAKE_ROOT}/etc/hostname.vether23
+	  hostname.vether223 ${FAKE_ROOT}/etc/hostname.vether223
 
 ${FAKE_ROOT}/etc/hostname.vlan42 : hostname.vlan42
 	doas install -o root -g wheel -m 0640 \
@@ -381,6 +381,12 @@ ${FAKE_ROOT}/var/www/htdocs/pfstat/solarized-dark.min.css : solarized-dark.min.c
 	doas install -o root -g daemon -m 0644 \
 	  solarized-dark.min.css ${FAKE_ROOT}/var/www/htdocs/pfstat/solarized-dark.min.css
 
+${FAKE_ROOT}/tmp/load-payload-commands:
+	touch ${FAKE_ROOT}/tmp/load-payload-commands
+
+${FAKE_ROOT}/tmp/test-payload-commands:
+	touch ${FAKE_ROOT}/tmp/test-payload-commands
+
 ${FAKE_ROOT}/tmp/load-payload.sh : ${FAKE_ROOT}/tmp/load-payload-commands
 	echo "set -e" > ${FAKE_ROOT}/tmp/load-payload.sh
 	doas sort -u -o ${FAKE_ROOT}/tmp/load-payload.sh ${FAKE_ROOT}/tmp/load-payload-commands
@@ -401,6 +407,7 @@ test-payload: payload
 
 load-payload: payload
 	./load-payload.sh
+	doas rm -rf ${FAKE_ROOT}/tmp/*
 
 clean : 
 	doas rm -rf ${FAKE_ROOT}

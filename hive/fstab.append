@@ -1,0 +1,4 @@
+172.23.0.2:/volume1/arc	/arc	nfs	rsize=32768,wsize=32768	0 0
+172.23.0.2:/volume1/mistakenot	/mistakenot	nfs	rsize=32768,wsize=32768	0 0
+172.23.0.2:/volume1/multi	/multi	nfs	rsize=32768,wsize=32768	0 0
+172.23.0.2:/volume2/shadowhax-movies	/shadowhax-movies	nfs	rsize=32768,wsize=32768	0 0

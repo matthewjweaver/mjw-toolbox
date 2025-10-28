@@ -1,5 +1,0 @@
-172.23.0.66:/volume1/arc	/arc	nfs	rsize=32768,wsize=32768	0 0
-172.23.0.66:/volume1/mistakenot	/home/mistakenot	nfs	rsize=32768,wsize=32768	0 0
-172.23.0.66:/volume1/multi	/home/multi	nfs	rsize=32768,wsize=32768	0 0
-172.23.0.66:/volume2/shadowhax-movies	/home/shadowhax-movies	nfs	rsize=32768,wsize=32768	0 0
-UUID=c695f41f-13ab-4d2b-ba20-d4de0b39977d	/home/docker	ext4	rw,relatime 0 0

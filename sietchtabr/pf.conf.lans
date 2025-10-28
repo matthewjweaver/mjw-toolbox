@@ -1,20 +1,6 @@
 set state-defaults pflow
 
 ########################################################################
-# Hive LAN
-pass out log quick on vether0 inet \
-  from 192.168.23.0/24 \
-  to any \
-  nat-to (vether0) static-port
-
-pass in  log quick on vether23 inet \
-  from vether23:network \
-  to any
-pass out log quick on vether23 inet \
-  from any \
-  to vether23:network
-
-########################################################################
 # Home LAN (wifi, etc)
 # TODO: enable dhcp enforcement using dhcpd(8)'s -L and -A pf table
 # maintenance.
@@ -32,42 +18,42 @@ pass out log quick on vether0 inet \
   from { 192.168.223.21, 192.168.223.24 } \
   nat-to (vether0) static-port
 pass out log quick on vether0 inet \
-  from ixl0:network \
+  from vether223:network \
   nat-to (vether0)
 pass out log quick on vether0 inet6 \
   from any \
   nat-to (vether0)
 
 # Capture all DNS
-pass in log quick on ixl0 inet \
+pass in log quick on vether223 inet \
   proto { tcp, udp } \
   from any \
   to any port { domain, domain-s } \
-  rdr-to ixl0
-pass in log quick on ixl0 inet6 \
+  rdr-to vether223
+pass in log quick on vether223 inet6 \
   proto { tcp, udp } \
   from any \
   to any port { domain, domain-s } \
-  rdr-to (ixl0)
+  rdr-to (vether223)
 
 # Pass this LAN's outbound traffic
-pass in  log quick on ixl0 inet \
-  from ixl0:network to any
-pass in  log quick on ixl0 inet6 \
-  from (ixl0:network) to any
+pass in  log quick on vether223 inet \
+  from vether223:network to any
+pass in  log quick on vether223 inet6 \
+  from (vether223:network) to any
 
 # Pass traffic from the router to this LAN
-pass out log quick on ixl0 inet \
-  from ixl0 to ixl0:network
-pass out log quick on ixl0 inet \
-  from ixl0:network to ixl0:network
-pass out log quick on ixl0 inet6 \
-  from (ixl0) to (ixl0:network)
+pass out log quick on vether223 inet \
+  from vether223 to vether223:network
+pass out log quick on vether223 inet \
+  from vether223:network to vether223:network
+pass out log quick on vether223 inet6 \
+  from (vether223) to (vether223:network)
 
 # Pass multicast
-pass in  log quick on ixl0 inet \
+pass in  log quick on vether223 inet \
   from 224.0.0.0/24 to any
-pass out log quick on ixl0 inet \
+pass out log quick on vether223 inet \
   from any to 224.0.0.0/24
 
 
@@ -109,7 +95,7 @@ pass in  log quick on vlan666 inet \
 # Permit http and https from router, lans
 pass out log quick on vlan666 inet \
   proto tcp \
-  from { vlan666, ixl0, ixl0:network } \
+  from { vlan666, vether223, vether223:network } \
   to vlan666:network \
   port { https, www }
 
@@ -126,7 +112,7 @@ pass log quick on vlan666 inet \
 # Pass outbound traffic only
 pass in  log quick on vlan666 inet \
   from vlan666:network \
-  to ! ixl0:network
+  to ! vether223:network
 
 # Pass traffic from router
 pass out log quick on vlan666 inet \
@@ -150,7 +136,7 @@ pass in  log quick on vlan42 inet \
 
 pass in  log quick on vlan42 inet \
   from 10.42.1.254 to taqwa.here
-pass out log quick on ixl0 inet \
+pass out log quick on vether223 inet \
   from 10.42.1.254 to taqwa.here
 
 # taqwa relayd

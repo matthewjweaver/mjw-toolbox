@@ -41,5 +41,12 @@ rcctl enable smokeping_fcgi
 mkdir -p /var/www/htdocs/pf
 
 usermod -G _munin www
+usermod -G _rrdcached _munin
+chgrp _rrdcached /var/db/munin
+chmod g+w /var/db/munin
+
+# make more tap interfaces for vmd
+cd /dev
+sh ./MAKEDEV tap0 tap1 tap2 tap3 tap4 tap5 tap6 tap7
 
 echo "Check crontab-additions.*"
