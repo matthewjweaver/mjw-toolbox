@@ -98,7 +98,6 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/syslog.conf \
   ${FAKE_ROOT}/etc/vm.conf \
   ${FAKE_ROOT}/home/sysop/bin/mon-uplink.sh \
-  ${FAKE_ROOT}/usr/local/libexec/munin/plugins/sensors_ \
   ${FAKE_ROOT}/usr/local/libexec/munin/plugins/unbound_munin_ \
   ${FAKE_ROOT}/var/unbound/etc/unbound.conf \
   ${FAKE_ROOT}/var/www/etc/hosts \
@@ -346,10 +345,6 @@ ${FAKE_ROOT}/etc/vm.conf : vm.conf
 ${FAKE_ROOT}/home/sysop/bin/mon-uplink.sh : mon-uplink.sh
 	doas install -o sysop -g wheel -m 0750 \
 	  mon-uplink.sh ${FAKE_ROOT}/home/sysop/bin/mon-uplink.sh
-
-${FAKE_ROOT}/usr/local/libexec/munin/plugins/sensors_ : sensors_
-	doas install -o root -g bin -m 0755 \
-	  sensors_ ${FAKE_ROOT}/usr/local/libexec/munin/plugins/sensors_
 
 ${FAKE_ROOT}/usr/local/libexec/munin/plugins/unbound_munin_ : unbound_munin_
 	doas install -o root -g bin -m 0755 \
