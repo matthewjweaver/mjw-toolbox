@@ -1,4 +1,4 @@
 # renew letsencrypt certs as necessary
-for DOMAIN in layeraleph.com; do
+for DOMAIN in layeraleph.com crisisengineering.com crisisengineers.com; do
   acme-client ${DOMAIN} && rcctl reload httpd
 done
