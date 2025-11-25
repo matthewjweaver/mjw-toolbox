@@ -86,7 +86,6 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/pf.conf \
   ${FAKE_ROOT}/etc/pf.conf.vpns \
   ${FAKE_ROOT}/etc/pf.conf.lans \
-  ${FAKE_ROOT}/etc/pf.sshbots \
   ${FAKE_ROOT}/etc/pfstat.conf \
   ${FAKE_ROOT}/etc/rc.local \
   ${FAKE_ROOT}/etc/relayd.conf \
@@ -270,7 +269,7 @@ ${FAKE_ROOT}/etc/ntpd.conf : ntpd.conf
 	echo "rcctl restart ntpd" \
 	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
-${FAKE_ROOT}/etc/pf.conf : pf.conf ${FAKE_ROOT}/etc/pf.conf.lans ${FAKE_ROOT}/etc/pf.conf.vpns ${FAKE_ROOT}/etc/pf.sshbots ${FAKE_ROOT}/etc/rc.local
+${FAKE_ROOT}/etc/pf.conf : pf.conf ${FAKE_ROOT}/etc/pf.conf.lans ${FAKE_ROOT}/etc/pf.conf.vpns ${FAKE_ROOT}/etc/rc.local
 	echo "pfctl -nf etc/pf.conf" \
 	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g wheel -m 0600 \
@@ -289,10 +288,6 @@ ${FAKE_ROOT}/etc/pf.conf.vpns : pf.conf.vpns
 	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g wheel -m 0600 \
 	  pf.conf.vpns ${FAKE_ROOT}/etc/pf.conf.vpns
-
-${FAKE_ROOT}/etc/pf.sshbots : ../openbsd-skel/pf.sshbots
-	doas install -o root -g wheel -m 0640 \
-	  ../openbsd-skel/pf.sshbots ${FAKE_ROOT}/etc/pf.sshbots
 
 ${FAKE_ROOT}/etc/pfstat.conf : pfstat.conf
 	doas install -o root -g wheel -m 0644 \
