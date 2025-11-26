@@ -20,15 +20,15 @@ necessary NAT rules to allow a gateway to NAT outbound traffic from a
 local network to the internet on the egress interface.
 
 
-## pf.sshbots / update-sshbots.sh
+## pf.scannerbots / update-scannerbots.sh
 
-The pf.sshbots is a persistent table of addresses and netblocks observed
+The pf.scannerbots is a persistent table of addresses and netblocks observed
 doing funny business to ssh. The pf.conf(5) files will, by default, drop
 all traffic from these addresses if this file is placed in
-`/etc/pf.sshbots`.
+`/etc/pf.scannerbots`.
 
 The commands for collecting suspected hostile addresses from logs are
-collected in `update-sshbots.sh`. They're OK, but could use some work.
+collected in `update-scannerbots.sh`. They're OK, but could use some work.
 Existing liabilities include connection attempts with cute usernames
 like shellcode.
 

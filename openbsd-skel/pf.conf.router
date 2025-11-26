@@ -3,9 +3,9 @@ set skip on lo
 block drop log
 
 # tables used to filter bad actors
-table <sshbots> counters persist file "/etc/pf.sshbots"
+table <scannerbots> counters persist file "/etc/pf.scannerbots"
 # Zap all traffic from addresses that scan ssh
-block drop log quick from { <sshbots> } to any
+block drop log quick from { <scannerbots> } to any
 
 pass out on egress nat-to (egress) keep state
 pass in on egress proto tcp from any to egress port ssh keep state
