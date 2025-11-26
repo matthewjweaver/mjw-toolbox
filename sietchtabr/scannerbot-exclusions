@@ -1,5 +1,5 @@
 # These addresses are excepted from automated ssh bot deny lists.
-# See ../openbsd-skel/{README.md,pf.sshbots} for details.
+# See ../openbsd-skel/{README.md,pf.scannerbots} for details.
 192.168.223.0/24
 192.168.25.0/24
 192.168.1.0/24
