@@ -7,13 +7,11 @@ korba : \
   /etc/httpd.conf \
   /etc/iked.conf \
   /etc/munin/munin-node.conf \
-  /etc/ntpd.conf \
   /etc/newsyslog.conf \
   /etc/opendnssec/conf.xml \
   /etc/opendnssec/kasp.xml \
   /etc/pf.conf \
   /etc/pf.sshbots \
-  /etc/resolv.conf \
   /etc/softhsm.conf \
   /etc/ssh/ssh_config \
   /etc/ssh/sshd_config \
@@ -22,8 +20,7 @@ korba : \
   /var/nsd/zones/master/ice-nine.org \
   /var/nsd/zones/master/mcweavers.net \
   /var/nsd/zones/master/mjw.wtf \
-  /var/nsd/zones/master/nodeless.net \
-  /var/unbound/etc/unbound.conf
+  /var/nsd/zones/master/nodeless.net
 
 /etc/acme-client.conf : acme-client.conf
 	install -o root -g wheel -m 0644 \
@@ -58,10 +55,6 @@ korba : \
 	install -o root -g wheel -m 0644 \
 	munin-node.conf /etc/munin/munin-node.conf
 
-/etc/ntpd.conf : ntpd.conf
-	install -o root -g wheel -m 0644 \
-	  ntpd.conf /etc/ntpd.conf
-
 /etc/newsyslog.conf : newsyslog.conf
 	install -o root -g wheel -m 0644 \
 	  newsyslog.conf /etc/newsyslog.conf
@@ -87,10 +80,6 @@ korba : \
 /etc/pf.sshbots : ../openbsd-skel/pf.sshbots
 	install -o root -g wheel -m 0600 \
 	  ../openbsd-skel/pf.sshbots /etc/pf.sshbots
-
-/etc/resolv.conf : resolv.conf
-	install -o root -g wheel -m 0644 \
-	  resolv.conf /etc/resolv.conf
 
 /etc/softhsm.conf : softhsm.conf
 	install -o root -g wheel -m 0644 \
@@ -151,8 +140,4 @@ korba : \
 /var/opendnssec/unsigned/nodeless.net : zones/nodeless.net
 	install -o _opendnssec -g _opendnssec -m 0600 \
 	  zones/nodeless.net /var/opendnssec/unsigned/nodeless.net
-
-/var/unbound/etc/unbound.conf : unbound.conf
-	install -o root -g _unbound -m 0640 \
-	  unbound.conf /var/unbound/etc/unbound.conf
 
