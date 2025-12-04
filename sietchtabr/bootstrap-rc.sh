@@ -3,7 +3,7 @@
 # To be run on a new machine, serves as knowledge store for 
 # various rcctl configuration, plus arbitrary filesystem changes.
 
-rcctl set syslogd flags "-U 127.0.0.1"
+rcctl set syslogd flags "-U 127.0.0.1 -U 192.168.223.1"
 rcctl restart syslogd
 rcctl enable dhcpd
 rcctl set dhcpd flags "-A dhcpd_abandoned -L dhcpd_leased"
