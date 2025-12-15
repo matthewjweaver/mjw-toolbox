@@ -8,11 +8,8 @@ korba : \
   /etc/iked.conf \
   /etc/munin/munin-node.conf \
   /etc/newsyslog.conf \
-  /etc/opendnssec/conf.xml \
-  /etc/opendnssec/kasp.xml \
   /etc/pf.conf \
   /etc/pf.sshbots \
-  /etc/softhsm.conf \
   /etc/ssh/ssh_config \
   /etc/ssh/sshd_config \
   /etc/syslog.conf \
@@ -59,18 +56,6 @@ korba : \
 	install -o root -g wheel -m 0644 \
 	  newsyslog.conf /etc/newsyslog.conf
 
-/etc/opendnssec/conf.xml : conf.xml
-	install -o root -g _opendnssec -m 0640 \
-	  conf.xml /etc/opendnssec/conf.xml
-	@echo "************ Fix XXXLOLXXX in /etc/opendnssec/conf.xml ************"
-	@echo "************ Also, re-run ods-enforcer update conf ************"
-	ods-enforcer update conf
-
-/etc/opendnssec/kasp.xml : kasp.xml
-	install -o root -g _opendnssec -m 0640 \
-	  kasp.xml /etc/opendnssec/kasp.xml
-	ods-enforcer policy import
-
 /etc/pf.conf : pf.conf /etc/pf.sshbots
 	pfctl -nf pf.conf
 	install -o root -g wheel -m 0600 \
@@ -80,10 +65,6 @@ korba : \
 /etc/pf.sshbots : ../openbsd-skel/pf.sshbots
 	install -o root -g wheel -m 0600 \
 	  ../openbsd-skel/pf.sshbots /etc/pf.sshbots
-
-/etc/softhsm.conf : softhsm.conf
-	install -o root -g wheel -m 0644 \
-	  softhsm.conf /etc/softhsm.conf
 
 /etc/ssh/ssh_config : ../openbsd-skel/ssh_config
 	install -o root -g wheel -m 0644 \
@@ -101,43 +82,23 @@ korba : \
 	install -o root -g _nsd -m 0640 \
 	  nsd.conf /var/nsd/etc/nsd.conf
 
-/var/nsd/zones/master/ice-nine.org : \
-  /var/opendnssec/unsigned/ice-nine.org
-	chown _opendnssec /var/nsd/zones/master
-	chgrp _nsd /var/nsd/zones/master
-	ods-signer sign ice-nine.org
+/var/nsd/zones/master/ice-nine.org : zones/ice-nine.org
+	install -o _nsd -g _nsd -m 0644 \
+	  zones/ice-nine.org /var/nsd/zones/master/ice-nine.org
+	nsd-control reload ice-nine.org
 
-/var/nsd/zones/master/mcweavers.net : \
-  /var/opendnssec/unsigned/mcweavers.net
-	chown _opendnssec /var/nsd/zones/master
-	chgrp _nsd /var/nsd/zones/master
-	ods-signer sign mcweavers.net
+/var/nsd/zones/master/mcweavers.net : zones/mcweavers.net
+	install -o _nsd -g _nsd -m 0644 \
+	  zones/mcweavers.net /var/nsd/zones/master/mcweavers.net
+	nsd-control reload mcweavers.net
 
-/var/nsd/zones/master/mjw.wtf : \
-  /var/opendnssec/unsigned/mjw.wtf
-	chown _opendnssec /var/nsd/zones/master
-	chgrp _nsd /var/nsd/zones/master
-	ods-signer sign mjw.wtf
+/var/nsd/zones/master/mjw.wtf : zones/mjw.wtf
+	install -o _nsd -g _nsd -m 0644 \
+	  zones/mjw.wtf /var/nsd/zones/master/mjw.wtf
+	nsd-control reload mjw.wtf
 
-/var/nsd/zones/master/nodeless.net : \
-  /var/opendnssec/unsigned/nodeless.net
-	chown _opendnssec /var/nsd/zones/master
-	chgrp _nsd /var/nsd/zones/master
-	ods-signer sign nodeless.net
-
-/var/opendnssec/unsigned/ice-nine.org : zones/ice-nine.org
-	install -o _opendnssec -g _opendnssec -m 0600 \
-	  zones/ice-nine.org /var/opendnssec/unsigned/ice-nine.org
-
-/var/opendnssec/unsigned/mcweavers.net : zones/mcweavers.net
-	install -o _opendnssec -g _opendnssec -m 0600 \
-	  zones/mcweavers.net /var/opendnssec/unsigned/mcweavers.net
-
-/var/opendnssec/unsigned/mjw.wtf : zones/mjw.wtf
-	install -o _opendnssec -g _opendnssec -m 0600 \
-	  zones/mjw.wtf /var/opendnssec/unsigned/mjw.wtf
-
-/var/opendnssec/unsigned/nodeless.net : zones/nodeless.net
-	install -o _opendnssec -g _opendnssec -m 0600 \
-	  zones/nodeless.net /var/opendnssec/unsigned/nodeless.net
+/var/nsd/zones/master/nodeless.net : zones/nodeless.net
+	install -o _nsd -g _nsd -m 0644 \
+	  zones/nodeless.net /var/nsd/zones/master/nodeless.net
+	nsd-control reload nodeless.net
 
