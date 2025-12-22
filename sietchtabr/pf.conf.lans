@@ -30,7 +30,7 @@ pass in log quick on vether223 inet \
   from any \
   to any port { domain, domain-s } \
   rdr-to vether223
-pass in log quick on vether223 inet6 \
+pass in log quick on vether6 inet6 \
   proto { tcp, udp } \
   from any \
   to any port { domain, domain-s } \
@@ -39,16 +39,16 @@ pass in log quick on vether223 inet6 \
 # Pass this LAN's outbound traffic
 pass in  log quick on vether223 inet \
   from vether223:network to any
-pass in  log quick on vether223 inet6 \
-  from (vether223:network) to any
+pass in  log quick on vether6 inet6 \
+  from (vether6:network) to any
 
 # Pass traffic from the router to this LAN
 pass out log quick on vether223 inet \
   from vether223 to vether223:network
 pass out log quick on vether223 inet \
   from vether223:network to vether223:network
-pass out log quick on vether223 inet6 \
-  from (vether223) to (vether223:network)
+pass out log quick on vether6 inet6 \
+  from (vether6) to (vether6:network)
 
 # Pass multicast
 pass in  log quick on vether223 inet \

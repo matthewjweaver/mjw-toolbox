@@ -49,6 +49,7 @@ ${FAKE_ROOT}/var/www/htdocs/pfstat :
 sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/acme-client.conf \
   ${FAKE_ROOT}/etc/daily.local \
+  ${FAKE_ROOT}/etc/dhcp6leased.conf \
   ${FAKE_ROOT}/etc/dhcpd.conf \
   ${FAKE_ROOT}/etc/dhcpcd.conf \
   ${FAKE_ROOT}/etc/doas.conf \
@@ -69,6 +70,7 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/hostname.sec1 \
   ${FAKE_ROOT}/etc/hostname.sec2 \
   ${FAKE_ROOT}/etc/hostname.vether0 \
+  ${FAKE_ROOT}/etc/hostname.vether6 \
   ${FAKE_ROOT}/etc/hostname.vether223 \
   ${FAKE_ROOT}/etc/hostname.vlan42 \
   ${FAKE_ROOT}/etc/hostname.vlan666 \
@@ -121,6 +123,14 @@ ${FAKE_ROOT}/etc/dhcpd.conf : dhcpd.conf
 	doas install -o root -g wheel -m 0644 \
 	  dhcpd.conf ${FAKE_ROOT}/etc/dhcpd.conf
 	echo "rcctl restart dhcpd" \
+	  >> ${FAKE_ROOT}/tmp/load-payload-commands
+
+${FAKE_ROOT}/etc/dhcp6leased.conf : dhcp6leased.conf
+	echo "dhcp6leased -nf etc/dhcp6leased.conf" \
+	  >> ${FAKE_ROOT}/tmp/test-payload-commands
+	doas install -o root -g wheel -m 0644 \
+	  dhcp6leased.conf ${FAKE_ROOT}/etc/dhcp6leased.conf
+	echo "rcctl restart dhcp6leased" \
 	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/etc/dhcpleased.conf : dhcpleased.conf
@@ -199,6 +209,10 @@ ${FAKE_ROOT}/etc/hostname.sec2 : hostname.sec2
 ${FAKE_ROOT}/etc/hostname.vether0 : hostname.vether0
 	doas install -o root -g wheel -m 0640 \
 	  hostname.vether0 ${FAKE_ROOT}/etc/hostname.vether0
+
+${FAKE_ROOT}/etc/hostname.vether6 : hostname.vether6
+	doas install -o root -g wheel -m 0640 \
+	  hostname.vether6 ${FAKE_ROOT}/etc/hostname.vether6
 
 ${FAKE_ROOT}/etc/hostname.vether223 : hostname.vether223
 	doas install -o root -g wheel -m 0640 \
