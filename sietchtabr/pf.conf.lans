@@ -33,7 +33,7 @@ pass in log quick on vether6 inet6 \
   proto { tcp, udp } \
   from any \
   to any port { domain, domain-s } \
-  rdr-to (vether223)
+  rdr-to (vether6)
 
 # Pass this LAN's outbound traffic
 pass in  log quick on vether223 inet \
