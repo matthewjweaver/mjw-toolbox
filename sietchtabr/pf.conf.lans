@@ -21,8 +21,7 @@ pass out log quick on vether0 inet \
   from vether223:network \
   nat-to (vether0)
 pass out log quick on vether0 inet6 \
-  from any \
-  nat-to (vether0)
+  from (vether6:network)
 
 # Capture all DNS
 pass in log quick on vether223 inet \
