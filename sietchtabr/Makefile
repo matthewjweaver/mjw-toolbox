@@ -309,8 +309,12 @@ ${FAKE_ROOT}/etc/pfstat.conf : pfstat.conf
 	  pfstat.conf ${FAKE_ROOT}/etc/pfstat.conf
 
 ${FAKE_ROOT}/etc/rad.conf : rad.conf
+	echo "rad -nf etc/rad.conf" \
+	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g wheel -m 0644 \
 	  rad.conf ${FAKE_ROOT}/etc/rad.conf
+	echo "rcctl reload rad" \
+	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/etc/rc.local : rc.local
 	doas install -o root -g wheel -m 0644 \
