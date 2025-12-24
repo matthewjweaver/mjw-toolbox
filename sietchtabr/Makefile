@@ -89,6 +89,7 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/pf.conf.vpns \
   ${FAKE_ROOT}/etc/pf.conf.lans \
   ${FAKE_ROOT}/etc/pfstat.conf \
+  ${FAKE_ROOT}/etc/rad.conf \
   ${FAKE_ROOT}/etc/rc.local \
   ${FAKE_ROOT}/etc/relayd.conf \
   ${FAKE_ROOT}/etc/resolv.conf \
@@ -306,6 +307,10 @@ ${FAKE_ROOT}/etc/pf.conf.vpns : pf.conf.vpns
 ${FAKE_ROOT}/etc/pfstat.conf : pfstat.conf
 	doas install -o root -g wheel -m 0644 \
 	  pfstat.conf ${FAKE_ROOT}/etc/pfstat.conf
+
+${FAKE_ROOT}/etc/rad.conf : rad.conf
+	doas install -o root -g wheel -m 0644 \
+	  rad.conf ${FAKE_ROOT}/etc/rad.conf
 
 ${FAKE_ROOT}/etc/rc.local : rc.local
 	doas install -o root -g wheel -m 0644 \
