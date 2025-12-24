@@ -85,6 +85,7 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/newsyslog.conf \
   ${FAKE_ROOT}/etc/nfsen.conf \
   ${FAKE_ROOT}/etc/ntpd.conf \
+  ${FAKE_ROOT}/etc/pf.blessed_nodes \
   ${FAKE_ROOT}/etc/pf.conf \
   ${FAKE_ROOT}/etc/pf.conf.vpns \
   ${FAKE_ROOT}/etc/pf.conf.lans \
@@ -283,6 +284,10 @@ ${FAKE_ROOT}/etc/ntpd.conf : ntpd.conf
 	  ntpd.conf ${FAKE_ROOT}/etc/ntpd.conf
 	echo "rcctl restart ntpd" \
 	  >> ${FAKE_ROOT}/tmp/load-payload-commands
+
+${FAKE_ROOT}/etc/pf.blessed_nodes : pf.blessed_nodes
+	doas install -o root -g wheel -m 0600 \
+	  pf.blessed_nodes ${FAKE_ROOT}/etc/pf.blessed_nodes
 
 ${FAKE_ROOT}/etc/pf.conf : pf.conf ${FAKE_ROOT}/etc/pf.conf.lans ${FAKE_ROOT}/etc/pf.conf.vpns ${FAKE_ROOT}/etc/rc.local
 	echo "pfctl -nf etc/pf.conf" \

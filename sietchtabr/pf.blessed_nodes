@@ -1,0 +1,25 @@
+# These addresses are excepted from automated bot deny lists, and the
+# router will always pass tcp ssh traffic from them to any address.
+# See ../openbsd-skel/{README.md,pf.scannerbots} for details.
+# lans
+192.168.223.0/24
+192.168.25.0/24
+192.168.1.0/24
+# unconfigured local addresses
+169.254.87.0/24
+# multicast
+224.0.0.0/24
+# tpl
+10.42.0.0/16
+# sietchtabr
+69.4.102.188
+# ayat
+64.33.195.232
+# korba
+155.138.220.216
+2001:19f0:5401:d29:5400:2ff:fe9f:b322
+# hq.layeraleph.com
+207.148.3.69
+2001:19f0:6401:7ee:5400:2ff:fe9f:e7bb
+# vpn.grahams.wtf
+50.170.228.250
