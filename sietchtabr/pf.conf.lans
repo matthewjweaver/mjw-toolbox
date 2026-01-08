@@ -133,25 +133,8 @@ pass out log quick on vether0 inet \
 pass in  log quick on vlan42 inet \
   from vlan42:network to any
 
-pass in  log quick on vlan42 inet \
-  from 10.42.1.254 to taqwa.here
 pass out log quick on vether223 inet \
-  from 10.42.1.254 to taqwa.here
-
-# taqwa relayd
-pass in  log quick on vlan42 inet \
-  proto tcp \
-  from 10.42.0.0/16 \
-  to 10.42.1.10 \
-  port { 111, 2049 }
-pass in  log quick on vlan42 inet \
-  proto udp \
-  from 10.42.0.0/16 \
-  to 10.42.1.10 \
-  port { 111, 2049 }
-pass out log quick on em5 inet \
-  from 10.42.0.0/16 \
-  to taqwa.here
+  from 10.42.0.0/16 to taqwa.here
 
 # Pass traffic from the router to this LAN
 pass out log quick on vlan42 inet \
