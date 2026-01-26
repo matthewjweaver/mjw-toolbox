@@ -237,7 +237,7 @@ pass out log quick on vether0 inet \
   #port { ipsec-nat-t, isakmp }
 
 # Tunneled Traffic
-pass log quick on enc1 inet \
+pass log quick on { enc1, sec1 } inet \
   from { sietchtabr.nodeless.net, vpn.grahams.wtf, 192.168.2.0/24, 192.168.223.0/24 } \
   to { sietchtabr.nodeless.net, vpn.grahams.wtf, 192.168.2.0/24, 192.168.223.0/24 }
 
