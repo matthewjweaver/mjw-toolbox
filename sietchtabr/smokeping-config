@@ -224,7 +224,9 @@ menu = vpns
 title = vpns
 ++ tpl
 host = bb3.nodeless.net
-++ dixieflatline
-host = 192.168.2.209
-++ mneumonic
+++ blueant
+host = vpn.grahams.wtf
+++ bobbynewmark
 host = 192.168.2.210
+++ newmonic
+host = 192.168.2.222
