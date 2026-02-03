@@ -12,11 +12,11 @@ if [ ! -d /multi ]; then
 fi
 if [ ! -d /home/inbound/complete ]; then
   mkdir -p /home/inbound/complete
-  chown -R 501 /home/inbound/complete
+  chown -R 5001 /home/inbound/complete
 fi
 if [ ! -d /home/inbound/incomplete ]; then
   mkdir -p /home/inbound/incomplete
-  chown -R 501 /home/inbound/incomplete
+  chown -R 5001 /home/inbound/incomplete
 fi
 
 docker stop sabnzbd
@@ -26,7 +26,7 @@ docker run \
   -d \
   --name sabnzbd \
   --restart always \
-  -e PUID="501" \
+  -e PUID="5001" \
   -e PGID="100" \
   -p 8080:8080 \
   -v /home/sabnzbd:/config \
