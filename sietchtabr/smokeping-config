@@ -118,7 +118,8 @@ unison_tolerance = 2
 
 +FPing
 binary = /usr/local/sbin/fping
-hostinterval = 0.15
+hostinterval = 0.05
+mininterval = 0.001
 
 ++FPingNormal
 offset = random
