@@ -23,7 +23,7 @@ cgiurl   = https://sietchtabr.nodeless.net/smokeping/smokeping.cgi
 smokemail = /etc/smokeping/smokemail
 tmail = /etc/smokeping/tmail
 # specify this to get syslog logging
-syslogfacility = local0
+syslogfacility = daemon
 # each probe is now run in its own process
 # disable this to revert to the old behaviour
 # concurrentprobes = no
@@ -40,18 +40,18 @@ comment = loss 3 times  in a row
 
 *** Database ***
 
-step     = 60
+step     = 10
 pings    = 20
 
+# Full res for a day, minutely for a week, four-hourly for a year.
 # consfn mrhb steps total
-
-AVERAGE  0.5   1  1008
-AVERAGE  0.5  12  4320
-    MIN  0.5  12  4320
-    MAX  0.5  12  4320
-AVERAGE  0.5 144   720
-    MAX  0.5 144   720
-    MIN  0.5 144   720
+AVERAGE  0.5   1 17280
+AVERAGE  0.5   3 20160
+    MIN  0.5  12 20160
+    MAX  0.5  12 20160
+AVERAGE  0.5 720  4380
+    MAX  0.5 720  4380
+    MIN  0.5 720  4380
 
 *** Presentation ***
 
@@ -104,7 +104,7 @@ unison_tolerance = 2
 "Last 3 Hours"    3h
 "Last 30 Hours"   30h
 "Last 10 Days"    10d
-"Last 400 Days"   400d
+"Last 365 Days"   365d
 
 #+ hierarchies
 #++ owner
@@ -116,117 +116,364 @@ unison_tolerance = 2
 
 *** Probes ***
 
-# Here we have just one probe, fping, pinging four hosts. 
-# 
-# The fping probe is using the default parameters, some of them supplied
-# from the Database section ("step" and "pings"), and some of them by
-# the probe module.
-
 +FPing
 binary = /usr/local/sbin/fping
+hostinterval = 0.15
+
+++FPingNormal
+offset = random
+
+++FPingLarge
+packetsize = 1400
+offset = random
 
 *** Targets ***
 
 # The hosts are located in three sites
 
-probe = FPing
-
+probe = FPingNormal
 menu = Top
 title = Network Latency Grapher
-remark = Welcome to this SmokePing website.
+remark = nodeless.net connectivity and latency
 
-+ mysite0
+######################################################################
+# template
+######################################################################
+#++ host
+#menu = host
+#title = ICMP latency for host
+#
+#+++ normal
+#title = Normal packetsize (56 bytes)
+#probe = FPingNormal
+#host = host
+#
+#+++ large
+#title = Large packetsize (1400 bytes)
+#probe = FPingLarge
+#host = host
+######################################################################
+
++ net-LAN
 menu = LAN
 title = Local Connectivity Beacons
 
 ++ localhost
+menu = localhost
+title = ICMP latency for localhost
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
 host = localhost
-++ el-sayal
-host = el-sayal.here
+
 ++ ghola
+menu = ghola
+title = ICMP latency for ghola
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
 host = ghola.here
-++ otheym
-host = otheym.here
-++ ptp-gb-A
-host = ptp-gb-A.here
-++ ptp-gb-B
-host = ptp-gb-B.here
-++ ptp-pb-A
-host = ptp-pb-A.here
-++ ptp-pb-B
-host = ptp-pb-B.here
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = ghola.here
+
 ++ qanat
+menu = qanat
+title = ICMP latency for qanat
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
 host = qanat.here
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = qanat.here
+
 ++ wap1
+menu = wap1
+title = ICMP latency for wap1
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
 host = wap1.here
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = wap1.here
+
 ++ wap2
+menu = wap2
+title = ICMP latency for wap2
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
 host = wap2.here
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = wap2.here
+
 ++ wap3
+menu = wap3
+title = ICMP latency for wap3
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
 host = wap3.here
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = wap3.here
+
 ++ wap4
+menu = wap4
+title = ICMP latency for wap4
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
 host = wap4.here
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = wap4.here
+
 ++ wap5
+menu = wap5
+title = ICMP latency for wap5
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
 host = wap5.here
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = wap5.here
+
 ++ wap6
+menu = wap6
+title = ICMP latency for wap6
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
 host = wap6.here
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = wap6.here
+
 ++ wap7
+menu = wap7
+title = ICMP latency for wap7
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
 host = wap7.here
 
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = wap7.here
 
-
-+ mysite1
-menu = EAU
-title = EAU connectivity beacons
++ net-INET
+menu = internet
+title = upstream connectivity beacons
 
 ++ uplink
+menu = gateway
+title = ICMP latency for gateway
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
 host = 69.4.102.161
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = 69.4.102.161
+
 ++ FSLY
+menu = FSLY
+title = ICMP latency for FSLY
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
 host = www.fastly-debug.com
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = www.fastly-debug.com
+
 ++ GOOG
+menu = GOOG
+title = ICMP latency for GOOG
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
 host = 8.8.8.8
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = 8.8.8.8
+
 ++ quad9
+menu = quad9
+title = ICMP latency for quad9
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
 host = 9.9.9.9
-++ NET
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = 9.9.9.9
+
+++ cloudflare
+menu = cloudflare
+title = ICMP latency for cloudflare
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
 host = 1.1.1.1
 
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = 1.1.1.1
 
-+ mysite2
++ net-BOS
 menu = BOS
 title = BOS connectivity beacons
 
-++ kulon
-host = kulon.nodeless.net
-++ blueant
+++ grahams
+menu = grahams
+title = ICMP latency for grahams
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
 host = home.grahams.wtf
-++ starscream
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = home.grahams.wtf
+
+++ jeffm
+menu = jeffm
+title = ICMP latency for jeffm
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
 host = jeffm.io
 
-+ mysite3
-menu = the clown
-title = beacons in the clown
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = jeffm.io
 
-++ khala
-host = khala.here
++ net-clown
+menu = the clown
+title = Clown connectivity beacons
+
 ++ korba
+menu = korba
+title = ICMP latency for korba
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
 host = korba.nodeless.net
-++ hq
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = korba.nodeless.net
+
+++ layeraleph
+menu = layeraleph
+title = ICMP latency for layeraleph
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
 host = hq.layeraleph.com
 
-+ mysite5
-menu = community
-title = community beacons
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = hq.layeraleph.com
 
-++ live365
-host = ingest.live365.com
+++ TPL-bb3
+menu = TPL-bb3
+title = ICMP latency for bb3
 
-+ mysite6
-menu = vpns
-title = vpns
-++ tpl
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
 host = bb3.nodeless.net
-++ blueant
-host = vpn.grahams.wtf
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = bb3.nodeless.net
+
++ net-VPN
+menu = VPNs
+title = VPN connectivity beacons
+
 ++ bobbynewmark
-host = 192.168.2.210
-++ newmonic
-host = 192.168.2.222
+menu = bobbynewmark
+title = ICMP latency for bobbynewmark
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
+host = bobbynewmark.local.grahams.wtf
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = bobbynewmark.local.grahams.wtf
+
+++ kulon
+menu = kulon
+title = ICMP latency for kulon
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
+host = kulon.nodeless.net
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = kulon.nodeless.net
+
