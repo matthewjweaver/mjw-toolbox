@@ -57,7 +57,6 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/hostname.bridge0 \
   ${FAKE_ROOT}/etc/hostname.bridge223 \
   ${FAKE_ROOT}/etc/hostname.bridge42 \
-  ${FAKE_ROOT}/etc/hostname.em0 \
   ${FAKE_ROOT}/etc/hostname.em1 \
   ${FAKE_ROOT}/etc/hostname.enc1 \
   ${FAKE_ROOT}/etc/hostname.enc2 \
@@ -65,6 +64,7 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/hostname.enc4 \
   ${FAKE_ROOT}/etc/hostname.gre0 \
   ${FAKE_ROOT}/etc/hostname.ixl0 \
+  ${FAKE_ROOT}/etc/hostname.ixl2 \
   ${FAKE_ROOT}/etc/hostname.pflow0 \
   ${FAKE_ROOT}/etc/hostname.sec0 \
   ${FAKE_ROOT}/etc/hostname.sec1 \
@@ -160,10 +160,6 @@ ${FAKE_ROOT}/etc/hostname.bridge42 : hostname.bridge42
 	doas install -o root -g wheel -m 0640 \
 	  hostname.bridge42 ${FAKE_ROOT}/etc/hostname.bridge42
 
-${FAKE_ROOT}/etc/hostname.em0 : hostname.em0
-	doas install -o root -g wheel -m 0640 \
-	  hostname.em0 ${FAKE_ROOT}/etc/hostname.em0
-
 ${FAKE_ROOT}/etc/hostname.em1 : hostname.em1
 	doas install -o root -g wheel -m 0640 \
 	  hostname.em1 ${FAKE_ROOT}/etc/hostname.em1
@@ -191,6 +187,10 @@ ${FAKE_ROOT}/etc/hostname.gre0 : hostname.gre0
 ${FAKE_ROOT}/etc/hostname.ixl0 : hostname.ixl0
 	doas install -o root -g wheel -m 0640 \
 	  hostname.ixl0 ${FAKE_ROOT}/etc/hostname.ixl0
+
+${FAKE_ROOT}/etc/hostname.ixl2 : hostname.ixl2
+	doas install -o root -g wheel -m 0640 \
+	  hostname.ixl2 ${FAKE_ROOT}/etc/hostname.ixl2
 
 ${FAKE_ROOT}/etc/hostname.pflow0 : hostname.pflow0
 	doas install -o root -g wheel -m 0640 \
