@@ -51,7 +51,6 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/daily.local \
   ${FAKE_ROOT}/etc/dhcp6leased.conf \
   ${FAKE_ROOT}/etc/dhcpd.conf \
-  ${FAKE_ROOT}/etc/dhcpcd.conf \
   ${FAKE_ROOT}/etc/doas.conf \
   ${FAKE_ROOT}/etc/exports \
   ${FAKE_ROOT}/etc/hostname.bridge0 \
@@ -114,10 +113,6 @@ ${FAKE_ROOT}/etc/acme-client.conf : acme-client.conf
 ${FAKE_ROOT}/etc/daily.local : daily.local
 	doas install -o root -g wheel -m 0644 \
 	  daily.local ${FAKE_ROOT}/etc/daily.local
-
-${FAKE_ROOT}/etc/dhcpcd.conf : dhcpcd.conf
-	doas install -o root -g wheel -m 0644 \
-	  dhcpcd.conf ${FAKE_ROOT}/etc/dhcpcd.conf
 
 ${FAKE_ROOT}/etc/dhcpd.conf : dhcpd.conf
 	echo "dhcpd -nc etc/dhcpd.conf" \
