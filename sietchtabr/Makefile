@@ -53,7 +53,6 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/dhcpd.conf \
   ${FAKE_ROOT}/etc/doas.conf \
   ${FAKE_ROOT}/etc/exports \
-  ${FAKE_ROOT}/etc/hostname.bridge0 \
   ${FAKE_ROOT}/etc/hostname.bridge223 \
   ${FAKE_ROOT}/etc/hostname.bridge42 \
   ${FAKE_ROOT}/etc/hostname.em1 \
@@ -68,7 +67,6 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/hostname.sec0 \
   ${FAKE_ROOT}/etc/hostname.sec1 \
   ${FAKE_ROOT}/etc/hostname.sec2 \
-  ${FAKE_ROOT}/etc/hostname.vether0 \
   ${FAKE_ROOT}/etc/hostname.vether6 \
   ${FAKE_ROOT}/etc/hostname.vether223 \
   ${FAKE_ROOT}/etc/hostname.vlan42 \
@@ -143,10 +141,6 @@ ${FAKE_ROOT}/etc/exports : exports
 	doas install -o root -g wheel -m 0644 \
 	  exports ${FAKE_ROOT}/etc/exports
 
-${FAKE_ROOT}/etc/hostname.bridge0 : hostname.bridge0
-	doas install -o root -g wheel -m 0640 \
-	  hostname.bridge0 ${FAKE_ROOT}/etc/hostname.bridge0
-
 ${FAKE_ROOT}/etc/hostname.bridge223 : hostname.bridge223
 	doas install -o root -g wheel -m 0640 \
 	  hostname.bridge223 ${FAKE_ROOT}/etc/hostname.bridge223
@@ -202,10 +196,6 @@ ${FAKE_ROOT}/etc/hostname.sec1 : hostname.sec1
 ${FAKE_ROOT}/etc/hostname.sec2 : hostname.sec2
 	doas install -o root -g wheel -m 0640 \
 	  hostname.sec2 ${FAKE_ROOT}/etc/hostname.sec2
-
-${FAKE_ROOT}/etc/hostname.vether0 : hostname.vether0
-	doas install -o root -g wheel -m 0640 \
-	  hostname.vether0 ${FAKE_ROOT}/etc/hostname.vether0
 
 ${FAKE_ROOT}/etc/hostname.vether6 : hostname.vether6
 	doas install -o root -g wheel -m 0640 \
