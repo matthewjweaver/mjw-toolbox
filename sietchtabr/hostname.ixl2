@@ -1,4 +1,5 @@
 # uplink
+mtu 9000
 lladdr 00:e0:67:18:73:a2
 inet autoconf
 inet6 autoconf
