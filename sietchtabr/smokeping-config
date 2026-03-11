@@ -41,7 +41,7 @@ comment = loss 3 times  in a row
 *** Database ***
 
 step     = 10
-pings    = 20
+pings    = 10
 
 # Full res for a day, minutely for a week, four-hourly for a year.
 # consfn mrhb steps total
@@ -118,8 +118,8 @@ unison_tolerance = 2
 
 +FPing
 binary = /usr/local/sbin/fping
-hostinterval = 0.05
-mininterval = 0.001
+hostinterval = 0.10
+mininterval = 0.002
 
 ++FPingNormal
 offset = random
