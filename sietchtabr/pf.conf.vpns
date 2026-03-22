@@ -4,7 +4,8 @@ set state-defaults pflow
 nodeless="{ \
   sietchtabr.nodeless.net, \
   korba.nodeless.net, \
-  hq.layeraleph.com }"
+  hq.layeraleph.com, \
+  2603:b078:4997::1/64 }"
 
 # IPSEC
 pass in  log quick on ixl2 inet \
@@ -38,27 +39,10 @@ pass out log quick on ixl2 inet6 \
   from (ixl2) to $nodeless \
   port { ipsec-nat-t, isakmp, 22713 }
 
-# Wireguard (fixed random port, 22713)
-pass in  log quick on ixl2 inet \
-  proto udp \
-  from $nodeless to (ixl2) \
-  port 22713
-pass in  log quick on ixl2 inet6 \
-  proto udp \
-  from $nodeless to (ixl2) \
-  port 22713
-pass out log quick on ixl2 inet \
-  proto udp \
-  from (ixl2) to $nodeless \
-  port 22713
-pass out log quick on ixl2 inet6 \
-  proto udp \
-  from (ixl2) to $nodeless \
-  port 22713
-
 # tunneled traffic
 pass on enc0
 pass on enc3
+pass on sec4
 
 ########################################################################
 # The Promised Lan VPN

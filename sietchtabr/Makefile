@@ -64,6 +64,7 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/hostname.enc2 \
   ${FAKE_ROOT}/etc/hostname.enc3 \
   ${FAKE_ROOT}/etc/hostname.enc4 \
+  ${FAKE_ROOT}/etc/hostname.enc5 \
   ${FAKE_ROOT}/etc/hostname.gre0 \
   ${FAKE_ROOT}/etc/hostname.ixl0 \
   ${FAKE_ROOT}/etc/hostname.ixl2 \
@@ -71,6 +72,8 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/hostname.sec0 \
   ${FAKE_ROOT}/etc/hostname.sec1 \
   ${FAKE_ROOT}/etc/hostname.sec2 \
+  ${FAKE_ROOT}/etc/hostname.sec3 \
+  ${FAKE_ROOT}/etc/hostname.sec4 \
   ${FAKE_ROOT}/etc/hostname.vether6 \
   ${FAKE_ROOT}/etc/hostname.vether223 \
   ${FAKE_ROOT}/etc/hostname.vlan42 \
@@ -174,6 +177,10 @@ ${FAKE_ROOT}/etc/hostname.enc4 : hostname.enc4
 	doas install -o root -g wheel -m 0640 \
 	  hostname.enc4 ${FAKE_ROOT}/etc/hostname.enc4
 
+${FAKE_ROOT}/etc/hostname.enc5 : hostname.enc5
+	doas install -o root -g wheel -m 0640 \
+	  hostname.enc5 ${FAKE_ROOT}/etc/hostname.enc5
+
 ${FAKE_ROOT}/etc/hostname.gre0 : hostname.gre0
 	doas install -o root -g wheel -m 0640 \
 	  hostname.gre0 ${FAKE_ROOT}/etc/hostname.gre0
@@ -201,6 +208,14 @@ ${FAKE_ROOT}/etc/hostname.sec1 : hostname.sec1
 ${FAKE_ROOT}/etc/hostname.sec2 : hostname.sec2
 	doas install -o root -g wheel -m 0640 \
 	  hostname.sec2 ${FAKE_ROOT}/etc/hostname.sec2
+
+${FAKE_ROOT}/etc/hostname.sec3 : hostname.sec3
+	doas install -o root -g wheel -m 0640 \
+	  hostname.sec3 ${FAKE_ROOT}/etc/hostname.sec3
+
+${FAKE_ROOT}/etc/hostname.sec4 : hostname.sec4
+	doas install -o root -g wheel -m 0640 \
+	  hostname.sec4 ${FAKE_ROOT}/etc/hostname.sec4
 
 ${FAKE_ROOT}/etc/hostname.vether6 : hostname.vether6
 	doas install -o root -g wheel -m 0640 \
