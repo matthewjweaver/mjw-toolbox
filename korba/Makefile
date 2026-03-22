@@ -79,6 +79,7 @@ korba : \
 	  syslog.conf /etc/syslog.conf
 
 /var/nsd/etc/nsd.conf : nsd.conf
+	nsd-checkconf ./nsd.conf
 	install -o root -g _nsd -m 0640 \
 	  nsd.conf /var/nsd/etc/nsd.conf
 
