@@ -9,6 +9,7 @@ fakeroot : \
   ${FAKE_ROOT}/home/sysop/bin \
   ${FAKE_ROOT}/usr/local/libexec/munin/plugins/ \
   ${FAKE_ROOT}/tmp/ \
+  ${FAKE_ROOT}/var/nsd/etc \
   ${FAKE_ROOT}/var/unbound/etc \
   ${FAKE_ROOT}/var/www/etc \
   ${FAKE_ROOT}/var/www/htdocs/pfstat
@@ -36,6 +37,9 @@ ${FAKE_ROOT}/usr/local/libexec/munin/plugins/ :
 
 ${FAKE_ROOT}/tmp/ :
 	mkdir -p ${FAKE_ROOT}/tmp/
+
+${FAKE_ROOT}/var/nsd/etc :
+	mkdir -p ${FAKE_ROOT}/var/nsd/etc
 
 ${FAKE_ROOT}/var/unbound/etc :
 	mkdir -p ${FAKE_ROOT}/var/unbound/etc
@@ -99,6 +103,7 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/vm.conf \
   ${FAKE_ROOT}/home/sysop/bin/mon-uplink.sh \
   ${FAKE_ROOT}/usr/local/libexec/munin/plugins/unbound_munin_ \
+  ${FAKE_ROOT}/var/nsd/etc/nsd.conf \
   ${FAKE_ROOT}/var/unbound/etc/unbound.conf \
   ${FAKE_ROOT}/var/www/etc/hosts \
   ${FAKE_ROOT}/var/www/htdocs/pfstat/index.html \
@@ -357,6 +362,14 @@ ${FAKE_ROOT}/home/sysop/bin/mon-uplink.sh : mon-uplink.sh
 ${FAKE_ROOT}/usr/local/libexec/munin/plugins/unbound_munin_ : unbound_munin_
 	doas install -o root -g bin -m 0755 \
 	  unbound_munin_ ${FAKE_ROOT}/usr/local/libexec/munin/plugins/unbound_munin_
+
+${FAKE_ROOT}/var/nsd/etc/nsd.conf : nsd.conf
+	echo "nsd-checkconf var/nsd/etc/nsd.conf" \
+	  >> ${FAKE_ROOT}/tmp/test-payload-commands
+	doas install -o root -g _nsd -m 0640 \
+	  nsd.conf ${FAKE_ROOT}/var/nsd/etc/nsd.conf
+	echo "rcctl reload nsd" \
+	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/var/unbound/etc/unbound.conf : unbound.conf
 	echo "unbound-checkconf var/unbound/etc/unbound.conf" \
