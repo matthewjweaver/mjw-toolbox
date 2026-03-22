@@ -7,20 +7,20 @@ set state-defaults pflow
 # NAT outbound
 
 # uncomment to nuke tablets
-#block log quick on vether0 inet \
+#block log quick on ixl2 inet \
   #from { 192.168.223.37, 192.168.223.38 } \
   #to any
-#block log quick on vether0 inet \
+#block log quick on ixl2 inet \
   #from any \
   #to { 192.168.223.37, 192.168.223.38 }
 
-pass out log quick on vether0 inet \
+pass out log quick on ixl2 inet \
   from { 192.168.223.21, 192.168.223.24 } \
-  nat-to (vether0) static-port
-pass out log quick on vether0 inet \
-  from vether223:network \
-  nat-to (vether0)
-pass out log quick on vether0 inet6 \
+  nat-to (ixl2) static-port
+pass out log quick on ixl2 inet \
+  from { vether223:network } \
+  nat-to (ixl2)
+pass out log quick on ixl2 inet6 \
   from (vether6:network)
 
 # Capture all DNS
@@ -59,9 +59,9 @@ pass out log quick on vether223 inet \
 ########################################################################
 # Untrusted LAN (internet of shit)
 # NAT Outbound
-pass out log quick on vether0 inet \
+pass out log quick on ixl2 inet \
   from vlan666:network \
-  nat-to (vether0)
+  nat-to (ixl2)
 
 # Capture DNS
 pass in log quick on vlan666 inet \
@@ -122,13 +122,13 @@ pass out log quick on vlan666 inet \
 ########################################################################
 # Local Promised Lan Segment
 # Pass this LAN's outbound traffic
-pass out log quick on vether0 inet \
+pass out log quick on ixl2 inet \
   from vlan42:network to ! 10.42.0.0/16 \
-  nat-to (vether0)
+  nat-to (ixl2)
 # special gre tunnel
-pass out log quick on vether0 inet \
+pass out log quick on ixl2 inet \
   from 10.128.10.1 to any \
-  nat-to (vether0)
+  nat-to (ixl2)
 
 pass in  log quick on vlan42 inet \
   from vlan42:network to any
@@ -157,8 +157,8 @@ pass in  log quick on tap0 inet \
 pass out log quick on tap0 inet \
   from any to any \
   nat-to (tap0)
-pass out log quick on vether0 inet \
+pass out log quick on ixl2 inet \
   from (tap0:network) to any \
-  nat-to (vether0)
+  nat-to (ixl2)
 
 

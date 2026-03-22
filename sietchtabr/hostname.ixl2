@@ -1,0 +1,4 @@
+# uplink
+mtu 9000
+inet autoconf
+inet6 autoconf

@@ -9,6 +9,7 @@ fakeroot : \
   ${FAKE_ROOT}/home/sysop/bin \
   ${FAKE_ROOT}/usr/local/libexec/munin/plugins/ \
   ${FAKE_ROOT}/tmp/ \
+  ${FAKE_ROOT}/var/nsd/etc \
   ${FAKE_ROOT}/var/unbound/etc \
   ${FAKE_ROOT}/var/www/etc \
   ${FAKE_ROOT}/var/www/htdocs/pfstat
@@ -37,6 +38,9 @@ ${FAKE_ROOT}/usr/local/libexec/munin/plugins/ :
 ${FAKE_ROOT}/tmp/ :
 	mkdir -p ${FAKE_ROOT}/tmp/
 
+${FAKE_ROOT}/var/nsd/etc :
+	mkdir -p ${FAKE_ROOT}/var/nsd/etc
+
 ${FAKE_ROOT}/var/unbound/etc :
 	mkdir -p ${FAKE_ROOT}/var/unbound/etc
 
@@ -51,25 +55,25 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/daily.local \
   ${FAKE_ROOT}/etc/dhcp6leased.conf \
   ${FAKE_ROOT}/etc/dhcpd.conf \
-  ${FAKE_ROOT}/etc/dhcpcd.conf \
   ${FAKE_ROOT}/etc/doas.conf \
   ${FAKE_ROOT}/etc/exports \
-  ${FAKE_ROOT}/etc/hostname.bridge0 \
   ${FAKE_ROOT}/etc/hostname.bridge223 \
   ${FAKE_ROOT}/etc/hostname.bridge42 \
-  ${FAKE_ROOT}/etc/hostname.em0 \
   ${FAKE_ROOT}/etc/hostname.em1 \
   ${FAKE_ROOT}/etc/hostname.enc1 \
   ${FAKE_ROOT}/etc/hostname.enc2 \
   ${FAKE_ROOT}/etc/hostname.enc3 \
   ${FAKE_ROOT}/etc/hostname.enc4 \
+  ${FAKE_ROOT}/etc/hostname.enc5 \
   ${FAKE_ROOT}/etc/hostname.gre0 \
   ${FAKE_ROOT}/etc/hostname.ixl0 \
+  ${FAKE_ROOT}/etc/hostname.ixl2 \
   ${FAKE_ROOT}/etc/hostname.pflow0 \
   ${FAKE_ROOT}/etc/hostname.sec0 \
   ${FAKE_ROOT}/etc/hostname.sec1 \
   ${FAKE_ROOT}/etc/hostname.sec2 \
-  ${FAKE_ROOT}/etc/hostname.vether0 \
+  ${FAKE_ROOT}/etc/hostname.sec3 \
+  ${FAKE_ROOT}/etc/hostname.sec4 \
   ${FAKE_ROOT}/etc/hostname.vether6 \
   ${FAKE_ROOT}/etc/hostname.vether223 \
   ${FAKE_ROOT}/etc/hostname.vlan42 \
@@ -102,6 +106,7 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/vm.conf \
   ${FAKE_ROOT}/home/sysop/bin/mon-uplink.sh \
   ${FAKE_ROOT}/usr/local/libexec/munin/plugins/unbound_munin_ \
+  ${FAKE_ROOT}/var/nsd/etc/nsd.conf \
   ${FAKE_ROOT}/var/unbound/etc/unbound.conf \
   ${FAKE_ROOT}/var/www/etc/hosts \
   ${FAKE_ROOT}/var/www/htdocs/pfstat/index.html \
@@ -114,10 +119,6 @@ ${FAKE_ROOT}/etc/acme-client.conf : acme-client.conf
 ${FAKE_ROOT}/etc/daily.local : daily.local
 	doas install -o root -g wheel -m 0644 \
 	  daily.local ${FAKE_ROOT}/etc/daily.local
-
-${FAKE_ROOT}/etc/dhcpcd.conf : dhcpcd.conf
-	doas install -o root -g wheel -m 0644 \
-	  dhcpcd.conf ${FAKE_ROOT}/etc/dhcpcd.conf
 
 ${FAKE_ROOT}/etc/dhcpd.conf : dhcpd.conf
 	echo "dhcpd -nc etc/dhcpd.conf" \
@@ -148,10 +149,6 @@ ${FAKE_ROOT}/etc/exports : exports
 	doas install -o root -g wheel -m 0644 \
 	  exports ${FAKE_ROOT}/etc/exports
 
-${FAKE_ROOT}/etc/hostname.bridge0 : hostname.bridge0
-	doas install -o root -g wheel -m 0640 \
-	  hostname.bridge0 ${FAKE_ROOT}/etc/hostname.bridge0
-
 ${FAKE_ROOT}/etc/hostname.bridge223 : hostname.bridge223
 	doas install -o root -g wheel -m 0640 \
 	  hostname.bridge223 ${FAKE_ROOT}/etc/hostname.bridge223
@@ -159,10 +156,6 @@ ${FAKE_ROOT}/etc/hostname.bridge223 : hostname.bridge223
 ${FAKE_ROOT}/etc/hostname.bridge42 : hostname.bridge42
 	doas install -o root -g wheel -m 0640 \
 	  hostname.bridge42 ${FAKE_ROOT}/etc/hostname.bridge42
-
-${FAKE_ROOT}/etc/hostname.em0 : hostname.em0
-	doas install -o root -g wheel -m 0640 \
-	  hostname.em0 ${FAKE_ROOT}/etc/hostname.em0
 
 ${FAKE_ROOT}/etc/hostname.em1 : hostname.em1
 	doas install -o root -g wheel -m 0640 \
@@ -184,6 +177,10 @@ ${FAKE_ROOT}/etc/hostname.enc4 : hostname.enc4
 	doas install -o root -g wheel -m 0640 \
 	  hostname.enc4 ${FAKE_ROOT}/etc/hostname.enc4
 
+${FAKE_ROOT}/etc/hostname.enc5 : hostname.enc5
+	doas install -o root -g wheel -m 0640 \
+	  hostname.enc5 ${FAKE_ROOT}/etc/hostname.enc5
+
 ${FAKE_ROOT}/etc/hostname.gre0 : hostname.gre0
 	doas install -o root -g wheel -m 0640 \
 	  hostname.gre0 ${FAKE_ROOT}/etc/hostname.gre0
@@ -191,6 +188,10 @@ ${FAKE_ROOT}/etc/hostname.gre0 : hostname.gre0
 ${FAKE_ROOT}/etc/hostname.ixl0 : hostname.ixl0
 	doas install -o root -g wheel -m 0640 \
 	  hostname.ixl0 ${FAKE_ROOT}/etc/hostname.ixl0
+
+${FAKE_ROOT}/etc/hostname.ixl2 : hostname.ixl2
+	doas install -o root -g wheel -m 0640 \
+	  hostname.ixl2 ${FAKE_ROOT}/etc/hostname.ixl2
 
 ${FAKE_ROOT}/etc/hostname.pflow0 : hostname.pflow0
 	doas install -o root -g wheel -m 0640 \
@@ -208,9 +209,13 @@ ${FAKE_ROOT}/etc/hostname.sec2 : hostname.sec2
 	doas install -o root -g wheel -m 0640 \
 	  hostname.sec2 ${FAKE_ROOT}/etc/hostname.sec2
 
-${FAKE_ROOT}/etc/hostname.vether0 : hostname.vether0
+${FAKE_ROOT}/etc/hostname.sec3 : hostname.sec3
 	doas install -o root -g wheel -m 0640 \
-	  hostname.vether0 ${FAKE_ROOT}/etc/hostname.vether0
+	  hostname.sec3 ${FAKE_ROOT}/etc/hostname.sec3
+
+${FAKE_ROOT}/etc/hostname.sec4 : hostname.sec4
+	doas install -o root -g wheel -m 0640 \
+	  hostname.sec4 ${FAKE_ROOT}/etc/hostname.sec4
 
 ${FAKE_ROOT}/etc/hostname.vether6 : hostname.vether6
 	doas install -o root -g wheel -m 0640 \
@@ -372,6 +377,14 @@ ${FAKE_ROOT}/home/sysop/bin/mon-uplink.sh : mon-uplink.sh
 ${FAKE_ROOT}/usr/local/libexec/munin/plugins/unbound_munin_ : unbound_munin_
 	doas install -o root -g bin -m 0755 \
 	  unbound_munin_ ${FAKE_ROOT}/usr/local/libexec/munin/plugins/unbound_munin_
+
+${FAKE_ROOT}/var/nsd/etc/nsd.conf : nsd.conf
+	echo "nsd-checkconf var/nsd/etc/nsd.conf" \
+	  >> ${FAKE_ROOT}/tmp/test-payload-commands
+	doas install -o root -g _nsd -m 0640 \
+	  nsd.conf ${FAKE_ROOT}/var/nsd/etc/nsd.conf
+	echo "rcctl reload nsd" \
+	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/var/unbound/etc/unbound.conf : unbound.conf
 	echo "unbound-checkconf var/unbound/etc/unbound.conf" \

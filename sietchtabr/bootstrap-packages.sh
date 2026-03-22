@@ -5,7 +5,6 @@
 export PKG_PATH=https://sietchtabr.nodeless.net/%m
 doas pkg_add \
   aggregate \
-  dhcpcd \
   git \
   gitwrapper \
   gnupg \
