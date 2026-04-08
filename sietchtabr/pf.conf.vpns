@@ -46,48 +46,30 @@ pass on sec4
 
 ########################################################################
 # The Promised Lan VPN
-# XXX: make ipv6 work
-promised_lan_routers="{ bb3.nodeless.net }"
+#promised_lan_routers="{ bb3.nodeless.net }"
+promised_lan_routers="{ 2001:19f0:5c01:390:5400:3ff:fec5:a456 }"
 
 # IPSEC
-pass in  log quick on ixl2 inet \
+pass in  log quick on ixl2 inet6 \
   proto esp \
   from $promised_lan_routers \
-  to (ixl2)
-#pass in  log quick on ixl2 inet6 \
-  #proto esp \
-  #from $promised_lan_routers \
-  #to (ixl2) 
-pass out log quick on ixl2 inet \
+  to (ixl2) 
+pass out log quick on ixl2 inet6 \
   proto esp \
   from (ixl2) \
   to $promised_lan_routers
-#pass out log quick on ixl2 inet6 \
-  #proto esp \
-  #from (ixl2) \
-  #to $promised_lan_routers
 
 # IKEv2, NAT traversal
-pass in  log quick on ixl2 inet \
+pass in  log quick on ixl2 inet6 \
   proto udp \
   from $promised_lan_routers \
   to (ixl2) \
   port { ipsec-nat-t, isakmp }
-#pass in  log quick on ixl2 inet6 \
-  #proto udp \
-  #from $promised_lan_routers \
-  #to (ixl2) \
-  #port { ipsec-nat-t, isakmp }
-pass out log quick on ixl2 inet \
+pass out log quick on ixl2 inet6 \
   proto udp \
   from (ixl2) \
   to $promised_lan_routers \
   port { ipsec-nat-t, isakmp }
-#pass out log quick on ixl2 inet6 \
-  #proto udp \
-  #from (ixl2) \
-  #to $promised_lan_routers \
-  #port { ipsec-nat-t, isakmp }
 
 # Safety: drop all other traffic between TPL routers
 block out log quick on ixl2 \

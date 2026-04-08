@@ -242,11 +242,15 @@ ${FAKE_ROOT}/etc/httpd.conf : httpd.conf
 	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/etc/iked.conf : iked.conf
+	echo "iked -nf etc/iked.conf" \
+	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	~/bin/op run --env-file=.env -- \
 	  sh ../install-secretfied.sh \
 	    iked.conf \
 	    "-o root -g wheel -m 0600" \
 	    ${FAKE_ROOT}/etc/iked.conf
+	echo "rcctl -d reload iked" \
+	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/etc/login.conf : login.conf
 	doas install -o root -g wheel -m 0644 \
