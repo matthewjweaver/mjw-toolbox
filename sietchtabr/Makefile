@@ -349,6 +349,10 @@ ${FAKE_ROOT}/etc/resolv.conf : resolv.conf
 ${FAKE_ROOT}/etc/smokeping/config : smokeping-config
 	doas install -o root -g wheel -m 0644 \
 	  smokeping-config ${FAKE_ROOT}/etc/smokeping/config
+	echo "rcctl reload smokeping" \
+	  >> ${FAKE_ROOT}/tmp/load-payload-commands
+	echo "rcctl restart smokeping_fcgi" \
+	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/etc/ssh/ssh_config : ssh_config
 	doas install -o root -g wheel -m 0644 \
