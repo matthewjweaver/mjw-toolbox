@@ -74,8 +74,6 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/hostname.sec2 \
   ${FAKE_ROOT}/etc/hostname.sec3 \
   ${FAKE_ROOT}/etc/hostname.sec4 \
-  ${FAKE_ROOT}/etc/hostname.vether6 \
-  ${FAKE_ROOT}/etc/hostname.vether223 \
   ${FAKE_ROOT}/etc/hostname.vlan42 \
   ${FAKE_ROOT}/etc/hostname.vlan666 \
   ${FAKE_ROOT}/etc/httpd.conf \
@@ -216,14 +214,6 @@ ${FAKE_ROOT}/etc/hostname.sec3 : hostname.sec3
 ${FAKE_ROOT}/etc/hostname.sec4 : hostname.sec4
 	doas install -o root -g wheel -m 0640 \
 	  hostname.sec4 ${FAKE_ROOT}/etc/hostname.sec4
-
-${FAKE_ROOT}/etc/hostname.vether6 : hostname.vether6
-	doas install -o root -g wheel -m 0640 \
-	  hostname.vether6 ${FAKE_ROOT}/etc/hostname.vether6
-
-${FAKE_ROOT}/etc/hostname.vether223 : hostname.vether223
-	doas install -o root -g wheel -m 0640 \
-	  hostname.vether223 ${FAKE_ROOT}/etc/hostname.vether223
 
 ${FAKE_ROOT}/etc/hostname.vlan42 : hostname.vlan42
 	doas install -o root -g wheel -m 0640 \
