@@ -20,7 +20,7 @@ rcctl enable relayd
 rcctl disable resolvd
 rcctl stop resolvd
 rcctl enable rrdcached
-rcctl set rrdcached flags "-b /var/db/rrd -m 770 -l unix:/var/run/rrd/rrdcached.sock -l unix:/var/www/run/rrd/rrdcached.sock -j /var/db/rrd/journal -p /var/run/rrd/rrdcached.pid -w 120 -z 60"
+rcctl set rrdcached flags "-b /var/db/smokeping -m 770 -l unix:/var/run/rrd/rrdcached.sock -l unix:/var/www/run/rrd/rrdcached.sock -j /var/db/rrd/journal -p /var/run/rrd/rrdcached.pid -w 180 -z 60"
 rcctl enable unbound
 rcctl enable ntpd
 rcctl enable vmd

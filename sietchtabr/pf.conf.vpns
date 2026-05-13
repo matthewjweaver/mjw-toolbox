@@ -95,68 +95,6 @@ pass in  log quick on sec0 \
 pass log quick on enc2
 
 ########################################################################
-# khala (LEO) VPN
-# XXX: move to ipv6 once spacex gets its shit together
-# Starlink IP address blocks per ARIN
-# SpaceX Services, Inc. SPACEX-STARLINK-IPV4-03 (NET-98-97-0-0-1) 98.97.0.0 - 98.97.127.255
-# SpaceX Services, Inc. NET-SUB-98-97-9-0 (NET-98-97-9-0-1) 98.97.9.0 - 98.97.9.255
-# SpaceX Services, Inc. SPACEX-STARLINK-IPV4 (NET-129-222-0-0-1) 129.222.0.0 - 129.222.255.255
-# khala itself gets a "carrier grade" NAT address in 100.64.0.0/10
-
-starlink="{ 98.97.0.0/15, 98.97.9.0/24, 129.222.0.0/16 }"
-
-# IPSEC
-pass in  log quick on ixl2 inet \
-  proto esp \
-  from $starlink to (ixl2)
-pass in  log quick on ixl2 inet \
-  proto esp \
-  from (ixl2) to $starlink
-
-# IKEv2, NAT traversal
-pass in  log quick on ixl2 inet \
-  proto udp \
-  from $starlink to (ixl2) \
-  port { ipsec-nat-t, isakmp }
-pass out log quick on ixl2 inet \
-  proto udp \
-  from (ixl2) to $starlink \
-  port { ipsec-nat-t, isakmp }
-
-# Tunneled Traffic
-pass log quick on enc3 inet \
-  from $starlink \
-  to   { 100.64.0.0/10, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24 }
-pass log quick on enc3 inet \
-  from { 100.64.0.0/10, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24 } \
-  to   $starlink
-pass log quick on enc3 inet \
-  from { 100.64.0.0/10, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24, 10.42.0.0/16 } \
-  to   { 100.64.0.0/10, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24, 10.42.0.0/16 }
-pass in log on ixl2 inet \
-  proto icmp \
-  from $starlink \
-  to (ixl2) \
-  icmp-type echoreq code 0
-pass in log on ixl2 inet \
-  proto icmp \
-  from { 100.64.0.0/10, sietchtabr.nodeless.net, 192.168.223.0/24, 192.168.25.0/24 } \
-  to (ixl2) \
-  icmp-type echoreq code 0
-
-# Out onto LAN
-pass out log quick on vether223 inet \
-  from $starlink \
-  to 192.168.223.0/24
-pass out log quick on vether223 inet \
-  from { 100.64.0.0/10, 192.168.25.0/24 } \
-  to 192.168.223.0/24
-pass out log quick on vlan42 inet \
-  from 10.42.0.0/16 \
-  to  10.42.1.0/24
-
-
-########################################################################
 # Grahams VPN
 # XXX: make ipv6 work
 
@@ -208,7 +146,7 @@ pass log quick on { enc1, sec1 } inet \
   to { sietchtabr.nodeless.net, vpn.grahams.wtf, 192.168.2.0/24, 192.168.223.0/24 }
 
 # Out onto LAN
-pass out log quick on vether223 inet \
+pass out log quick on ixl0 inet \
   from { vpn.grahams.wtf, 192.168.2.0/24 } \
-  to { 192.168.223.0/24 }
+  to ixl0:network
 
