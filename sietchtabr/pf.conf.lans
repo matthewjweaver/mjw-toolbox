@@ -133,6 +133,11 @@ pass out log quick on ixl2 inet \
 pass in  log quick on vlan42 inet \
   from vlan42:network to any
 
+pass in  log quick on vlan42 inet \
+  from 10.42.0.0/16 to 10.42.0.0/16
+pass out log quick on vlan42 inet \
+  from 10.42.0.0/16 to 10.42.0.0/16
+
 pass out log quick on ixl0 inet \
   from 10.42.0.0/16 to taqwa.here
 
