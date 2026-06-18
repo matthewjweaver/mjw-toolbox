@@ -5,7 +5,7 @@ nodeless="{ \
   sietchtabr.nodeless.net, \
   korba.nodeless.net, \
   hq.layeraleph.com, \
-  2603:b078:4997::1/64 }"
+  2603:b078:54e9::1/64 }"
 
 # IPSEC
 pass in  log quick on ixl2 inet \
