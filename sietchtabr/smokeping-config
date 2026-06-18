@@ -312,6 +312,20 @@ title = Large packetsize (1400 bytes)
 probe = FPingLarge
 host = 69.4.102.161
 
+++ ayat
+menu = ayat
+title = ICMP latency for ayat
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
+host = ayat.nodeless.net
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = ayat.nodeless.net
+
 ++ FSLY
 menu = FSLY
 title = ICMP latency for FSLY
