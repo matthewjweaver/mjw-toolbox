@@ -87,6 +87,10 @@ pass out log quick on sec0 \
   from 192.168.223.0/24 \
   to 10.42.0.0/16 \
   nat-to 10.42.1.1
+pass log quick on sec0 \
+  from 192.168.224.1/32 \
+  to 10.42.0.0/16 \
+  binat-to 10.42.1.5
 pass in  log quick on sec0 \
   from 10.42.0.0/16 \
   to 10.42.1.0/24
