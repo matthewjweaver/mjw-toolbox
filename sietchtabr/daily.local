@@ -58,7 +58,7 @@ rm ${f}
 # on timeouts.
 if [ -d /var/www/htdocs/pub/OpenBSD ]; then
   cd /var/www/htdocs/pub/OpenBSD/syspatch
-  if /usr/bin/openrsync --exclude snapshots -av --delete --no-motd \
+  if /usr/local/bin/rsync --exclude snapshots -av --delete --no-motd \
     rsync://ftp.usa.openbsd.org/ftp/syspatch/. . 2>&1 | \
     logger -p "daemon.debug" -t rsync; then
       logger -p daemon.notice -t rsync "OpenBSD syspatch updated successfully"
@@ -66,7 +66,7 @@ if [ -d /var/www/htdocs/pub/OpenBSD ]; then
       logger -p daemon.notice -t rsync "OpenBSD syspatch rsync exited with error";
   fi
   cd /var/www/htdocs/pub/OpenBSD/
-  if /usr/bin/openrsync --exclude snapshots -av --delete --no-motd \
+  if /usr/local/bin/rsync --exclude snapshots -av --delete --no-motd \
     rsync://ftp.usa.openbsd.org/ftp . 2>&1 | \
     logger -p "daemon.debug" -t rsync; then
       logger -p daemon.notice -t rsync "OpenBSD mirror updated successfully";
