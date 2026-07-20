@@ -123,7 +123,7 @@ ${FAKE_ROOT}/etc/dhcpd.conf : dhcpd.conf
 	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g wheel -m 0644 \
 	  dhcpd.conf ${FAKE_ROOT}/etc/dhcpd.conf
-	echo "rcctl restart dhcpd" \
+	echo "rcctl -d restart dhcpd" \
 	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/etc/dhcp6leased.conf : dhcp6leased.conf
@@ -131,7 +131,7 @@ ${FAKE_ROOT}/etc/dhcp6leased.conf : dhcp6leased.conf
 	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g wheel -m 0644 \
 	  dhcp6leased.conf ${FAKE_ROOT}/etc/dhcp6leased.conf
-	echo "rcctl restart dhcp6leased" \
+	echo "rcctl -d restart dhcp6leased" \
 	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/etc/dhcpleased.conf : dhcpleased.conf
@@ -228,7 +228,7 @@ ${FAKE_ROOT}/etc/httpd.conf : httpd.conf
 	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g wheel -m 0644 \
 	  httpd.conf ${FAKE_ROOT}/etc/httpd.conf
-	echo "rcctl reload httpd" \
+	echo "rcctl -d reload httpd" \
 	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/etc/iked.conf : iked.conf
@@ -281,7 +281,7 @@ ${FAKE_ROOT}/etc/ntpd.conf : ntpd.conf
 	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g wheel -m 0644 \
 	  ntpd.conf ${FAKE_ROOT}/etc/ntpd.conf
-	echo "rcctl restart ntpd" \
+	echo "rcctl -d restart ntpd" \
 	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/etc/pf.blessed_nodes : pf.blessed_nodes
@@ -317,7 +317,7 @@ ${FAKE_ROOT}/etc/rad.conf : rad.conf
 	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g wheel -m 0644 \
 	  rad.conf ${FAKE_ROOT}/etc/rad.conf
-	echo "rcctl reload rad" \
+	echo "rcctl -d reload rad" \
 	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/etc/rc.local : rc.local
@@ -329,7 +329,7 @@ ${FAKE_ROOT}/etc/relayd.conf : relayd.conf
 	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g wheel -m 0600 \
 	  relayd.conf ${FAKE_ROOT}/etc/relayd.conf
-	echo "rcctl reload relayd" \
+	echo "rcctl -d reload relayd" \
 	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/etc/resolv.conf : resolv.conf
@@ -339,9 +339,9 @@ ${FAKE_ROOT}/etc/resolv.conf : resolv.conf
 ${FAKE_ROOT}/etc/smokeping/config : smokeping-config
 	doas install -o root -g wheel -m 0644 \
 	  smokeping-config ${FAKE_ROOT}/etc/smokeping/config
-	echo "rcctl reload smokeping" \
+	echo "rcctl -d reload smokeping" \
 	  >> ${FAKE_ROOT}/tmp/load-payload-commands
-	echo "rcctl restart smokeping_fcgi" \
+	echo "rcctl -d restart smokeping_fcgi" \
 	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/etc/ssh/ssh_config : ssh_config
@@ -365,7 +365,7 @@ ${FAKE_ROOT}/etc/vm.conf : vm.conf
 	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g wheel -m 0644 \
 	  vm.conf ${FAKE_ROOT}/etc/vm.conf
-	echo "rcctl reload vmd" \
+	echo "rcctl -d reload vmd" \
 	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/home/sysop/bin/mon-uplink.sh : mon-uplink.sh
@@ -381,7 +381,7 @@ ${FAKE_ROOT}/var/nsd/etc/nsd.conf : nsd.conf
 	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g _nsd -m 0640 \
 	  nsd.conf ${FAKE_ROOT}/var/nsd/etc/nsd.conf
-	echo "rcctl reload nsd" \
+	echo "rcctl -d reload nsd" \
 	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/var/unbound/etc/unbound.conf : unbound.conf
@@ -389,7 +389,7 @@ ${FAKE_ROOT}/var/unbound/etc/unbound.conf : unbound.conf
 	  >> ${FAKE_ROOT}/tmp/test-payload-commands
 	doas install -o root -g _unbound -m 0640 \
 	  unbound.conf ${FAKE_ROOT}/var/unbound/etc/unbound.conf
-	echo "rcctl reload unbound" \
+	echo "rcctl -d reload unbound" \
 	  >> ${FAKE_ROOT}/tmp/load-payload-commands
 
 ${FAKE_ROOT}/var/www/etc/hosts : www-chroot-hosts
