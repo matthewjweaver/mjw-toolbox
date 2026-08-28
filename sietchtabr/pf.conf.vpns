@@ -44,6 +44,12 @@ pass on enc0
 pass on enc3
 pass on sec4
 
+# LAN traffic from ayat
+pass out log quick on ixl0 inet \
+  from 192.168.224.0/24 to 192.168.223.0/24
+pass in  log quick on ixl0 inet \
+  from 192.168.223.0/24 to 192.168.224.0/24
+
 ########################################################################
 # The Promised Lan VPN
 #promised_lan_routers="{ bb3.nodeless.net }"
