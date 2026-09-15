@@ -168,6 +168,34 @@ title = Normal packetsize (56 bytes)
 probe = FPingNormal
 host = localhost
 
+++ jwl-wired
+menu = jwl-wired
+title = ICMP latency for jwl-wired
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
+host = jwl-wired.here
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = jwl-wired.here
+
+++ jwl-wifi
+menu = jwl-wifi
+title = ICMP latency for jwl-wifi
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
+host = jwl-wifi.here
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = jwl-wifi.here
+
 ++ ghola
 menu = ghola
 title = ICMP latency for ghola
@@ -381,6 +409,34 @@ host = 1.1.1.1
 title = Large packetsize (1400 bytes)
 probe = FPingLarge
 host = 1.1.1.1
+
+++ MSFT-teams
+menu = msft-teams
+title = ICMP latency for microsoft
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
+host = teams.microsoft.com
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = teams.microsoft.com
+
+++ MSFT-365
+menu = msft-365
+title = ICMP latency for microsoft
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
+host = m365.cloud.microsoft
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = m365.cloud.microsoft
 
 + net-BOS
 menu = BOS
