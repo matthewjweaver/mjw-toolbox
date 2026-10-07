@@ -26,6 +26,10 @@ pass out log quick on ixl2 inet6 \
 # Capture all DNS
 pass in log quick on ixl0 inet \
   proto { tcp, udp } \
+  from 192.168.223.26 \
+  to any port { domain, domain-s }
+pass in log quick on ixl0 inet \
+  proto { tcp, udp } \
   from any \
   to any port { domain, domain-s } \
   rdr-to ixl0
