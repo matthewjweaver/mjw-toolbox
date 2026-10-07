@@ -210,6 +210,20 @@ title = Large packetsize (1400 bytes)
 probe = FPingLarge
 host = ghola.here
 
+++ gutenberg
+menu = gutenberg
+title = ICMP latency for ghola
+
++++ normal
+title = Normal packetsize (56 bytes)
+probe = FPingNormal
+host = gutenberg.here
+
++++ large
+title = Large packetsize (1400 bytes)
+probe = FPingLarge
+host = gutenberg.here
+
 ++ qanat
 menu = qanat
 title = ICMP latency for qanat
