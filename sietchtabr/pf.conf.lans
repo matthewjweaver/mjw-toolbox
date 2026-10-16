@@ -57,6 +57,14 @@ pass out log quick on ixl0 inet \
 
 
 ########################################################################
+# Printer LAN (lol)
+pass in  log quick on ixl3 inet \
+  from { ixl0:network, ixl3:network } to { ixl0:network, ixl3:network }
+pass out log quick on ixl3 inet \
+  from any to ixl3:network
+
+
+########################################################################
 # Untrusted LAN (internet of shit)
 # NAT Outbound
 pass out log quick on ixl2 inet \

@@ -57,7 +57,6 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/dhcpd.conf \
   ${FAKE_ROOT}/etc/doas.conf \
   ${FAKE_ROOT}/etc/exports \
-  ${FAKE_ROOT}/etc/hostname.bridge223 \
   ${FAKE_ROOT}/etc/hostname.bridge42 \
   ${FAKE_ROOT}/etc/hostname.em1 \
   ${FAKE_ROOT}/etc/hostname.enc1 \
@@ -68,6 +67,7 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/hostname.gre0 \
   ${FAKE_ROOT}/etc/hostname.ixl0 \
   ${FAKE_ROOT}/etc/hostname.ixl2 \
+  ${FAKE_ROOT}/etc/hostname.ixl3 \
   ${FAKE_ROOT}/etc/hostname.pflow0 \
   ${FAKE_ROOT}/etc/hostname.sec0 \
   ${FAKE_ROOT}/etc/hostname.sec1 \
@@ -147,10 +147,6 @@ ${FAKE_ROOT}/etc/exports : exports
 	doas install -o root -g wheel -m 0644 \
 	  exports ${FAKE_ROOT}/etc/exports
 
-${FAKE_ROOT}/etc/hostname.bridge223 : hostname.bridge223
-	doas install -o root -g wheel -m 0640 \
-	  hostname.bridge223 ${FAKE_ROOT}/etc/hostname.bridge223
-
 ${FAKE_ROOT}/etc/hostname.bridge42 : hostname.bridge42
 	doas install -o root -g wheel -m 0640 \
 	  hostname.bridge42 ${FAKE_ROOT}/etc/hostname.bridge42
@@ -190,6 +186,10 @@ ${FAKE_ROOT}/etc/hostname.ixl0 : hostname.ixl0
 ${FAKE_ROOT}/etc/hostname.ixl2 : hostname.ixl2
 	doas install -o root -g wheel -m 0640 \
 	  hostname.ixl2 ${FAKE_ROOT}/etc/hostname.ixl2
+
+${FAKE_ROOT}/etc/hostname.ixl3 : hostname.ixl3
+	doas install -o root -g wheel -m 0640 \
+	  hostname.ixl3 ${FAKE_ROOT}/etc/hostname.ixl3
 
 ${FAKE_ROOT}/etc/hostname.pflow0 : hostname.pflow0
 	doas install -o root -g wheel -m 0640 \
