@@ -1,0 +1,4 @@
+inet 192.168.23.1 255.255.255.0 192.168.23.255
+# theo says jumbo in ixl is buggy
+mtu 1500
+up

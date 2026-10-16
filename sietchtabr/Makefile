@@ -67,6 +67,7 @@ sietchtabr: fakeroot \
   ${FAKE_ROOT}/etc/hostname.gre0 \
   ${FAKE_ROOT}/etc/hostname.ixl0 \
   ${FAKE_ROOT}/etc/hostname.ixl2 \
+  ${FAKE_ROOT}/etc/hostname.ixl3 \
   ${FAKE_ROOT}/etc/hostname.pflow0 \
   ${FAKE_ROOT}/etc/hostname.sec0 \
   ${FAKE_ROOT}/etc/hostname.sec1 \
@@ -185,6 +186,10 @@ ${FAKE_ROOT}/etc/hostname.ixl0 : hostname.ixl0
 ${FAKE_ROOT}/etc/hostname.ixl2 : hostname.ixl2
 	doas install -o root -g wheel -m 0640 \
 	  hostname.ixl2 ${FAKE_ROOT}/etc/hostname.ixl2
+
+${FAKE_ROOT}/etc/hostname.ixl3 : hostname.ixl3
+	doas install -o root -g wheel -m 0640 \
+	  hostname.ixl3 ${FAKE_ROOT}/etc/hostname.ixl3
 
 ${FAKE_ROOT}/etc/hostname.pflow0 : hostname.pflow0
 	doas install -o root -g wheel -m 0640 \
