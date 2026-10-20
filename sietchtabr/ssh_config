@@ -1,7 +1,6 @@
-# ssh-keygen -t ed25519 -o -a 100
-# ssh-keygen -t rsa -b 4096 -o -a 100
-# aes256-ctr included for arubas
-Compression  no
+# Use PQ suites whenever possible, ed25519-only suites included for
+# backwards compatibility.
+Compression  yes
 ControlMaster auto
 ControlPath ~/.ssh/control-%r@%h:%p
 ControlPersist 8h
@@ -15,14 +14,6 @@ Protocol  2
 Host *
   KexAlgorithms mlkem768x25519-sha256,sntrup761x25519-sha512,sntrup761x25519-sha512@openssh.com,curve25519-sha256,curve25519-sha256@libssh.org
   PubkeyAuthentication yes
-  HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com,ssh-ed25519,ssh-rsa
-  Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes256-ctr
-  MACs umac-64-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com
-
-Host *.openbsd.org
-  User anoncvs
-  ChallengeResponseAuthentication no
-  ForwardAgent no
-  KbdInteractiveAuthentication no
-  PasswordAuthentication no
-
+  HostKeyAlgorithms ssh-mldsa44-ed25519,ssh-mldsa44-ed25519-cert,ssh-ed25519,sk-ssh-ed25519@openssh.com
+  Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com
+  MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
