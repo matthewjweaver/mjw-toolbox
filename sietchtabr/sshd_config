@@ -1,14 +1,15 @@
-# Adapted from https://stribika.github.io/2015/01/04/secure-secure-shell.html
-
+# Originally adapted from https://stribika.github.io/2015/01/04/secure-secure-shell.html
+# Use PQ suites whenever possible, ed25519-only suites included for
+# backwards compatibility.
 AcceptEnv LANG LC_*
 ChallengeResponseAuthentication no
-Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes256-ctr
-Compression no
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com
+HostKey /etc/ssh/ssh_host_mldsa44_ed25519_key
 HostKey /etc/ssh/ssh_host_ed25519_key
-HostKey /etc/ssh/ssh_host_rsa_key
+HostKeyAlgorithms ssh-mldsa44-ed25519,ssh-ed25519
 KexAlgorithms mlkem768x25519-sha256,sntrup761x25519-sha512,sntrup761x25519-sha512@openssh.com,curve25519-sha256,curve25519-sha256@libssh.org
 LoginGraceTime 15
-MACs umac-64-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com
+MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
 PrintMotd no
 Protocol 2
 PubkeyAuthentication yes
